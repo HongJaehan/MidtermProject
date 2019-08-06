@@ -9,7 +9,7 @@ public:
 
 	void Init();
 	void Control();
-	void Update(int);
+	void Update(float);
 	void Render(Gdiplus::Graphics*);
 };
 

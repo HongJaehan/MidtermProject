@@ -34,7 +34,7 @@ void Position::operator=(const Position& vec)
 }
 void Position::SetX(float _x)
 {
-	x = +x;
+	x = _x;
 }
 
 float Position::GetX()
@@ -44,7 +44,7 @@ float Position::GetX()
 
 void Position::SetY(float _y)
 {
-	y = +y;
+	y = _y;
 }
 
 float Position::GetY()

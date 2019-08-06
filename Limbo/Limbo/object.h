@@ -9,7 +9,7 @@ public:
 
 public:
 	virtual void Control() = 0;
-	virtual void Update(int) = 0;
+	virtual void Update(float) = 0;
 	virtual void Render(Gdiplus::Graphics*) = 0;
 	//virtual std::weak_ptr<Gdiplus::Image> GetImage();
 
@@ -18,5 +18,7 @@ protected:
 	eTag tag;
 	Gdiplus::Graphics* MemG;
 	Gdiplus::Image* tempImg;
+	int width;
+	int height;
 	//Gdiplus::Image* img;
 };

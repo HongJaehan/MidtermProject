@@ -15,10 +15,12 @@
 #include <vector>
 #include <memory>
 #include <string>
+#include <cmath>
 #include <unordered_map>
 #include <functional>
 #include "AssetManager.h"
 #include "SceneManager.h"
+#include "GameManager.h"
 
 
 #endif //PCH_H

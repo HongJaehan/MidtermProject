@@ -21,7 +21,7 @@ void EndScene::Control()
 
 }
 
-void EndScene::Update(int)
+void EndScene::Update(float)
 {
 
 }

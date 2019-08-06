@@ -21,7 +21,9 @@ static enum ePlayerState
 {
 	eState_Idle,
 	eState_Run,
-	eState_Jump
+	eState_Jump,
+	eState_Interaction,
+	eState_Die
 };
 
 static struct sFileImgName
@@ -29,6 +31,14 @@ static struct sFileImgName
 public:
 	std::string Player = "Player.png";
 };
+
+struct defines
+{
+public:
+	int playerWidth = 116;
+	int playerHeight = 163;
+};
+static defines define;
 
 
 sFileImgName fileImgName;

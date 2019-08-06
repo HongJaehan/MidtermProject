@@ -27,7 +27,7 @@ void GameScene::Control()
 	}
 }
 
-void GameScene::Update(int Delta)
+void GameScene::Update(float Delta)
 {
 	for (auto& it : objectVec)
 	{

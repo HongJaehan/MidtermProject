@@ -23,7 +23,7 @@ void IntroScene::Control()
 	}
 }
 
-void IntroScene::Update(int)
+void IntroScene::Update(float)
 {
 	int x = 0;
 }
