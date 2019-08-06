@@ -4,12 +4,12 @@
 
 GameScene::GameScene()
 {
-
+	Init();
 }
 
 GameScene::~GameScene()
 {
-
+	delete player;
 }
 
 void GameScene::Init()
@@ -27,19 +27,19 @@ void GameScene::Control()
 	}
 }
 
-void GameScene::Update()
+void GameScene::Update(int Delta)
 {
 	for (auto& it : objectVec)
 	{
-		it->Update();
+		it->Update(Delta);
 	}
 }
 
-void GameScene::Render()
+void GameScene::Render(Gdiplus::Graphics* MemG)
 {
 	for (auto& it : objectVec)
 	{
-		it->Render();
+		it->Render(MemG);
 	}
 }
 

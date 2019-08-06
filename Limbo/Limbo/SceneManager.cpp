@@ -1,6 +1,19 @@
 #include "pch.h"
 #include "SceneManager.h"
 
+
+SceneManager::SceneManager()
+{
+
+}
+
+SceneManager::~SceneManager()
+{
+	for (auto& it : sceneVec)
+	{
+		delete it;
+	}
+}
 void SceneManager::SetCurScene(Scene* scene)
 {
 	curScene = scene;
@@ -16,7 +29,13 @@ void SceneManager::Init()
 	introScene = new IntroScene();
 	gameScene = new GameScene();
 	endScene = new EndScene();
-	curScene = introScene;
+	//curScene = introScene;
+	
+
+	sceneVec.emplace_back(introScene);
+	sceneVec.emplace_back(gameScene);
+	sceneVec.emplace_back(endScene);
+
 	curScene = gameScene;
 
 	//SceneLevel 0부터 시작

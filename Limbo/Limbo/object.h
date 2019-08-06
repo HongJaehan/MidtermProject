@@ -1,6 +1,6 @@
 #pragma once
 #include "pch.h"
-
+#include <string>
 class Object
 {
 public:
@@ -9,10 +9,14 @@ public:
 
 public:
 	virtual void Control() = 0;
-	virtual void Update() = 0;
-	virtual void Render() = 0;
-	Gdiplus::Image* GetImage();
+	virtual void Update(int) = 0;
+	virtual void Render(Gdiplus::Graphics*) = 0;
+	//virtual std::weak_ptr<Gdiplus::Image> GetImage();
 
 protected:
-	Gdiplus::Image* img;
+	std::weak_ptr<Gdiplus::Image> img;
+	eTag tag;
+	Gdiplus::Graphics* MemG;
+	Gdiplus::Image* tempImg;
+	//Gdiplus::Image* img;
 };

@@ -1,5 +1,5 @@
 #pragma once
-
+#include <string>
 
 enum eCheckPoint
 {
@@ -10,8 +10,25 @@ enum eCheckPoint
 	eCheckPoint5
 };
 
-struct sFileImgName
+enum eTag
+{
+	ePlayer,
+	eGrass,
+	eTerrain
+};
+
+static enum ePlayerState 
+{
+	eState_Idle,
+	eState_Run,
+	eState_Jump
+};
+
+static struct sFileImgName
 {
 public:
 	std::string Player = "Player.png";
 };
+
+
+sFileImgName fileImgName;

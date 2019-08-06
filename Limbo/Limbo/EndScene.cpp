@@ -21,12 +21,12 @@ void EndScene::Control()
 
 }
 
-void EndScene::Update()
+void EndScene::Update(int)
 {
 
 }
 
-void EndScene::Render()
+void EndScene::Render(Gdiplus::Graphics* MemG)
 {
 
 }

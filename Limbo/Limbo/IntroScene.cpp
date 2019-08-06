@@ -23,12 +23,12 @@ void IntroScene::Control()
 	}
 }
 
-void IntroScene::Update()
+void IntroScene::Update(int)
 {
 	int x = 0;
 }
 
-void IntroScene::Render()
+void IntroScene::Render(Gdiplus::Graphics* MemG)
 {
 	int y = 0;
 

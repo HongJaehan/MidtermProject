@@ -12,6 +12,7 @@ private:
 	std::weak_ptr<Gdiplus::Image> MyLoadImage(std::wstring std);
 
 private:
+	//size_t ´Â ±×³É unsigned int
 	std::unordered_map<size_t, std::shared_ptr<Gdiplus::Image>> imgDic;
 	//std::unordered_map<size_t, Image*> soundDic;
 

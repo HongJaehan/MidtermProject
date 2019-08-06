@@ -8,6 +8,8 @@
 class SceneManager : public Singleton<SceneManager>
 {
 public:
+	SceneManager();
+	~SceneManager();
 	void SetCurScene(Scene*);
 	Scene* GetCurScene();
 	void Init();

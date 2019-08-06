@@ -26,7 +26,7 @@
       <UniqueIdentifier>{e06f4c70-35f4-456e-ac4a-47744e287324}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\Scene">
-      <UniqueIdentifier>{27af9448-7018-44df-b874-81c5b85e47fb}</UniqueIdentifier>
+      <UniqueIdentifier>{ed1289f5-6cd7-4280-9474-db57a4a8404d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -63,15 +63,6 @@
     <ClInclude Include="Singleton.h">
       <Filter>소스 파일\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="IntroScene.h">
-      <Filter>소스 파일\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>소스 파일\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="GameScene.h">
-      <Filter>소스 파일\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="pch.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -81,11 +72,20 @@
     <ClInclude Include="common.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Position.h">
+      <Filter>소스 파일\Math</Filter>
+    </ClInclude>
     <ClInclude Include="EndScene.h">
       <Filter>소스 파일\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Position.h">
-      <Filter>소스 파일\Math</Filter>
+    <ClInclude Include="GameScene.h">
+      <Filter>소스 파일\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroScene.h">
+      <Filter>소스 파일\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>소스 파일\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -113,23 +113,23 @@
     <ClCompile Include="CVector.cpp">
       <Filter>소스 파일\Math</Filter>
     </ClCompile>
-    <ClCompile Include="Scene.cpp">
-      <Filter>소스 파일\Scene</Filter>
+    <ClCompile Include="Player.cpp">
+      <Filter>소스 파일\Object</Filter>
     </ClCompile>
-    <ClCompile Include="IntroScene.cpp">
+    <ClCompile Include="Position.cpp">
+      <Filter>소스 파일\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="EndScene.cpp">
       <Filter>소스 파일\Scene</Filter>
     </ClCompile>
     <ClCompile Include="GameScene.cpp">
       <Filter>소스 파일\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>소스 파일\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="EndScene.cpp">
+    <ClCompile Include="IntroScene.cpp">
       <Filter>소스 파일\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Position.cpp">
-      <Filter>소스 파일\Math</Filter>
+    <ClCompile Include="Scene.cpp">
+      <Filter>소스 파일\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

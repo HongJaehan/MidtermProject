@@ -65,16 +65,17 @@ void CChildView::OnPaint()
 	Gdiplus::Bitmap BackBuffer(rc.Width(), rc.Height(), PixelFormat32bppARGB);
 	Gdiplus::Graphics MemG(&BackBuffer);
 
-	Gdiplus::SolidBrush WhiteBrush(Gdiplus::Color(255, 255, 255, 255));
+	Gdiplus::SolidBrush WhiteBrush(Gdiplus::Color(255, 102, 102, 102));
 	MemG.FillRectangle(&WhiteBrush, rc2);
 
 	static int PrevTick = GetTickCount();
 	static int Delta = 0;
 	Delta = GetTickCount() - PrevTick;
+
 	//현재Scene의 Control, Update, Render을 전부 돌려준다.
 	SceneManager::GetInstance()->GetCurScene()->Control();
-	SceneManager::GetInstance()->GetCurScene()->Update();
-	SceneManager::GetInstance()->GetCurScene()->Render();
+	SceneManager::GetInstance()->GetCurScene()->Update(Delta);
+	SceneManager::GetInstance()->GetCurScene()->Render(&MemG);
 
 	//sm.Update(Delta * 0.001f, &MemG);
 	//UpdateMove(Delta, &MemG);
