@@ -53,7 +53,7 @@ BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs)
 
 void CChildView::OnPaint() 
 {
-	//CshootApp::bRender = true;
+	//CLimboApp::bRender = true;
 
 	CPaintDC dc(this); // 그리기를 위한 디바이스 컨텍스트입니다.
 	Gdiplus::Graphics MainG(dc);
@@ -68,18 +68,7 @@ void CChildView::OnPaint()
 	Gdiplus::SolidBrush WhiteBrush(Gdiplus::Color(255, 102, 102, 102));
 	MemG.FillRectangle(&WhiteBrush, rc2);
 
-	static int PrevTick = GetTickCount();
-	static int Delta = 0;
-	Delta = GetTickCount() - PrevTick;
-
-	//현재Scene의 Control, Update, Render을 전부 돌려준다.
-	SceneManager::GetInstance()->GetCurScene()->Control();
-	SceneManager::GetInstance()->GetCurScene()->Update(Delta);
 	SceneManager::GetInstance()->GetCurScene()->Render(&MemG);
-
-	//sm.Update(Delta * 0.001f, &MemG);
-	//UpdateMove(Delta, &MemG);
-	PrevTick = GetTickCount();
 
 	MainG.DrawImage(&BackBuffer, 0, 0, rc.Width(), rc.Height());
 	//Image Img(TEXT("Asset\\bg.png"));
@@ -113,7 +102,7 @@ void CChildView::OnPaint()
 	//temp.Format(TEXT("%d"), value);
 	//memDC.GetDC().DrawText(temp, rc, DT_LEFT | DT_VCENTER);
 
-	//CshootApp::bRender = false;
+	//CLimboApp::bRender = false;
 }
 
 BOOL CChildView::OnEraseBkgnd(CDC* pDC)

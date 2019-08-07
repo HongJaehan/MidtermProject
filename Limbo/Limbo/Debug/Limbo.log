@@ -1,8 +1,6 @@
 ﻿  Player.cpp
-E:\MidTermProject\Limbo\Limbo\Player.cpp(21,14): warning C4244:  '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-E:\MidTermProject\Limbo\Limbo\Player.cpp(22,15): warning C4244:  '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-E:\MidTermProject\Limbo\Limbo\Player.cpp(134,36): warning C4244:  '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-E:\MidTermProject\Limbo\Limbo\Player.cpp(133,50): warning C4244:  '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-E:\MidTermProject\Limbo\Limbo\Player.cpp(148,50): warning C4244:  '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-E:\MidTermProject\Limbo\Limbo\Player.cpp(148,38): warning C4244:  '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Limbo.vcxproj -> E:\MidTermProject\Limbo\Debug\Limbo.exe
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Player.cpp(23,14): warning C4244:  '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Player.cpp(24,15): warning C4244:  '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Player.cpp(187,50): warning C4244:  '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Player.cpp(187,38): warning C4244:  '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Limbo.vcxproj -> D:\MidTermProject\MidtermProject\Limbo\Debug\Limbo.exe

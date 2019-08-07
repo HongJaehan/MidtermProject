@@ -15,7 +15,7 @@ public:
 
 protected:
 	std::weak_ptr<Gdiplus::Image> img;
-	eTag tag;
+	ETag tag;
 	Gdiplus::Graphics* MemG;
 	Gdiplus::Image* tempImg;
 	int width;

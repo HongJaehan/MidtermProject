@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-enum eCheckPoint
+enum ECheckPoint
 {
 	eCheckPoint1,
 	eCheckPoint2,
@@ -10,14 +10,14 @@ enum eCheckPoint
 	eCheckPoint5
 };
 
-enum eTag
+enum ETag
 {
 	ePlayer,
 	eGrass,
 	eTerrain
 };
 
-static enum ePlayerState 
+static enum EPlayerState 
 {
 	eState_Idle,
 	eState_Run,
@@ -26,19 +26,18 @@ static enum ePlayerState
 	eState_Die
 };
 
-static struct sFileImgName
+static struct SFileImgName
 {
 public:
 	std::string Player = "Player.png";
 };
 
-struct defines
+struct Defines
 {
 public:
 	int playerWidth = 116;
 	int playerHeight = 163;
 };
-static defines define;
+static Defines define;
 
-
-sFileImgName fileImgName;
+SFileImgName fileImgName;

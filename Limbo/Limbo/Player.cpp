@@ -2,9 +2,11 @@
 #include "Player.h"
 #include "MainFrm.h"
 
-#define MAX_SPEED 8
+#define MAX_SPEED 2
 #define INIT_SPEED 0
-#define PI 3.14
+#define PI (3.1415926535897932f)
+#define GRAVITY 100
+#define DEGTORAD(X) (X * (PI / 180))
 
 Player::Player()
 {
@@ -51,9 +53,12 @@ void Player::Control()
 			bFlagLeft = true;
 			break;
 		case eState_Jump:
-			//점프 해주기
 			break;
 		case eState_Run:
+			if (GetAsyncKeyState(VK_UP) & 0x8001)
+			{
+				break;
+			}
 			if (!bFlagLeft) { speed = 0; }//현재 오른쪽으로 달리고있는 중이었다면 speed를 0으로 초기화한다.
 			bFlagLeft = true;
 			pos.SetX(pos.GetX() - speed );
@@ -63,7 +68,6 @@ void Player::Control()
 		default :
 			break;
 		}
-		
 	}
 	else if (GetAsyncKeyState(VK_RIGHT) & 0x8001) //오른쪽 달리기
 	{
@@ -71,33 +75,21 @@ void Player::Control()
 		{
 		case eState_Idle:
 			state = eState_Run;
-			frame = 0;
 			bFlagLeft = false;
 			break;
 		case eState_Jump:
 			break;
 		case eState_Run:
+			if (GetAsyncKeyState(VK_UP) & 0x1001)
+			{
+				state = eState_Jump;
+				jumpInitPosX = pos.GetX();
+				jumpInitPosY = pos.GetY();
+				break;
+			}
 			if (bFlagLeft) { speed = 0; }//현재 왼쪽으로 달리고있는 중이었다면 speed를 0으로 초기화한다.
 			bFlagLeft = false;
 			pos.SetX(pos.GetX() + speed );
-			break;
-		case eState_Interaction:
-			break;
-		default:
-			break;
-		}
-	}
-	else if (GetAsyncKeyState(VK_UP) & 0x1001) //점프
-	{
-		switch (state)
-		{
-		case eState_Idle:
-			state = eState_Jump;
-			break;
-		case eState_Jump:
-			break;
-		case eState_Run:
-			state = eState_Jump;
 			break;
 		case eState_Interaction:
 			break;
@@ -111,10 +103,15 @@ void Player::Control()
 	}
 	else //Idle
 	{
-		state = eState_Idle;
-		speed = INIT_SPEED;
+		if (state != eState_Jump)
+		{
+			state = eState_Idle;
+			speed = INIT_SPEED;
+		}
 	}
 }
+
+static float AddDelta = 0;
 
 void Player::Update(float Delta)
 {
@@ -126,12 +123,54 @@ void Player::Update(float Delta)
 	case eState_Run:
 		if (speed < MAX_SPEED) //스피드가 최고 속도를 넘지 않으면
 		{
-			speed += 1.0f;
+			speed += Delta * 2;
 		}
 		break;
 	case eState_Jump:
-		pos.SetXY(speed * cos(45 * (PI / 180)) * Delta * 0.01f ,
-			speed *sin(45*(PI/180)) * Delta * 0.01f);
+		if (bFlagLeft)
+		{
+			pos.SetY(jumpInitPosY + speed * cos(DEGTORAD(-45)) - 0.5f * GRAVITY * Delta * Delta);
+			pos.SetX(jumpInitPosX + 10 * cos(DEGTORAD(-45)) * Delta);
+		}
+		else
+		{
+			//pos.SetY(jumpInitPosY + speed * cos(DEGTORAD(-45)) - 0.5f * GRAVITY * Delta * Delta);
+			//pos.SetX(jumpInitPosX + 10 * cos(DEGTORAD(-45)) * Delta);
+
+			
+			AddDelta += Delta;
+			float AddVal = (0.5f * GRAVITY * AddDelta * AddDelta);
+			pos.SetX(pos.GetX() +  speed * 100 * Delta);
+			pos.SetY(pos.GetY() + (-400.f * Delta) + AddVal);
+			
+			//예시
+			if (pos.GetY() >= jumpInitPosY)
+			{
+				state = eState_Idle;
+				pos.SetY(jumpInitPosY);
+				AddDelta = 0;
+			}
+			//jumpInitPosX += 10.f * speed * Delta;
+			//jumpInitPosY += (-200.f * Delta) + AddVal;
+#if defined VEL_DEBUG
+			for (int i = 0; i < 1000; ++i)
+			{
+#endif
+			
+#if defined VEL_DEBUG
+				ptList.emplace_back(Gdiplus::PointF(jumpInitPosX, jumpInitPosY ));
+			}
+#else
+			//pos.SetX(jumpInitPosX);
+			//pos.SetY(jumpInitPosY);
+#endif
+			
+			//AddDelta += Delta;
+			//float AddVal = (0.5f * GRAVITY * AddDelta * AddDelta);
+			//
+			//pos.SetX(X + speed * cos(DEGTORAD(45)) * Delta);
+			//pos.SetY(Y + (-1000 * Delta) + AddVal);
+		}
 		break;
 	}
 }
@@ -153,7 +192,17 @@ void Player::Render(Gdiplus::Graphics* MemG)
 		bm.RotateFlip(Gdiplus::Rotate180FlipY);
 	}
 	MemG->DrawImage(&bm, screenPosRect);
-	
+
+#if defined VEL_DEBUG
+	if(ptList.size() < 2) return;
+	for (auto it = ptList.begin(); it != ptList.end() - 1; ++it)
+	{
+		Gdiplus::Pen pen(Gdiplus::Color(255, 0, 0, 0), 1);
+		Gdiplus::PointF& pt1 = *it;
+		Gdiplus::PointF& pt2 = *(it + 1);
+		MemG->DrawLine(&pen, pt1, pt2);
+	}
+#endif
 	//temp.DrawImage(img.lock,rect, rects[frame].X, rects[frame].Y, rects[frame].Width, rects[frame].Height,
 	//	Gdiplus::Unit::UnitPixel,nullptr, 0, nullptr);
 

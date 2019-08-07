@@ -143,16 +143,17 @@ UINT CLimboApp::FuncThread(LPVOID pParam)
 {
 	while (1)
 	{
+
 		DWORD tick = GetTickCount();
 		DWORD Delta = tick - PrevTick;
 
 		if (CMainFrame * MainFrm = static_cast<CMainFrame*>(theApp.GetMainWnd()))
 		{
-			//if (!CshootApp::bRender)
+			//if (!bRender)
 			{
-				// Update
-				//SceneManager::GetInstance().Update(Delta * 0.001f);
-
+				//현재Scene의 Control, Update을 전부 돌려준다.
+				SceneManager::GetInstance()->GetCurScene()->Control();
+				SceneManager::GetInstance()->GetCurScene()->Update(Delta * 0.001f);
 				// Render
 				//Main에서 가져온 CChildView
 				CChildView* view = MainFrm->GetView();
@@ -164,10 +165,8 @@ UINT CLimboApp::FuncThread(LPVOID pParam)
 					view->InvalidateRect(rc);
 			}
 		}
-
-		Sleep(1000 / 60);
 		PrevTick = tick;
+		Sleep(1000/60);
 	}
-
 	return  -1;
 }

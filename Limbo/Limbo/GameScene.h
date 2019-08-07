@@ -17,6 +17,6 @@ public:
 private:
 	Object* player;
 	std::vector<Object*> objectVec;
-	eCheckPoint checkPoint;
+	ECheckPoint checkPoint;
 };
 

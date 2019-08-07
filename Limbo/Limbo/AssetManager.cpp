@@ -87,6 +87,8 @@ std::weak_ptr<Gdiplus::Image> AssetManager::MyLoadImage(std::wstring str)
 {
 	std::wstring temp(TEXT("Asset\\"));
 	temp.append(str);
+
+
 	std::shared_ptr<Gdiplus::Image> Img(new Gdiplus::Image(str.c_str()));
 
 	//if (Img = nullptr)
