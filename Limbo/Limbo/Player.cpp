@@ -5,20 +5,26 @@
 #define MAX_SPEED 2
 #define INIT_SPEED 0
 #define PI (3.1415926535897932f)
-#define GRAVITY 100
+#define GRAVITY 75
 #define DEGTORAD(X) (X * (PI / 180))
 
 Player::Player()
 {
-	img = AssetManager::GetInstance()->GetImage(TEXT("Player.png"));
-	tempImg = new Gdiplus::Image(TEXT("player.png"));
+	//img = AssetManager::GetInstance()->GetImage(TEXT("Player.png"));
+	//tempImg = new Gdiplus::Image(TEXT("player.png"));
 	tag = ePlayer;
 	state = eState_Idle;
 	bFlagLeft = false;
 	speed = 0.1f;
-	width = define.playerWidth;
-	height = define.playerHeight;
-	
+	width = defines.playerWidth;
+	height = defines.playerHeight;
+	enable = true;
+
+	//AnimationList에 애니메이션을 추가해준다.
+	AddAnimation(new Animation_Idle());
+	AddAnimation(new Animation_Run());
+	AddAnimation(new Animation_Jump());
+
 	//임시 처리
  	pos.SetX(0 + width*0.5);
 	pos.SetY(800 - height);
@@ -34,11 +40,11 @@ Player::~Player()
 {
 
 }
-
-std::weak_ptr<Gdiplus::Image> Player::GetImage()
-{
-	return img;
-}
+//
+//std::weak_ptr<Gdiplus::Image> Player::GetImage()
+//{
+//	//return img;
+//}
 
 void Player::Control()
 {
@@ -49,23 +55,25 @@ void Player::Control()
 		{
 		case eState_Idle:
 			state = eState_Run;
-			frame = 0;
 			bFlagLeft = true;
 			break;
 		case eState_Jump:
 			break;
 		case eState_Run:
-			if (GetAsyncKeyState(VK_UP) & 0x8001)
+			if (GetAsyncKeyState(VK_UP) & 0x1001)
 			{
+				state = eState_Jump;
+				jumpInitPosX = pos.GetX();
+				jumpInitPosY = pos.GetY();
 				break;
 			}
-			if (!bFlagLeft) { speed = 0; }//현재 오른쪽으로 달리고있는 중이었다면 speed를 0으로 초기화한다.
+			if (!bFlagLeft) { speed = 0; }//현재 왼쪽으로 달리고있는 중이었다면 speed를 0으로 초기화한다.
 			bFlagLeft = true;
-			pos.SetX(pos.GetX() - speed );
+			pos.SetX(pos.GetX() - speed);
 			break;
 		case eState_Interaction:
 			break;
-		default :
+		default:
 			break;
 		}
 	}
@@ -97,6 +105,15 @@ void Player::Control()
 			break;
 		}
 	}
+	else if (GetAsyncKeyState(VK_UP) & 0x8001) //상호작용
+	{
+		switch(state)
+		{
+		case eState_Idle:
+			state = eState_Jump;
+			break;
+		}
+	}
 	else if (GetAsyncKeyState(VK_CONTROL) & 0x8001) //상호작용
 	{
 
@@ -110,6 +127,8 @@ void Player::Control()
 		}
 	}
 }
+
+
 
 static float AddDelta = 0;
 
@@ -127,52 +146,49 @@ void Player::Update(float Delta)
 		}
 		break;
 	case eState_Jump:
-		if (bFlagLeft)
-		{
-			pos.SetY(jumpInitPosY + speed * cos(DEGTORAD(-45)) - 0.5f * GRAVITY * Delta * Delta);
-			pos.SetX(jumpInitPosX + 10 * cos(DEGTORAD(-45)) * Delta);
-		}
-		else
-		{
-			//pos.SetY(jumpInitPosY + speed * cos(DEGTORAD(-45)) - 0.5f * GRAVITY * Delta * Delta);
-			//pos.SetX(jumpInitPosX + 10 * cos(DEGTORAD(-45)) * Delta);
+		Jump(bFlagLeft, Delta);
+		break;
+#pragma region MyRegion
+		//pos.SetY(jumpInitPosY + speed * cos(DEGTORAD(-45)) - 0.5f * GRAVITY * Delta * Delta);
+	//pos.SetX(jumpInitPosX + 10 * cos(DEGTORAD(-45)) * Delta);
+	//AddDelta += Delta;
+	//float AddVal = (0.5f * GRAVITY * AddDelta * AddDelta);
+	//pos.SetX(pos.GetX() +  speed * 100 * Delta);
+	//pos.SetY(pos.GetY() + (-400.f * Delta) + AddVal);
 
-			
-			AddDelta += Delta;
-			float AddVal = (0.5f * GRAVITY * AddDelta * AddDelta);
-			pos.SetX(pos.GetX() +  speed * 100 * Delta);
-			pos.SetY(pos.GetY() + (-400.f * Delta) + AddVal);
-			
-			//예시
-			if (pos.GetY() >= jumpInitPosY)
-			{
-				state = eState_Idle;
-				pos.SetY(jumpInitPosY);
-				AddDelta = 0;
-			}
-			//jumpInitPosX += 10.f * speed * Delta;
-			//jumpInitPosY += (-200.f * Delta) + AddVal;
+	//예시
+	/*if (pos.GetY() >= jumpInitPosY)
+	{
+		state = eState_Idle;
+		pos.SetY(jumpInitPosY);
+		AddDelta = 0;
+	}*/
+	//jumpInitPosX += 10.f * speed * Delta;
+	//jumpInitPosY += (-200.f * Delta) + AddVal;
 #if defined VEL_DEBUG
-			for (int i = 0; i < 1000; ++i)
-			{
+		for (int i = 0; i < 1000; ++i)
+		{
 #endif
-			
+
 #if defined VEL_DEBUG
-				ptList.emplace_back(Gdiplus::PointF(jumpInitPosX, jumpInitPosY ));
-			}
+			ptList.emplace_back(Gdiplus::PointF(jumpInitPosX, jumpInitPosY));
+		}
 #else
 			//pos.SetX(jumpInitPosX);
 			//pos.SetY(jumpInitPosY);
 #endif
-			
+
 			//AddDelta += Delta;
 			//float AddVal = (0.5f * GRAVITY * AddDelta * AddDelta);
 			//
 			//pos.SetX(X + speed * cos(DEGTORAD(45)) * Delta);
 			//pos.SetY(Y + (-1000 * Delta) + AddVal);
-		}
-		break;
+#pragma endregion
 	}
+		//현재 상태의 img를 받아온다.
+	
+		
+		//playerAnimationList[state]->Update(img, Delta);
 }
 
 void Player::Render(Gdiplus::Graphics* MemG)
@@ -181,7 +197,7 @@ void Player::Render(Gdiplus::Graphics* MemG)
 	Gdiplus::Rect rect(0,0,width,height);
 	Gdiplus::Bitmap bm(width, height, PixelFormat32bppARGB);
 	Gdiplus::Graphics temp(&bm);
-	temp.DrawImage(tempImg,rect);
+	//temp.DrawImage(tempImg,rect);
 
 	//그려줄 screen좌표의 rect
 	Gdiplus::Rect screenPosRect(pos.GetX(), pos.GetY(), width, height);
@@ -191,6 +207,7 @@ void Player::Render(Gdiplus::Graphics* MemG)
 	{
 		bm.RotateFlip(Gdiplus::Rotate180FlipY);
 	}
+
 	MemG->DrawImage(&bm, screenPosRect);
 
 #if defined VEL_DEBUG
@@ -208,4 +225,34 @@ void Player::Render(Gdiplus::Graphics* MemG)
 
 	//MemG->DrawImage(&bm, rect);
 	//MemG->DrawImage()
+}
+
+
+void Player::Jump(bool bFlagLeft,float Delta)
+{
+		AddDelta += Delta;
+		float AddVal = (0.5f * GRAVITY * AddDelta * AddDelta);
+		if (bFlagLeft)
+		{
+			pos.SetX(pos.GetX() - speed * 100 * Delta);
+		}
+		else
+		{
+			pos.SetX(pos.GetX() + speed * 100 * Delta);
+		}
+		pos.SetY(pos.GetY() + (-400.f * Delta) + AddVal);
+
+		//예시
+		if (pos.GetY() >= jumpInitPosY)
+		{
+			state = eState_Idle;
+			pos.SetY(jumpInitPosY);
+			AddDelta = 0;
+			speed = 0;
+		}
+}
+
+void Player::AddAnimation(Animation* ani)
+{
+	playerAnimationList.emplace_back(ani);
 }

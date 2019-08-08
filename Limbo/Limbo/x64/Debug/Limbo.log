@@ -1,8 +1,31 @@
-﻿  Player.cpp
-D:\MidTermProject\MidtermProject\Limbo\Limbo\Player.cpp(22,14): warning C4244:  '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\MidTermProject\MidtermProject\Limbo\Limbo\Player.cpp(23,15): warning C4244:  '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\MidTermProject\MidtermProject\Limbo\Limbo\Player.cpp(135,23): warning C4244:  '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\MidTermProject\MidtermProject\Limbo\Limbo\Player.cpp(136,54): warning C4244:  '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\MidTermProject\MidtermProject\Limbo\Limbo\Player.cpp(150,50): warning C4244:  '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\MidTermProject\MidtermProject\Limbo\Limbo\Player.cpp(150,38): warning C4244:  '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+﻿  pch.cpp
+D:\MidTermProject\MidtermProject\Limbo\Limbo\common.h(27,2): warning C4091:  'static ': 변수를 선언하지 않으면 'EPlayerState' 왼쪽은 무시됩니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\common.h(33,2): warning C4091:  'static ': 변수를 선언하지 않으면 'SFileImgName' 왼쪽은 무시됩니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\AssetManager.h(20,38): warning C4356:  'Singleton<AssetManager>::instance': 정적 데이터 멤버는 파생 클래스를 통해 초기화할 수 없습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\SceneManager.h(29,38): warning C4356:  'Singleton<SceneManager>::instance': 정적 데이터 멤버는 파생 클래스를 통해 초기화할 수 없습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\GameManager.h(17,36): warning C4356:  'Singleton<GameManager>::instance': 정적 데이터 멤버는 파생 클래스를 통해 초기화할 수 없습니다.
+  Animation.cpp
+  Animation_Idle.cpp
+  Animation_Jump.cpp
+  Animation_Run.cpp
+  AssetManager.cpp
+  ChildView.cpp
+  CVector.cpp
+  EndScene.cpp
+  GameManager.cpp
+  GameScene.cpp
+  IntroScene.cpp
+  Limbo.cpp
+  MainFrm.cpp
+  object.cpp
+  Player.cpp
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Player.cpp(29,14): warning C4244:  '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Player.cpp(30,15): warning C4244:  '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Player.cpp(201,50): warning C4244:  '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Position.cpp
+  Scene.cpp
+  SceneManager.cpp
+  코드를 생성하고 있습니다...
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Player.cpp(201,38): warning C4244:  '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Player.cpp(201,38): warning C4244: D:\MidTermProject\MidtermProject\Limbo\Limbo\GameManager.cpp(23) : warning C4715: 'GameManager::GetCheckPoint': 모든 제어 경로에서 값을 반환하지는 않습니다.
   Limbo.vcxproj -> D:\MidTermProject\MidtermProject\Limbo\x64\Debug\Limbo.exe

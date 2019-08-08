@@ -16,6 +16,7 @@
 #include <memory>
 #include <string>
 #include <cmath>
+#include <tinyxml2.h>
 #include <unordered_map>
 #include <functional>
 #include "AssetManager.h"

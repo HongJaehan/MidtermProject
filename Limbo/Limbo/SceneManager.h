@@ -25,7 +25,6 @@ private:
 	int sceneLevel;
 	int maxSceneLevel;
 };
-
 SceneManager* SceneManager::instance = nullptr;
 
 

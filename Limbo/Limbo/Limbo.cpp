@@ -165,8 +165,8 @@ UINT CLimboApp::FuncThread(LPVOID pParam)
 					view->InvalidateRect(rc);
 			}
 		}
-		PrevTick = tick;
 		Sleep(1000/60);
+		PrevTick = tick;
 	}
 	return  -1;
 }

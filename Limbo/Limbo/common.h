@@ -37,7 +37,10 @@ struct Defines
 public:
 	int playerWidth = 116;
 	int playerHeight = 163;
+	std::string img_Player_Idle = "Player_Idle.png";
+	//std::wstring s = std::TEXT(img_Player_Idle);
 };
-static Defines define;
+
+static Defines defines;
 
 SFileImgName fileImgName;

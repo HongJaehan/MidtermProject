@@ -28,6 +28,12 @@
     <Filter Include="소스 파일\Scene">
       <UniqueIdentifier>{ed1289f5-6cd7-4280-9474-db57a4a8404d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Animation">
+      <UniqueIdentifier>{b2b66eb5-2cba-4416-acab-348012026505}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\MXL">
+      <UniqueIdentifier>{60dadda9-71ae-486c-aa6f-a58c0b3d77b9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="object.h">
@@ -90,6 +96,21 @@
     <ClInclude Include="GameManager.h">
       <Filter>소스 파일\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>소스 파일\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation_Idle.h">
+      <Filter>소스 파일\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation_Jump.h">
+      <Filter>소스 파일\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation_Run.h">
+      <Filter>소스 파일\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="XMLPaser.h">
+      <Filter>소스 파일\MXL</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssetManager.cpp">
@@ -136,6 +157,21 @@
     </ClCompile>
     <ClCompile Include="GameManager.cpp">
       <Filter>소스 파일\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>소스 파일\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation_Idle.cpp">
+      <Filter>소스 파일\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation_Jump.cpp">
+      <Filter>소스 파일\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation_Run.cpp">
+      <Filter>소스 파일\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="XMLPaser.cpp">
+      <Filter>소스 파일\MXL</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,18 +1,7 @@
 #include "pch.h"
 #include "AssetManager.h"
 
-
-struct BulletData
-{
-public:
-	void reset()
-	{
-		radius = 0;
-		
-	}
-	char Name[256];
-	float radius;
-};
+#pragma region MyRegion
 
 //struct MemoryPool
 //{
@@ -51,7 +40,7 @@ public:
 //private:
 //	std::vector<std::pair<int, BulletData>> Datas;
 //};
-
+#pragma endregion
 
 //오브젝트들은 이미지의 하드 포인터를 들고있으면 안되기 때문에 Weak_ptr을 사용해줘야한다.
 
@@ -83,13 +72,12 @@ std::weak_ptr<Gdiplus::Image> AssetManager::GetImage(std::wstring str)
 	return ret;
 }
 
-std::weak_ptr<Gdiplus::Image> AssetManager::MyLoadImage(std::wstring str)
+std::weak_ptr<Gdiplus::Image> AssetManager::MyLoadImage(std::wstring fileName)
 {
-	std::wstring temp(TEXT("Asset\\"));
-	temp.append(str);
+	std::wstring temp(TEXT("Image\\"));
+	temp.append(fileName);
 
-
-	std::shared_ptr<Gdiplus::Image> Img(new Gdiplus::Image(str.c_str()));
+	std::shared_ptr<Gdiplus::Image> Img = std::make_shared<Gdiplus::Image>(temp.c_str());
 
 	//if (Img = nullptr)
 	//{
@@ -97,7 +85,31 @@ std::weak_ptr<Gdiplus::Image> AssetManager::MyLoadImage(std::wstring str)
 	//}
 
 	std::hash<std::wstring> makeHash;
-	imgDic.insert(std::make_pair(makeHash(str), Img));
+	imgDic.insert(std::make_pair(makeHash(fileName), Img));
 	
 	 return Img;
+}
+
+void AssetManager::SetXMLData(std::vector<Gdiplus::Rect> &Rects, char* fileName)
+{
+	//char* temp = "XML\\";
+	//strcat_s(temp, fileName);
+	//strcat_s(&temp, fileName);
+
+	tinyxml2::XMLDocument* doc = new tinyxml2::XMLDocument();
+	doc->LoadFile(fileName);
+	
+	if (doc == nullptr) return;
+	
+	tinyxml2::XMLElement* Root = doc->RootElement();
+	//tinyxml2::XMLElement* TextureAtlasInfo = Root->FirstChildElement("TextureAtlas");
+	tinyxml2::XMLElement* atlasInfo = Root->FirstChildElement("sprite");
+
+	for (tinyxml2::XMLElement* element = atlasInfo; element != nullptr; element = element->NextSiblingElement())
+	{
+		Gdiplus::Rect r(Gdiplus::Rect(element->IntAttribute("x"), element->IntAttribute("y"),
+			element->IntAttribute("w"), element->IntAttribute("h")));
+	Rects.emplace_back(r);
+	}
+
 }
