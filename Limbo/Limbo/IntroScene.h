@@ -11,5 +11,7 @@ public:
 	void Control();
 	void Update(float);
 	void Render(Gdiplus::Graphics*);
+private:
+	std::weak_ptr<Gdiplus::Image> backgroundImg;
 };
 

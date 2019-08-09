@@ -29,14 +29,12 @@ void SceneManager::Init()
 	introScene = new IntroScene();
 	gameScene = new GameScene();
 	endScene = new EndScene();
-	//curScene = introScene;
+	curScene = introScene;
 	
 
 	sceneVec.emplace_back(introScene);
 	sceneVec.emplace_back(gameScene);
 	sceneVec.emplace_back(endScene);
-
-	curScene = gameScene;
 
 	//SceneLevel 0부터 시작
 	sceneLevel = 0;

@@ -3,7 +3,7 @@
 
 IntroScene::IntroScene()
 {
-
+	backgroundImg = AssetManager::GetInstance()->GetImage(TEXT("intro.png"));
 }
 
 IntroScene::~IntroScene()
@@ -25,11 +25,18 @@ void IntroScene::Control()
 
 void IntroScene::Update(float)
 {
-	int x = 0;
 }
 
 void IntroScene::Render(Gdiplus::Graphics* MemG)
 {
-	int y = 0;
+	Gdiplus::Rect rect(0, 0, GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN));
+	Gdiplus::Bitmap bm(GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), PixelFormat32bppARGB);
+	Gdiplus::Graphics temp(&bm);
 
+	temp.DrawImage(backgroundImg.lock().get(), rect);
+
+	////그려줄 screen좌표의 rect
+	Gdiplus::Rect screenPosRect(0, 0, GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN));
+
+	MemG->DrawImage(&bm, screenPosRect);
 }

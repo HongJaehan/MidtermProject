@@ -34,6 +34,9 @@
     <Filter Include="소스 파일\MXL">
       <UniqueIdentifier>{60dadda9-71ae-486c-aa6f-a58c0b3d77b9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Component">
+      <UniqueIdentifier>{084f7129-78e7-43bd-a1ec-26fd09907edc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="object.h">
@@ -111,6 +114,9 @@
     <ClInclude Include="XMLPaser.h">
       <Filter>소스 파일\MXL</Filter>
     </ClInclude>
+    <ClInclude Include="Terrain.h">
+      <Filter>소스 파일\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssetManager.cpp">
@@ -172,6 +178,9 @@
     </ClCompile>
     <ClCompile Include="XMLPaser.cpp">
       <Filter>소스 파일\MXL</Filter>
+    </ClCompile>
+    <ClCompile Include="Terrain.cpp">
+      <Filter>소스 파일\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

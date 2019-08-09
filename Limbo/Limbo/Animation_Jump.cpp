@@ -23,6 +23,7 @@ void Animation_Jump::Update( Gdiplus::Rect* rect, float Delta)
 	if (addDelta > 0.1f)
 	{
 		addDelta = 0;
+		++frame;
 	}
 
 	if (frame > XMLRect.size() - 1)
@@ -34,7 +35,6 @@ void Animation_Jump::Update( Gdiplus::Rect* rect, float Delta)
 	rect->Width = XMLRect[frame].Width;
 	rect->Height = XMLRect[frame].Height;
 
-	++frame;
 }
 void Animation_Jump::Begin()
 {

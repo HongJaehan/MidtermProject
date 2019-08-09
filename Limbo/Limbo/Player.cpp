@@ -200,6 +200,9 @@ void Player::Render(Gdiplus::Graphics* _MemG)
 	temp.DrawImage(playerAnimationList[state]->GetAtlasImg().lock().get(),rect, atlasRect.X , atlasRect.Y, atlasRect.Width, atlasRect.Height, Gdiplus::Unit::UnitPixel, nullptr, 0, nullptr);
 	//temp.DrawImage(tempImg,rect);
 
+	//Gdiplus::Color color;
+	//bm.GetPixel(60, 60, &color);
+	//int x = color.GetAlpha();
 	//그려줄 screen좌표의 rect
 	Gdiplus::Rect screenPosRect(pos.GetX(), pos.GetY(), width, height);
 
