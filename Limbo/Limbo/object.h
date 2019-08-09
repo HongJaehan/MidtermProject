@@ -13,13 +13,12 @@ public:
 //	virtual std::weak_ptr<Gdiplus::Image> GetImage();
 
 protected:
-	//std::weak_ptr<Gdiplus::Image> img;
+	//std::weak_ptr<Gdiplus::Image> *img;
 	ETag tag;
-	Gdiplus::Graphics* MemG;
-	std::weak_ptr<Gdiplus::Image> img;
+	//Gdiplus::Graphics* MemG;
 	//Gdiplus::Image* img;
 	int width;
 	int height;
 	bool enable;
-	//Gdiplus::Image* img;
+	Gdiplus::Image* img;
 };

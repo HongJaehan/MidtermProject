@@ -2,7 +2,7 @@
 #include "Player.h"
 #include "MainFrm.h"
 
-#define MAX_SPEED 2
+#define MAX_SPEED 3
 #define INIT_SPEED 0
 #define PI (3.1415926535897932f)
 #define GRAVITY 75
@@ -142,7 +142,7 @@ void Player::Update(float Delta)
 	case eState_Run:
 		if (speed < MAX_SPEED) //스피드가 최고 속도를 넘지 않으면
 		{
-			speed += Delta * 2;
+			speed += Delta * 10;
 		}
 		break;
 	case eState_Jump:
@@ -185,18 +185,19 @@ void Player::Update(float Delta)
 			//pos.SetY(Y + (-1000 * Delta) + AddVal);
 #pragma endregion
 	}
-		//현재 상태의 img를 받아온다.
-	
-		
-		//playerAnimationList[state]->Update(img, Delta);
+		//현재 Animation의 image를 XML정보에 맞춰 저장해줌.
+		playerAnimationList[state]->Update(&atlasRect, Delta);
 }
 
-void Player::Render(Gdiplus::Graphics* MemG)
+void Player::Render(Gdiplus::Graphics* _MemG)
 {
+	//auto atlasImg = img.lock();
 	//Player의 크기
 	Gdiplus::Rect rect(0,0,width,height);
+
 	Gdiplus::Bitmap bm(width, height, PixelFormat32bppARGB);
 	Gdiplus::Graphics temp(&bm);
+	temp.DrawImage(playerAnimationList[state]->GetAtlasImg().lock().get(),rect, atlasRect.X , atlasRect.Y, atlasRect.Width, atlasRect.Height, Gdiplus::Unit::UnitPixel, nullptr, 0, nullptr);
 	//temp.DrawImage(tempImg,rect);
 
 	//그려줄 screen좌표의 rect
@@ -208,7 +209,7 @@ void Player::Render(Gdiplus::Graphics* MemG)
 		bm.RotateFlip(Gdiplus::Rotate180FlipY);
 	}
 
-	MemG->DrawImage(&bm, screenPosRect);
+	_MemG->DrawImage(&bm, screenPosRect);
 
 #if defined VEL_DEBUG
 	if(ptList.size() < 2) return;
@@ -255,4 +256,11 @@ void Player::Jump(bool bFlagLeft,float Delta)
 void Player::AddAnimation(Animation* ani)
 {
 	playerAnimationList.emplace_back(ani);
+}
+
+void Player::ChangeState(EPlayerState _state)
+{
+	playerAnimationList[state]->End();
+	state = _state;
+	playerAnimationList[state]->Begin();
 }

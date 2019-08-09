@@ -7,9 +7,10 @@ class Animation_Idle :
 public:
 	Animation_Idle();
 	~Animation_Idle();
-	void Update(Gdiplus::Image* img, float Delta);
+	void Update(Gdiplus::Rect* rect, float Delta);
 	void Begin();
 	void End();
+	std::weak_ptr<Gdiplus::Image> GetAtlasImg();
 private:
 };
 

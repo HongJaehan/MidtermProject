@@ -19,7 +19,7 @@ public:
 	//std::weak_ptr<Gdiplus::Image> GetImage();
 	void Jump(bool bFlagLeft,float Delta);
 	void AddAnimation(Animation*);
-
+	void ChangeState(EPlayerState);
 private:
 	EPlayerState state;
 	Position pos; //playerÀÇ À§Ä¡ X,Y
@@ -30,5 +30,6 @@ private:
 	float jumpInitPosY;
 	//std::vector<Gdiplus::PointF> ptList;
 	std::vector<Animation*> playerAnimationList;
+	Gdiplus::Rect atlasRect;
 };
 

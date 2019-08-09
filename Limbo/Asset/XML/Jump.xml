@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker https://www.codeandweb.com/texturepacker -->
+<!-- $TexturePacker:SmartUpdate:119ecdd644f56a650a50e3067db23c48:3678d33f38c97cc1c82b25bb859be05a:de9df130b825f218a5ab899a8f6693af$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+with polygon mode enabled:
+vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
+verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
+triangles  => sprite triangulation, 3 vertex indices per triangle
+-->
+<TextureAtlas imagePath="Jump.png" width="1024" height="1024">
+    <sprite n="Frame0.png" x="0" y="0" w="116" h="163" pX="0.5" pY="0.5"/>
+    <sprite n="Frame1.png" x="116" y="0" w="116" h="163" pX="0.5" pY="0.5"/>
+    <sprite n="Frame2.png" x="232" y="0" w="116" h="163" pX="0.5" pY="0.5"/>
+    <sprite n="Frame3.png" x="348" y="0" w="116" h="163" pX="0.5" pY="0.5"/>
+    <sprite n="Frame4.png" x="464" y="0" w="116" h="163" pX="0.5" pY="0.5"/>
+    <sprite n="Frame5.png" x="580" y="0" w="116" h="163" pX="0.5" pY="0.5"/>
+    <sprite n="Frame6.png" x="696" y="0" w="116" h="163" pX="0.5" pY="0.5"/>
+    <sprite n="Frame7.png" x="812" y="0" w="116" h="163" pX="0.5" pY="0.5"/>
+    <sprite n="Frame8.png" x="0" y="163" w="116" h="163" pX="0.5" pY="0.5"/>
+    <sprite n="Frame9.png" x="116" y="163" w="116" h="163" pX="0.5" pY="0.5"/>
+    <sprite n="Frame10.png" x="232" y="163" w="116" h="163" pX="0.5" pY="0.5"/>
+    <sprite n="Frame11.png" x="348" y="163" w="116" h="163" pX="0.5" pY="0.5"/>
+    <sprite n="Frame12.png" x="464" y="163" w="116" h="163" pX="0.5" pY="0.5"/>
+    <sprite n="Frame13.png" x="580" y="163" w="116" h="163" pX="0.482759" pY="0.601227"/>
+    <sprite n="Frame14.png" x="696" y="163" w="116" h="163" pX="0.474138" pY="0.607362"/>
+    <sprite n="Frame15.png" x="812" y="163" w="116" h="163" pX="0.517241" pY="0.564417"/>
+    <sprite n="Frame16.png" x="0" y="326" w="116" h="163" pX="0.5" pY="0.539877"/>
+    <sprite n="Frame17.png" x="116" y="326" w="116" h="163" pX="0.5" pY="0.5"/>
+    <sprite n="Frame18.png" x="232" y="326" w="116" h="163" pX="0.5" pY="0.5"/>
+    <sprite n="Frame19.png" x="348" y="326" w="116" h="163" pX="0.5" pY="0.5"/>
+    <sprite n="Frame20.png" x="464" y="326" w="116" h="163" pX="0.5" pY="0.5"/>
+    <sprite n="Frame21.png" x="580" y="326" w="116" h="163" pX="0.5" pY="0.5"/>
+    <sprite n="Frame22.png" x="696" y="326" w="116" h="163" pX="0.5" pY="0.5"/>
+    <sprite n="Frame23.png" x="812" y="326" w="116" h="163" pX="0.5" pY="0.5"/>
+    <sprite n="Frame24.png" x="0" y="489" w="116" h="163" pX="0.5" pY="0.5"/>
+    <sprite n="Frame25.png" x="116" y="489" w="116" h="163" pX="0.5" pY="0.5"/>
+    <sprite n="Frame26.png" x="232" y="489" w="116" h="163" pX="0.5" pY="0.5"/>
+    <sprite n="Frame27.png" x="348" y="489" w="116" h="163" pX="0.5" pY="0.5"/>
+    <sprite n="Frame28.png" x="464" y="489" w="116" h="163" pX="0.5" pY="0.5"/>
+    <sprite n="Frame29.png" x="580" y="489" w="116" h="163" pX="0.5" pY="0.5"/>
+    <sprite n="Frame30.png" x="696" y="489" w="116" h="163" pX="0.5" pY="0.5"/>
+    <sprite n="Frame31.png" x="812" y="489" w="116" h="163" pX="0.5" pY="0.5"/>
+    <sprite n="Frame32.png" x="0" y="652" w="116" h="163" pX="0.5" pY="0.5"/>
+    <sprite n="Frame33.png" x="116" y="652" w="116" h="163" pX="0.5" pY="0.5"/>
+</TextureAtlas>

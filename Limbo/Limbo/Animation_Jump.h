@@ -6,9 +6,10 @@ class Animation_Jump :
 public:
 	Animation_Jump();
 	~Animation_Jump();
-	void Update(Gdiplus::Image *img ,float Delta);
+	void Update(Gdiplus::Rect* rect, float Delta);
 	void Begin();
 	void End();
+	std::weak_ptr<Gdiplus::Image> GetAtlasImg();
 private:
 	//std::vector<Gdiplus::Rect> sprites;
 };
