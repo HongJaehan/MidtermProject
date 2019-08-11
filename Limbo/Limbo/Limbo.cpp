@@ -146,6 +146,7 @@ UINT CLimboApp::FuncThread(LPVOID pParam)
 
 		DWORD tick = GetTickCount();
 		DWORD Delta = tick - PrevTick;
+		PrevTick = tick;
 
 		if (CMainFrame * MainFrm = static_cast<CMainFrame*>(theApp.GetMainWnd()))
 		{
@@ -166,7 +167,6 @@ UINT CLimboApp::FuncThread(LPVOID pParam)
 			}
 		}
 		Sleep(1000/60);
-		PrevTick = tick;
 	}
 	return  -1;
 }

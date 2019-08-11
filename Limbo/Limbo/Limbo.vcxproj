@@ -77,8 +77,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\Asset</OutDir>
-    <IncludePath>D:\MidTermProject\MidtermProject\Limbo\Limbo\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\MidTermProject\MidtermProject\Limbo\Limbo\Lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>E:\MidTermProject\Limbo\Limbo\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\MidTermProject\MidtermProject\Limbo\Limbo\Lib;E:\MidTermProject\Limbo\Limbo\Lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -200,6 +200,7 @@
     <ClInclude Include="Animation_Jump.h" />
     <ClInclude Include="Animation_Run.h" />
     <ClInclude Include="AssetManager.h" />
+    <ClInclude Include="Background.h" />
     <ClInclude Include="ChildView.h" />
     <ClInclude Include="common.h" />
     <ClInclude Include="CVector.h" />
@@ -228,6 +229,7 @@
     <ClCompile Include="Animation_Jump.cpp" />
     <ClCompile Include="Animation_Run.cpp" />
     <ClCompile Include="AssetManager.cpp" />
+    <ClCompile Include="Background.cpp" />
     <ClCompile Include="ChildView.cpp" />
     <ClCompile Include="CVector.cpp" />
     <ClCompile Include="EndScene.cpp" />

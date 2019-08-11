@@ -17,6 +17,8 @@ protected:
 	ETag tag;
 	//Gdiplus::Graphics* MemG;
 	//Gdiplus::Image* img;
+	int x;
+	int y;
 	int width;
 	int height;
 	bool enable;

@@ -7,6 +7,7 @@ public:
 	GameManager();
 	~GameManager();
 	std::pair<int, int> GetCheckPoint();
+	int GetTerrainData(int playerPosX);
 
 private:
 	//key : 체크 포인트 number    value: 체크포인트의 x, y 값
@@ -17,6 +18,10 @@ private:
 	int mapCount;
 	//Gdiplus::Graphics* TerrainGraphics;
 	Gdiplus::Bitmap* terrainBitmap;
+	Gdiplus::Bitmap* ex;
+
+	//player 위치값 X를 저장하는 변수
+	int playerPosX;
 };
 
 GameManager* GameManager::instance = nullptr;

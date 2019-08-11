@@ -17,7 +17,7 @@ public:
 	void Update(float);
 	void Render(Gdiplus::Graphics*);
 	//std::weak_ptr<Gdiplus::Image> GetImage();
-	void Jump(bool bFlagLeft,float Delta);
+	void Jump(bool bFlagLeft,int terrainY,float Delta);
 	void AddAnimation(Animation*);
 	void ChangeState(EPlayerState);
 private:

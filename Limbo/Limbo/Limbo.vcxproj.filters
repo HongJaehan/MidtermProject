@@ -37,6 +37,9 @@
     <Filter Include="소스 파일\Component">
       <UniqueIdentifier>{084f7129-78e7-43bd-a1ec-26fd09907edc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Background">
+      <UniqueIdentifier>{d68712d6-e9c2-449a-ab59-5fbbab785e96}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="object.h">
@@ -117,6 +120,9 @@
     <ClInclude Include="Terrain.h">
       <Filter>소스 파일\Object</Filter>
     </ClInclude>
+    <ClInclude Include="Background.h">
+      <Filter>소스 파일\Background</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssetManager.cpp">
@@ -181,6 +187,9 @@
     </ClCompile>
     <ClCompile Include="Terrain.cpp">
       <Filter>소스 파일\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Background.cpp">
+      <Filter>소스 파일\Background</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

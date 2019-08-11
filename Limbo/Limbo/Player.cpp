@@ -26,7 +26,7 @@ Player::Player()
 	AddAnimation(new Animation_Jump());
 
 	//임시 처리
- 	pos.SetX(0 + width*0.5);
+ 	pos.SetX(200 + width*0.5);
 	pos.SetY(800 - height);
 
 	//사용할 생각
@@ -134,9 +134,14 @@ static float AddDelta = 0;
 
 void Player::Update(float Delta)
 {
+
+	//GameManager에 현재 Player의 X좌표를 보내 Terrain의 Y 정보를 받아온다.
+	int terrainY = GameManager::GetInstance()->GetTerrainData(pos.GetX() + width * 0.5f);
+
 	switch (state)
 	{
 	case eState_Idle:
+		pos.SetY(pos.GetY() + 10);
 		speed = INIT_SPEED; //속도 초기화
 		break;
 	case eState_Run:
@@ -144,9 +149,11 @@ void Player::Update(float Delta)
 		{
 			speed += Delta * 10;
 		}
+		pos.SetY(pos.GetY() + 10);
+
 		break;
 	case eState_Jump:
-		Jump(bFlagLeft, Delta);
+		Jump(bFlagLeft,terrainY, Delta);
 		break;
 #pragma region MyRegion
 		//pos.SetY(jumpInitPosY + speed * cos(DEGTORAD(-45)) - 0.5f * GRAVITY * Delta * Delta);
@@ -185,6 +192,11 @@ void Player::Update(float Delta)
 			//pos.SetY(Y + (-1000 * Delta) + AddVal);
 #pragma endregion
 	}
+		//현재 Player의 Y좌표가 Terrain보다 크다면
+		if (pos.GetY() >= terrainY)
+		{
+			pos.SetY(terrainY);
+		}
 		//현재 Animation의 image를 XML정보에 맞춰 저장해줌.
 		playerAnimationList[state]->Update(&atlasRect, Delta);
 }
@@ -204,7 +216,7 @@ void Player::Render(Gdiplus::Graphics* _MemG)
 	//bm.GetPixel(60, 60, &color);
 	//int x = color.GetAlpha();
 	//그려줄 screen좌표의 rect
-	Gdiplus::Rect screenPosRect(pos.GetX(), pos.GetY(), width, height);
+	Gdiplus::Rect screenPosRect(1920/2, pos.GetY()-height+5, width, height);
 
 	//만약 좌측방향이라면 bit를 좌우 반전시켜준다.
 	if (bFlagLeft)
@@ -232,7 +244,7 @@ void Player::Render(Gdiplus::Graphics* _MemG)
 }
 
 
-void Player::Jump(bool bFlagLeft,float Delta)
+void Player::Jump(bool bFlagLeft,int terrainY,float Delta)
 {
 		AddDelta += Delta;
 		float AddVal = (0.5f * GRAVITY * AddDelta * AddDelta);
@@ -245,14 +257,10 @@ void Player::Jump(bool bFlagLeft,float Delta)
 			pos.SetX(pos.GetX() + speed * 100 * Delta);
 		}
 		pos.SetY(pos.GetY() + (-400.f * Delta) + AddVal);
-
-		//예시
-		if (pos.GetY() >= jumpInitPosY)
+		if (pos.GetY() > terrainY)
 		{
+			pos.SetY(terrainY);
 			state = eState_Idle;
-			pos.SetY(jumpInitPosY);
-			AddDelta = 0;
-			speed = 0;
 		}
 }
 
