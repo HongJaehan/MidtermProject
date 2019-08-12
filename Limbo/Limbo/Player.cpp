@@ -2,10 +2,10 @@
 #include "Player.h"
 #include "MainFrm.h"
 
-#define MAX_SPEED 3
+#define MAX_SPEED 2.5f
 #define INIT_SPEED 0
 #define PI (3.1415926535897932f)
-#define GRAVITY 75
+#define GRAVITY 9.8
 #define DEGTORAD(X) (X * (PI / 180))
 
 Player::Player()
@@ -25,15 +25,18 @@ Player::Player()
 	AddAnimation(new Animation_Run());
 	AddAnimation(new Animation_Jump());
 
-	//임시 처리
- 	pos.SetX(200 + width*0.5);
-	pos.SetY(800 - height);
+	int screenSizeWidth = defines.screenSizeX;
+ 	pos.SetX(screenSizeWidth*0.5f);
+	pos.SetY(800);
+
+	playerScreenPosX = pos.GetX() - width * 0.5;
+	playerScreenPosY = pos.GetY() - height;
+
 
 	//사용할 생각
 	//pos.SetX(GameManager::GetInstance()->GetCheckPoint().first + width * 0.5);
 	//pos.SetY(GameManager::GetInstance()->GetCheckPoint().first - height);
 
-	//MemG = 
 }
 
 Player::~Player()
@@ -48,13 +51,12 @@ Player::~Player()
 
 void Player::Control()
 {
-
 	if (GetAsyncKeyState(VK_LEFT) & 0x8001) //왼쪽 달리기
 	{
 		switch (state)
 		{
 		case eState_Idle:
-			state = eState_Run;
+			ChangeState(eState_Run);
 			bFlagLeft = true;
 			break;
 		case eState_Jump:
@@ -62,14 +64,14 @@ void Player::Control()
 		case eState_Run:
 			if (GetAsyncKeyState(VK_UP) & 0x1001)
 			{
-				state = eState_Jump;
+				ChangeState(eState_Jump);
 				jumpInitPosX = pos.GetX();
 				jumpInitPosY = pos.GetY();
 				break;
 			}
 			if (!bFlagLeft) { speed = 0; }//현재 왼쪽으로 달리고있는 중이었다면 speed를 0으로 초기화한다.
 			bFlagLeft = true;
-			pos.SetX(pos.GetX() - speed);
+			//pos.SetX(pos.GetX() - speed);
 			break;
 		case eState_Interaction:
 			break;
@@ -82,7 +84,7 @@ void Player::Control()
 		switch (state)
 		{
 		case eState_Idle:
-			state = eState_Run;
+			ChangeState(eState_Run);
 			bFlagLeft = false;
 			break;
 		case eState_Jump:
@@ -90,14 +92,14 @@ void Player::Control()
 		case eState_Run:
 			if (GetAsyncKeyState(VK_UP) & 0x1001)
 			{
-				state = eState_Jump;
+				ChangeState(eState_Jump);
 				jumpInitPosX = pos.GetX();
 				jumpInitPosY = pos.GetY();
 				break;
 			}
 			if (bFlagLeft) { speed = 0; }//현재 왼쪽으로 달리고있는 중이었다면 speed를 0으로 초기화한다.
 			bFlagLeft = false;
-			pos.SetX(pos.GetX() + speed );
+			//pos.SetX(pos.GetX() + speed );
 			break;
 		case eState_Interaction:
 			break;
@@ -110,7 +112,7 @@ void Player::Control()
 		switch(state)
 		{
 		case eState_Idle:
-			state = eState_Jump;
+			ChangeState(eState_Jump);
 			break;
 		}
 	}
@@ -122,7 +124,7 @@ void Player::Control()
 	{
 		if (state != eState_Jump)
 		{
-			state = eState_Idle;
+			ChangeState(eState_Idle);
 			speed = INIT_SPEED;
 		}
 	}
@@ -132,25 +134,48 @@ void Player::Control()
 
 static float AddDelta = 0;
 
+static float AddUpdateDelta = 0;
 void Player::Update(float Delta)
 {
+	AddUpdateDelta += Delta;
 
+	if (AddUpdateDelta > 0.3f)
+	{
+		AddUpdateDelta = 0;
+	}
 	//GameManager에 현재 Player의 X좌표를 보내 Terrain의 Y 정보를 받아온다.
-	int terrainY = GameManager::GetInstance()->GetTerrainData(pos.GetX() + width * 0.5f);
+	int terrainY = GameManager::GetInstance()->GetTerrainData(pos.GetX()+width*0.5f);
 
 	switch (state)
 	{
 	case eState_Idle:
-		pos.SetY(pos.GetY() + 10);
+		pos.SetY(pos.GetY() + AddUpdateDelta * GRAVITY);
 		speed = INIT_SPEED; //속도 초기화
+		//현재 Player의 Y좌표가 Terrain보다 크다면
+		if (pos.GetY() >= terrainY)
+		{
+			pos.SetY(terrainY);
+		}
 		break;
 	case eState_Run:
 		if (speed < MAX_SPEED) //스피드가 최고 속도를 넘지 않으면
 		{
-			speed += Delta * 10;
+			speed += AddUpdateDelta;
 		}
-		pos.SetY(pos.GetY() + 10);
-
+		if (bFlagLeft)
+		{
+			pos.SetX(pos.GetX() - speed * AddUpdateDelta);
+		}
+		else
+		{
+			pos.SetX(pos.GetX() + speed * AddUpdateDelta);
+		}
+		pos.SetY(pos.GetY() + AddUpdateDelta * GRAVITY);
+		//현재 Player의 Y좌표가 Terrain보다 크다면
+		if (pos.GetY() >= terrainY)
+		{
+			pos.SetY(terrainY);
+		}
 		break;
 	case eState_Jump:
 		Jump(bFlagLeft,terrainY, Delta);
@@ -192,31 +217,20 @@ void Player::Update(float Delta)
 			//pos.SetY(Y + (-1000 * Delta) + AddVal);
 #pragma endregion
 	}
-		//현재 Player의 Y좌표가 Terrain보다 크다면
-		if (pos.GetY() >= terrainY)
-		{
-			pos.SetY(terrainY);
-		}
 		//현재 Animation의 image를 XML정보에 맞춰 저장해줌.
-		playerAnimationList[state]->Update(&atlasRect, Delta);
+		playerAnimationList[state]->Update(&atlasRect,Delta);
 }
 
 void Player::Render(Gdiplus::Graphics* _MemG)
 {
-	//auto atlasImg = img.lock();
 	//Player의 크기
 	Gdiplus::Rect rect(0,0,width,height);
 
 	Gdiplus::Bitmap bm(width, height, PixelFormat32bppARGB);
 	Gdiplus::Graphics temp(&bm);
 	temp.DrawImage(playerAnimationList[state]->GetAtlasImg().lock().get(),rect, atlasRect.X , atlasRect.Y, atlasRect.Width, atlasRect.Height, Gdiplus::Unit::UnitPixel, nullptr, 0, nullptr);
-	//temp.DrawImage(tempImg,rect);
 
-	//Gdiplus::Color color;
-	//bm.GetPixel(60, 60, &color);
-	//int x = color.GetAlpha();
-	//그려줄 screen좌표의 rect
-	Gdiplus::Rect screenPosRect(1920/2, pos.GetY()-height+5, width, height);
+	Gdiplus::Rect screenPosRect(defines.screenSizeX/2 - width*0.5f,pos.GetY()-height+10, width, height);
 
 	//만약 좌측방향이라면 bit를 좌우 반전시켜준다.
 	if (bFlagLeft)
@@ -257,10 +271,13 @@ void Player::Jump(bool bFlagLeft,int terrainY,float Delta)
 			pos.SetX(pos.GetX() + speed * 100 * Delta);
 		}
 		pos.SetY(pos.GetY() + (-400.f * Delta) + AddVal);
+
 		if (pos.GetY() > terrainY)
 		{
 			pos.SetY(terrainY);
-			state = eState_Idle;
+			ChangeState(eState_Idle);
+			AddDelta = 0.0f;
+			speed = 0;
 		}
 }
 

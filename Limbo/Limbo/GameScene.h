@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "object.h"
 #include "Terrain.h"
+#include "Background.h"
 
 class GameScene :	public Scene
 {
@@ -18,6 +19,7 @@ public:
 private:
 	Object* player;
 	Object* terrain;
+	std::vector<Background*> backgroundVec;
 	std::vector<Object*> objectVec;
 	ECheckPoint checkPoint;
 };

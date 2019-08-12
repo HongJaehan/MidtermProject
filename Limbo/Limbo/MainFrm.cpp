@@ -79,8 +79,8 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 	cs.x = 0;
 	cs.y = 0;
 
-	cs.cx = 1920;
-	cs.cy = 1080;
+	cs.cx = defines.screenSizeX;
+	cs.cy = defines.screenSizeY;
 	cs.dwExStyle &= ~WS_EX_CLIENTEDGE;
 	cs.lpszClass = AfxRegisterWndClass(0);
 	return TRUE;

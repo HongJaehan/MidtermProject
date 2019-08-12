@@ -51,6 +51,8 @@ BOOL CLimboApp::InitInstance()
 	Gdiplus::GdiplusStartup(&gpToken, &start, nullptr);
 	EnableTaskbarInteraction(FALSE);
 
+
+
 	// RichEdit 컨트롤을 사용하려면 AfxInitRichEdit2()가 있어야 합니다.
 	// AfxInitRichEdit2();
 
@@ -166,7 +168,7 @@ UINT CLimboApp::FuncThread(LPVOID pParam)
 					view->InvalidateRect(rc);
 			}
 		}
-		Sleep(1000/60);
+		Sleep(1);
 	}
 	return  -1;
 }

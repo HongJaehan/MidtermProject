@@ -82,8 +82,8 @@ void CChildView::OnPaint()
 	//else
 	//	delta = 1.f;
 
-	//MemG.DrawImage(&Img, ProgressRect, 0, 0, 1080, 30, Gdiplus::Unit::UnitPixel);
-	//MemG.DrawImage(&Img2, ProgressRect2, 0, 0, 1080, 30, Gdiplus::Unit::UnitPixel);
+	//MemG.DrawImage(&Img, ProgressRect, 0, 0, defines.screenSizeY, 30, Gdiplus::Unit::UnitPixel);
+	//MemG.DrawImage(&Img2, ProgressRect2, 0, 0, defines.screenSizeY, 30, Gdiplus::Unit::UnitPixel);
 	//
 	//CMemDC memDC(dc, this);
 	//CBrush br(RGB(0, 0, 255));

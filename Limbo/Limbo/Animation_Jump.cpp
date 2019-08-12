@@ -20,7 +20,7 @@ void Animation_Jump::Update( Gdiplus::Rect* rect, float Delta)
 {
 	addDelta += Delta;
 
-	if (addDelta > 0.1f)
+	if (addDelta > 0.03f)
 	{
 		addDelta = 0;
 		++frame;

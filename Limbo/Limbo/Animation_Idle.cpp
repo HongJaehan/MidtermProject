@@ -20,9 +20,10 @@ void Animation_Idle::Update(Gdiplus::Rect* rect, float Delta)
 {
 	addDelta += Delta;
 
-	if (addDelta > 0.1f)
+	if (addDelta > 0.025f)
 	{
 		addDelta = 0;
+		++frame;
 	}
 
 	if (frame > XMLRect.size() - 1)
@@ -33,8 +34,6 @@ void Animation_Idle::Update(Gdiplus::Rect* rect, float Delta)
 	rect->Y = XMLRect[frame].Y;
 	rect->Width = XMLRect[frame].Width;
 	rect->Height = XMLRect[frame].Height;
-
-	++frame;
 }
 
 void Animation_Idle::Begin()

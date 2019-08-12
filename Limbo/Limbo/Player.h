@@ -23,6 +23,8 @@ public:
 private:
 	EPlayerState state;
 	Position pos; //player의 위치 X,Y
+	int playerScreenPosX;
+	int playerScreenPosY;
 	float speed;  //player의 속도
 	bool bFlagLeft; //Left Animation을 하기 위해 
 	//std::vector<Gdiplus::Rect> rects; //Player의 애니메이션을 불러오기위해 저장한 Rects값들 즉,xml에 정보

@@ -11,6 +11,7 @@
 #include "framework.h"
 #include "Singleton.h"
 #include "common.h"
+#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
 #include <gdiplus.h>
 #include <vector>
 #include <memory>
