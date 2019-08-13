@@ -1,4 +1,5 @@
 #pragma once
+#include "pch.h"
 #include "object.h"
 #include "Position.h"
 #include "common.h"
@@ -6,6 +7,7 @@
 #include "Animation_Idle.h"
 #include "Animation_Run.h"
 #include "Animation_Jump.h"
+#include "PlayerControlComponent.h"
 
 class Player :public Object
 {
@@ -20,7 +22,15 @@ public:
 	void Jump(bool bFlagLeft,int terrainY,float Delta);
 	void AddAnimation(Animation*);
 	void ChangeState(EPlayerState);
+	EPlayerState GetState();
+	bool GetLeftFlag();
+	void SetLeftFlag(bool Flag);
+	void InitSpeed();
 private:
+	//Component
+	PlayerControlComponent control;
+	//Component* collider;
+
 	EPlayerState state;
 	Position pos; //playerÀÇ À§Ä¡ X,Y
 	int playerScreenPosX;

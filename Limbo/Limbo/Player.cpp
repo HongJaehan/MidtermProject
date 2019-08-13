@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Player.h"
 #include "MainFrm.h"
+#include "PlayerControlComponent.h"
 
 #define MAX_SPEED 2.5f
 #define INIT_SPEED 0
@@ -32,7 +33,6 @@ Player::Player()
 	playerScreenPosX = pos.GetX() - width * 0.5;
 	playerScreenPosY = pos.GetY() - height;
 
-
 	//사용할 생각
 	//pos.SetX(GameManager::GetInstance()->GetCheckPoint().first + width * 0.5);
 	//pos.SetY(GameManager::GetInstance()->GetCheckPoint().first - height);
@@ -54,83 +54,6 @@ Player::~Player()
 
 void Player::Control()
 {
-	if (GetAsyncKeyState(VK_LEFT) & 0x8001) //왼쪽 달리기
-	{
-		switch (state)
-		{
-		case eState_Idle:
-			ChangeState(eState_Run);
-			bFlagLeft = true;
-			break;
-		case eState_Jump:
-			break;
-		case eState_Run:
-			if (GetAsyncKeyState(VK_UP) & 0x1001)
-			{
-				ChangeState(eState_Jump);
-				jumpInitPosX = pos.GetX();
-				jumpInitPosY = pos.GetY();
-				break;
-			}
-			if (!bFlagLeft) { speed = 0; }//현재 왼쪽으로 달리고있는 중이었다면 speed를 0으로 초기화한다.
-			bFlagLeft = true;
-			//pos.SetX(pos.GetX() - speed);
-			break;
-		case eState_Interaction:
-			break;
-		default:
-			break;
-		}
-	}
-	else if (GetAsyncKeyState(VK_RIGHT) & 0x8001) //오른쪽 달리기
-	{
-		switch (state)
-		{
-		case eState_Idle:
-			ChangeState(eState_Run);
-			bFlagLeft = false;
-			break;
-		case eState_Jump:
-			break;
-		case eState_Run:
-			if (GetAsyncKeyState(VK_UP) & 0x1001)
-			{
-				ChangeState(eState_Jump);
-				jumpInitPosX = pos.GetX();
-				jumpInitPosY = pos.GetY();
-				break;
-			}
-			if (bFlagLeft) { speed = 0; }//현재 왼쪽으로 달리고있는 중이었다면 speed를 0으로 초기화한다.
-			bFlagLeft = false;
-			//pos.SetX(pos.GetX() + speed );
-			break;
-		case eState_Interaction:
-			break;
-		default:
-			break;
-		}
-	}
-	else if (GetAsyncKeyState(VK_UP) & 0x8001) //상호작용
-	{
-		switch(state)
-		{
-		case eState_Idle:
-			ChangeState(eState_Jump);
-			break;
-		}
-	}
-	else if (GetAsyncKeyState(VK_CONTROL) & 0x8001) //상호작용
-	{
-
-	}
-	else //Idle
-	{
-		if (state != eState_Jump)
-		{
-			ChangeState(eState_Idle);
-			speed = INIT_SPEED;
-		}
-	}
 }
 
 
@@ -138,8 +61,12 @@ void Player::Control()
 static float AddDelta = 0;
 
 static float AddUpdateDelta = 0;
+
 void Player::Update(float Delta)
 {
+	//Component Update
+	control.Update(*this);
+
 	AddUpdateDelta += Delta;
 
 	if (AddUpdateDelta > 0.3f)
@@ -294,4 +221,22 @@ void Player::ChangeState(EPlayerState _state)
 	playerAnimationList[state]->End();
 	state = _state;
 	playerAnimationList[state]->Begin();
+}
+
+EPlayerState Player::GetState()
+{
+	return state;
+}
+bool Player::GetLeftFlag()
+{
+	return bFlagLeft;
+}
+void Player::SetLeftFlag(bool Flag)
+{
+	bFlagLeft = Flag;
+}
+
+void Player::InitSpeed()
+{
+	speed = 0;
 }

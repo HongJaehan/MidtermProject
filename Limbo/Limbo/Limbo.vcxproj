@@ -77,8 +77,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\Asset</OutDir>
-    <IncludePath>D:\MidTermProject\MidtermProject\Limbo\Limbo\include;C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\MidTermProject\MidtermProject\Limbo\Limbo\Lib;C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\MidTermProject\MidtermProject\Limbo\Limbo\include;C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\include;E:\MidTermProject\Limbo\Limbo\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\MidTermProject\MidtermProject\Limbo\Limbo\Lib;C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Lib;E:\MidTermProject\Limbo\Limbo\Lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -201,9 +201,12 @@
     <ClInclude Include="Animation_Run.h" />
     <ClInclude Include="AssetManager.h" />
     <ClInclude Include="Background.h" />
+    <ClInclude Include="BoxCollider2D.h" />
     <ClInclude Include="ChildView.h" />
+    <ClInclude Include="ColliderComponent.h" />
     <ClInclude Include="common.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="ControlComponent.h" />
     <ClInclude Include="CVector.h" />
     <ClInclude Include="EndScene.h" />
     <ClInclude Include="framework.h" />
@@ -215,6 +218,7 @@
     <ClInclude Include="object.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerControlComponent.h" />
     <ClInclude Include="Position.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Scene.h" />
@@ -231,8 +235,11 @@
     <ClCompile Include="Animation_Run.cpp" />
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="Background.cpp" />
+    <ClCompile Include="BoxCollider2D.cpp" />
     <ClCompile Include="ChildView.cpp" />
+    <ClCompile Include="ColliderComponent.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="ControlComponent.cpp" />
     <ClCompile Include="CVector.cpp" />
     <ClCompile Include="EndScene.cpp" />
     <ClCompile Include="GameManager.cpp" />
@@ -248,6 +255,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerControlComponent.cpp" />
     <ClCompile Include="Position.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
