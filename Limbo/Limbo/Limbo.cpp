@@ -51,6 +51,8 @@ BOOL CLimboApp::InitInstance()
 	Gdiplus::GdiplusStartup(&gpToken, &start, nullptr);
 	EnableTaskbarInteraction(FALSE);
 
+	//_CrtSetBreakAlloc(356);
+	//_CrtMemDumpAllObjectsSince(0); 
 
 
 	// RichEdit 컨트롤을 사용하려면 AfxInitRichEdit2()가 있어야 합니다.

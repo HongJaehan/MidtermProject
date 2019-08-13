@@ -40,7 +40,7 @@ public:
 	int screenSizeX = 1920;
 	int screenSizeY = 1080;
 	int mapImgSizeX = 1024;
-	int mapImgSizeY = 256;
+	int mapImgSizeY = 1024;
 
 	std::string img_Player_Idle = "Player_Idle.png";
 	//std::wstring s = std::TEXT(img_Player_Idle);

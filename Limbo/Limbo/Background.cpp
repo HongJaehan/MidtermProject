@@ -19,7 +19,7 @@ Background::Background(int _startPosX, std::wstring _imgName)
 }
 Background::~Background()
 {
-
+	delete img.lock().get();
 }
 
 int Background::GetStartPosX()
@@ -83,11 +83,6 @@ void Background::RenderRight(Gdiplus::Graphics* MemG, int sizeToDraw)
 
 	int imgSizeX = defines.mapImgSizeX;
 	int imgSizeY = defines.mapImgSizeY;
-	//////이미지 가져와서 3920 * defines.screenSizeY사이즈로 그려주기
-	////Gdiplus::Rect rect(0, 0, width * 2, height);
-	////Gdiplus::Bitmap bm(width * 2, height, PixelFormat32bppARGB);
-	////Gdiplus::Graphics temp(&bm);
-	////temp.DrawImage(AssetManager::GetInstance()->GetImage(imgName).lock().get(), rect);
 
 	//실제로 스크린에 뿌려줄 크기
 	Gdiplus::Rect rect2(width-sizeToDraw, 0, sizeToDraw, height);

@@ -203,6 +203,7 @@
     <ClInclude Include="Background.h" />
     <ClInclude Include="ChildView.h" />
     <ClInclude Include="common.h" />
+    <ClInclude Include="Component.h" />
     <ClInclude Include="CVector.h" />
     <ClInclude Include="EndScene.h" />
     <ClInclude Include="framework.h" />
@@ -231,6 +232,7 @@
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="ChildView.cpp" />
+    <ClCompile Include="Component.cpp" />
     <ClCompile Include="CVector.cpp" />
     <ClCompile Include="EndScene.cpp" />
     <ClCompile Include="GameManager.cpp" />

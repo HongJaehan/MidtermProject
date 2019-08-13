@@ -123,6 +123,9 @@
     <ClInclude Include="Background.h">
       <Filter>소스 파일\Background</Filter>
     </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>소스 파일\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssetManager.cpp">
@@ -190,6 +193,9 @@
     </ClCompile>
     <ClCompile Include="Background.cpp">
       <Filter>소스 파일\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>소스 파일\Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

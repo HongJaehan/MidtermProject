@@ -19,7 +19,6 @@ private:
 	int mapCount;
 	//Gdiplus::Graphics* TerrainGraphics;
 	Gdiplus::Bitmap* terrainBitmap;
-	Gdiplus::Bitmap* ex;
 
 	//player 위치값 X를 저장하는 변수
 	int playerPosX;

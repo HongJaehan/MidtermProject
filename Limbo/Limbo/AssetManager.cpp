@@ -43,6 +43,15 @@
 #pragma endregion
 
 //오브젝트들은 이미지의 하드 포인터를 들고있으면 안되기 때문에 Weak_ptr을 사용해줘야한다.
+AssetManager::AssetManager()
+{
+
+}
+
+AssetManager::~AssetManager()
+{
+	imgDic.clear();
+}
 
 std::weak_ptr<Gdiplus::Image> AssetManager::GetImage(std::wstring str)
 {
@@ -79,10 +88,10 @@ std::weak_ptr<Gdiplus::Image> AssetManager::MyLoadImage(std::wstring fileName)
 
 	std::shared_ptr<Gdiplus::Image> Img = std::make_shared<Gdiplus::Image>(temp.c_str());
 
-	//if (Img = nullptr)
-	//{
-	//	return nullptr;
-	//}
+	/*if (Img = nullptr)
+	{
+		return;
+	}*/
 
 	std::hash<std::wstring> makeHash;
 	imgDic.insert(std::make_pair(makeHash(fileName), Img));

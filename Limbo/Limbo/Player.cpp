@@ -5,7 +5,7 @@
 #define MAX_SPEED 2.5f
 #define INIT_SPEED 0
 #define PI (3.1415926535897932f)
-#define GRAVITY 9.8
+#define GRAVITY 7
 #define DEGTORAD(X) (X * (PI / 180))
 
 Player::Player()
@@ -267,11 +267,11 @@ void Player::Jump(bool bFlagLeft,int terrainY,float Delta)
 		float AddVal = (0.5f * GRAVITY * AddDelta * AddDelta);
 		if (bFlagLeft)
 		{
-			pos.SetX(pos.GetX() - speed * 100 * Delta);
+			pos.SetX(pos.GetX() - speed * 130 * Delta);
 		}
 		else
 		{
-			pos.SetX(pos.GetX() + speed * 100 * Delta);
+			pos.SetX(pos.GetX() + speed * 130 * Delta);
 		}
 		pos.SetY(pos.GetY() + (-400.f * Delta) + AddVal);
 

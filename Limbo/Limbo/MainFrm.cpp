@@ -29,6 +29,10 @@ CMainFrame::CMainFrame() noexcept
 
 	//씬 초기화
 	SceneManager::GetInstance()->Init();
+
+	//_CrtSetBreakAlloc(356);
+	//_CrtMemDumpAllObjectsSince(0);
+
 }
 
 CMainFrame::~CMainFrame()

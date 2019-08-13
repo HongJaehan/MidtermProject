@@ -12,6 +12,7 @@
 #include "Singleton.h"
 #include "common.h"
 #pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
+#include <crtdbg.h>
 #include <gdiplus.h>
 #include <vector>
 #include <memory>
