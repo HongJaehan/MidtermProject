@@ -3,12 +3,12 @@
 
 Terrain::Terrain()
 {
-
+	img = AssetManager().GetInstance()->GetImage(TEXT("map3.png")).lock().get();
 }
 
 Terrain::~Terrain()
 {
-
+	delete img;
 }
 
 void Terrain::Control()
@@ -23,14 +23,16 @@ void Terrain::Update(float Delta)
 
 void Terrain::Render(Gdiplus::Graphics* MemG)
 {
-	Gdiplus::Bitmap terrainBitmap(defines.screenSizeX*2, defines.screenSizeY, PixelFormat32bppARGB);
-	Gdiplus::Graphics graphics(&terrainBitmap);
-	Gdiplus::Image* img = AssetManager().GetInstance()->GetImage(TEXT("map3.png")).lock().get();
+	//Gdiplus::Bitmap terrainBitmap(defines.screenSizeX*2, defines.screenSizeY, PixelFormat32bppARGB);
+	//Gdiplus::Graphics graphics(&terrainBitmap);
+	//Gdiplus::Image* img = AssetManager().GetInstance()->GetImage(TEXT("map3.png")).lock().get();
 
-	graphics.DrawImage(img, 0, 0,defines.screenSizeX*2, defines.screenSizeY);
-	Gdiplus::Rect rect(0, 0, defines.screenSizeX*2, defines.screenSizeY);
-	MemG->DrawImage(&terrainBitmap, rect);
+//	graphics.DrawImage(img, 0, 0,defines.screenSizeX*2, defines.screenSizeY);
+	Gdiplus::Rect rect(0, 0, defines.screenSizeX, defines.screenSizeY);
+	MemG->DrawImage(img, rect);
+	//MemG->DrawImage(AssetManager().GetInstance()->GetImage(TEXT("map3.png")).lock().get(), rect);
 
+	//AssetManager().GetInstance()->GetImage(TEXT("map3.png")).reset();
 	/*int posY = 0;
 	Gdiplus::Color color;
 	graphics.DrawImage(img, 0, 0, defines.screenSizeX, defines.screenSizeY);

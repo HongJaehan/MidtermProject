@@ -13,7 +13,7 @@ Animation_Idle::Animation_Idle()
 
 Animation_Idle::~Animation_Idle()
 {
-
+	atlasImg.lock().~shared_ptr();
 }
 
 void Animation_Idle::Update(Gdiplus::Rect* rect, float Delta)

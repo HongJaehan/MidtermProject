@@ -9,6 +9,6 @@ public:
 	void Update(float);
 	void Render(Gdiplus::Graphics*);
 private:
-
+	Gdiplus::Image* img;
 };
 

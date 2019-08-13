@@ -41,7 +41,10 @@ Player::Player()
 
 Player::~Player()
 {
-
+	for (auto& it : playerAnimationList)
+	{
+		delete it;
+	}
 }
 //
 //std::weak_ptr<Gdiplus::Image> Player::GetImage()

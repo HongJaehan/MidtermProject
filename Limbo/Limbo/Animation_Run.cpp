@@ -13,7 +13,7 @@ Animation_Run::Animation_Run()
 
 Animation_Run::~Animation_Run()
 {
-
+	atlasImg.lock().~shared_ptr();
 }
 void Animation_Run::Update( Gdiplus::Rect* rect, float Delta)
 {
