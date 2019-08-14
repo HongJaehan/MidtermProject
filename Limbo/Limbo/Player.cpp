@@ -2,24 +2,32 @@
 #include "Player.h"
 #include "MainFrm.h"
 #include "PlayerControlComponent.h"
+#include <cmath>
 
-#define MAX_SPEED 2.5f
-#define INIT_SPEED 0
+#define MAX_velocity 150
+#define INIT_velocity 0
+#define ACCELERATION 150
 #define PI (3.1415926535897932f)
 #define GRAVITY 7
+#define JUMPFORCE 350
 #define DEGTORAD(X) (X * (PI / 180))
+
+float Lerp(float value1, float value2, float amount)
+{
+	return float(value1 + ((float)(value2 - value1) * amount));
+}
 
 Player::Player()
 {
-	//img = AssetManager::GetInstance()->GetImage(TEXT("Player.png"));
-	//tempImg = new Gdiplus::Image(TEXT("player.png"));
 	tag = ePlayer;
 	state = eState_Idle;
 	bFlagLeft = false;
-	speed = 0.1f;
+	velocity = 0.1f;
 	width = defines.playerWidth;
 	height = defines.playerHeight;
 	enable = true;
+
+//	float speed = Lerp(0, 10, 2);
 
 	//AnimationList에 애니메이션을 추가해준다.
 	AddAnimation(new Animation_Idle());
@@ -44,6 +52,7 @@ Player::~Player()
 	for (auto& it : playerAnimationList)
 	{
 		delete it;
+
 	}
 }
 //
@@ -52,103 +61,15 @@ Player::~Player()
 //	//return img;
 //}
 
-void Player::Control()
-{
-}
-
-
-
-static float AddDelta = 0;
-
-static float AddUpdateDelta = 0;
-
 void Player::Update(float Delta)
 {
 	//Component Update
 	control.Update(*this);
+	//physics 업데이트
+	PhysicsUpdate(Delta);
 
-	AddUpdateDelta += Delta;
-
-	if (AddUpdateDelta > 0.3f)
-	{
-		AddUpdateDelta = 0;
-	}
-	//GameManager에 현재 Player의 X좌표를 보내 Terrain의 Y 정보를 받아온다.
-	int terrainY = GameManager::GetInstance()->GetTerrainData(pos.GetX()+width*0.5f);
-
-	switch (state)
-	{
-	case eState_Idle:
-		pos.SetY(pos.GetY() + AddUpdateDelta * GRAVITY);
-		speed = INIT_SPEED; //속도 초기화
-		//현재 Player의 Y좌표가 Terrain보다 크다면
-		if (pos.GetY() >= terrainY)
-		{
-			pos.SetY(terrainY);
-		}
-		break;
-	case eState_Run:
-		if (speed < MAX_SPEED) //스피드가 최고 속도를 넘지 않으면
-		{
-			speed += AddUpdateDelta;
-		}
-		if (bFlagLeft)
-		{
-			pos.SetX(pos.GetX() - speed * AddUpdateDelta);
-		}
-		else
-		{
-			pos.SetX(pos.GetX() + speed * AddUpdateDelta);
-		}
-		pos.SetY(pos.GetY() + AddUpdateDelta * GRAVITY);
-		//현재 Player의 Y좌표가 Terrain보다 크다면
-		if (pos.GetY() >= terrainY)
-		{
-			pos.SetY(terrainY);
-		}
-		break;
-	case eState_Jump:
-		Jump(bFlagLeft,terrainY, Delta);
-		break;
-#pragma region MyRegion
-		//pos.SetY(jumpInitPosY + speed * cos(DEGTORAD(-45)) - 0.5f * GRAVITY * Delta * Delta);
-	//pos.SetX(jumpInitPosX + 10 * cos(DEGTORAD(-45)) * Delta);
-	//AddDelta += Delta;
-	//float AddVal = (0.5f * GRAVITY * AddDelta * AddDelta);
-	//pos.SetX(pos.GetX() +  speed * 100 * Delta);
-	//pos.SetY(pos.GetY() + (-400.f * Delta) + AddVal);
-
-	//예시
-	/*if (pos.GetY() >= jumpInitPosY)
-	{
-		state = eState_Idle;
-		pos.SetY(jumpInitPosY);
-		AddDelta = 0;
-	}*/
-	//jumpInitPosX += 10.f * speed * Delta;
-	//jumpInitPosY += (-200.f * Delta) + AddVal;
-#if defined VEL_DEBUG
-		for (int i = 0; i < 1000; ++i)
-		{
-#endif
-
-#if defined VEL_DEBUG
-			ptList.emplace_back(Gdiplus::PointF(jumpInitPosX, jumpInitPosY));
-		}
-#else
-			//pos.SetX(jumpInitPosX);
-			//pos.SetY(jumpInitPosY);
-#endif
-
-			//AddDelta += Delta;
-			//float AddVal = (0.5f * GRAVITY * AddDelta * AddDelta);
-			//
-			//pos.SetX(X + speed * cos(DEGTORAD(45)) * Delta);
-			//pos.SetY(Y + (-1000 * Delta) + AddVal);
-#pragma endregion
-	}
-		//현재 Animation의 image를 XML정보에 맞춰 저장해줌.
-		playerAnimationList[state]->Update(&atlasRect,Delta);
+	//현재 Animation의 image를 XML정보에 맞춰 저장해줌.
+	playerAnimationList[state]->Update(&atlasRect,Delta);
 }
 
 void Player::Render(Gdiplus::Graphics* _MemG)
@@ -187,29 +108,31 @@ void Player::Render(Gdiplus::Graphics* _MemG)
 	//MemG->DrawImage()
 }
 
-
+static float AddDelta = 0;
 void Player::Jump(bool bFlagLeft,int terrainY,float Delta)
 {
 		AddDelta += Delta;
 		float AddVal = (0.5f * GRAVITY * AddDelta * AddDelta);
+
 		if (bFlagLeft)
 		{
-			pos.SetX(pos.GetX() - speed * 130 * Delta);
+			pos.SetX(pos.GetX()-0.1f - velocity * Delta);
 		}
 		else
 		{
-			pos.SetX(pos.GetX() + speed * 130 * Delta);
+			pos.SetX(pos.GetX()+0.1f + velocity * Delta);
 		}
-		pos.SetY(pos.GetY() + (-400.f * Delta) + AddVal);
+		pos.SetY(pos.GetY() + (-JUMPFORCE * Delta) + AddVal);
 
 		if (pos.GetY() > terrainY)
 		{
 			pos.SetY(terrainY);
 			ChangeState(eState_Idle);
 			AddDelta = 0.0f;
-			speed = 0;
+			velocity = 0;
 		}
 }
+
 
 void Player::AddAnimation(Animation* ani)
 {
@@ -236,7 +159,90 @@ void Player::SetLeftFlag(bool Flag)
 	bFlagLeft = Flag;
 }
 
-void Player::InitSpeed()
+void Player::InitVelocity()
 {
-	speed = 0;
+	velocity = 0;
+}
+
+static float AddUpdateDelta = 0;
+void Player::PhysicsUpdate(float Delta)
+{
+	AddUpdateDelta += Delta;
+
+	if (AddUpdateDelta > 1.0f)
+	{
+		AddUpdateDelta = 1.0f;
+	}
+	//GameManager에 현재 Player의 X좌표를 보내 Terrain의 Y 정보를 받아온다.
+	int terrainY = GameManager::GetInstance()->GetTerrainData(pos.GetX() + width * 0.5f);
+
+	switch (state)
+	{
+	case eState_Idle:
+		pos.SetY(pos.GetY() + GRAVITY * AddUpdateDelta);
+		velocity = INIT_velocity; //속도 초기화
+		AddUpdateDelta = 0.0f;
+		//현재 Player의 Y좌표가 Terrain보다 크다면
+		if (pos.GetY() >= terrainY)
+		{
+			pos.SetY(terrainY);
+		}
+		break;
+	case eState_Run:
+		velocity = ACCELERATION * AddUpdateDelta;
+		if (bFlagLeft)
+		{
+			pos.SetX(pos.GetX() - velocity * Delta);
+		}
+		else
+		{
+			pos.SetX(pos.GetX() + velocity * Delta);
+		}
+		pos.SetY(pos.GetY() + GRAVITY * AddUpdateDelta);
+		//현재 Player의 Y좌표가 Terrain보다 크다면
+		if (pos.GetY() >= terrainY)
+		{
+			pos.SetY(terrainY);
+		}
+		break;
+	case eState_Jump:
+		Jump(bFlagLeft, terrainY, Delta);
+		break;
+#pragma region MyRegion
+		//pos.SetY(jumpInitPosY + velocity * cos(DEGTORAD(-45)) - 0.5f * GRAVITY * Delta * Delta);
+	//pos.SetX(jumpInitPosX + 10 * cos(DEGTORAD(-45)) * Delta);
+	//AddDelta += Delta;
+	//float AddVal = (0.5f * GRAVITY * AddDelta * AddDelta);
+	//pos.SetX(pos.GetX() +  velocity * 100 * Delta);
+	//pos.SetY(pos.GetY() + (-400.f * Delta) + AddVal);
+
+	//예시
+	/*if (pos.GetY() >= jumpInitPosY)
+	{
+		state = eState_Idle;
+		pos.SetY(jumpInitPosY);
+		AddDelta = 0;
+	}*/
+	//jumpInitPosX += 10.f * velocity * Delta;
+	//jumpInitPosY += (-200.f * Delta) + AddVal;
+#if defined VEL_DEBUG
+		for (int i = 0; i < 1000; ++i)
+		{
+#endif
+
+#if defined VEL_DEBUG
+			ptList.emplace_back(Gdiplus::PointF(jumpInitPosX, jumpInitPosY));
+		}
+#else
+			//pos.SetX(jumpInitPosX);
+			//pos.SetY(jumpInitPosY);
+#endif
+
+			//AddDelta += Delta;
+			//float AddVal = (0.5f * GRAVITY * AddDelta * AddDelta);
+			//
+			//pos.SetX(X + velocity * cos(DEGTORAD(45)) * Delta);
+			//pos.SetY(Y + (-1000 * Delta) + AddVal);
+#pragma endregion
+	}
 }

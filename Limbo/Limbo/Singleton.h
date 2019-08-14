@@ -5,7 +5,7 @@ class Singleton
 {
 protected:
 	Singleton() {};
-	Singleton(const Singleton& other);
+	//Singleton(const Singleton& other);
 	virtual ~Singleton() {};
 
 private :

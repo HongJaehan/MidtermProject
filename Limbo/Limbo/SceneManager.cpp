@@ -51,3 +51,20 @@ void SceneManager::MoveNextScene()
  		curScene = sceneVec[++sceneLevel];
 	}
 }
+
+void SceneManager::Render(CDC* pDC, CRect rc)
+{
+	Gdiplus::Graphics MainG(pDC->GetSafeHdc());
+
+	Gdiplus::Rect rc2(rc.left, rc.top, rc.Width(), rc.Height());
+
+	Gdiplus::Bitmap BackBuffer(rc.Width(), rc.Height(), PixelFormat32bppARGB);
+	Gdiplus::Graphics MemG(&BackBuffer);
+
+	Gdiplus::SolidBrush WhiteBrush(Gdiplus::Color(255, 202, 202, 202));
+	MemG.FillRectangle(&WhiteBrush, rc2);
+
+	GetCurScene()->Render(&MemG);
+
+	MainG.DrawImage(&BackBuffer, 0, 0, rc.Width(), rc.Height());
+}

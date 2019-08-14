@@ -44,15 +44,6 @@ void GameScene::Init()
 	}
 }
 
-//현재 씬 안에 있는 모든 오브젝트들을 한번씩 거쳐가며 Control, Update, Render돌려준다.
-void GameScene::Control()
-{
-	for (auto& it : objectVec)
-	{
-		it->Control();
-	}
-}
-
 void GameScene::Update(float Delta)
 {
 	for (auto& it : objectVec)

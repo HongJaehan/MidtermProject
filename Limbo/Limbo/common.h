@@ -23,7 +23,13 @@ static enum EPlayerState
 	eState_Run,
 	eState_Jump,
 	eState_Interaction,
+	eState_IteractionMove,
 	eState_Die
+};
+
+enum EEvent
+{
+	eEvent_PlayerDie
 };
 
 static struct SFileImgName
@@ -35,10 +41,12 @@ public:
 struct Defines
 {
 public:
-	int playerWidth = 116;
-	int playerHeight = 163;
-	int screenSizeX = 1920;
-	int screenSizeY = 1080;
+	//int playerWidth = 116;
+	//int playerHeight = 163;
+	int playerWidth = 61;
+	int playerHeight = 86;
+	int screenSizeX = 1024;
+	int screenSizeY = 576;
 	int mapImgSizeX = 1024;
 	int mapImgSizeY = 1024;
 

@@ -30,7 +30,7 @@ void PlayerControlComponent::Update(Player& player)
 				player.ChangeState(eState_Jump);
 				break;
 			}
-			if (!player.GetLeftFlag()) { player.InitSpeed(); }//현재 왼쪽으로 달리고있는 중이었다면 speed를 0으로 초기화한다.
+			if (!player.GetLeftFlag()) { player.InitVelocity(); }//현재 왼쪽으로 달리고있는 중이었다면 speed를 0으로 초기화한다.
 			player.SetLeftFlag(true);
 			break;
 		case eState_Interaction:
@@ -55,7 +55,7 @@ void PlayerControlComponent::Update(Player& player)
 				player.ChangeState(eState_Jump);
 				break;
 			}
-			if (player.GetLeftFlag()) { player.InitSpeed(); }//현재 왼쪽으로 달리고있는 중이었다면 speed를 0으로 초기화한다.
+			if (player.GetLeftFlag()) { player.InitVelocity(); }//현재 왼쪽으로 달리고있는 중이었다면 speed를 0으로 초기화한다.
 			player.SetLeftFlag(false);
 			break;
 		case eState_Interaction:
@@ -82,7 +82,7 @@ void PlayerControlComponent::Update(Player& player)
 		if (player.GetState()!= eState_Jump)
 		{
 			player.ChangeState(eState_Idle);
-			player.InitSpeed();
+			player.InitVelocity();
 		}
 	}
 }

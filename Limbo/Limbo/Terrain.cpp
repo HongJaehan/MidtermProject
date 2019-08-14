@@ -11,11 +11,6 @@ Terrain::~Terrain()
 	delete img;
 }
 
-void Terrain::Control()
-{
-
-}
-
 void Terrain::Update(float Delta)
 {
 

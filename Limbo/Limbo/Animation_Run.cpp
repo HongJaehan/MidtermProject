@@ -13,7 +13,7 @@ Animation_Run::Animation_Run()
 
 Animation_Run::~Animation_Run()
 {
-	atlasImg.lock().~shared_ptr();
+	atlasImg.reset();
 }
 void Animation_Run::Update( Gdiplus::Rect* rect, float Delta)
 {
@@ -21,8 +21,8 @@ void Animation_Run::Update( Gdiplus::Rect* rect, float Delta)
 
 	if (addDelta > 0.025f)
 	{
-		addDelta = 0;
 		++frame;
+		addDelta = 0;
 	}
 
 	if (frame > XMLRect.size() - 1)

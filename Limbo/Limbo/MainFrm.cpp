@@ -80,8 +80,8 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 		cs.hMenu = nullptr;
 	}
 
-	cs.x = 0;
-	cs.y = 0;
+	cs.x = 300;
+	cs.y = 200;
 
 	cs.cx = defines.screenSizeX;
 	cs.cy = defines.screenSizeY;

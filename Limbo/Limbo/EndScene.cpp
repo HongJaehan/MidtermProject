@@ -16,10 +16,7 @@ void EndScene::Init()
 {
 
 }
-void EndScene::Control()
-{
 
-}
 
 void EndScene::Update(float)
 {

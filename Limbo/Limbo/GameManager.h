@@ -9,6 +9,7 @@ public:
 	std::pair<int, int> GetCheckPoint();
 	int GetTerrainData(int playerPosX);
 	int GetPlayerPosX();
+	void Func(int);
 
 private:
 	//key : 체크 포인트 number    value: 체크포인트의 x, y 값

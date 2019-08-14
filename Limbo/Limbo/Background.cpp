@@ -19,7 +19,7 @@ Background::Background(int _startPosX, std::wstring _imgName)
 }
 Background::~Background()
 {
-	delete img.lock().get();
+	img.reset();
 }
 
 int Background::GetStartPosX()

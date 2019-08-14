@@ -51,10 +51,12 @@ BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs)
 	return TRUE;
 }
 
+//static int count = 0;
+
 void CChildView::OnPaint() 
 {
 	//CLimboApp::bRender = true;
-
+	++theApp.CallCount;
 	CPaintDC dc(this); // 그리기를 위한 디바이스 컨텍스트입니다.
 	Gdiplus::Graphics MainG(dc);
 

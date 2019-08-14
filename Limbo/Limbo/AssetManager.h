@@ -16,9 +16,11 @@ private:
 
 private:
 	//size_t ´Â ±×³É unsigned int
+	tinyxml2::XMLDocument* doc;
 	std::unordered_map<size_t, std::shared_ptr<Gdiplus::Image>> imgDic;
 	//std::unordered_map<size_t, Image*> soundDic;
 
 };
+
 AssetManager* AssetManager::instance = nullptr;
 

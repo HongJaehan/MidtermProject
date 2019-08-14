@@ -28,10 +28,12 @@ public:
 // 구현입니다.
 	static DWORD PrevTick;
 	static bool bRender;
+	static int CallCount;
 public:
 	afx_msg void OnAppAbout();
 	static UINT FuncThread(LPVOID pParam);
 	DECLARE_MESSAGE_MAP()
+
 };
 
 extern CLimboApp theApp;

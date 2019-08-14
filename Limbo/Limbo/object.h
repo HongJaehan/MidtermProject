@@ -7,7 +7,6 @@ class Object
 public:
 	Object();
 	virtual ~Object();
-	virtual void Control() = 0;
 	virtual void Update(float) = 0;
 	virtual void Render(Gdiplus::Graphics*) = 0;
 //	virtual std::weak_ptr<Gdiplus::Image> GetImage();

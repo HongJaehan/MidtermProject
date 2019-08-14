@@ -209,6 +209,7 @@
     <ClInclude Include="ControlComponent.h" />
     <ClInclude Include="CVector.h" />
     <ClInclude Include="EndScene.h" />
+    <ClInclude Include="EventManager.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameScene.h" />
@@ -217,6 +218,7 @@
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="object.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="PhysicsComponent.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerControlComponent.h" />
     <ClInclude Include="Position.h" />
@@ -242,6 +244,7 @@
     <ClCompile Include="ControlComponent.cpp" />
     <ClCompile Include="CVector.cpp" />
     <ClCompile Include="EndScene.cpp" />
+    <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="IntroScene.cpp" />
@@ -254,6 +257,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="PhysicsComponent.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerControlComponent.cpp" />
     <ClCompile Include="Position.cpp" />

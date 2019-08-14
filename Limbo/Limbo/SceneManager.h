@@ -14,6 +14,7 @@ public:
 	Scene* GetCurScene();
 	void Init();
 	void MoveNextScene();
+	void Render(CDC* pDC, CRect rc);
 
 private:
 	Scene* curScene;

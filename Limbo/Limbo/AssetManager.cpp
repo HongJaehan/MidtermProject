@@ -1,56 +1,17 @@
 #include "pch.h"
 #include "AssetManager.h"
 
-#pragma region MyRegion
-
-//struct MemoryPool
-//{
-//	float radius;
-//public:
-//	MemoryPool()
-//	{
-//		Datas.reserve(10000);
-//		Datas.resize(10000);
-//	}
-//
-//	BulletData CreateBullet()
-//	{
-//		for (auto& it : Datas)
-//		{
-//			if (it.first == 0)
-//			{
-//				it.first = 1;
-//				return it.second;
-//			}
-//		}
-//		return nullptr;
-//	}
-//
-//	void RetrunBullet(BulletData* pBullet)
-//	{
-//		for (auto& it : Datas)
-//		{
-//			if (&it.second == pBullet)
-//			{
-//				it.first = 0;
-//				it.second.reset();
-//			}
-//		}
-//	}
-//private:
-//	std::vector<std::pair<int, BulletData>> Datas;
-//};
-#pragma endregion
 
 //오브젝트들은 이미지의 하드 포인터를 들고있으면 안되기 때문에 Weak_ptr을 사용해줘야한다.
 AssetManager::AssetManager()
 {
-
+	doc = new tinyxml2::XMLDocument();
 }
 
 AssetManager::~AssetManager()
 {
-	imgDic.clear();
+	delete doc;
+	//imgDic.clear();
 }
 
 std::weak_ptr<Gdiplus::Image> AssetManager::GetImage(std::wstring str)
@@ -101,11 +62,6 @@ std::weak_ptr<Gdiplus::Image> AssetManager::MyLoadImage(std::wstring fileName)
 
 void AssetManager::SetXMLData(std::vector<Gdiplus::Rect> &Rects, char* fileName)
 {
-	//char* temp = "XML\\";
-	//strcat_s(temp, fileName);
-	//strcat_s(&temp, fileName);
-
-	tinyxml2::XMLDocument* doc = new tinyxml2::XMLDocument();
 	doc->LoadFile(fileName);
 	
 	if (doc == nullptr) return;
@@ -116,9 +72,9 @@ void AssetManager::SetXMLData(std::vector<Gdiplus::Rect> &Rects, char* fileName)
 
 	for (tinyxml2::XMLElement* element = atlasInfo; element != nullptr; element = element->NextSiblingElement())
 	{
-		Gdiplus::Rect r(Gdiplus::Rect(element->IntAttribute("x"), element->IntAttribute("y"),
+		Gdiplus::Rect rect(Gdiplus::Rect(element->IntAttribute("x"), element->IntAttribute("y"),
 			element->IntAttribute("w"), element->IntAttribute("h")));
-	Rects.emplace_back(r);
+	Rects.emplace_back(rect);
 	}
 
 }

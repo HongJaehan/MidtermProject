@@ -15,16 +15,13 @@ void IntroScene::Init()
 {
 
 }
-void IntroScene::Control()
-{
-   	if (GetAsyncKeyState(VK_SPACE) & 0x1001)
-	{
-    		SceneManager::GetInstance()->MoveNextScene();
-	}
-}
 
 void IntroScene::Update(float)
 {
+	if (GetAsyncKeyState(VK_SPACE) & 0x1001)
+	{
+		SceneManager::GetInstance()->MoveNextScene();
+	}
 }
 
 void IntroScene::Render(Gdiplus::Graphics* MemG)
@@ -36,7 +33,7 @@ void IntroScene::Render(Gdiplus::Graphics* MemG)
 	temp.DrawImage(backgroundImg.lock().get(), rect);
 
 	////그려줄 screen좌표의 rect
-	Gdiplus::Rect screenPosRect(0, 0, GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN));
+	Gdiplus::Rect screenPosRect(0, 0, defines.screenSizeX, defines.screenSizeY);
 
 	MemG->DrawImage(&bm, screenPosRect);
 }

@@ -8,7 +8,6 @@ public:
 	~IntroScene();
 
 	void Init();
-	void Control();
 	void Update(float);
 	void Render(Gdiplus::Graphics*);
 private:

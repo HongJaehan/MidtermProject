@@ -142,37 +142,120 @@ void CLimboApp::OnAppAbout()
 }
 
 // CLimboApp 메시지 처리기
+int CLimboApp::CallCount = 0;
 
 UINT CLimboApp::FuncThread(LPVOID pParam)
 {
+	CallCount = 0;
+
 	while (1)
 	{
 
 		DWORD tick = GetTickCount();
 		DWORD Delta = tick - PrevTick;
 		PrevTick = tick;
-
+		static DWORD PrevStaticDelta = GetTickCount();
+		static int AddDelta = 0;
+		
 		//system("cls");
 		//printf("%d", 1000 / Delta);
+		
+
 		if (CMainFrame * MainFrm = static_cast<CMainFrame*>(theApp.GetMainWnd()))
 		{
 			//if (!bRender)
 			{
-				//현재Scene의 Control, Update을 전부 돌려준다.
-				SceneManager::GetInstance()->GetCurScene()->Control();
+				//현재Scene의 Update을 전부 돌려준다.
 				SceneManager::GetInstance()->GetCurScene()->Update(Delta * 0.001f);
 				// Render
 				//Main에서 가져온 CChildView
 				CChildView* view = MainFrm->GetView();
 
+				//++CallCount;
 				CRect rc;
+				//CDC* pDC = view->GetDC();
 				view->GetClientRect(rc);
 
 				if (!rc.IsRectNull())
-					view->InvalidateRect(rc);
+					view->Invalidate();
+					//SceneManager::GetInstance()->Render(pDC, rc);
+
+				
+				//pDC->DrawText(temp, rc, DT_LEFT | DT_VCENTER);
+
+				//view->ReleaseDC(pDC);
+				if (GetTickCount() - PrevStaticDelta > 1000)
+				{
+					PrevStaticDelta = GetTickCount();
+					CString temp;
+					temp.Format(TEXT("%d\n"), CallCount);
+					CString temp2;
+					temp2.Format(TEXT("%d\n"), GameManager::GetInstance()->GetPlayerPosX());
+					OutputDebugString(temp.GetBuffer());
+					OutputDebugString(temp2.GetBuffer());
+
+					CallCount = 0;
+				}
 			}
 		}
 		Sleep(1);
 	}
 	return  -1;
 }
+
+//UINT CLimboApp::FuncThread(LPVOID pParam)
+//{
+//	while (1)
+//	{
+//		DWORD tick = GetTickCount();
+//		DWORD Delta = tick - PrevTick;
+//		static DWORD AddDelta = 0;
+//		PrevTick = tick;
+//		StaticTick += Delta;
+//		AddDelta += Delta;
+//		static DWORD minDelta = 1000 / 60;
+//
+//		if (CMainFrame * MainFrm = static_cast<CMainFrame*>(theApp.GetMainWnd()))
+//		{
+//			if (AddDelta < minDelta)
+//			{
+//				continue;
+//				//   Sleep(minDelta - AddDelta);
+//			}
+//			else
+//			{
+//				if (AddDelta > 100)
+//					AddDelta = 0;
+//				else
+//					AddDelta = AddDelta - minDelta;
+//				Delta = minDelta;
+//			}
+//
+//			// Update
+//			++CallCount;
+//			SceneManager::GetInstance().Update(Delta);
+//
+//			// Render
+//			CChildView* view = MainFrm->GetView();
+//
+//			CRect rc;
+//			view->GetClientRect(rc);
+//			if (!rc.IsRectNull())
+//				view->InvalidateRect(rc);
+//
+//			if (StaticTick > 1000)
+//			{
+//				printf("dddddddddd: %d \n", CallCount);
+//				CallCount = 0;
+//				StaticTick = 0;
+//			}
+//		}
+//
+//		Sleep(1);
+//
+//		// Release
+//		SceneManager::GetInstance().Release();
+//	}
+//
+//	return  -1;
+//}

@@ -13,7 +13,7 @@ Animation_Jump::Animation_Jump()
 
 Animation_Jump::~Animation_Jump()
 {
-	atlasImg.lock().~shared_ptr();
+	atlasImg.reset();
 }
 
 void Animation_Jump::Update( Gdiplus::Rect* rect, float Delta)
