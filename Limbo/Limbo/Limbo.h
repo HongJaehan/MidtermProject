@@ -28,6 +28,8 @@ public:
 // 구현입니다.
 	static DWORD PrevTick;
 	static bool bRender;
+
+	static DWORD StaticTick;
 	static int CallCount;
 public:
 	afx_msg void OnAppAbout();

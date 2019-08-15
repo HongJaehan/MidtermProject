@@ -22,6 +22,7 @@ GameManager::GameManager()
 		graphics.DrawImage(img, rect);
 		x += defines.screenSizeX * 2;
 	}
+
 	EventManager::GetInstance()->AddEvent(std::bind(&GameManager::Func, this,std::placeholders::_1),EEvent::eEvent_PlayerDie);
 	
 }
@@ -65,6 +66,8 @@ void GameManager::Func(int)
 {
 	playerPosX;
 }
+
+
 int GameManager::GetPlayerPosX()
 {
 	return playerPosX;

@@ -4,6 +4,7 @@
 #include "object.h"
 #include "Terrain.h"
 #include "Background.h"
+#include "ColliderObject.h"
 
 class GameScene :	public Scene
 {
@@ -14,6 +15,8 @@ public:
 	void Init();
 	void Update(float);
 	void Render(Gdiplus::Graphics*);
+	bool CollisionCheck(Object*,Object*);
+	void Func(int);
 
 private:
 	Object* player;

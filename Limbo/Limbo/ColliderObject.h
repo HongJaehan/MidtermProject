@@ -1,11 +1,14 @@
 #pragma once
 #include "object.h"
-class Terrain :public Object 
+
+class ColliderObject :
+	public Object
 {
 public:
-	Terrain();
-	~Terrain();
-	void Update(float);
+	ColliderObject();
+	ColliderObject(ETag _tag, int _x, int _y, int _width, int _height);
+	~ColliderObject();
+	void Update(float Delta);
 	void Render(Gdiplus::Graphics*);
 	bool GetEnable();
 	void SetEnable(bool);
@@ -15,6 +18,8 @@ public:
 	int GetHeight();
 	ETag GetTag();
 private:
+	int screenPosX;
+	int screenPosY;
 	Gdiplus::Image* img;
 };
 

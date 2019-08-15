@@ -1,0 +1,4 @@
+﻿  pch.cpp
+E:\MidTermProject\Limbo\Limbo\common.h(28,2): warning C4091:  'static ': 변수를 선언하지 않으면 'EPlayerState' 왼쪽은 무시됩니다.
+E:\MidTermProject\Limbo\Limbo\common.h(39,2): warning C4091:  'static ': 변수를 선언하지 않으면 'SFileImgName' 왼쪽은 무시됩니다.
+E:\MidTermProject\Limbo\Limbo\pch.h(21,10): error C1083:  포함 파일을 열 수 없습니다. 'tinyxml2.h': No such file or directory

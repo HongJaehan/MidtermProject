@@ -14,7 +14,8 @@ enum ETag
 {
 	ePlayer,
 	eGrass,
-	eTerrain
+	eCollider,
+	eTrap
 };
 
 static enum EPlayerState 

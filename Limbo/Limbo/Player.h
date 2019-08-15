@@ -8,6 +8,7 @@
 #include "Animation_Run.h"
 #include "Animation_Jump.h"
 #include "PlayerControlComponent.h"
+#include "BoxCollider2D.h"
 
 class Player :public Object
 {
@@ -26,13 +27,22 @@ public:
 	void SetLeftFlag(bool Flag);
 	void InitVelocity();
 	void PhysicsUpdate(float Delta);
+	void CheckCollision(Object &objVec);
+	bool GetEnable();
+	void SetEnable(bool);
+	int GetPosX();
+	int GetPosY();
+	int GetWidth();
+	int GetHeight();
+	ETag GetTag();
+	void Collision(Object*);
 private:
 	//Component
 	PlayerControlComponent control;
+	//BoxCollider2D collider;
 	//Component* collider;
 
 	EPlayerState state;
-	Position pos; //player의 위치 X,Y
 	int playerScreenPosX;
 	int playerScreenPosY;
 	float velocity; //player의 속도

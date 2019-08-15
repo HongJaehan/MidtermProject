@@ -39,6 +39,8 @@ CLimboApp::CLimboApp() noexcept
 CLimboApp theApp;
 DWORD CLimboApp::PrevTick = 0;
 bool CLimboApp::bRender = false;
+int CLimboApp::CallCount = 0;
+DWORD CLimboApp::StaticTick = 0;
 
 
 // CLimboApp 초기화
@@ -141,8 +143,62 @@ void CLimboApp::OnAppAbout()
 	aboutDlg.DoModal();
 }
 
-// CLimboApp 메시지 처리기
-int CLimboApp::CallCount = 0;
+//UINT CLimboApp::FuncThread(LPVOID pParam)
+//{
+//	while (1)
+//	{
+//		DWORD tick = GetTickCount();
+//		DWORD Delta = tick - PrevTick;
+//		static DWORD AddDelta = 0;
+//		PrevTick = tick;
+//		StaticTick += Delta;
+//		AddDelta += Delta;
+//		static DWORD minDelta = 1000 / 60;
+//
+//		if (CMainFrame * MainFrm = static_cast<CMainFrame*>(theApp.GetMainWnd()))
+//		{
+//			if (AddDelta < minDelta)
+//			{
+//				continue;
+//				//   Sleep(minDelta - AddDelta);
+//			}
+//			else
+//			{
+//				if (AddDelta > 100)
+//					AddDelta = 0;
+//				else
+//					AddDelta = AddDelta - minDelta;
+//				Delta = minDelta;
+//			}
+//
+//			// Update
+//			++CallCount;
+//			SceneManager::GetInstance()->GetCurScene()->Update(Delta);
+//			// Render
+//			CChildView* view = MainFrm->GetView();
+//
+//			CRect rc;
+//			view->GetClientRect(rc);
+//			if (!rc.IsRectNull())
+//				view->InvalidateRect(rc);
+//
+//			if (StaticTick > 1000)
+//			{
+//				printf("CallCount: %d \n", CallCount);
+//				CallCount = 0;
+//				StaticTick = 0;
+//			}
+//		}
+//
+//		Sleep(1);
+//
+//		// Release
+//		//SceneManager::GetInstance().Release();
+//	}
+//
+//	return  -1;
+//}
+
 
 UINT CLimboApp::FuncThread(LPVOID pParam)
 {
@@ -202,6 +258,7 @@ UINT CLimboApp::FuncThread(LPVOID pParam)
 	}
 	return  -1;
 }
+
 
 //UINT CLimboApp::FuncThread(LPVOID pParam)
 //{

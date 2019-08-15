@@ -8,6 +8,7 @@ public:
 	EventManager();
 	~EventManager();
 	void AddEvent(std::function<void(int)> func, EEvent);
+	void OnEvent(EEvent);
 
 private:
 	std::unordered_map<EEvent,std::vector<std::function<void(int)>>> dicEvent;
