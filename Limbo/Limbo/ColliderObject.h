@@ -10,13 +10,7 @@ public:
 	~ColliderObject();
 	void Update(float Delta);
 	void Render(Gdiplus::Graphics*);
-	bool GetEnable();
-	void SetEnable(bool);
-	int GetPosX();
-	int GetPosY();
-	int GetWidth();
-	int GetHeight();
-	ETag GetTag();
+	void Collision(Object*);
 private:
 	int screenPosX;
 	int screenPosY;

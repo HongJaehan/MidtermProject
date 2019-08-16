@@ -6,7 +6,7 @@ Animation_Jump::Animation_Jump()
 	frame = 0;
 	state = eState_Jump;
 	addDelta = 0.0f;
-	std::wstring imgName(TEXT("Jump.png"));
+	std::wstring imgName(TEXT("JumpEx.png"));
 	atlasImg = AssetManager::GetInstance()->GetImage(imgName);
 	AssetManager::GetInstance()->SetXMLData(XMLRect, "XML\\Jump.xml");
 }

@@ -26,17 +26,19 @@ Player::Player()
 	width = defines.playerWidth;
 	height = defines.playerHeight;
 	enable = true;
-
 //	float speed = Lerp(0, 10, 2);
-
+	
 	//AnimationList에 애니메이션을 추가해준다.
 	AddAnimation(new Animation_Idle());
 	AddAnimation(new Animation_Run());
 	AddAnimation(new Animation_Jump());
 
 	int screenSizeWidth = defines.screenSizeX;
-	x = screenSizeWidth * 0.5f;
-	y = 800;
+	//x = screenSizeWidth * 0.5f;
+	x = 3000;
+	y = 300;
+
+	collider = new BoxCollider2D(x, y, width, height, false);
 
 	playerScreenPosX = x - width * 0.5;
 	playerScreenPosY = y - height;
@@ -52,8 +54,8 @@ Player::~Player()
 	for (auto& it : playerAnimationList)
 	{
 		delete it;
-
 	}
+	delete collider;
 }
 
 void Player::Update(float Delta)
@@ -62,6 +64,9 @@ void Player::Update(float Delta)
 	control.Update(*this);
 	//physics 업데이트
 	PhysicsUpdate(Delta);
+
+	collider->SetX(x);
+	collider->SetY(y);
 
 	//현재 Animation의 image를 XML정보에 맞춰 저장해줌.
 	playerAnimationList[state]->Update(&atlasRect,Delta);
@@ -152,7 +157,7 @@ void Player::PhysicsUpdate(float Delta)
 		AddUpdateDelta = 1.0f;
 	}
 	//GameManager에 현재 Player의 X좌표를 보내 Terrain의 Y 정보를 받아온다.
-	int terrainY = GameManager::GetInstance()->GetTerrainData(x + width * 0.5f);
+	int terrainY = GameManager::GetInstance()->GetTerrainData(x);
 
 	switch (state)
 	{
@@ -223,6 +228,8 @@ void Player::PhysicsUpdate(float Delta)
 			//pos.SetY(Y + (-1000 * Delta) + AddVal);
 #pragma endregion
 	}
+		/*collider->SetY(y);
+		collider->SetX(x);*/
 }
 
 
@@ -233,32 +240,32 @@ EPlayerState Player::GetState()
 
 void Player::Collision(Object* obj)
 {
-	int playerLeft = x - width * 0.5f;
-	int playerRight = x + width * 0.5f;
-	int playerTop = y - height * 0.5f;
-	int playerBottom = y + height * 0.5f;
+	//int playerLeft = x - width * 0.5f;
+	//int playerRight = x + width * 0.5f;
+	//int playerTop = y - height * 0.5f;
+	//int playerBottom = y + height * 0.5f;
 
-	int objLeft = obj->GetPosX() - obj->GetWidth() * 0.5f;
-	int objRight = obj->GetPosX() + obj->GetWidth() * 0.5f;
-	int objTop = obj->GetPosY() - obj->GetHeight() * 0.5f;
-	int objBottom = obj->GetPosY() + obj->GetHeight() * 0.5f;
+	//int objLeft = obj->GetPosX() - obj->GetWidth() * 0.5f;
+	//int objRight = obj->GetPosX() + obj->GetWidth() * 0.5f;
+	//int objTop = obj->GetPosY() - obj->GetHeight() * 0.5f;
+	//int objBottom = obj->GetPosY() + obj->GetHeight() * 0.5f;
 
-	if (playerLeft < objRight)
-	{
-		x = obj->GetPosX() + obj->GetWidth() * 0.5f;
-	}
-	else if (playerRight > objLeft)
-	{
-		x = playerRight - width * 0.5f + 100;
-	}
-	if (playerTop < objBottom)
-	{
-		y = playerTop + height * 0.5f;
-	}
-	else if (playerBottom > objTop)
-	{
-		y = playerBottom - height * 0.5f;
-	}
+	//if (playerLeft <= objRight)
+	//{
+	//	x = x + 1;
+	//}
+	//else if (playerRight > objLeft)
+	//{
+	//	x = playerRight - width * 0.5f + 100;
+	//}
+	//if (playerTop < objBottom)
+	//{
+	//	y = playerTop + height * 0.5f;
+	//}
+	//else if (playerBottom > objTop)
+	//{
+	//	y = playerBottom - height * 0.5f;
+	//}
 }
 
 bool Player::GetLeftFlag()
@@ -273,40 +280,4 @@ void Player::SetLeftFlag(bool Flag)
 void Player::InitVelocity()
 {
 	velocity = 0;
-}
-
-bool Player::GetEnable()
-{
-	return enable;
-}
-
-
-void Player::SetEnable(bool bFlag)
-{
-	enable = bFlag;
-}
-
-int Player::GetPosX()
-{
-	return x;
-}
-
-int Player::GetPosY()
-{
-	return y;
-}
-
-int Player::GetWidth()
-{
-	return width;
-}
-
-int Player::GetHeight()
-{
-	return height;
-}
-
-ETag Player::GetTag()
-{
-	return tag;
 }

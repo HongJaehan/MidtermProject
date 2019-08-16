@@ -27,14 +27,7 @@ public:
 	void SetLeftFlag(bool Flag);
 	void InitVelocity();
 	void PhysicsUpdate(float Delta);
-	void CheckCollision(Object &objVec);
-	bool GetEnable();
-	void SetEnable(bool);
-	int GetPosX();
-	int GetPosY();
-	int GetWidth();
-	int GetHeight();
-	ETag GetTag();
+	//void CheckCollision(Object &objVec);
 	void Collision(Object*);
 private:
 	//Component

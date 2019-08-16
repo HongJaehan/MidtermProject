@@ -13,9 +13,10 @@ enum ECheckPoint
 enum ETag
 {
 	ePlayer,
-	eGrass,
-	eCollider,
-	eTrap
+	eGrass, //id = 1
+	eCollider, //id = 2
+	eTrap, //id =3 
+	eAutoMovement // id = 4
 };
 
 static enum EPlayerState 
@@ -42,8 +43,6 @@ public:
 struct Defines
 {
 public:
-	//int playerWidth = 116;
-	//int playerHeight = 163;
 	int playerWidth = 61;
 	int playerHeight = 86;
 	int screenSizeX = 1024;

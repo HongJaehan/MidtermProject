@@ -18,11 +18,13 @@ ColliderObject::ColliderObject(ETag _tag, int _x, int _y, int _width, int _heigh
  	screenPosX = x - width * 0.5;
 	screenPosY = y - height * 0.5;
 	enable = false;
+
+	collider = new BoxCollider2D(_x, _y, _width,_height, false);
 }
 
 ColliderObject::~ColliderObject()
 {
-
+	delete collider;
 }
 
 void ColliderObject::Update(float Delta)
@@ -33,41 +35,52 @@ void ColliderObject::Update(float Delta)
 void ColliderObject::Render(Gdiplus::Graphics* MemG)
 {
 	int drawToScreenPosX = screenPosX - (GameManager::GetInstance()->GetPlayerPosX() - defines.screenSizeX * 0.5f);
-	Gdiplus::Rect rect(drawToScreenPosX, y-height*0.5f, width, height);
+	Gdiplus::Rect rect(drawToScreenPosX,screenPosY, width, height);
 	MemG->DrawImage(img, rect);
 }
 
-bool ColliderObject::GetEnable()
+void ColliderObject::Collision(Object* obj)
 {
-	return enable;
-}
+	obj = dynamic_cast<Player*>(obj);
+	if (obj->GetCollider() == nullptr)
+	{
+		return;
+	}
 
-void ColliderObject::SetEnable(bool bFlag)
-{
-	enable = bFlag;
-}
+	if (GetCollider() == nullptr)
+	{
+		return;
+	}
 
-int ColliderObject::GetPosX()
-{
-	return x;
-}
+	int playerLeft = obj->GetCollider()->GetX() - obj->GetCollider()->GetWidth()*0.5f;
+	int playerRight = obj->GetCollider()->GetX() + obj->GetCollider()->GetWidth() * 0.5f;
+	int playerTop = obj->GetCollider()->GetY() - obj->GetCollider()->GetHeight() * 0.5f;
+	int playerBottom = obj->GetCollider()->GetY() + obj->GetCollider()->GetHeight() * 0.5f;
 
-int ColliderObject::GetPosY()
-{
-	return y;
-}
+	int objLeft = collider->GetX() - width * 0.5f;
+	int objRight = collider->GetX() + width * 0.5f;
+	int objTop = collider->GetY() - height * 0.5f;
+	int objBottom = collider->GetY() + height * 0.5f;
 
-int ColliderObject::GetWidth()
-{
-	return width;
-}
-
-int ColliderObject::GetHeight()
-{
-	return height;
-}
-
-ETag ColliderObject::GetTag()
-{
-	return tag;
+	if (playerLeft <= objRight && objRight - playerLeft < obj->GetWidth())
+	{
+		printf("obj Right = %d \n", objRight);
+		printf("player Left = %d \n", playerLeft);
+		printf("player posX = %d \n", obj->GetPosX());
+		printf("Game M X = %d \n", GameManager::GetInstance()->GetPlayerPosX());
+		obj->SetX(obj->GetPosX() + 1);
+	}
+	else if (playerRight >= objLeft)
+	{
+		printf("objTop = %d \n", objTop);
+		obj->SetX(obj->GetPosX() - 1);
+	}
+	if (playerTop < objBottom)
+	{
+		//y = playerTop + height * 0.5f;
+	}
+	else if (playerBottom > objTop)
+	{
+		//y = playerBottom - height * 0.5f;
+	}
 }

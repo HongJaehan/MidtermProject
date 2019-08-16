@@ -37,7 +37,15 @@ void GameScene::Init()
 	//terrain = new Terrain();
 	//objectVec.emplace_back(terrain);
 	ColliderObject *cObject = new ColliderObject(ETag::eCollider, 95, 206, 190, 412);
+	ColliderObject *cObject2 = new ColliderObject(ETag::eCollider, 3270, 450, 47, 32);
+	ColliderObject *cObject3 = new ColliderObject(ETag::eCollider, 4060, 350, 70, 50);
+
+
 	objectVec.emplace_back(cObject);
+	objectVec.emplace_back(cObject2);
+	objectVec.emplace_back(cObject3);
+
+
 
 	//임시로
 	int mapCount = 10;
@@ -73,25 +81,11 @@ void GameScene::Update(float Delta)
 		{
 			it->SetEnable(true);
 			//충돌 체크
-			if (CollisionCheck(player, it))
+			if (it->HasCollider() && CollisionCheck(player, it))
 			{
-				switch (it->GetTag())
-				{
-					//트랩에 충돌했을 경우
-				case ETag::eTrap:
-					EventManager::GetInstance()->OnEvent(eEvent_PlayerDie);
-					break;
-					//Collider에 단순 충돌한 경우
-				case ETag::eCollider:
-				{
-					auto _player = dynamic_cast<Player*>(player);
-					_player->Collision(it);
-					break;
-				}
-				default:
-					break;
-				}
+				it->Collision(player);
 			}
+
 			it->Update(Delta);
 		}
 		else
@@ -142,16 +136,16 @@ void GameScene::Render(Gdiplus::Graphics* MemG)
 
 bool GameScene::CollisionCheck(Object* obj1, Object* obj2)
 {
+	int obj1_Top = obj1->GetCollider()->GetY() - obj1->GetCollider()->GetHeight() * 0.5f;
+	int obj1_Bottom = obj1->GetCollider()->GetY() + obj1->GetCollider()->GetHeight() * 0.5f;
+	int obj1_Left = obj1->GetCollider()->GetX() - obj1->GetCollider()->GetWidth() * 0.5f;
+	int obj1_Right = obj1->GetCollider()->GetX() + obj1->GetCollider()->GetWidth() * 0.5f;
 
-	int obj1_Top = obj1->GetPosY() - obj1->GetHeight() * 0.5f;
-	int obj1_Bottom = obj1->GetPosY() + obj1->GetHeight() * 0.5f;
-	int obj1_Left = obj1->GetPosX() - obj1->GetWidth() * 0.5f;
-	int obj1_Right = obj1->GetPosX() + obj1->GetWidth() * 0.5f;
+	int obj2_Top = obj2->GetCollider()->GetY() - obj2->GetCollider()->GetHeight() * 0.5f;
+	int obj2_Bottom = obj2->GetCollider()->GetY() + obj2->GetCollider()->GetHeight() * 0.5f;
+	int obj2_Left = obj2->GetCollider()->GetX() - obj2->GetCollider()->GetWidth() * 0.5f;
+	int obj2_Right = obj2->GetCollider()->GetX() + obj2->GetCollider()->GetWidth() * 0.5f;
 
-	int obj2_Top = obj2->GetPosY() - obj2->GetHeight() * 0.5f;
-	int obj2_Bottom = obj2->GetPosY() + obj2->GetHeight() * 0.5f;
-	int obj2_Left = obj2->GetPosX() - obj2->GetWidth() * 0.5f;
-	int obj2_Right = obj2->GetPosX() + obj2->GetWidth() * 0.5f;
 
 	//AABB
 	//스크린 좌표로는 y축이 아래로 커지기 때문에

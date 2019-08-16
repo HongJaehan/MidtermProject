@@ -6,7 +6,7 @@ Animation_Run::Animation_Run()
 	frame = 0;
 	state = eState_Run;
 	addDelta = 0.0f;
-	std::wstring imgName(TEXT("Run.png"));
+	std::wstring imgName(TEXT("RunEx.png"));
 	atlasImg = AssetManager::GetInstance()->GetImage(imgName);
 	AssetManager::GetInstance()->SetXMLData(XMLRect, "XML\\Run.xml");
 }

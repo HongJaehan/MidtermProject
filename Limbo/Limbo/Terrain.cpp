@@ -44,37 +44,7 @@ void Terrain::Render(Gdiplus::Graphics* MemG)
 	}*/
 }
 
-bool Terrain::GetEnable()
+void Terrain::Collision(Object* obj)
 {
-	return enable;
-}
 
-void Terrain::SetEnable(bool bFlag)
-{
-	enable = bFlag;
-}
-
-int Terrain::GetPosX()
-{
-	return x;
-}
-
-int Terrain::GetPosY()
-{
-	return y;
-}
-
-int Terrain::GetWidth()
-{
-	return width;
-}
-
-int Terrain::GetHeight()
-{
-	return height;
-}
-
-ETag Terrain::GetTag()
-{
-	return tag;
 }

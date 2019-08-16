@@ -35,7 +35,7 @@ GameManager::~GameManager()
 int GameManager::GetTerrainData(int _playerPosX)
 {
 	//받아온 X값을 저장
-	playerPosX = _playerPosX;;
+	playerPosX = _playerPosX;
 	Gdiplus::Color color;
 	int y;
 	for (y = 0; y < defines.screenSizeY; ++y)
