@@ -5,6 +5,7 @@
 #include "Terrain.h"
 #include "Background.h"
 #include "ColliderObject.h"
+#include "Niddle.h"
 
 class GameScene :	public Scene
 {

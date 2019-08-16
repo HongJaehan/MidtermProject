@@ -17,10 +17,10 @@ public:
 	int GetPosY();
 	int GetWidth();
 	int GetHeight();
-	BoxCollider2D* GetCollider();
 	void SetX(int _x);
 	void SetY(int _y);
 	ETag GetTag();
+	BoxCollider2D* GetCollider();
 	bool HasCollider();
 //	virtual std::weak_ptr<Gdiplus::Image> GetImage();
 

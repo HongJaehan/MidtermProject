@@ -28,6 +28,7 @@ GameScene::~GameScene()
 //{
 //	int k = x;
 //}
+
 void GameScene::Init()
 {
 	//EventManager::GetInstance()->AddEvent(std::bind(&GameScene::Func, this, std::placeholders::_1), eEvent_PlayerDie);
@@ -36,15 +37,31 @@ void GameScene::Init()
 	//objectVec.emplace_back(player);
 	//terrain = new Terrain();
 	//objectVec.emplace_back(terrain);
+
+	////XML 파싱 예시
+	//for (auto& it : XML)
+	//{
+	//	switch (it->id)
+	//	{
+	//	case id:
+	//		ColliderObject* object = new ColliderObject(XML, ~~~~~);
+	//		break;
+	//	case id2:
+	//		break;
+	//	}
+	//}
+	
 	ColliderObject *cObject = new ColliderObject(ETag::eCollider, 95, 206, 190, 412);
 	ColliderObject *cObject2 = new ColliderObject(ETag::eCollider, 3270, 450, 47, 32);
-	ColliderObject *cObject3 = new ColliderObject(ETag::eCollider, 4060, 350, 70, 50);
-
+	ColliderObject *cObject3 = new ColliderObject(ETag::eCollider, 3890, 420, 60, 36);
+	ColliderObject *cObject4 = new ColliderObject(ETag::eCollider, 9478, 360, 65, 40);
+	Niddle* cObject5 = new Niddle(ETag::eTrap, 1361, 534, 62, 72);
 
 	objectVec.emplace_back(cObject);
 	objectVec.emplace_back(cObject2);
 	objectVec.emplace_back(cObject3);
-
+	objectVec.emplace_back(cObject4);
+	objectVec.emplace_back(cObject5);
 
 
 	//임시로
@@ -141,8 +158,8 @@ bool GameScene::CollisionCheck(Object* obj1, Object* obj2)
 	int obj1_Left = obj1->GetCollider()->GetX() - obj1->GetCollider()->GetWidth() * 0.5f;
 	int obj1_Right = obj1->GetCollider()->GetX() + obj1->GetCollider()->GetWidth() * 0.5f;
 
-	int obj2_Top = obj2->GetCollider()->GetY() - obj2->GetCollider()->GetHeight() * 0.5f;
-	int obj2_Bottom = obj2->GetCollider()->GetY() + obj2->GetCollider()->GetHeight() * 0.5f;
+	int obj2_Top = obj2->GetCollider()->GetY() + obj2->GetCollider()->GetHeight() * 0.5f;
+	int obj2_Bottom = obj2->GetCollider()->GetY() + obj2->GetCollider()->GetHeight();
 	int obj2_Left = obj2->GetCollider()->GetX() - obj2->GetCollider()->GetWidth() * 0.5f;
 	int obj2_Right = obj2->GetCollider()->GetX() + obj2->GetCollider()->GetWidth() * 0.5f;
 

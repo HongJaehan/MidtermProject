@@ -62,7 +62,7 @@ void ColliderObject::Collision(Object* obj)
 	int objTop = collider->GetY() - height * 0.5f;
 	int objBottom = collider->GetY() + height * 0.5f;
 
-	if (playerLeft <= objRight && objRight - playerLeft < obj->GetWidth())
+	if (playerLeft <= objRight && objRight - playerLeft < obj->GetWidth() && playerBottom > objTop)
 	{
 		printf("obj Right = %d \n", objRight);
 		printf("player Left = %d \n", playerLeft);
@@ -70,7 +70,7 @@ void ColliderObject::Collision(Object* obj)
 		printf("Game M X = %d \n", GameManager::GetInstance()->GetPlayerPosX());
 		obj->SetX(obj->GetPosX() + 1);
 	}
-	else if (playerRight >= objLeft)
+	else if (playerRight >= objLeft && playerBottom > objTop)
 	{
 		printf("objTop = %d \n", objTop);
 		obj->SetX(obj->GetPosX() - 1);

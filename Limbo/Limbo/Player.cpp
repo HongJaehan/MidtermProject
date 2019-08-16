@@ -35,8 +35,8 @@ Player::Player()
 
 	int screenSizeWidth = defines.screenSizeX;
 	//x = screenSizeWidth * 0.5f;
-	x = 3000;
-	y = 300;
+	x = 500;
+	y = 450;
 
 	collider = new BoxCollider2D(x, y, width, height, false);
 
