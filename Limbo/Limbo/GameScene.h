@@ -6,6 +6,7 @@
 #include "Background.h"
 #include "ColliderObject.h"
 #include "Niddle.h"
+#include "Trap.h"
 
 class GameScene :	public Scene
 {
@@ -17,7 +18,7 @@ public:
 	void Update(float);
 	void Render(Gdiplus::Graphics*);
 	bool CollisionCheck(Object*,Object*);
-	void Func(int);
+	void SceneReset();
 
 private:
 	Object* player;

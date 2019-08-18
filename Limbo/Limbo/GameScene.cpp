@@ -51,17 +51,22 @@ void GameScene::Init()
 	//	}
 	//}
 	
-	ColliderObject *cObject = new ColliderObject(ETag::eCollider, 95, 206, 190, 412);
-	ColliderObject *cObject2 = new ColliderObject(ETag::eCollider, 3270, 450, 47, 32);
-	ColliderObject *cObject3 = new ColliderObject(ETag::eCollider, 3890, 420, 60, 36);
-	ColliderObject *cObject4 = new ColliderObject(ETag::eCollider, 9478, 360, 65, 40);
-	Niddle* cObject5 = new Niddle(ETag::eTrap, 1361, 534, 62, 72);
+	ColliderObject *cObject = new ColliderObject(ETag::eTag_Collider, 95, 206, 190, 412);
+	ColliderObject *cObject2 = new ColliderObject(ETag::eTag_Collider, 3270, 400, 47, 32);
+	ColliderObject *cObject3 = new ColliderObject(ETag::eTag_Collider, 3890, 350, 60, 36);
+	ColliderObject *cObject4 = new ColliderObject(ETag::eTag_Collider, 9478, 360, 65, 40);
+	Niddle* cObject5 = new Niddle(ETag::eTag_Trap, 1360, 480, 80, 72);
+	Trap* cObject6 = new Trap(ETag::eTag_Trap, 2864, 404, 150, 70);
+	Trap* cObject7 = new Trap(ETag::eTag_Trap, 3016,417,140,44);
 
 	objectVec.emplace_back(cObject);
 	objectVec.emplace_back(cObject2);
 	objectVec.emplace_back(cObject3);
 	objectVec.emplace_back(cObject4);
 	objectVec.emplace_back(cObject5);
+	objectVec.emplace_back(cObject6);
+	//objectVec.emplace_back(cObject7);
+
 
 
 	//임시로
@@ -78,6 +83,9 @@ void GameScene::Init()
 		backgroundVec.emplace_back(b);
 		startPosX += defines.screenSizeX * 2;
 	}
+
+	//Event등록
+	EventManager::GetInstance()->AddEvent(std::bind(&GameScene::SceneReset, this), EEvent::eEvent_ResetGameScene);
 }
 
 void GameScene::Update(float Delta)
@@ -94,13 +102,15 @@ void GameScene::Update(float Delta)
 		int objRight = it->GetPosX() + it->GetWidth() * 0.5f;
 		int objLeft = it->GetPosX() - it->GetWidth() * 0.5f;
 		//스크린 좌표 안에 오브젝트가 존재하면 enable -> true 로 변경, Update실행
-		if (objRight >= screenLeft || objLeft <= screenRight)
+		if (objRight >= screenLeft && (abs(objRight-screenLeft) < defines.screenSizeX) 
+			|| objLeft <= screenRight && (abs(screenRight - objLeft) < defines.screenSizeX))
 		{
 			it->SetEnable(true);
 			//충돌 체크
 			if (it->HasCollider() && CollisionCheck(player, it))
 			{
 				it->Collision(player);
+				player->Collision(it);
 			}
 
 			it->Update(Delta);
@@ -166,22 +176,30 @@ bool GameScene::CollisionCheck(Object* obj1, Object* obj2)
 
 	//AABB
 	//스크린 좌표로는 y축이 아래로 커지기 때문에
-	if (obj1_Top > obj2_Bottom )
+	if (obj1_Top >= obj2_Bottom )
 	{
 		return false;
 	}
-	if (obj1_Bottom < obj2_Top)
+	if (obj1_Bottom <= obj2_Top)
 	{
 		return false;
 	}
-	if (obj1_Left > obj2_Right)
+	if (obj1_Left >= obj2_Right)
 	{
 		return false;
 	}
-	if (obj1_Right < obj2_Left)
+	if (obj1_Right <= obj2_Left)
 	{
 		return false;
 	}
 
 	return true;
+}
+
+void GameScene::SceneReset()
+{
+	Player* _player = dynamic_cast<Player*>(player);
+	_player->ChangeState(eState_Idle);
+	_player->SetX(400);
+	_player->SetY(player->GetPosX());
 }

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ROOT>
+    <sprite n="Frame0.png" x="0" y="0" w="125" h="126" pX="0.488" pY="0.579365"/>
+    <sprite n="Frame1.png" x="125" y="0" w="125" h="125" pX="0.5" pY="0.5"/>
+    <sprite n="Frame2.png" x="250" y="0" w="125" h="125" pX="0.5" pY="0.5"/>
+    <sprite n="Frame3.png" x="375" y="0" w="125" h="125" pX="0.5" pY="0.5"/>
+    <sprite n="Frame4.png" x="500" y="0" w="125" h="125" pX="0.5" pY="0.5"/>
+    <sprite n="Frame5.png" x="625" y="0" w="125" h="125" pX="0.5" pY="0.5"/>
+    <sprite n="Frame6.png" x="750" y="0" w="125" h="125" pX="0.5" pY="0.5"/>
+    <sprite n="Frame7.png" x="875" y="0" w="125" h="126" pX="0.5" pY="0.5"/>
+    <sprite n="Frame8.png" x="0" y="130" w="125" h="127" pX="0.5" pY="0.5"/>
+    <sprite n="Frame9.png" x="125" y="130" w="125" h="127" pX="0.5" pY="0.5"/>
+    <sprite n="Frame10.png" x="250" y="130" w="125" h="129" pX="0.5" pY="0.5"/>
+    <sprite n="Frame11.png" x="375" y="130" w="125" h="129" pX="0.5" pY="0.5"/>
+    <sprite n="Frame12.png" x="500" y="130" w="125" h="129" pX="0.5" pY="0.5"/>
+    <sprite n="Frame13.png" x="625" y="130" w="125" h="129" pX="0.5" pY="0.5"/>
+    <sprite n="Frame14.png" x="750" y="130" w="125" h="130" pX="0.5" pY="0.5"/>
+    <sprite n="Frame15.png" x="875" y="130" w="125" h="129" pX="0.5" pY="0.5"/>
+    <sprite n="Frame16.png" x="0" y="260" w="125" h="129" pX="0.5" pY="0.5"/>
+    <sprite n="Frame17.png" x="125" y="260" w="125" h="129" pX="0.5" pY="0.5"/>
+    <sprite n="Frame18.png" x="250" y="260" w="125" h="129" pX="0.5" pY="0.5"/>
+    <sprite n="Frame19.png" x="375" y="260" w="125" h="129" pX="0.5" pY="0.5"/>
+    <sprite n="Frame20.png" x="500" y="260" w="125" h="127" pX="0.5" pY="0.5"/>
+    <sprite n="Frame21.png" x="625" y="260" w="125" h="127" pX="0.5" pY="0.5"/>
+    <sprite n="Frame22.png" x="750" y="260" w="125" h="126" pX="0.5" pY="0.5"/>
+    <sprite n="Frame23.png" x="875" y="260" w="125" h="125" pX="0.5" pY="0.5"/>
+    <sprite n="Frame24.png" x="0" y="390" w="125" h="125" pX="0.5" pY="0.5"/>
+    <sprite n="Frame25.png" x="125" y="390" w="125" h="125" pX="0.5" pY="0.5"/>
+    <sprite n="Frame26.png" x="250" y="390" w="125" h="125" pX="0.5" pY="0.5"/>
+    <sprite n="Frame27.png" x="375" y="390" w="125" h="125" pX="0.5" pY="0.5"/>
+    <sprite n="Frame28.png" x="500" y="390" w="125" h="125" pX="0.5" pY="0.5"/>
+    <sprite n="Frame29.png" x="625" y="390" w="125" h="126" pX="0.5" pY="0.5"/>
+</ROOT>

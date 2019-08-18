@@ -7,6 +7,7 @@
 #include "Animation_Idle.h"
 #include "Animation_Run.h"
 #include "Animation_Jump.h"
+#include "Animation_Die.h"
 #include "PlayerControlComponent.h"
 #include "BoxCollider2D.h"
 
@@ -29,6 +30,7 @@ public:
 	void PhysicsUpdate(float Delta);
 	//void CheckCollision(Object &objVec);
 	void Collision(Object*);
+	void PlayerDie();
 private:
 	//Component
 	PlayerControlComponent control;

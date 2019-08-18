@@ -21,6 +21,9 @@
 
 CChildView::CChildView()
 {
+	//CPaintDC dc(this); // 그리기를 위한 디바이스 컨텍스트입니다.
+	//Gdiplus::Graphics MainG(dc);
+	//SceneManager::GetInstance()->MainG = &MainG;
 }
 
 CChildView::~CChildView()
@@ -55,7 +58,7 @@ BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs)
 
 void CChildView::OnPaint() 
 {
-	//CLimboApp::bRender = true;
+	/*CLimboApp::bRender = true;*/
 	++theApp.CallCount;
 	CPaintDC dc(this); // 그리기를 위한 디바이스 컨텍스트입니다.
 	Gdiplus::Graphics MainG(dc);
@@ -71,8 +74,10 @@ void CChildView::OnPaint()
 	MemG.FillRectangle(&WhiteBrush, rc2);
 
 	SceneManager::GetInstance()->GetCurScene()->Render(&MemG);
-
 	MainG.DrawImage(&BackBuffer, 0, 0, rc.Width(), rc.Height());
+	
+	
+	
 	//Image Img(TEXT("Asset\\bg.png"));
 	//Image Img2(TEXT("Asset\\ed.jpg"));
 	//static float delta = 1.f;

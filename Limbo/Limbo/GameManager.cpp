@@ -7,9 +7,9 @@ GameManager::GameManager()
 	nowCheckPoint = 0;
 
 
-    terrainBitmap = new Gdiplus::Bitmap (defines.screenSizeX*2*mapCount, defines.screenSizeY, PixelFormat32bppARGB);
+	terrainBitmap = new Gdiplus::Bitmap(defines.screenSizeX * 2 * mapCount, defines.screenSizeY, PixelFormat32bppARGB);
 	Gdiplus::Graphics graphics(terrainBitmap);
-	
+
 
 	int x = 0;
 	for (int i = 1; i <= mapCount; ++i)
@@ -22,8 +22,6 @@ GameManager::GameManager()
 		graphics.DrawImage(img, rect);
 		x += defines.screenSizeX * 2;
 	}
-
-	EventManager::GetInstance()->AddEvent(std::bind(&GameManager::Func, this,std::placeholders::_1),EEvent::eEvent_PlayerDie);
 	
 }
 
@@ -32,10 +30,13 @@ GameManager::~GameManager()
 	delete terrainBitmap;
 }
 
+void GameManager::SetPlayerPosX(int _playerPosX)
+{
+	playerPosX = _playerPosX;
+}
+
 int GameManager::GetTerrainData(int _playerPosX)
 {
-	//받아온 X값을 저장
-	playerPosX = _playerPosX;
 	Gdiplus::Color color;
 	int y;
 	for (y = 0; y < defines.screenSizeY; ++y)
@@ -62,13 +63,17 @@ std::pair<int, int> GameManager::GetCheckPoint()
 	}
 }
 
-void GameManager::Func(int)
-{
-	playerPosX;
-}
+//void GameManager::Func(int)
+//{
+//	playerPosX;
+//}
 
 
 int GameManager::GetPlayerPosX()
 {
 	return playerPosX;
+}
+
+void GameManager::Init()
+{
 }

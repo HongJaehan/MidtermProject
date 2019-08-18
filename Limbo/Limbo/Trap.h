@@ -18,5 +18,6 @@ private:
 	Animation_Trap animation;
 	int screenPosX;
 	int screenPosY;
+	bool state;
 };
 

@@ -1,25 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with TexturePacker https://www.codeandweb.com/texturepacker -->
-<!-- $TexturePacker:SmartUpdate:afc2e6f7bfc190550775fed002e1ea28:edb2b780b32378580facf480ca528249:7e0251533f86cba7593f783da6d09279$ -->
-<!--Format:
-n  => name of the sprite
-x  => sprite x pos in texture
-y  => sprite y pos in texture
-w  => sprite width (may be trimmed)
-h  => sprite height (may be trimmed)
-pX => x pos of the pivot point (relative to sprite width)
-pY => y pos of the pivot point (relative to sprite height)
-oX => sprite's x-corner offset (only available if trimmed)
-oY => sprite's y-corner offset (only available if trimmed)
-oW => sprite's original width (only available if trimmed)
-oH => sprite's original height (only available if trimmed)
-r => 'y' only set if sprite is rotated
-with polygon mode enabled:
-vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
-verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
-triangles  => sprite triangulation, 3 vertex indices per triangle
--->
-<TextureAtlas imagePath="trap.png" width="2048" height="2048">
+
+<ROOT>
     <sprite n="1.png" x="0" y="0" w="665" h="334"/>
     <sprite n="2.png" x="665" y="0" w="665" h="334"/>
     <sprite n="3.png" x="1330" y="0" w="665" h="334"/>
@@ -34,4 +15,4 @@ triangles  => sprite triangulation, 3 vertex indices per triangle
     <sprite n="12.png" x="1330" y="1002" w="665" h="334"/>
     <sprite n="13.png" x="0" y="1336" w="665" h="334"/>
     <sprite n="14.png" x="665" y="1336" w="665" h="334"/>
-</TextureAtlas>
+</ROOT>

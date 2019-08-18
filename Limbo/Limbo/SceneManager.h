@@ -14,8 +14,8 @@ public:
 	Scene* GetCurScene();
 	void Init();
 	void MoveNextScene();
-	void Render(CDC* pDC, CRect rc);
-
+	void Render(CRect rc);
+	Gdiplus::Graphics* MainG;
 private:
 	Scene* curScene;
 	Scene* introScene;

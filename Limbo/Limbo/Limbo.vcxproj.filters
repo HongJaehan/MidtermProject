@@ -156,6 +156,9 @@
     <ClInclude Include="Animation_Trap.h">
       <Filter>소스 파일\Animation</Filter>
     </ClInclude>
+    <ClInclude Include="Animation_Die.h">
+      <Filter>소스 파일\Animation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssetManager.cpp">
@@ -255,6 +258,9 @@
       <Filter>소스 파일\Object</Filter>
     </ClCompile>
     <ClCompile Include="Animation_Trap.cpp">
+      <Filter>소스 파일\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation_Die.cpp">
       <Filter>소스 파일\Animation</Filter>
     </ClCompile>
   </ItemGroup>

@@ -79,7 +79,7 @@ void PlayerControlComponent::Update(Player& player)
 	}
 	else //Idle
 	{
-		if (player.GetState()!= eState_Jump)
+		if (player.GetState()!= eState_Jump && player.GetState()!= eState_Die)
 		{
 			player.ChangeState(eState_Idle);
 			player.InitVelocity();

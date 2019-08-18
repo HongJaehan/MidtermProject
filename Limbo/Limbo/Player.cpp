@@ -4,7 +4,7 @@
 #include "PlayerControlComponent.h"
 #include <cmath>
 
-#define MAX_velocity 150
+#define MAX_velocity 1
 #define INIT_velocity 0
 #define ACCELERATION 150
 #define PI (3.1415926535897932f)
@@ -19,7 +19,7 @@ float Lerp(float value1, float value2, float amount)
 
 Player::Player()
 {
-	tag = ePlayer;
+	tag = eTag_Player;
 	state = eState_Idle;
 	bFlagLeft = false;
 	velocity = 0.1f;
@@ -28,21 +28,22 @@ Player::Player()
 	enable = true;
 //	float speed = Lerp(0, 10, 2);
 	
-	//AnimationList에 애니메이션을 추가해준다.
+	//AnimationList에 애니메이션을 추가해준다.  enum순서대로 넣어줘야 한다ㄷ
 	AddAnimation(new Animation_Idle());
 	AddAnimation(new Animation_Run());
 	AddAnimation(new Animation_Jump());
-
+	AddAnimation(new Animation_Die());
 	int screenSizeWidth = defines.screenSizeX;
 	//x = screenSizeWidth * 0.5f;
-	x = 500;
+	x = 2500;
 	y = 450;
 
 	collider = new BoxCollider2D(x, y, width, height, false);
 
 	playerScreenPosX = x - width * 0.5;
-	playerScreenPosY = y - height;
+	playerScreenPosY = y - height * 0.5;
 
+ 	EventManager::GetInstance()->AddEvent(std::bind(&Player::PlayerDie, this),EEvent::eEvent_PlayerDie);
 	//사용할 생각
 	//pos.SetX(GameManager::GetInstance()->GetCheckPoint().first + width * 0.5);
 	//pos.SetY(GameManager::GetInstance()->GetCheckPoint().first - height);
@@ -64,12 +65,13 @@ void Player::Update(float Delta)
 	control.Update(*this);
 	//physics 업데이트
 	PhysicsUpdate(Delta);
-
+	GameManager::GetInstance()->SetPlayerPosX(x);
 	collider->SetX(x);
 	collider->SetY(y);
 
 	//현재 Animation의 image를 XML정보에 맞춰 저장해줌.
 	playerAnimationList[state]->Update(&atlasRect,Delta);
+
 }
 
 void Player::Render(Gdiplus::Graphics* _MemG)
@@ -82,7 +84,21 @@ void Player::Render(Gdiplus::Graphics* _MemG)
 	temp.DrawImage(playerAnimationList[state]->GetAtlasImg().lock().get(),rect,
 		atlasRect.X , atlasRect.Y, atlasRect.Width, atlasRect.Height, Gdiplus::Unit::UnitPixel, nullptr, 0, nullptr);
 
-	Gdiplus::Rect screenPosRect(defines.screenSizeX/2 - width*0.5f,y-height+10, width, height);
+	int playerScreenWidth;
+	int playerScreenHeight;
+	if (state == eState_Die)
+	{
+		playerScreenWidth = defines.playerWidth_Die;
+		playerScreenHeight = defines.playerHeight_Die;
+	}
+	else
+	{
+		playerScreenWidth = width;
+		playerScreenHeight = height;
+	}
+	Gdiplus::Rect screenPosRect(defines.screenSizeX / 2 - width * 0.5f, y - height *0.5f + 10, playerScreenWidth, height);
+	
+
 
 	//만약 좌측방향이라면 bit를 좌우 반전시켜준다.
 	if (bFlagLeft)
@@ -117,11 +133,11 @@ void Player::Jump(bool bFlagLeft,int terrainY,float Delta)
 
 		if (bFlagLeft)
 		{
-			x = x - 0.1f + velocity * Delta;
+			x -= velocity * Delta; 
 		}
 		else
 		{
-			x = x + 0.1f + velocity * Delta;
+			x += velocity * Delta;
 		}
 
 		y = y + (-150 * Delta) + AddVal;
@@ -154,11 +170,10 @@ void Player::PhysicsUpdate(float Delta)
 
 	if (AddUpdateDelta > 1.0f)
 	{
-		AddUpdateDelta = 1.0f;
+		AddUpdateDelta = 0.5f;
 	}
 	//GameManager에 현재 Player의 X좌표를 보내 Terrain의 Y 정보를 받아온다.
-	int terrainY = GameManager::GetInstance()->GetTerrainData(x);
-
+	int terrainY = GameManager::GetInstance()->GetTerrainData(x) - height * 0.5f;
 	switch (state)
 	{
 	case eState_Idle:
@@ -172,14 +187,14 @@ void Player::PhysicsUpdate(float Delta)
 		}
 		break;
 	case eState_Run:
-		velocity = ACCELERATION * AddUpdateDelta;
+		velocity = ACCELERATION * AddUpdateDelta * 1.3f;
 		if (bFlagLeft)
 		{
-			x = x - velocity * Delta;
+			x -= velocity * Delta;
 		}
 		else
 		{
-			x = x + velocity * Delta;
+			x += velocity * Delta;
 		}
 		y = y + GRAVITY * AddUpdateDelta;
 		//현재 Player의 Y좌표가 Terrain보다 크다면
@@ -191,6 +206,14 @@ void Player::PhysicsUpdate(float Delta)
 	case eState_Jump:
 		Jump(bFlagLeft, terrainY, Delta);
 		break;
+	case eState_Die:
+		y = y + GRAVITY * AddUpdateDelta;
+		if (y >= terrainY)
+		{
+			y = terrainY;
+		}
+		break;
+	
 #pragma region MyRegion
 		//pos.SetY(jumpInitPosY + velocity * cos(DEGTORAD(-45)) - 0.5f * GRAVITY * Delta * Delta);
 	//pos.SetX(jumpInitPosX + 10 * cos(DEGTORAD(-45)) * Delta);
@@ -240,32 +263,30 @@ EPlayerState Player::GetState()
 
 void Player::Collision(Object* obj)
 {
-	//int playerLeft = x - width * 0.5f;
-	//int playerRight = x + width * 0.5f;
-	//int playerTop = y - height * 0.5f;
-	//int playerBottom = y + height * 0.5f;
 
-	//int objLeft = obj->GetPosX() - obj->GetWidth() * 0.5f;
-	//int objRight = obj->GetPosX() + obj->GetWidth() * 0.5f;
-	//int objTop = obj->GetPosY() - obj->GetHeight() * 0.5f;
-	//int objBottom = obj->GetPosY() + obj->GetHeight() * 0.5f;
+	if (obj->GetTag() != eTag_Collider)
+	{
+		return;
+	}
 
-	//if (playerLeft <= objRight)
-	//{
-	//	x = x + 1;
-	//}
-	//else if (playerRight > objLeft)
-	//{
-	//	x = playerRight - width * 0.5f + 100;
-	//}
-	//if (playerTop < objBottom)
-	//{
-	//	y = playerTop + height * 0.5f;
-	//}
-	//else if (playerBottom > objTop)
-	//{
-	//	y = playerBottom - height * 0.5f;
-	//}
+	int objLeft = obj->GetCollider()->GetX() - obj->GetCollider()->GetWidth() * 0.5f;
+	int objRight = obj->GetCollider()->GetX() + obj->GetCollider()->GetWidth() * 0.5f;
+	int objTop = obj->GetCollider()->GetY() - obj->GetCollider()->GetHeight() * 0.5f;
+	int objBottom = obj->GetCollider()->GetY() + obj->GetCollider()->GetHeight() * 0.5f;
+
+	int pLeft = GetCollider()->GetX() - GetCollider()->GetWidth() * 0.5f;
+	int pRight = GetCollider()->GetX() + GetCollider()->GetWidth() * 0.5f;
+	int pTop = GetCollider()->GetY() - GetCollider()->GetHeight() * 0.5f;
+	int pBottom = GetCollider()->GetY() + GetCollider()->GetHeight() * 0.5f;
+	
+	if (pLeft < objRight && abs(objRight - pLeft) < width)
+	{
+		x = objRight + width * 0.5f;
+	}
+	else if (pRight > objLeft && abs(pRight-objLeft) < width)
+	{
+		x = objLeft - width * 0.5f;
+	}
 }
 
 bool Player::GetLeftFlag()
@@ -280,4 +301,9 @@ void Player::SetLeftFlag(bool Flag)
 void Player::InitVelocity()
 {
 	velocity = 0;
+}
+
+void Player::PlayerDie()
+{
+	ChangeState(eState_Die);
 }
