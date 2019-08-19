@@ -201,6 +201,7 @@
     <ClInclude Include="Animation_Interaction.h" />
     <ClInclude Include="Animation_InteractionMove.h" />
     <ClInclude Include="Animation_Jump.h" />
+    <ClInclude Include="Animation_Logo.h" />
     <ClInclude Include="Animation_Run.h" />
     <ClInclude Include="Animation_Trap.h" />
     <ClInclude Include="AssetManager.h" />
@@ -244,6 +245,7 @@
     <ClCompile Include="Animation_Interaction.cpp" />
     <ClCompile Include="Animation_InteractionMove.cpp" />
     <ClCompile Include="Animation_Jump.cpp" />
+    <ClCompile Include="Animation_Logo.cpp" />
     <ClCompile Include="Animation_Run.cpp" />
     <ClCompile Include="Animation_Trap.cpp" />
     <ClCompile Include="AssetManager.cpp" />

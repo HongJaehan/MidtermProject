@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ROOT>
+    <sprite n="PRESS1.png" x="0" y="0" w="555" h="374"/>
+	<sprite n="PRESS2.png" x="556" y="0" w="555" h="374"/>
+	<sprite n="PRESS3.png" x="1112" y="0" w="555" h="374"/>
+</ROOT>
