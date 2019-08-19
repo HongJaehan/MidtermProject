@@ -17,7 +17,8 @@ enum ETag
 	eTag_Collider, //id = 2
 	eTag_Trap, //id =3 
 	eTag_AutoMovement, // id = 4
-	eTag_Niddle
+	eTag_Niddle,
+	eTag_Spider
 };
 
 static enum EPlayerState 
@@ -30,6 +31,12 @@ static enum EPlayerState
 	eState_InteractionMove = 5,
 };
 
+enum ESpiderState
+{
+	eSpiderState_Idle,
+	eSpiderState_Down,
+	eSpiderState_Up
+};
 enum EEvent
 {
 	eEvent_PlayerDie,

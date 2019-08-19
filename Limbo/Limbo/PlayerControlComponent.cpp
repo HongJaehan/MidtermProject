@@ -64,7 +64,14 @@ void PlayerControlComponent::Update(Player& player)
 		case eState_Interaction:
 			break;
 		case eState_InteractionMove:
-			player.SetVelocity(70);
+			if (GetAsyncKeyState(VK_CONTROL) & 0x8001)
+			{
+				player.SetVelocity(70);
+			}
+			else
+			{
+
+			}
 			break;
 		default:
 			break;

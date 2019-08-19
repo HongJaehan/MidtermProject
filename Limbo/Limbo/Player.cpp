@@ -38,7 +38,7 @@ Player::Player()
 
 	int screenSizeWidth = defines.screenSizeX;
 	//x = screenSizeWidth * 0.5f;
-	x = 3000;
+	x = 5000;
 	y = 450;
 
 	collider = new BoxCollider2D(x, y, width, height, false);
@@ -102,6 +102,7 @@ void Player::Render(Gdiplus::Graphics* _MemG)
 	case eState_Die:
 		playerScreenWidth = defines.playerWidth_Die;
 		playerScreenHeight = height;
+		screenPosY += 10;
 		break;
 	case eState_InteractionMove:
 		playerScreenWidth = width;
@@ -205,6 +206,7 @@ void Player::PhysicsUpdate(float Delta)
 		}
 		break;
 	case eState_Run:
+		y = y + GRAVITY * AddUpdateDelta;
 		velocity = ACCELERATION * AddUpdateDelta * 1.3f;
 		if (bFlagLeft)
 		{
@@ -214,27 +216,24 @@ void Player::PhysicsUpdate(float Delta)
 		{
 			x += velocity * Delta;
 		}
-
-		break;
-	case eState_Jump:
-		Jump(bFlagLeft, terrainY, Delta);
-		break;
-	case eState_InteractionMove:
-		x += velocity * Delta;
-		y = y + GRAVITY * AddUpdateDelta;
-		//현재 Player의 Y좌표가 Terrain보다 크다면
 		if (y >= terrainY)
 		{
 			y = terrainY;
 		}
 		break;
+	case eState_Jump:
+		Jump(bFlagLeft, terrainY, Delta);
+		break;
+	case eState_InteractionMove:
+		//x += velocity * Delta;
+		//y = y + GRAVITY * AddUpdateDelta;
+		//현재 Player의 Y좌표가 Terrain보다 크다면
 	case eState_Die:
 		y = y + GRAVITY * AddUpdateDelta;
 		if (y >= terrainY)
 		{
 			y = terrainY;
 		}
-
 		break;
 	}
 }
@@ -297,7 +296,15 @@ void Player::Collision(Object* obj)
 		case eState_InteractionMove:
 			if (GetAsyncKeyState(VK_CONTROL) & 0x8001)
 			{
-
+				if (GetAsyncKeyState(VK_RIGHT) & 0x8001)
+				{
+					x += 1;
+					obj->SetX(obj->GetPosX() + 1);
+				}else if (GetAsyncKeyState(VK_LEFT) & 0x8001)
+				{
+					x -= 1;
+					obj->SetX(obj->GetPosX() - 1);
+				}
 			}
 			else
 			{

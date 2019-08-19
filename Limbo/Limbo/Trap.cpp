@@ -34,6 +34,8 @@ void Trap::Update(float Delta)
 	////printf("Left = %f\n", collider->GetX() - collider->GetWidth() * 0.5);
 	//
 	y = GameManager::GetInstance()->GetTerrainData(x)-height*0.5f;
+	collider->SetX(x);
+	collider->SetY(y-height*0.5f);
 	//collider->SetX(x);
 	//collider->SetY(y-height*0.5f);
 	////printf("Top = %f\n", collider->GetY() - collider->GetHeight() * 0.5);
@@ -44,7 +46,7 @@ void Trap::Render(Gdiplus::Graphics* MemG)
 {
 
 
-	int drawToScreenPosX = screenPosX - (GameManager::GetInstance()->GetPlayerPosX() - defines.screenSizeX * 0.5f);
+	int drawToScreenPosX = x - (width * 0.5f) - (GameManager::GetInstance()->GetPlayerPosX() - defines.screenSizeX * 0.5f);
 	////Player¿« ≈©±‚
 	//Gdiplus::Rect rect(0, 0, width, height);
 
@@ -69,7 +71,7 @@ void Trap::Render(Gdiplus::Graphics* MemG)
 
 void Trap::Collision(Object* obj)
 {
-	obj = dynamic_cast<Player*>(obj);
+	Player* _obj = dynamic_cast<Player*>(obj);
 	if (obj->GetCollider() == nullptr)
 	{
 		return;
@@ -96,6 +98,18 @@ void Trap::Collision(Object* obj)
 		EventManager::GetInstance()->OnEvent(eEvent_PlayerDie);
 		return;
 	}
+	//if (_obj->GetState() == eState_InteractionMove)
+	//{
+	//	if (playerRight > objLeft && playerLeft < objLeft)
+	//	{
+	//		x = playerLeft + 1;
+	//	}
+	//	else if(playerLeft < objRight && playerRight > objRight)
+	//	{
+	//		x = playerRight - 1;
+	//	}
+	//}
+
 	//if (playerBottom < objTop && playerRight > objLeft && abs(playerRight - objLeft) < obj->GetWidth())
 	//{
 	//

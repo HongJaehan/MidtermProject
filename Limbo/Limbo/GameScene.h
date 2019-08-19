@@ -7,6 +7,7 @@
 #include "ColliderObject.h"
 #include "Niddle.h"
 #include "Trap.h"
+#include "Spider.h"
 
 class GameScene :	public Scene
 {

@@ -57,7 +57,8 @@ void GameScene::Init()
 	ColliderObject *cObject4 = new ColliderObject(ETag::eTag_Collider, 9478, 360, 65, 40);
 	Niddle* cObject5 = new Niddle(ETag::eTag_Niddle, 1360, 480, 80, 72);
 	Trap* cObject6 = new Trap(ETag::eTag_Trap, 2864, 350, 150, 70);
-	//Trap* cObject7 = new Trap(ETag::eTag_Trap, 3016,417,140,44);
+	Trap* cObject7 = new Trap(ETag::eTag_Trap, 3016,417, 150, 70);
+	Spider* cObject8 = new Spider(ETag::eTag_Spider, 5566, -171, 438, 524);
 
 	objectVec.emplace_back(cObject);
 	objectVec.emplace_back(cObject2);
@@ -65,9 +66,8 @@ void GameScene::Init()
 	objectVec.emplace_back(cObject4);
 	objectVec.emplace_back(cObject5);
 	objectVec.emplace_back(cObject6);
-	//objectVec.emplace_back(cObject7);
-
-
+	objectVec.emplace_back(cObject7);
+	objectVec.emplace_back(cObject8);
 
 	//юс╫ц╥н
 	int mapCount = 10;
@@ -169,7 +169,7 @@ bool GameScene::CollisionCheck(Object* obj1, Object* obj2)
 	int obj1_Right = obj1->GetCollider()->GetX() + obj1->GetCollider()->GetWidth() * 0.5f;
 
 	int obj2_Top = obj2->GetCollider()->GetY() + obj2->GetCollider()->GetHeight() * 0.5f;
-	int obj2_Bottom = obj2->GetCollider()->GetY() + obj2->GetCollider()->GetHeight();
+	int obj2_Bottom = obj2->GetCollider()->GetY() + obj2->GetCollider()->GetHeight()*0.5f;
 	int obj2_Left = obj2->GetCollider()->GetX() - obj2->GetCollider()->GetWidth() * 0.5f;
 	int obj2_Right = obj2->GetCollider()->GetX() + obj2->GetCollider()->GetWidth() * 0.5f;
 
