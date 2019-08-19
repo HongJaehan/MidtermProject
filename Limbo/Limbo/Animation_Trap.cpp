@@ -4,7 +4,6 @@
 Animation_Trap::Animation_Trap()
 {
 	frame = 0;
-	state = eState_Die;
 	addDelta = 0.0f;
 	std::wstring imgName(TEXT("trapEx.png"));
 	atlasImg = AssetManager::GetInstance()->GetImage(imgName);

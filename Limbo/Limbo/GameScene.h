@@ -8,6 +8,7 @@
 #include "Niddle.h"
 #include "Trap.h"
 #include "Spider.h"
+#include "RotateRock.h"
 
 class GameScene :	public Scene
 {

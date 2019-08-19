@@ -56,9 +56,10 @@ void GameScene::Init()
 	ColliderObject *cObject3 = new ColliderObject(ETag::eTag_Collider, 3890, 350, 60, 36);
 	ColliderObject *cObject4 = new ColliderObject(ETag::eTag_Collider, 9478, 360, 65, 40);
 	Niddle* cObject5 = new Niddle(ETag::eTag_Niddle, 1360, 480, 80, 72);
-	Trap* cObject6 = new Trap(ETag::eTag_Trap, 2864, 350, 150, 70);
-	Trap* cObject7 = new Trap(ETag::eTag_Trap, 3016,417, 150, 70);
+	Trap* cObject6 = new Trap(ETag::eTag_Trap, 2864, 390, 120, 70);
+	Trap* cObject7 = new Trap(ETag::eTag_Trap, 3016,460, 120, 70);
 	Spider* cObject8 = new Spider(ETag::eTag_Spider, 5566, -171, 438, 524);
+	RotateRock* cObject9 = new RotateRock(ETag::eTag_Rock, 9297, 233, 220, 220);
 
 	objectVec.emplace_back(cObject);
 	objectVec.emplace_back(cObject2);
@@ -68,6 +69,7 @@ void GameScene::Init()
 	objectVec.emplace_back(cObject6);
 	objectVec.emplace_back(cObject7);
 	objectVec.emplace_back(cObject8);
+	objectVec.emplace_back(cObject9);
 
 	//юс╫ц╥н
 	int mapCount = 10;
@@ -202,6 +204,6 @@ void GameScene::SceneReset()
 {
 	Player* _player = dynamic_cast<Player*>(player);
 	_player->ChangeState(eState_Idle);
-	_player->SetX(400);
+	_player->SetX(GameManager::GetInstance()->GetCheckPointPosX());
 	_player->SetY(player->GetPosX());
 }

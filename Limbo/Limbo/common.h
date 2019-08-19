@@ -18,7 +18,8 @@ enum ETag
 	eTag_Trap, //id =3 
 	eTag_AutoMovement, // id = 4
 	eTag_Niddle,
-	eTag_Spider
+	eTag_Spider,
+	eTag_Rock
 };
 
 static enum EPlayerState 
@@ -36,6 +37,12 @@ enum ESpiderState
 	eSpiderState_Idle,
 	eSpiderState_Down,
 	eSpiderState_Up
+};
+
+enum ERotateRockState
+{
+	eRotateRock_Idle,
+	eRotateRock_Move
 };
 enum EEvent
 {

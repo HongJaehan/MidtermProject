@@ -6,15 +6,15 @@ class GameManager :	public Singleton<GameManager>
 public:
 	GameManager();
 	~GameManager();
-	std::pair<int, int> GetCheckPoint();
 	int GetTerrainData(int playerPosX);
 	int GetPlayerPosX();
+	int GetCheckPointPosX();
 	void Init();
 	void SetPlayerPosX(int _playerPosX);
-
+	void ConfirmCheckPoint(int _playerPosX);
 private:
 	//key : 체크 포인트 number    value: 체크포인트의 x, y 값
-	std::unordered_map<int, std::pair<int, int>> checkPoint;
+	std::vector<int> checkPointVec;
 	int nowCheckPoint;
 
 	//지형정보

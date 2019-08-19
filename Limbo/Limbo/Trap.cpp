@@ -17,9 +17,13 @@ Trap::Trap(ETag _tag, int _x, int _y, int _width, int _height)
 	height = _height;
 	screenPosX = x - width * 0.5;
 	screenPosY = y - height * 0.5;
+	InitPosX = x;
+	InitPosY = y;
 	enable = false;
 
 	collider = new BoxCollider2D(_x, _y, _width - 50, _height, false);
+
+	EventManager::GetInstance()->AddEvent(std::bind(&Trap::Init, this), EEvent::eEvent_ResetGameScene);
 }
 
 Trap::~Trap()
@@ -119,4 +123,11 @@ void Trap::Collision(Object* obj)
 	//	action = true;
 	//	EventManager::GetInstance()->OnEvent(eEvent_PlayerDie);
 	//}
+}
+
+void Trap::Init()
+{
+	x = InitPosX;
+	y = InitPosY;
+	action = false;
 }

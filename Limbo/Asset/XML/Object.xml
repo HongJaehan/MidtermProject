@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker https://www.codeandweb.com/texturepacker -->
+<!-- $TexturePacker:SmartUpdate:eb9c50b1ab15efaa87a3dd697d3f16cc:c104793642a7c0329ff8c48781e71df4:c2079223ed0f83aa164be0b5f6383251$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+with polygon mode enabled:
+vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
+verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
+triangles  => sprite triangulation, 3 vertex indices per triangle
+-->
+<TextureAtlas imagePath="Object.png" width="1024" height="1024">
+    <sprite n="corpse.png" x="131" y="0" w="246" h="107" oX="0" oY="2" oW="246" oH="109"/>
+    <sprite n="Geer.png" x="0" y="155" w="251" h="250"/>
+    <sprite n="Grass.png" x="251" y="155" w="231" h="270" oX="3" oY="1" oW="239" oH="271"/>
+    <sprite n="Movement1.png" x="0" y="0" w="33" h="54" oX="2" oY="0" oW="39" oH="54"/>
+    <sprite n="Movment2.png" x="33" y="0" w="51" h="89" oX="3" oY="1" oW="54" oH="91"/>
+    <sprite n="Movment3.png" x="84" y="0" w="47" h="94" oX="4" oY="1" oW="54" oH="96"/>
+    <sprite n="Owl.png" x="898" y="0" w="94" h="155" oX="4" oY="4" oW="99" oH="160"/>
+    <sprite n="Rabbit.png" x="482" y="155" w="97" h="446" oX="3" oY="0" oW="100" oH="446"/>
+    <sprite n="Rock.png" x="758" y="0" w="140" h="142" oX="1" oY="0" oW="141" oH="142"/>
+    <sprite n="rock2.png" x="601" y="0" w="157" h="137" oX="2" oY="3" oW="162" oH="140"/>
+    <sprite n="rock3.png" x="377" y="0" w="157" h="110" oX="0" oY="0" oW="162" oH="111"/>
+    <sprite n="Trap2.png" x="579" y="155" w="335" h="653"/>
+    <sprite n="Trap3.png" x="534" y="0" w="67" h="111"/>
+</TextureAtlas>

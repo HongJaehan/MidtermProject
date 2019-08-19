@@ -22,6 +22,13 @@ GameManager::GameManager()
 		graphics.DrawImage(img, rect);
 		x += defines.screenSizeX * 2;
 	}
+
+	//임시
+	checkPointVec.emplace_back(500);
+	checkPointVec.emplace_back(2375);
+	checkPointVec.emplace_back(4291);
+	checkPointVec.emplace_back(7993);
+
 	
 }
 
@@ -33,6 +40,20 @@ GameManager::~GameManager()
 void GameManager::SetPlayerPosX(int _playerPosX)
 {
 	playerPosX = _playerPosX;
+	ConfirmCheckPoint(playerPosX);
+}
+
+void GameManager::ConfirmCheckPoint(int _playerPosX)
+{
+	for (int i = 0; i < checkPointVec.size(); ++i)
+	{
+		if (_playerPosX > checkPointVec[i])
+			nowCheckPoint = i;
+		if (nowCheckPoint == 3)
+		{
+			int xxx;
+		}
+	}
 }
 
 int GameManager::GetTerrainData(int _playerPosX)
@@ -52,17 +73,6 @@ int GameManager::GetTerrainData(int _playerPosX)
 	return y;
 }
 
-std::pair<int, int> GameManager::GetCheckPoint()
-{
-	auto& it = checkPoint.find(nowCheckPoint);
-	//checkPoint에서 key를 찾았을 경우
-	if (it != checkPoint.end())
-	{
-		//두번째 x,y 값을 가지고 있는 pair을 반환해준다.
-		return it->second;
-	}
-}
-
 //void GameManager::Func(int)
 //{
 //	playerPosX;
@@ -72,6 +82,11 @@ std::pair<int, int> GameManager::GetCheckPoint()
 int GameManager::GetPlayerPosX()
 {
 	return playerPosX;
+}
+
+int GameManager::GetCheckPointPosX()
+{
+	return checkPointVec[nowCheckPoint];
 }
 
 void GameManager::Init()

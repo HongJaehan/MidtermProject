@@ -1,5 +1,6 @@
 #pragma once
 #include "object.h"
+#include "Animation_Spider.h"
 class Spider :
 	public Object
 {
@@ -12,12 +13,17 @@ public:
 	void Collision(Object* obj);
 	void Up(float Delta);
 	void Down(float Delta);
+	void Init();
 private:
 	Gdiplus::Image* colImg;
 	Gdiplus::Rect atlasRect;
-	Animation_Trap animation;
+	Animation_Spider animation;
 	int screenPosX;
 	int screenPosY;
 	bool action;
+	ESpiderState state;
+	int initPosX;
+	int initPosY;
+	int maxY;
 };
 

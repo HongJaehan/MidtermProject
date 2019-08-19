@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker https://www.codeandweb.com/texturepacker -->
+<!-- $TexturePacker:SmartUpdate:334f47c6b873012cbd01ff938b0725f7:1605ba3f3f0e034698c25be5006f9d4c:e5e1ad7b1d73b65572ded621312810bc$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+with polygon mode enabled:
+vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
+verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
+triangles  => sprite triangulation, 3 vertex indices per triangle
+-->
+<ROOT>
+    <sprite n="Spider1.png" x="0" y="0" w="177" h="211"/>
+    <sprite n="Spider2.png" x="188" y="0" w="178" h="211"/>
+    <sprite n="Spider3.png" x="376" y="0" w="178" h="211"/>
+    <sprite n="Spider4.png" x="564" y="0" w="177" h="212"/>
+    <sprite n="Spider5.png" x="752" y="0" w="178" h="212"/>
+    <sprite n="Spider6.png" x="0" y="212" w="156" h="212"/>
+    <sprite n="Spider7.png" x="188" y="212" w="156" h="212"/>
+    <sprite n="Spider8.png" x="376" y="212" w="188" h="212"/>
+    <sprite n="Spider9.png" x="564" y="212" w="185" h="212"/>
+    <sprite n="Spider10.png" x="752" y="212" w="177" h="212"/>
+</ROOT>
