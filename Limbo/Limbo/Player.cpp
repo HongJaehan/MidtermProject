@@ -33,9 +33,12 @@ Player::Player()
 	AddAnimation(new Animation_Run());
 	AddAnimation(new Animation_Jump());
 	AddAnimation(new Animation_Die());
+	AddAnimation(new Animation_Interaction());
+	AddAnimation(new Animation_InteractionMove());
+
 	int screenSizeWidth = defines.screenSizeX;
 	//x = screenSizeWidth * 0.5f;
-	x = 2500;
+	x = 3000;
 	y = 450;
 
 	collider = new BoxCollider2D(x, y, width, height, false);
@@ -43,7 +46,10 @@ Player::Player()
 	playerScreenPosX = x - width * 0.5;
 	playerScreenPosY = y - height * 0.5;
 
+
  	EventManager::GetInstance()->AddEvent(std::bind(&Player::PlayerDie, this),EEvent::eEvent_PlayerDie);
+	EventManager::GetInstance()->AddEvent(std::bind(&Player::MoveReady, this), EEvent::eEvent_MoveReady);
+
 	//사용할 생각
 	//pos.SetX(GameManager::GetInstance()->GetCheckPoint().first + width * 0.5);
 	//pos.SetY(GameManager::GetInstance()->GetCheckPoint().first - height);
@@ -65,6 +71,9 @@ void Player::Update(float Delta)
 	control.Update(*this);
 	//physics 업데이트
 	PhysicsUpdate(Delta);
+	//printf("bottom = %f", collider->GetY()+collider->GetHeight() * 0.5f);
+	//printf("right = %f\n", collider->GetX() + collider->GetWidth() * 0.5f);
+
 	GameManager::GetInstance()->SetPlayerPosX(x);
 	collider->SetX(x);
 	collider->SetY(y);
@@ -86,17 +95,26 @@ void Player::Render(Gdiplus::Graphics* _MemG)
 
 	int playerScreenWidth;
 	int playerScreenHeight;
-	if (state == eState_Die)
+
+	int screenPosY = y - (height * 0.5f) + 10;
+	switch (state)
 	{
+	case eState_Die:
 		playerScreenWidth = defines.playerWidth_Die;
-		playerScreenHeight = defines.playerHeight_Die;
-	}
-	else
-	{
+		playerScreenHeight = height;
+		break;
+	case eState_InteractionMove:
+		playerScreenWidth = width;
+		playerScreenHeight = defines.playerHeight_InterMove;
+		screenPosY += 20;
+		break;
+	default:
 		playerScreenWidth = width;
 		playerScreenHeight = height;
+		break;
 	}
-	Gdiplus::Rect screenPosRect(defines.screenSizeX / 2 - width * 0.5f, y - height *0.5f + 10, playerScreenWidth, height);
+
+	Gdiplus::Rect screenPosRect((defines.screenSizeX / 2) - (width * 0.5f), screenPosY, playerScreenWidth, playerScreenHeight);
 	
 
 
@@ -196,6 +214,13 @@ void Player::PhysicsUpdate(float Delta)
 		{
 			x += velocity * Delta;
 		}
+
+		break;
+	case eState_Jump:
+		Jump(bFlagLeft, terrainY, Delta);
+		break;
+	case eState_InteractionMove:
+		x += velocity * Delta;
 		y = y + GRAVITY * AddUpdateDelta;
 		//현재 Player의 Y좌표가 Terrain보다 크다면
 		if (y >= terrainY)
@@ -203,56 +228,15 @@ void Player::PhysicsUpdate(float Delta)
 			y = terrainY;
 		}
 		break;
-	case eState_Jump:
-		Jump(bFlagLeft, terrainY, Delta);
-		break;
 	case eState_Die:
 		y = y + GRAVITY * AddUpdateDelta;
 		if (y >= terrainY)
 		{
 			y = terrainY;
 		}
+
 		break;
-	
-#pragma region MyRegion
-		//pos.SetY(jumpInitPosY + velocity * cos(DEGTORAD(-45)) - 0.5f * GRAVITY * Delta * Delta);
-	//pos.SetX(jumpInitPosX + 10 * cos(DEGTORAD(-45)) * Delta);
-	//AddDelta += Delta;
-	//float AddVal = (0.5f * GRAVITY * AddDelta * AddDelta);
-	//pos.SetX(x +  velocity * 100 * Delta);
-	//pos.SetY(y + (-400.f * Delta) + AddVal);
-
-	//예시
-	/*if (y >= jumpInitPosY)
-	{
-		state = eState_Idle;
-		pos.SetY(jumpInitPosY);
-		AddDelta = 0;
-	}*/
-	//jumpInitPosX += 10.f * velocity * Delta;
-	//jumpInitPosY += (-200.f * Delta) + AddVal;
-#if defined VEL_DEBUG
-		for (int i = 0; i < 1000; ++i)
-		{
-#endif
-
-#if defined VEL_DEBUG
-			ptList.emplace_back(Gdiplus::PointF(jumpInitPosX, jumpInitPosY));
-		}
-#else
-			//pos.SetX(jumpInitPosX);
-			//pos.SetY(jumpInitPosY);
-#endif
-
-			//AddDelta += Delta;
-			//float AddVal = (0.5f * GRAVITY * AddDelta * AddDelta);
-			//
-			//pos.SetX(X + velocity * cos(DEGTORAD(45)) * Delta);
-			//pos.SetY(Y + (-1000 * Delta) + AddVal);
-#pragma endregion
 	}
-		/*collider->SetY(y);
-		collider->SetX(x);*/
 }
 
 
@@ -264,28 +248,69 @@ EPlayerState Player::GetState()
 void Player::Collision(Object* obj)
 {
 
-	if (obj->GetTag() != eTag_Collider)
+	if (obj->GetTag() == eTag_Collider || obj->GetTag() == eTag_Trap)
+	{
+		int objLeft = obj->GetCollider()->GetX() - obj->GetCollider()->GetWidth() * 0.5f;
+		int objRight = obj->GetCollider()->GetX() + obj->GetCollider()->GetWidth() * 0.5f;
+		int objTop = obj->GetCollider()->GetY() - obj->GetCollider()->GetHeight() * 0.5f;
+		int objBottom = obj->GetCollider()->GetY() + obj->GetCollider()->GetHeight() * 0.5f;
+
+		int pLeft = GetCollider()->GetX() - GetCollider()->GetWidth() * 0.5f;
+		int pRight = GetCollider()->GetX() + GetCollider()->GetWidth() * 0.5f;
+		int pTop = GetCollider()->GetY() - GetCollider()->GetHeight() * 0.5f;
+		int pBottom = GetCollider()->GetY() + GetCollider()->GetHeight() * 0.5f;
+
+
+		switch(state)
+		{
+		case eState_Die:
+			break;
+		case eState_Run:
+			if (pLeft < objRight && abs(objRight - pLeft) < width)
+			{
+				x = objRight + width * 0.5f;
+			}
+			else if (pRight > objLeft && abs(pRight - objLeft) < width)
+			{
+				x = objLeft - width * 0.5f;
+			}
+			break;
+		case eState_Idle:
+			if (obj->GetTag() == eTag_Trap)
+			{
+				if (GetAsyncKeyState(VK_CONTROL) & 0x8001) //상호작용
+				{
+					ChangeState(eState_Interaction);
+				}
+			}
+			break;
+		case eState_Interaction:
+			if (GetAsyncKeyState(VK_CONTROL) & 0x8001)
+			{
+
+			}
+			else
+			{
+				ChangeState(eState_Idle);
+			}
+			break;
+		case eState_InteractionMove:
+			if (GetAsyncKeyState(VK_CONTROL) & 0x8001)
+			{
+
+			}
+			else
+			{
+				ChangeState(eState_Idle);
+			}
+			break;
+		default:
+			break;
+		}
+	}
+	else
 	{
 		return;
-	}
-
-	int objLeft = obj->GetCollider()->GetX() - obj->GetCollider()->GetWidth() * 0.5f;
-	int objRight = obj->GetCollider()->GetX() + obj->GetCollider()->GetWidth() * 0.5f;
-	int objTop = obj->GetCollider()->GetY() - obj->GetCollider()->GetHeight() * 0.5f;
-	int objBottom = obj->GetCollider()->GetY() + obj->GetCollider()->GetHeight() * 0.5f;
-
-	int pLeft = GetCollider()->GetX() - GetCollider()->GetWidth() * 0.5f;
-	int pRight = GetCollider()->GetX() + GetCollider()->GetWidth() * 0.5f;
-	int pTop = GetCollider()->GetY() - GetCollider()->GetHeight() * 0.5f;
-	int pBottom = GetCollider()->GetY() + GetCollider()->GetHeight() * 0.5f;
-	
-	if (pLeft < objRight && abs(objRight - pLeft) < width)
-	{
-		x = objRight + width * 0.5f;
-	}
-	else if (pRight > objLeft && abs(pRight-objLeft) < width)
-	{
-		x = objLeft - width * 0.5f;
 	}
 }
 
@@ -306,4 +331,24 @@ void Player::InitVelocity()
 void Player::PlayerDie()
 {
 	ChangeState(eState_Die);
+}
+
+bool Player::GetbFlagInteraction()
+{
+	return bFlagInteraction;
+}
+
+void Player::SetbFlagInteraction(bool _bFlag)
+{
+	bFlagInteraction = _bFlag;
+}
+
+void Player::MoveReady()
+{
+	ChangeState(eState_InteractionMove);
+}
+
+void Player::SetVelocity(float _velocity)
+{
+	velocity = _velocity;
 }

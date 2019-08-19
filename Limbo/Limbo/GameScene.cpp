@@ -55,9 +55,9 @@ void GameScene::Init()
 	ColliderObject *cObject2 = new ColliderObject(ETag::eTag_Collider, 3270, 400, 47, 32);
 	ColliderObject *cObject3 = new ColliderObject(ETag::eTag_Collider, 3890, 350, 60, 36);
 	ColliderObject *cObject4 = new ColliderObject(ETag::eTag_Collider, 9478, 360, 65, 40);
-	Niddle* cObject5 = new Niddle(ETag::eTag_Trap, 1360, 480, 80, 72);
-	Trap* cObject6 = new Trap(ETag::eTag_Trap, 2864, 404, 150, 70);
-	Trap* cObject7 = new Trap(ETag::eTag_Trap, 3016,417,140,44);
+	Niddle* cObject5 = new Niddle(ETag::eTag_Niddle, 1360, 480, 80, 72);
+	Trap* cObject6 = new Trap(ETag::eTag_Trap, 2864, 350, 150, 70);
+	//Trap* cObject7 = new Trap(ETag::eTag_Trap, 3016,417,140,44);
 
 	objectVec.emplace_back(cObject);
 	objectVec.emplace_back(cObject2);
@@ -176,23 +176,25 @@ bool GameScene::CollisionCheck(Object* obj1, Object* obj2)
 
 	//AABB
 	//스크린 좌표로는 y축이 아래로 커지기 때문에
-	if (obj1_Top >= obj2_Bottom )
-	{
-		return false;
-	}
-	if (obj1_Bottom <= obj2_Top)
-	{
-		return false;
-	}
-	if (obj1_Left >= obj2_Right)
-	{
-		return false;
-	}
-	if (obj1_Right <= obj2_Left)
-	{
-		return false;
-	}
-
+	//if (obj1_Top >= obj2_Bottom )
+	//{
+	//	return false;
+	//}
+	//if (obj1_Bottom <= obj2_Top)
+	//{
+	//	return false;
+	//}
+	//if (obj1_Left >= obj2_Right)
+	//{
+	//	return false;
+	//}
+	//if (obj1_Right <= obj2_Left)
+	//{
+	//	return false;
+	//}
+	if (obj1_Right < obj2_Left || obj1_Left > obj2_Right) return false;
+	if (obj1_Top > obj2_Bottom || obj1_Bottom < obj2_Top) return false;
+	
 	return true;
 }
 

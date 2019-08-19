@@ -8,6 +8,8 @@
 #include "Animation_Run.h"
 #include "Animation_Jump.h"
 #include "Animation_Die.h"
+#include "Animation_InteractionMove.h"
+#include "Animation_Interaction.h"
 #include "PlayerControlComponent.h"
 #include "BoxCollider2D.h"
 
@@ -31,9 +33,15 @@ public:
 	//void CheckCollision(Object &objVec);
 	void Collision(Object*);
 	void PlayerDie();
+
+	bool GetbFlagInteraction();
+	void SetbFlagInteraction(bool _bFlag);
+	void MoveReady();
+	void SetVelocity(float _velocity);
 private:
 	//Component
 	PlayerControlComponent control;
+	bool bFlagInteraction;
 	//BoxCollider2D collider;
 	//Component* collider;
 

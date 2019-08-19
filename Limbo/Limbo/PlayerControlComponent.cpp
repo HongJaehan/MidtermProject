@@ -35,6 +35,9 @@ void PlayerControlComponent::Update(Player& player)
 			break;
 		case eState_Interaction:
 			break;
+		case eState_InteractionMove:
+			player.SetVelocity(-70);
+			break;
 		default:
 			break;
 		}
@@ -60,6 +63,9 @@ void PlayerControlComponent::Update(Player& player)
 			break;
 		case eState_Interaction:
 			break;
+		case eState_InteractionMove:
+			player.SetVelocity(70);
+			break;
 		default:
 			break;
 		}
@@ -73,13 +79,9 @@ void PlayerControlComponent::Update(Player& player)
 			break;
 		}
 	}
-	else if (GetAsyncKeyState(VK_CONTROL) & 0x8001) //상호작용
-	{
-
-	}
 	else //Idle
 	{
-		if (player.GetState()!= eState_Jump && player.GetState()!= eState_Die)
+		if (player.GetState()!= eState_Jump && player.GetState()!= eState_Die && player.GetState() != eState_Interaction && player.GetState() != eState_InteractionMove)
 		{
 			player.ChangeState(eState_Idle);
 			player.InitVelocity();

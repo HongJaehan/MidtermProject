@@ -32,14 +32,13 @@ void Animation_Trap::Update(Gdiplus::Rect* rect, float Delta, bool action)
 		return;
 	}
 
-	addDelta += Delta;
+	//addDelta += Delta;
 
-	if (addDelta > 0.1f)
-	{
-		addDelta = 0;
-		++frame;
-	}
-
+	//if (addDelta > 0.01f)
+	//{
+	//	addDelta = 0;
+	//}
+	++frame;
 	if (frame > XMLRect.size() - 1)
 	{
 		frame = XMLRect.size() - 1;
