@@ -38,7 +38,7 @@ Player::Player()
 
 	int screenSizeWidth = defines.screenSizeX;
 	//x = screenSizeWidth * 0.5f;
-	x = 4800;
+	x = 6000;
 	y = 450;
 
 	collider = new BoxCollider2D(x, y, width, height, false);
@@ -246,8 +246,8 @@ EPlayerState Player::GetState()
 
 void Player::Collision(Object* obj)
 {
-
-	if (obj->GetTag() == eTag_Collider || obj->GetTag() == eTag_Trap)
+	//Trigger가 아닐경우 수행
+	if (!obj->GetCollider()->IsTrigger())
 	{
 		int objLeft = obj->GetCollider()->GetX() - obj->GetCollider()->GetWidth() * 0.5f;
 		int objRight = obj->GetCollider()->GetX() + obj->GetCollider()->GetWidth() * 0.5f;
@@ -275,7 +275,7 @@ void Player::Collision(Object* obj)
 			}
 			break;
 		case eState_Idle:
-			if (obj->GetTag() == eTag_Trap)
+			if (obj->GetTag() == eTag_Trap || obj->GetTag() == eTag_Corpse)
 			{
 				if (GetAsyncKeyState(VK_CONTROL) & 0x8001) //상호작용
 				{

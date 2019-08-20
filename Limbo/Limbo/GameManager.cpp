@@ -29,7 +29,8 @@ GameManager::GameManager()
 	checkPointVec.emplace_back(4291);
 	checkPointVec.emplace_back(7993);
 
-	
+	//Object들의 XML데이터를 objectXMLDic에 저장
+	AssetManager::GetInstance()->SetXMLData(objectXMLDic, "XML\\Object.xml");
 }
 
 GameManager::~GameManager()
@@ -48,13 +49,21 @@ void GameManager::ConfirmCheckPoint(int _playerPosX)
 	for (int i = 0; i < checkPointVec.size(); ++i)
 	{
 		if (_playerPosX > checkPointVec[i])
-			nowCheckPoint = i;
-		if (nowCheckPoint == 3)
 		{
-			int xxx;
+			if (nowCheckPoint < i)
+			{
+				nowCheckPoint = i;
+			}
 		}
+		
 	}
 }
+
+Gdiplus::Rect GameManager::GetObjectRect(EObjectNum _objNum)
+{
+	return objectXMLDic[_objNum];
+}
+
 
 int GameManager::GetTerrainData(int _playerPosX)
 {

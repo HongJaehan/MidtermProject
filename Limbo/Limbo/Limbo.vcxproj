@@ -214,6 +214,7 @@
     <ClInclude Include="common.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="ControlComponent.h" />
+    <ClInclude Include="Corpse.h" />
     <ClInclude Include="CVector.h" />
     <ClInclude Include="EndScene.h" />
     <ClInclude Include="EventManager.h" />
@@ -260,6 +261,7 @@
     <ClCompile Include="ColliderObject.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="ControlComponent.cpp" />
+    <ClCompile Include="Corpse.cpp" />
     <ClCompile Include="CVector.cpp" />
     <ClCompile Include="EndScene.cpp" />
     <ClCompile Include="EventManager.cpp" />

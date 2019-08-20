@@ -9,6 +9,7 @@
 #include "Trap.h"
 #include "Spider.h"
 #include "RotateRock.h"
+#include "Corpse.h"
 
 class GameScene :	public Scene
 {

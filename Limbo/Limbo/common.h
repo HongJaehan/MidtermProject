@@ -19,7 +19,8 @@ enum ETag
 	eTag_AutoMovement, // id = 4
 	eTag_Niddle,
 	eTag_Spider,
-	eTag_Rock
+	eTag_Rock,
+	eTag_Corpse
 };
 
 static enum EPlayerState 
@@ -57,6 +58,22 @@ public:
 	std::string Player = "Player.png";
 };
 
+enum EObjectNum
+{
+	eCorpse = 0,
+	eGeer = 1,
+	eGrass = 2,
+	eMovement1 = 3,
+	eMovement2 = 4,
+	eMovement3 = 5,
+	eOwl = 6,
+	eRabbit = 7,
+	eRotateRock = 8,
+	eRock1 = 9,
+	eRock2 = 10,
+	eSquareTrap = 11,
+	eFallTrap = 12
+};
 struct Defines
 {
 public:

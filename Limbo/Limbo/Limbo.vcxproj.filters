@@ -177,6 +177,9 @@
     <ClInclude Include="RotateRock.h">
       <Filter>소스 파일\Object</Filter>
     </ClInclude>
+    <ClInclude Include="Corpse.h">
+      <Filter>소스 파일\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssetManager.cpp">
@@ -297,6 +300,9 @@
       <Filter>소스 파일\Animation</Filter>
     </ClCompile>
     <ClCompile Include="RotateRock.cpp">
+      <Filter>소스 파일\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Corpse.cpp">
       <Filter>소스 파일\Object</Filter>
     </ClCompile>
   </ItemGroup>

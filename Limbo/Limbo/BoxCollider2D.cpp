@@ -48,3 +48,8 @@ void BoxCollider2D::SetY(int _y)
 {
 	y = _y;
 }
+
+bool BoxCollider2D::IsTrigger()
+{
+	return trigger;
+}

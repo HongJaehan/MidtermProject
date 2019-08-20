@@ -73,8 +73,27 @@ void AssetManager::SetXMLData(std::vector<Gdiplus::Rect> &Rects, char* fileName)
 	for (tinyxml2::XMLElement* element = atlasInfo; element != nullptr; element = element->NextSiblingElement())
 	{
 		Gdiplus::Rect rect(Gdiplus::Rect(element->IntAttribute("x"), element->IntAttribute("y"),
-			element->IntAttribute("w"), element->IntAttribute("h")));
+			element->IntAttribute("w"), element->IntAttribute("h")) );
 	Rects.emplace_back(rect);
 	}
 
+}
+
+void AssetManager::SetXMLData(std::unordered_map<int, Gdiplus::Rect>& dic, char* fileName)
+{
+	doc->LoadFile(fileName);
+
+	if (doc == nullptr) return;
+
+	tinyxml2::XMLElement* Root = doc->RootElement();
+	//tinyxml2::XMLElement* TextureAtlasInfo = Root->FirstChildElement("TextureAtlas");
+	tinyxml2::XMLElement* atlasInfo = Root->FirstChildElement("sprite");
+
+	for (tinyxml2::XMLElement* element = atlasInfo; element != nullptr; element = element->NextSiblingElement())
+	{
+		int key = element->IntAttribute("num");
+		Gdiplus::Rect rect(element->IntAttribute("x"), element->IntAttribute("y"),
+			element->IntAttribute("w"), element->IntAttribute("h"));
+		dic.insert(std::make_pair(key,rect));
+	}
 }

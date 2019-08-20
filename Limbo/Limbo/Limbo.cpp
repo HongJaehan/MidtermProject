@@ -305,7 +305,6 @@ UINT CLimboApp::FuncThread(LPVOID pParam)
 
 			if (StaticTick > 1000)
 			{
-				printf("dddddddddd: %d \n", CallCount);
 				CallCount = 0;
 				StaticTick = 0;
 			}

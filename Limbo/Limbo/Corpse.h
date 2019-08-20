@@ -1,24 +1,23 @@
 #pragma once
 #include "object.h"
-class RotateRock :
+class Corpse :
 	public Object
 {
 public:
-	RotateRock();
-	RotateRock(ETag _tag, int _x, int _y, int _width, int _height);
-	~RotateRock();
-
+	Corpse();
+	Corpse(ETag _tag, int _x, int _y, int _width, int _height);
+	~Corpse();
 	void Update(float Delta);
 	void Render(Gdiplus::Graphics* MemG);
-	void Collision(Object*);
+	void Collision(Object* obj);
 	void Init();
 private:
+
 	int screenPosX;
 	int screenPosY;
-	int initPosX;
-	int initPosY;
+	int InitPosX;
+	int InitPosY;
 	Gdiplus::Image* img;
-	ERotateRockState state;
 	Gdiplus::Rect* xmlRect;
 };
 

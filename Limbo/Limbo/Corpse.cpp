@@ -1,0 +1,82 @@
+#include "pch.h"
+#include "Corpse.h"
+
+Corpse::Corpse()
+{
+}
+
+Corpse::Corpse(ETag _tag, int _x, int _y, int _width, int _height)
+{
+
+	img = AssetManager().GetInstance()->GetImage(TEXT("Object.png")).lock().get();
+	xmlRect = new Gdiplus::Rect(GameManager::GetInstance()->GetObjectRect(EObjectNum::eCorpse));
+	tag = _tag;
+	x = _x;
+	y = _y;
+	width = _width;
+	height = _height;
+	screenPosX = x - width * 0.5;
+	screenPosY = y - height * 0.5;
+	InitPosX = x;
+	InitPosY = y;
+	enable = false;
+
+	collider = new BoxCollider2D(_x, _y, _width, _height, false);
+
+	EventManager::GetInstance()->AddEvent(std::bind(&Corpse::Init, this), EEvent::eEvent_ResetGameScene);
+}
+
+Corpse::~Corpse()
+{
+}
+
+void Corpse::Update(float Delta)
+{
+	y = GameManager::GetInstance()->GetTerrainData(x) - height * 0.5f;
+	collider->SetX(x);
+	collider->SetY(y - height * 0.5f);
+}
+
+void Corpse::Render(Gdiplus::Graphics* MemG)
+{
+	Gdiplus::Rect rect(0, 0, width, height);
+	Gdiplus::Bitmap bm(width, height, PixelFormat32bppARGB);
+	Gdiplus::Graphics temp(&bm);
+	temp.DrawImage(img, rect,
+		xmlRect->X, xmlRect->Y, xmlRect->Width, xmlRect->Height, Gdiplus::Unit::UnitPixel, nullptr, 0, nullptr);
+
+	int drawToScreenPosX = (x - width * 0.5f) - (GameManager::GetInstance()->GetPlayerPosX() - defines.screenSizeX * 0.5f);
+
+	Gdiplus::Rect rect2(drawToScreenPosX, y - (height * 0.5f), width, height);
+	MemG->DrawImage(&bm, rect2);
+
+}
+void Corpse::Collision(Object* obj)
+{
+	//Player* _obj = dynamic_cast<Player*>(obj);
+	//if (obj->GetCollider() == nullptr)
+	//{
+	//	return;
+	//}
+
+	//if (GetCollider() == nullptr)
+	//{
+	//	return;
+	//}
+	//int playerLeft = obj->GetCollider()->GetX() - obj->GetCollider()->GetWidth() * 0.5f;
+	//int playerRight = obj->GetCollider()->GetX() + obj->GetCollider()->GetWidth() * 0.5f;
+	//int playerTop = obj->GetCollider()->GetY() - obj->GetCollider()->GetHeight() * 0.5f;
+	//int playerBottom = obj->GetCollider()->GetY() + obj->GetCollider()->GetHeight() * 0.5f;
+
+	//int objLeft = collider->GetX() - collider->GetWidth() * 0.5f;
+	//int objRight = collider->GetX() + collider->GetWidth() * 0.5f;
+	//int objTop = collider->GetY() - collider->GetHeight() * 0.5f;
+	//int objBottom = collider->GetY() + collider->GetHeight() * 0.5f;
+
+}
+
+void Corpse::Init()
+{
+	x = InitPosX;
+	y = InitPosY;
+}
