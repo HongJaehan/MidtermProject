@@ -1,0 +1,172 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(438,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+  pch.cpp
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\common.h(33,2): warning C4091:  'static ': 변수를 선언하지 않으면 'EPlayerState' 왼쪽은 무시됩니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\common.h(58,2): warning C4091:  'static ': 변수를 선언하지 않으면 'SFileImgName' 왼쪽은 무시됩니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\AssetManager.h(24,38): warning C4356:  'Singleton<AssetManager>::instance': 정적 데이터 멤버는 파생 클래스를 통해 초기화할 수 없습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\SceneManager.h(29,38): warning C4356:  'Singleton<SceneManager>::instance': 정적 데이터 멤버는 파생 클래스를 통해 초기화할 수 없습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\GameManager.h(29,36): warning C4356:  'Singleton<GameManager>::instance': 정적 데이터 멤버는 파생 클래스를 통해 초기화할 수 없습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\EventManager.h(17,38): warning C4356:  'Singleton<EventManager>::instance': 정적 데이터 멤버는 파생 클래스를 통해 초기화할 수 없습니다.
+  Animation.cpp
+  Animation_Die.cpp
+  Animation_Idle.cpp
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Animation_Die.cpp(32,12): warning C4018:  '>': signed 또는 unsigned가 일치하지 않습니다.
+  Animation_Interaction.cpp
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Animation_Idle.cpp(29,12): warning C4018:  '>': signed 또는 unsigned가 일치하지 않습니다.
+  Animation_InteractionMove.cpp
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Animation_Interaction.cpp(29,12): warning C4018:  '>': signed 또는 unsigned가 일치하지 않습니다.
+  Animation_Jump.cpp
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Animation_InteractionMove.cpp(29,12): warning C4018:  '>': signed 또는 unsigned가 일치하지 않습니다.
+  Animation_Logo.cpp
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Animation_Jump.cpp(29,12): warning C4018:  '>': signed 또는 unsigned가 일치하지 않습니다.
+  Animation_Run.cpp
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Animation_Logo.cpp(28,12): warning C4018:  '>': signed 또는 unsigned가 일치하지 않습니다.
+  Animation_Spider.cpp
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Animation_Run.cpp(28,12): warning C4018:  '>': signed 또는 unsigned가 일치하지 않습니다.
+  Animation_Trap.cpp
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Animation_Spider.cpp(41,13): warning C4018:  '>=': signed 또는 unsigned가 일치하지 않습니다.
+  AssetManager.cpp
+  Background.cpp
+  BoxCollider2D.cpp
+  ChildView.cpp
+  ColliderComponent.cpp
+  ColliderObject.cpp
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Animation_Trap.cpp(41,12): warning C4018:  '>': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\ColliderObject.cpp(18,18): warning C4244:  '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\ColliderObject.cpp(19,17): warning C4244:  '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Component.cpp
+  ControlComponent.cpp
+  CVector.cpp
+  EndScene.cpp
+  컴파일하고 있습니다...
+  EventManager.cpp
+  GameManager.cpp
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\ColliderObject.cpp(37,23): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\GameManager.cpp(48,20): warning C4018:  '<': signed 또는 unsigned가 일치하지 않습니다.
+  GameScene.cpp
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\GameManager.cpp(54,8): warning C4101:  'xxx' :참조되지 않은 지역 변수입니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\GameScene.cpp(98,17): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\GameScene.cpp(99,18): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\GameScene.cpp(104,16): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\GameScene.cpp(105,15): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\GameScene.cpp(168,15): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\GameScene.cpp(169,18): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\GameScene.cpp(170,16): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\GameScene.cpp(171,17): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\GameScene.cpp(173,15): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\GameScene.cpp(174,18): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\GameScene.cpp(175,16): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  IntroScene.cpp
+  Limbo.cpp
+  MainFrm.cpp
+  Niddle.cpp
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\GameScene.cpp(176,17): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Niddle.cpp(18,17): warning C4244:  '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Niddle.cpp(19,17): warning C4244:  '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  object.cpp
+  PhysicsComponent.cpp
+  Player.cpp
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Niddle.cpp(35,23): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Player.cpp(46,23): warning C4244:  '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Player.cpp(47,23): warning C4244:  '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Player.cpp(99,17): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Player.cpp(118,56): warning C4244:  '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Player.cpp(155,25): warning C4244:  '-=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Player.cpp(159,25): warning C4244:  '+=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Player.cpp(162,26): warning C4244:  '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Player.cpp(195,15): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Player.cpp(199,9): warning C4244:  '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Player.cpp(209,9): warning C4244:  '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Player.cpp(213,25): warning C4244:  '-=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Player.cpp(217,25): warning C4244:  '+=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Player.cpp(232,9): warning C4244:  '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Player.cpp(252,15): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Player.cpp(253,16): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Player.cpp(254,14): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Player.cpp(255,17): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Player.cpp(257,13): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Player.cpp(258,14): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Player.cpp(259,12): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Player.cpp(260,15): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Player.cpp(270,18): warning C4244:  '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  PlayerControlComponent.cpp
+  Position.cpp
+  RotateRock.cpp
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Player.cpp(274,17): warning C4244:  '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\RotateRock.cpp(17,17): warning C4244:  '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\RotateRock.cpp(18,17): warning C4244:  '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\RotateRock.cpp(50,19): warning C4244:  '-=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\RotateRock.cpp(53,52): warning C4244:  '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\RotateRock.cpp(60,23): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Scene.cpp
+  SceneManager.cpp
+  Spider.cpp
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\RotateRock.cpp(66,41): warning C4244:  '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Spider.cpp(15,17): warning C4244:  '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Spider.cpp(16,17): warning C4244:  '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Spider.cpp(23,55): warning C4244:  '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Spider.cpp(62,23): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Spider.cpp(73,58): warning C4244:  '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Spider.cpp(89,19): warning C4244:  '-=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Terrain.cpp
+  Trap.cpp
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Spider.cpp(105,20): warning C4244:  '+=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Trap.cpp(18,17): warning C4244:  '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Trap.cpp(19,17): warning C4244:  '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Trap.cpp(40,51): warning C4244:  '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Trap.cpp(42,18): warning C4244:  '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Trap.cpp(53,23): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Trap.cpp(65,54): warning C4244:  '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Trap.cpp(89,17): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Trap.cpp(90,18): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Trap.cpp(91,16): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Trap.cpp(92,19): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Trap.cpp(94,14): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Trap.cpp(95,15): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Trap.cpp(96,13): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  XMLPaser.cpp
+C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Trap.cpp(97,16): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+Animation.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+Animation_Die.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+Animation_Idle.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+Animation_Interaction.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+Animation_InteractionMove.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+Animation_Jump.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+Animation_Logo.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+Animation_Run.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+Animation_Spider.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+Animation_Trap.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+AssetManager.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+Background.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+BoxCollider2D.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+ChildView.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+ColliderComponent.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+ColliderObject.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+Component.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+ControlComponent.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+CVector.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+EndScene.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+EventManager.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+GameManager.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+GameScene.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+IntroScene.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+Limbo.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+MainFrm.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+Niddle.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+object.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+pch.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+PhysicsComponent.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+Player.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+PlayerControlComponent.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+Position.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+RotateRock.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+Scene.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+SceneManager.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+Spider.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+Terrain.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+Trap.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+XMLPaser.obj : warning LNK4258: '/entry:WinMainCRTStartup' 지시문은 '/ENTRY:wWinMainCRTStartup' 스위치와 호환되지 않습니다. 무시됩니다.
+  코드를 생성하고 있습니다.
+  Previous IPDB not found, fall back to full compilation.
+  All 1685 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  코드를 생성했습니다.
+  Limbo.vcxproj -> C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\..\Asset\Limbo.exe

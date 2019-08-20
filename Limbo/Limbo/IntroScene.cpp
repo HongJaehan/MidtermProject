@@ -11,6 +11,8 @@ IntroScene::IntroScene()
 	bm2 = new Gdiplus::Bitmap(GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), PixelFormat32bppARGB);
 	imgAttr = new Gdiplus::ImageAttributes();
 	IntroAnimation = new Animation_Logo();
+
+	sndPlaySound(TEXT("Sound\\White_Island_OST_Isle_of_Wonder.wav"), SND_ASYNC | SND_LOOP);
 }
 
 IntroScene::~IntroScene()
@@ -29,6 +31,7 @@ void IntroScene::Update(float delta)
 {
 	if (GetAsyncKeyState(VK_SPACE) & 0x1001)
 	{
+		sndPlaySound(NULL, SND_ASYNC);
 		SceneManager::GetInstance()->MoveNextScene();
 	}
 

@@ -25,6 +25,7 @@
 #include "SceneManager.h"
 #include "GameManager.h"
 #include "EventManager.h"
+#include <MMSystem.h>
 
-
+#pragma comment(lib, "winmm.lib")
 #endif //PCH_H
