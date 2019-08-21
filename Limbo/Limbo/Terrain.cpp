@@ -48,3 +48,8 @@ void Terrain::Collision(Object* obj)
 {
 
 }
+
+bool Terrain::HasInteraction()
+{
+	return false;
+}

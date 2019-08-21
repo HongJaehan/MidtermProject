@@ -43,3 +43,8 @@ void ColliderObject::Collision(Object* obj)
 {
 
 }
+
+bool ColliderObject::HasInteraction()
+{
+	return false;
+}

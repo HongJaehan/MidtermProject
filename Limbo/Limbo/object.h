@@ -22,6 +22,8 @@ public:
 	ETag GetTag();
 	BoxCollider2D* GetCollider();
 	bool HasCollider();
+	
+	virtual bool HasInteraction() = 0;
 //	virtual std::weak_ptr<Gdiplus::Image> GetImage();
 
 protected:

@@ -14,6 +14,7 @@ public:
 	void Up(float Delta);
 	void Down(float Delta);
 	void Init();
+	bool HasInteraction();
 private:
 	Gdiplus::Image* colImg;
 	Gdiplus::Rect atlasRect;

@@ -20,8 +20,9 @@ Corpse::Corpse(ETag _tag, int _x, int _y, int _width, int _height)
 	InitPosX = x;
 	InitPosY = y;
 	enable = false;
-
-	collider = new BoxCollider2D(_x, _y, _width, _height, false);
+	bFlagOnEvent = false;
+	cutRopeEventPos = 6747;
+	collider = new BoxCollider2D(_x, _y, _width-50, _height-10, false);
 
 	EventManager::GetInstance()->AddEvent(std::bind(&Corpse::Init, this), EEvent::eEvent_ResetGameScene);
 }
@@ -32,9 +33,19 @@ Corpse::~Corpse()
 
 void Corpse::Update(float Delta)
 {
-	y = GameManager::GetInstance()->GetTerrainData(x) - height * 0.5f;
+	y = GameManager::GetInstance()->GetTerrainData(x) - (height * 0.5f);
 	collider->SetX(x);
-	collider->SetY(y - height * 0.5f);
+	collider->SetY(y);
+
+	if (bFlagOnEvent == false)
+	{
+		if (x > cutRopeEventPos)
+		{
+			bFlagOnEvent = true;
+			CutRope();
+		}
+	}
+	//printf("dx = %d\n" ,x);
 }
 
 void Corpse::Render(Gdiplus::Graphics* MemG)
@@ -47,31 +58,14 @@ void Corpse::Render(Gdiplus::Graphics* MemG)
 
 	int drawToScreenPosX = (x - width * 0.5f) - (GameManager::GetInstance()->GetPlayerPosX() - defines.screenSizeX * 0.5f);
 
-	Gdiplus::Rect rect2(drawToScreenPosX, y - (height * 0.5f), width, height);
+	//Gdiplus::Rect rect2(drawToScreenPosX, y - (height * 0.5f), width, height);
+	Gdiplus::Rect rect2(drawToScreenPosX, y, width, height);
+
 	MemG->DrawImage(&bm, rect2);
 
 }
 void Corpse::Collision(Object* obj)
 {
-	//Player* _obj = dynamic_cast<Player*>(obj);
-	//if (obj->GetCollider() == nullptr)
-	//{
-	//	return;
-	//}
-
-	//if (GetCollider() == nullptr)
-	//{
-	//	return;
-	//}
-	//int playerLeft = obj->GetCollider()->GetX() - obj->GetCollider()->GetWidth() * 0.5f;
-	//int playerRight = obj->GetCollider()->GetX() + obj->GetCollider()->GetWidth() * 0.5f;
-	//int playerTop = obj->GetCollider()->GetY() - obj->GetCollider()->GetHeight() * 0.5f;
-	//int playerBottom = obj->GetCollider()->GetY() + obj->GetCollider()->GetHeight() * 0.5f;
-
-	//int objLeft = collider->GetX() - collider->GetWidth() * 0.5f;
-	//int objRight = collider->GetX() + collider->GetWidth() * 0.5f;
-	//int objTop = collider->GetY() - collider->GetHeight() * 0.5f;
-	//int objBottom = collider->GetY() + collider->GetHeight() * 0.5f;
 
 }
 
@@ -79,4 +73,14 @@ void Corpse::Init()
 {
 	x = InitPosX;
 	y = InitPosY;
+}
+
+bool Corpse::HasInteraction()
+{
+	return true;
+}
+
+void Corpse::CutRope()
+{
+	EventManager::GetInstance()->OnEvent(eEvent_CutRope);
 }

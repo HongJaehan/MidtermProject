@@ -117,3 +117,8 @@ void Spider::Init()
 	x = initPosX;
 	y = initPosY;
 }
+
+bool Spider::HasInteraction()
+{
+	return false;
+}

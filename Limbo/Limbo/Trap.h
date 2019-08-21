@@ -13,6 +13,7 @@ public:
 	void Render(Gdiplus::Graphics* MemG);
 	void Collision(Object* obj);
 	void Init();
+	bool HasInteraction();
 private:
 	Gdiplus::Image* colImg;
 	Gdiplus::Rect atlasRect;

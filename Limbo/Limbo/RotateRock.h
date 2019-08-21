@@ -12,6 +12,7 @@ public:
 	void Render(Gdiplus::Graphics* MemG);
 	void Collision(Object*);
 	void Init();
+	bool HasInteraction();
 private:
 	int screenPosX;
 	int screenPosY;
@@ -19,6 +20,9 @@ private:
 	int initPosY;
 	Gdiplus::Image* img;
 	ERotateRockState state;
+	Gdiplus::Bitmap* bm;
 	Gdiplus::Rect* xmlRect;
+	int minX;
+	int rotateNum;
 };
 

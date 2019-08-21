@@ -38,7 +38,7 @@ Player::Player()
 
 	int screenSizeWidth = defines.screenSizeX;
 	//x = screenSizeWidth * 0.5f;
-	x = 6000;
+	x = 9500;
 	y = 450;
 
 	collider = new BoxCollider2D(x, y, width, height, false);
@@ -67,6 +67,7 @@ Player::~Player()
 
 void Player::Update(float Delta)
 {
+
 	//Component Update
 	control.Update(*this);
 	//physics 업데이트
@@ -81,6 +82,7 @@ void Player::Update(float Delta)
 	//현재 Animation의 image를 XML정보에 맞춰 저장해줌.
 	playerAnimationList[state]->Update(&atlasRect,Delta);
 
+	printf("x = %d\n", x);
 }
 
 void Player::Render(Gdiplus::Graphics* _MemG)
@@ -97,6 +99,7 @@ void Player::Render(Gdiplus::Graphics* _MemG)
 	int playerScreenHeight;
 
 	int screenPosY = y - (height * 0.5f) + 10;
+
 	switch (state)
 	{
 	case eState_Die:
@@ -196,7 +199,7 @@ void Player::PhysicsUpdate(float Delta)
 	switch (state)
 	{
 	case eState_Idle:
-		y = y + GRAVITY * AddUpdateDelta;
+		y = y + GRAVITY * AddUpdateDelta + 1;
 		velocity = INIT_velocity; //속도 초기화
 		AddUpdateDelta = 0.0f;
 		//현재 Player의 Y좌표가 Terrain보다 크다면
@@ -275,41 +278,21 @@ void Player::Collision(Object* obj)
 			}
 			break;
 		case eState_Idle:
-			if (obj->GetTag() == eTag_Trap || obj->GetTag() == eTag_Corpse)
+			if (pBottom > objTop && abs(pBottom - objTop) < height)
 			{
-				if (GetAsyncKeyState(VK_CONTROL) & 0x8001) //상호작용
-				{
-					ChangeState(eState_Interaction);
-				}
+				y = objTop - height * 0.5f;
 			}
+			break;
+		case eState_Jump:
+			if (pBottom > objTop && abs(pBottom - objTop) < height)
+			{
+				y = objTop - height * 0.5f;
+			}
+			ChangeState(eState_Idle);
 			break;
 		case eState_Interaction:
-			if (GetAsyncKeyState(VK_CONTROL) & 0x8001)
-			{
-
-			}
-			else
-			{
-				ChangeState(eState_Idle);
-			}
 			break;
 		case eState_InteractionMove:
-			if (GetAsyncKeyState(VK_CONTROL) & 0x8001)
-			{
-				if (GetAsyncKeyState(VK_RIGHT) & 0x8001)
-				{
-					x += 1;
-					obj->SetX(obj->GetPosX() + 1);
-				}else if (GetAsyncKeyState(VK_LEFT) & 0x8001)
-				{
-					x -= 1;
-					obj->SetX(obj->GetPosX() - 1);
-				}
-			}
-			else
-			{
-				ChangeState(eState_Idle);
-			}
 			break;
 		default:
 			break;
@@ -358,4 +341,57 @@ void Player::MoveReady()
 void Player::SetVelocity(float _velocity)
 {
 	velocity = _velocity;
+}
+
+bool Player::HasInteraction()
+{
+	return false;
+}
+
+void Player::InInteractionDistance(Object* obj)
+{
+	switch (state)
+	{
+	case eState_Die:
+		break;
+	case eState_Run:
+		break;
+	case eState_Idle:
+			if (GetAsyncKeyState(VK_CONTROL) & 0x8001) //상호작용
+			{
+				ChangeState(eState_Interaction);
+			}
+		break;
+	case eState_Interaction:
+		if (GetAsyncKeyState(VK_CONTROL) & 0x8001)
+		{
+
+		}
+		else
+		{
+			ChangeState(eState_Idle);
+		}
+		break;
+	case eState_InteractionMove:
+		if (GetAsyncKeyState(VK_CONTROL) & 0x8001)
+		{
+			if (GetAsyncKeyState(VK_RIGHT) & 0x8001)
+			{
+				x += 1;
+				obj->SetX(obj->GetPosX() + 1);
+			}
+			else if (GetAsyncKeyState(VK_LEFT) & 0x8001)
+			{
+				x -= 1;
+				obj->SetX(obj->GetPosX() - 1);
+			}
+		}
+		else
+		{
+			ChangeState(eState_Idle);
+		}
+		break;
+	default:
+		break;
+	}
 }

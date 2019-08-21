@@ -23,5 +23,9 @@ private:
 
 	Animation* IntroAnimation;
 	Gdiplus::Rect atlasRect;
+
+	int soundA;
+
+
 };
 

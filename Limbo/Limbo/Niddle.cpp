@@ -41,3 +41,8 @@ void Niddle::Collision(Object*)
 {
 	EventManager::GetInstance()->OnEvent(eEvent_PlayerDie); 
 }
+
+bool Niddle::HasInteraction()
+{
+	return false;
+}

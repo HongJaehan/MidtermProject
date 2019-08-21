@@ -20,7 +20,10 @@ enum ETag
 	eTag_Niddle,
 	eTag_Spider,
 	eTag_Rock,
-	eTag_Corpse
+	eTag_Corpse,
+	eTag_SquareRock,
+	eTag_FallenTrap
+
 };
 
 static enum EPlayerState 
@@ -43,13 +46,15 @@ enum ESpiderState
 enum ERotateRockState
 {
 	eRotateRock_Idle,
-	eRotateRock_Move
+	eRotateRock_Move,
+	eRotateRock_Stop
 };
 enum EEvent
 {
 	eEvent_PlayerDie,
 	eEvent_ResetGameScene,
-	eEvent_MoveReady
+	eEvent_MoveReady,
+	eEvent_CutRope
 };
 
 static struct SFileImgName

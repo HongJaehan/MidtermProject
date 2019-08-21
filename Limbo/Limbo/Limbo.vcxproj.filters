@@ -180,6 +180,21 @@
     <ClInclude Include="Corpse.h">
       <Filter>소스 파일\Object</Filter>
     </ClInclude>
+    <ClInclude Include="InteractionComponent.h">
+      <Filter>소스 파일\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="SquareTrap.h">
+      <Filter>소스 파일\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Rope.h">
+      <Filter>소스 파일\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation_Rope.h">
+      <Filter>소스 파일\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="FelledTrap.h">
+      <Filter>소스 파일\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssetManager.cpp">
@@ -303,6 +318,21 @@
       <Filter>소스 파일\Object</Filter>
     </ClCompile>
     <ClCompile Include="Corpse.cpp">
+      <Filter>소스 파일\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="InteractionComponent.cpp">
+      <Filter>소스 파일\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="SquareTrap.cpp">
+      <Filter>소스 파일\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Rope.cpp">
+      <Filter>소스 파일\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation_Rope.cpp">
+      <Filter>소스 파일\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="FelledTrap.cpp">
       <Filter>소스 파일\Object</Filter>
     </ClCompile>
   </ItemGroup>

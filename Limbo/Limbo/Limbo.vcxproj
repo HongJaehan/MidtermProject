@@ -196,6 +196,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="Animation_Rope.h" />
     <ClInclude Include="Animation_Die.h" />
     <ClInclude Include="Animation_Idle.h" />
     <ClInclude Include="Animation_Interaction.h" />
@@ -218,9 +219,11 @@
     <ClInclude Include="CVector.h" />
     <ClInclude Include="EndScene.h" />
     <ClInclude Include="EventManager.h" />
+    <ClInclude Include="FelledTrap.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="InteractionComponent.h" />
     <ClInclude Include="IntroScene.h" />
     <ClInclude Include="Limbo.h" />
     <ClInclude Include="MainFrm.h" />
@@ -232,11 +235,13 @@
     <ClInclude Include="PlayerControlComponent.h" />
     <ClInclude Include="Position.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="Rope.h" />
     <ClInclude Include="RotateRock.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Spider.h" />
+    <ClInclude Include="SquareTrap.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="Trap.h" />
@@ -244,6 +249,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="Animation_Rope.cpp" />
     <ClCompile Include="Animation_Die.cpp" />
     <ClCompile Include="Animation_Idle.cpp" />
     <ClCompile Include="Animation_Interaction.cpp" />
@@ -265,8 +271,10 @@
     <ClCompile Include="CVector.cpp" />
     <ClCompile Include="EndScene.cpp" />
     <ClCompile Include="EventManager.cpp" />
+    <ClCompile Include="FelledTrap.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="InteractionComponent.cpp" />
     <ClCompile Include="IntroScene.cpp" />
     <ClCompile Include="Limbo.cpp" />
     <ClCompile Include="MainFrm.cpp" />
@@ -282,10 +290,12 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerControlComponent.cpp" />
     <ClCompile Include="Position.cpp" />
+    <ClCompile Include="Rope.cpp" />
     <ClCompile Include="RotateRock.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Spider.cpp" />
+    <ClCompile Include="SquareTrap.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Trap.cpp" />
     <ClCompile Include="XMLPaser.cpp" />

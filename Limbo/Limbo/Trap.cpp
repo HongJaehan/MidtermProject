@@ -131,3 +131,8 @@ void Trap::Init()
 	y = InitPosY;
 	action = false;
 }
+
+bool Trap::HasInteraction()
+{
+	return true;
+}

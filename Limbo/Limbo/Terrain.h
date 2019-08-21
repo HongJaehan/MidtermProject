@@ -8,6 +8,7 @@ public:
 	void Update(float);
 	void Render(Gdiplus::Graphics*);
 	void Collision(Object*);
+	bool HasInteraction();
 private:
 	Gdiplus::Image* img;
 };

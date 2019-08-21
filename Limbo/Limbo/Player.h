@@ -38,6 +38,8 @@ public:
 	void SetbFlagInteraction(bool _bFlag);
 	void MoveReady();
 	void SetVelocity(float _velocity);
+	bool HasInteraction();
+	void InInteractionDistance(Object* obj);
 private:
 	//Component
 	PlayerControlComponent control;

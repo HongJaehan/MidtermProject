@@ -12,7 +12,8 @@ IntroScene::IntroScene()
 	imgAttr = new Gdiplus::ImageAttributes();
 	IntroAnimation = new Animation_Logo();
 
-	sndPlaySound(TEXT("Sound\\White_Island_OST_Isle_of_Wonder.wav"), SND_ASYNC | SND_LOOP);
+	 sndPlaySound(TEXT("Sound\\White_Island_OST_Isle_of_Wonder.wav"), SND_ASYNC | SND_LOOP);
+
 }
 
 IntroScene::~IntroScene()
