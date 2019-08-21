@@ -196,6 +196,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="Animation_End.h" />
     <ClInclude Include="Animation_Rope.h" />
     <ClInclude Include="Animation_Die.h" />
     <ClInclude Include="Animation_Idle.h" />
@@ -249,6 +250,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="Animation_End.cpp" />
     <ClCompile Include="Animation_Rope.cpp" />
     <ClCompile Include="Animation_Die.cpp" />
     <ClCompile Include="Animation_Idle.cpp" />

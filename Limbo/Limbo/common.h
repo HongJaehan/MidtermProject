@@ -23,7 +23,6 @@ enum ETag
 	eTag_Corpse,
 	eTag_SquareRock,
 	eTag_FallenTrap
-
 };
 
 static enum EPlayerState 
@@ -63,6 +62,12 @@ public:
 	std::string Player = "Player.png";
 };
 
+enum ESceneTag
+{
+	eIntroScene,
+	eGameScene,
+	eEndScene
+};
 enum EObjectNum
 {
 	eCorpse = 0,

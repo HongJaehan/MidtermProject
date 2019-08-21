@@ -5,6 +5,8 @@
 GameScene::GameScene()
 {
 	Init();
+	tag = ESceneTag::eGameScene;
+
 }
 
 GameScene::~GameScene()
@@ -50,7 +52,6 @@ void GameScene::Init()
 	//		break;
 	//	}
 	//}
-	bFlagCollision = false;
 	
 	ColliderObject *cObject = new ColliderObject(ETag::eTag_Collider, 95, 206, 190, 412);
 	ColliderObject *cObject2 = new ColliderObject(ETag::eTag_Collider, 3270, 400, 47, 32);
@@ -60,11 +61,8 @@ void GameScene::Init()
 	Trap* cObject6 = new Trap(ETag::eTag_Trap, 2890, 390, 120, 70);
 	Trap* cObject7 = new Trap(ETag::eTag_Trap, 3016,460, 120, 70);
 	Spider* cObject8 = new Spider(ETag::eTag_Spider, 5566, -171, 438, 524);
-	RotateRock* cObject9 = new RotateRock(ETag::eTag_Rock, 9297, 233, 160, 160);
+	RotateRock* cObject9 = new RotateRock(ETag::eTag_Rock, 9297, 233, 220, 220);
 	Corpse* cObject10 = new Corpse(ETag::eTag_Corpse, 6328, 485, 100, 50);
-	SquareTrap* cObject11 = new SquareTrap(ETag::eTag_SquareRock, 6906, -100, 330, 612);
-	Rope* cObject12 = new Rope(ETag::eTag_Trap, 6906, 500, 350, 50);
-	FelledTrap* cObject13 = new FelledTrap(ETag::eTag_FallenTrap, 10505, 145, 50, 74);
 
 	objectVec.emplace_back(cObject);
 	objectVec.emplace_back(cObject2);
@@ -76,10 +74,6 @@ void GameScene::Init()
 	objectVec.emplace_back(cObject8);
 	objectVec.emplace_back(cObject9);
 	objectVec.emplace_back(cObject10);
-	objectVec.emplace_back(cObject11);
-	objectVec.emplace_back(cObject12);
-	objectVec.emplace_back(cObject13);
-
 
 
 	//임시로
@@ -125,33 +119,8 @@ void GameScene::Update(float Delta)
 				it->Collision(player);
 				player->Collision(it);
 			}
+
 			it->Update(Delta);
-
-			if (it->HasInteraction())
-			{
-				auto pLeft = player->GetPosX() - player->GetWidth() * 0.4f;
-				auto pRight = player->GetPosX() + player->GetWidth() * 0.4f;
-				auto oLeft = it->GetPosX() - it->GetCollider()->GetWidth() * 0.5f;
-				auto oRight = it->GetPosX() + it->GetCollider()->GetWidth() * 0.5f;
-
-				//x범위
-				if ((abs(oLeft - pRight) < 15 && pRight < oLeft) || (abs(pLeft - oRight) < 15 && pLeft > oRight))
-				{
-					//y범위
-					if (abs(player->GetPosY() - it->GetPosY()) < it->GetHeight()+3)
-					{
-						player->InInteractionDistance(it);
-					}
-					else
-					{
-						if (player->GetState() == EPlayerState::eState_InteractionMove)
-						{
-							player->ChangeState(EPlayerState::eState_Idle);
-						}
-					}
-					
-				}
-			}
 		}
 		else
 		{
@@ -210,6 +179,7 @@ bool GameScene::CollisionCheck(Object* obj1, Object* obj2)
 	int obj2_Bottom = obj2->GetCollider()->GetY() + obj2->GetCollider()->GetHeight()*0.5f;
 	int obj2_Left = obj2->GetCollider()->GetX() - obj2->GetCollider()->GetWidth() * 0.5f;
 	int obj2_Right = obj2->GetCollider()->GetX() + obj2->GetCollider()->GetWidth() * 0.5f;
+
 
 	//AABB
 	//스크린 좌표로는 y축이 아래로 커지기 때문에
