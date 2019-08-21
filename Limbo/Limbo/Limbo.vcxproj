@@ -219,6 +219,7 @@
     <ClInclude Include="CVector.h" />
     <ClInclude Include="EndScene.h" />
     <ClInclude Include="EventManager.h" />
+    <ClInclude Include="FallenRock.h" />
     <ClInclude Include="FelledTrap.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameManager.h" />
@@ -271,6 +272,7 @@
     <ClCompile Include="CVector.cpp" />
     <ClCompile Include="EndScene.cpp" />
     <ClCompile Include="EventManager.cpp" />
+    <ClCompile Include="FallenRock.cpp" />
     <ClCompile Include="FelledTrap.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameScene.cpp" />

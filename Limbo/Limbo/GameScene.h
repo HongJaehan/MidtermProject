@@ -13,7 +13,7 @@
 #include "SquareTrap.h"
 #include "Rope.h"
 #include "FelledTrap.h"
-
+#include "FallenRock.h"
 class GameScene :	public Scene
 {
 public:

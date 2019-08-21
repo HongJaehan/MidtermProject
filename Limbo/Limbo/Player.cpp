@@ -38,7 +38,7 @@ Player::Player()
 
 	int screenSizeWidth = defines.screenSizeX;
 	//x = screenSizeWidth * 0.5f;
-	x = 9500;
+	x = 10800;
 	y = 450;
 
 	collider = new BoxCollider2D(x, y, width, height, false);
@@ -82,7 +82,7 @@ void Player::Update(float Delta)
 	//현재 Animation의 image를 XML정보에 맞춰 저장해줌.
 	playerAnimationList[state]->Update(&atlasRect,Delta);
 
-	printf("x = %d\n", x);
+	//printf("x = %d\n", x);
 }
 
 void Player::Render(Gdiplus::Graphics* _MemG)
@@ -268,27 +268,41 @@ void Player::Collision(Object* obj)
 		case eState_Die:
 			break;
 		case eState_Run:
+		{
 			if (pLeft < objRight && abs(objRight - pLeft) < width)
 			{
-				x = objRight + width * 0.5f;
+				if (y > objTop)
+				{
+					x = objRight + width * 0.5f;
+				}
 			}
 			else if (pRight > objLeft && abs(pRight - objLeft) < width)
 			{
-				x = objLeft - width * 0.5f;
+				if (y > objTop)
+				{
+					x = objLeft - width * 0.5f;
+				}
 			}
+		}
 			break;
 		case eState_Idle:
-			if (pBottom > objTop && abs(pBottom - objTop) < height)
+		{
+			float dist = abs(pBottom - objTop);
+			if (pBottom > objTop && dist < height)
 			{
 				y = objTop - height * 0.5f;
 			}
+		}
 			break;
 		case eState_Jump:
-			if (pBottom > objTop && abs(pBottom - objTop) < height)
+		{
+			float dist = abs(pBottom - objTop);
+			if (pBottom >= objTop && dist < height)
 			{
 				y = objTop - height * 0.5f;
 			}
 			ChangeState(eState_Idle);
+		}
 			break;
 		case eState_Interaction:
 			break;

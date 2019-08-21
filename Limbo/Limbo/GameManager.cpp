@@ -79,7 +79,7 @@ int GameManager::GetTerrainData(int _playerPosX)
 		}
 	}
 	
-	return y;
+	return y + defines.playerHeight;
 }
 
 //void GameManager::Func(int)

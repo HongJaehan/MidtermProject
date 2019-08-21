@@ -195,6 +195,9 @@
     <ClInclude Include="FelledTrap.h">
       <Filter>소스 파일\Object</Filter>
     </ClInclude>
+    <ClInclude Include="FallenRock.h">
+      <Filter>소스 파일\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssetManager.cpp">
@@ -333,6 +336,9 @@
       <Filter>소스 파일\Animation</Filter>
     </ClCompile>
     <ClCompile Include="FelledTrap.cpp">
+      <Filter>소스 파일\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="FallenRock.cpp">
       <Filter>소스 파일\Object</Filter>
     </ClCompile>
   </ItemGroup>

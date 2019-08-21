@@ -18,20 +18,28 @@ FelledTrap::FelledTrap(ETag _tag, int _x, int _y, int _width, int _height)
 	screenPosY = y - height * 0.5;
 	initPosX = x;
 	initPosY = y;
-	maxY = GameManager::GetInstance()->GetTerrainData(x);
+	maxY = GameManager::GetInstance()->GetTerrainData(x) + 20;
 	enable = false;
 
-	collider = new BoxCollider2D(_x, _y, _width, _height, false);
+	collider = new BoxCollider2D(_x, _y, _width, _height-60, false);
 
 	EventManager::GetInstance()->AddEvent(std::bind(&FelledTrap::Init, this), EEvent::eEvent_ResetGameScene);
 }
 
 FelledTrap::~FelledTrap()
 {
+	delete xmlRect;
 }
 
 void FelledTrap::Update(float Delta)
 {
+	float dist = abs(x - GameManager::GetInstance()->GetPlayerPosX());
+	printf("%f\n", dist);
+	if (dist< 80)
+	{
+		active = true;
+	}
+
 	if (active)
 	{
 		Down(Delta);

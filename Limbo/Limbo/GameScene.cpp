@@ -65,6 +65,10 @@ void GameScene::Init()
 	SquareTrap* cObject11 = new SquareTrap(ETag::eTag_SquareRock, 6906, -100, 330, 612);
 	Rope* cObject12 = new Rope(ETag::eTag_Trap, 6906, 500, 350, 50);
 	FelledTrap* cObject13 = new FelledTrap(ETag::eTag_FallenTrap, 10505, 145, 50, 74);
+	Niddle* cObject14 = new Niddle(ETag::eTag_Niddle, 10160, 450, 200, 90);
+	Niddle* cObject15 = new Niddle(ETag::eTag_Niddle, 11618, 603, 937, 100);
+	FallenRock* cObject16 = new FallenRock(ETag::eTag_FallenRock, 11264, 444, 88, 82, EObjectNum::eRock1);
+
 
 	objectVec.emplace_back(cObject);
 	objectVec.emplace_back(cObject2);
@@ -79,6 +83,11 @@ void GameScene::Init()
 	objectVec.emplace_back(cObject11);
 	objectVec.emplace_back(cObject12);
 	objectVec.emplace_back(cObject13);
+	objectVec.emplace_back(cObject14);
+	objectVec.emplace_back(cObject15);
+	objectVec.emplace_back(cObject16);
+
+
 
 
 
@@ -103,7 +112,6 @@ void GameScene::Init()
 
 void GameScene::Update(float Delta)
 {
-	player->Update(Delta);
 	
 	//현재 스크린 좌표
 	int screenLeft = GameManager::GetInstance()->GetPlayerPosX() - defines.screenSizeX * 0.5f;
@@ -158,6 +166,7 @@ void GameScene::Update(float Delta)
 			it->SetEnable(false);
 		}
 	}
+	player->Update(Delta);
 }
 
 void GameScene::Render(Gdiplus::Graphics* MemG)

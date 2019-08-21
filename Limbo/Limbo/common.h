@@ -22,8 +22,8 @@ enum ETag
 	eTag_Rock,
 	eTag_Corpse,
 	eTag_SquareRock,
-	eTag_FallenTrap
-
+	eTag_FallenTrap,
+	eTag_FallenRock
 };
 
 static enum EPlayerState 
@@ -79,6 +79,7 @@ enum EObjectNum
 	eSquareTrap = 11,
 	eFallTrap = 12
 };
+
 struct Defines
 {
 public:
