@@ -5,8 +5,6 @@
 GameScene::GameScene()
 {
 	Init();
-	tag = ESceneTag::eGameScene;
-
 }
 
 GameScene::~GameScene()
@@ -52,17 +50,25 @@ void GameScene::Init()
 	//		break;
 	//	}
 	//}
+	bFlagCollision = false;
 	
 	ColliderObject *cObject = new ColliderObject(ETag::eTag_Collider, 95, 206, 190, 412);
-	ColliderObject *cObject2 = new ColliderObject(ETag::eTag_Collider, 3270, 400, 47, 32);
+	ColliderObject *cObject2 = new ColliderObject(ETag::eTag_Collider, 3800, 300, 200, 100);
 	ColliderObject *cObject3 = new ColliderObject(ETag::eTag_Collider, 3890, 350, 60, 36);
 	ColliderObject *cObject4 = new ColliderObject(ETag::eTag_Collider, 9478, 360, 65, 40);
 	Niddle* cObject5 = new Niddle(ETag::eTag_Niddle, 1360, 480, 80, 72);
 	Trap* cObject6 = new Trap(ETag::eTag_Trap, 2890, 390, 120, 70);
 	Trap* cObject7 = new Trap(ETag::eTag_Trap, 3016,460, 120, 70);
 	Spider* cObject8 = new Spider(ETag::eTag_Spider, 5566, -171, 438, 524);
-	RotateRock* cObject9 = new RotateRock(ETag::eTag_Rock, 9297, 233, 220, 220);
+	RotateRock* cObject9 = new RotateRock(ETag::eTag_Rock, 9297, 233, 160, 160);
 	Corpse* cObject10 = new Corpse(ETag::eTag_Corpse, 6328, 485, 100, 50);
+	SquareTrap* cObject11 = new SquareTrap(ETag::eTag_SquareRock, 6906, -100, 330, 612);
+	Rope* cObject12 = new Rope(ETag::eTag_Trap, 6906, 500, 350, 50);
+	FelledTrap* cObject13 = new FelledTrap(ETag::eTag_FallenTrap, 10505, 145, 50, 74);
+	Niddle* cObject14 = new Niddle(ETag::eTag_Niddle, 10160, 450, 200, 90);
+	Niddle* cObject15 = new Niddle(ETag::eTag_Niddle, 11618, 603, 937, 100);
+	FallenRock* cObject16 = new FallenRock(ETag::eTag_FallenRock, 11364, 444, 188, 182, EObjectNum::eRock1);
+
 
 	objectVec.emplace_back(cObject);
 	objectVec.emplace_back(cObject2);
@@ -74,7 +80,12 @@ void GameScene::Init()
 	objectVec.emplace_back(cObject8);
 	objectVec.emplace_back(cObject9);
 	objectVec.emplace_back(cObject10);
-
+	objectVec.emplace_back(cObject11);
+	objectVec.emplace_back(cObject12);
+	objectVec.emplace_back(cObject13);
+	objectVec.emplace_back(cObject14);
+	objectVec.emplace_back(cObject15);
+	objectVec.emplace_back(cObject16);
 
 	//임시로
 	int mapCount = 10;
@@ -97,8 +108,6 @@ void GameScene::Init()
 
 void GameScene::Update(float Delta)
 {
-	player->Update(Delta);
-	
 	//현재 스크린 좌표
 	int screenLeft = GameManager::GetInstance()->GetPlayerPosX() - defines.screenSizeX * 0.5f;
 	int screenRight = GameManager::GetInstance()->GetPlayerPosX() + defines.screenSizeX * 0.5f;
@@ -118,15 +127,44 @@ void GameScene::Update(float Delta)
 			{
 				it->Collision(player);
 				player->Collision(it);
+				player->SetNowColState(true);
 			}
-
 			it->Update(Delta);
+
+			if (it->HasInteraction())
+			{
+				auto pLeft = player->GetPosX() - player->GetWidth() * 0.4f;
+				auto pRight = player->GetPosX() + player->GetWidth() * 0.4f;
+				auto oLeft = it->GetPosX() - it->GetCollider()->GetWidth() * 0.5f;
+				auto oRight = it->GetPosX() + it->GetCollider()->GetWidth() * 0.5f;
+
+				//x범위
+				if ((abs(oLeft - pRight) < 15 && pRight < oLeft) || (abs(pLeft - oRight) < 15 && pLeft > oRight))
+				{
+					//y범위
+					if (abs(player->GetPosY() - it->GetPosY()) < it->GetHeight()+3)
+					{
+						player->InInteractionDistance(it);
+					}
+					else
+					{
+						if (player->GetState() == EPlayerState::eState_InteractionMove)
+						{
+							player->ChangeState(EPlayerState::eState_Idle);
+						}
+					}
+					
+				}
+			}
 		}
 		else
 		{
 			it->SetEnable(false);
 		}
 	}
+
+	player->Update(Delta);
+	player->InitColState();
 }
 
 void GameScene::Render(Gdiplus::Graphics* MemG)
@@ -175,11 +213,10 @@ bool GameScene::CollisionCheck(Object* obj1, Object* obj2)
 	int obj1_Left = obj1->GetCollider()->GetX() - obj1->GetCollider()->GetWidth() * 0.5f;
 	int obj1_Right = obj1->GetCollider()->GetX() + obj1->GetCollider()->GetWidth() * 0.5f;
 
-	int obj2_Top = obj2->GetCollider()->GetY() + obj2->GetCollider()->GetHeight() * 0.5f;
+	int obj2_Top = obj2->GetCollider()->GetY() - obj2->GetCollider()->GetHeight() * 0.5f;
 	int obj2_Bottom = obj2->GetCollider()->GetY() + obj2->GetCollider()->GetHeight()*0.5f;
 	int obj2_Left = obj2->GetCollider()->GetX() - obj2->GetCollider()->GetWidth() * 0.5f;
 	int obj2_Right = obj2->GetCollider()->GetX() + obj2->GetCollider()->GetWidth() * 0.5f;
-
 
 	//AABB
 	//스크린 좌표로는 y축이 아래로 커지기 때문에

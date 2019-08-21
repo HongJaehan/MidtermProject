@@ -1,7 +1,6 @@
 #pragma once
 #include "Scene.h"
 #include "Animation_Logo.h"
-#include "MCISound.h"
 
 class IntroScene :public Scene
 {
@@ -25,8 +24,8 @@ private:
 	Animation* IntroAnimation;
 	Gdiplus::Rect atlasRect;
 
-	MCISound *sound;
-	HWND hWnd;
-	DWORD Sound1, Sound2;
+	int soundA;
+
+
 };
 

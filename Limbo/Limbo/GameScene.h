@@ -10,7 +10,10 @@
 #include "Spider.h"
 #include "RotateRock.h"
 #include "Corpse.h"
-
+#include "SquareTrap.h"
+#include "Rope.h"
+#include "FelledTrap.h"
+#include "FallenRock.h"
 class GameScene :	public Scene
 {
 public:
@@ -24,10 +27,11 @@ public:
 	void SceneReset();
 
 private:
-	Object* player;
+	Player* player;
 	Object* terrain;
 	std::vector<Background*> backgroundVec;
 	std::vector<Object*> objectVec;
 	ECheckPoint checkPoint;
+	bool bFlagCollision;
 };
 

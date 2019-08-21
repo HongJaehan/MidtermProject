@@ -13,7 +13,7 @@ public:
 	void Render(Gdiplus::Graphics* MemG);
 	void Collision(Object* obj);
 	void Init();
-
+	void StartAnimation();
 	bool HasInteraction();
 private:
 	Gdiplus::Image* img;

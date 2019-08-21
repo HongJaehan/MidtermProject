@@ -12,24 +12,14 @@ IntroScene::IntroScene()
 	imgAttr = new Gdiplus::ImageAttributes();
 	IntroAnimation = new Animation_Logo();
 
-	tag = ESceneTag::eIntroScene;
-	/*soundA = sndPlaySound(TEXT("Sound\\Imprison2_OST.wav"), SND_ASYNC | SND_LOOP | SND_NOSTOP);
-	soundB = sndPlaySound(TEXT("Sound\\walking-1.wav"), SND_ASYNC | SND_LOOP);*/
-	//////////////////////////////////////////////////////////////////////////////////////////////
+	 sndPlaySound(TEXT("Sound\\White_Island_OST_Isle_of_Wonder.wav"), SND_ASYNC | SND_LOOP);
 
-	//Sound1 = sound->LoadWAV(hWnd, L"Sound\\Imprison2_OST.wav");
-	//Sound2 = sound->LoadWAV(hWnd, L"Sound\\walking-1.wav");
-	//Sound1 = mciSendCommand(1, MCI_PLAY, MCI_NOTIFY, (DWORD)(LPVOID)& sound->mciPlay); //play
-
-	//////////////////////////////////////////////////////////////////////////////////////////////
 }
 
 IntroScene::~IntroScene()
 {
 	delete bm2;
 	delete imgAttr;
-	mciSendCommand(1, MCI_CLOSE, 0, (DWORD)(LPVOID)nullptr);
-	mciSendCommand(2, MCI_CLOSE, 0, (DWORD)(LPVOID)nullptr);
 }
 
 void IntroScene::Init()
@@ -42,15 +32,9 @@ void IntroScene::Update(float delta)
 {
 	if (GetAsyncKeyState(VK_SPACE) & 0x1001)
 	{
-		//soundA = sndPlaySound(NULL, SND_ASYNC);
-		Sound1 = mciSendCommand(1, MCI_SEEK, MCI_SEEK_TO_START, (DWORD)(LPVOID)nullptr);
+		sndPlaySound(NULL, SND_ASYNC);
 		SceneManager::GetInstance()->MoveNextScene();
 	}
-
-	/*if (GetAsyncKeyState(VK_UP) & 0x1001)
-	{
-		soundB = sndPlaySound(NULL, SND_ASYNC);
-	}*/
 
 	/////////////////////////////////////////////////
 	////투명도 조절 4행 4열

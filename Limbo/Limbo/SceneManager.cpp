@@ -29,7 +29,7 @@ void SceneManager::Init()
 	introScene = new IntroScene();
 	gameScene = new GameScene();
 	endScene = new EndScene();
-	curScene = endScene;
+	curScene = introScene;
 	
 
 	sceneVec.emplace_back(introScene);

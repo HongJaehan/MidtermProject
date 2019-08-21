@@ -22,7 +22,8 @@ enum ETag
 	eTag_Rock,
 	eTag_Corpse,
 	eTag_SquareRock,
-	eTag_FallenTrap
+	eTag_FallenTrap,
+	eTag_FallenRock
 };
 
 static enum EPlayerState 
@@ -62,12 +63,6 @@ public:
 	std::string Player = "Player.png";
 };
 
-enum ESceneTag
-{
-	eIntroScene,
-	eGameScene,
-	eEndScene
-};
 enum EObjectNum
 {
 	eCorpse = 0,
@@ -84,6 +79,7 @@ enum EObjectNum
 	eSquareTrap = 11,
 	eFallTrap = 12
 };
+
 struct Defines
 {
 public:

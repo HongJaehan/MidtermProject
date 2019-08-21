@@ -35,7 +35,6 @@ BEGIN_MESSAGE_MAP(CChildView, CWnd)
 	ON_WM_PAINT()
 	ON_WM_ERASEBKGND()
 	ON_WM_CREATE()
-	ON_WM_KEYDOWN()
 END_MESSAGE_MAP()
 
 
@@ -130,16 +129,4 @@ int CChildView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	CWinThread* pThread = AfxBeginThread(&CLimboApp::FuncThread, NULL);
 
 	return 0;
-}
-
-void CChildView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
-{
-	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
-	if (SceneManager::GetInstance()->GetCurScene()->tag == ESceneTag::eEndScene)
-	{
-		EndScene* endScene = reinterpret_cast<EndScene*>(SceneManager::GetInstance()->GetCurScene());
-		endScene->SendKeyDown(nChar, nRepCnt, nFlags);
-	}
-
-	CWnd::OnKeyDown(nChar, nRepCnt, nFlags);
 }
