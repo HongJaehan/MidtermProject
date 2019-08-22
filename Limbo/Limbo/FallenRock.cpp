@@ -18,10 +18,10 @@ FallenRock::FallenRock(ETag _tag, int _x, int _y, int _width, int _height,EObjec
 	screenPosY = y - height * 0.5;
 	initPosX = x;
 	initPosY = y;
-	maxY = GameManager::GetInstance()->GetTerrainData(x);
+	maxY = GameManager::GetInstance()->GetTerrainData(x) + 200;
 	enable = false;
 
-	collider = new BoxCollider2D(_x+width*0.5f, _y-height*0.5f, _width, _height, false);
+	collider = new BoxCollider2D(_x, _y, _width, _height, false);
 
 	EventManager::GetInstance()->AddEvent(std::bind(&FallenRock::Init, this), EEvent::eEvent_ResetGameScene);
 }
@@ -64,11 +64,7 @@ void FallenRock::Down(float Delta)
 {
 	if (y + (height * 0.5f) < maxY)
 	{
-		y += Delta * 100;
-	}
-	else
-	{
-
+		y += Delta * 70;
 	}
 }
 

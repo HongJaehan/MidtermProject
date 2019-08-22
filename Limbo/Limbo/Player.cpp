@@ -4,8 +4,8 @@
 #include "PlayerControlComponent.h"
 #include <cmath>
 
-#define MAX_velocity 1
-#define INIT_velocity 0
+#define MAX_velocity 150
+#define INIT_velocity 0.5f
 #define ACCELERATION 150
 #define PI (3.1415926535897932f)
 #define GRAVITY 7
@@ -29,8 +29,7 @@ Player::Player()
 	bFlagNowCol = false;
 	bFlagRightCol = false;
 	bFlagLeftCol = false;
-	jumpCount = 0;
-	jumpdist = 0.0f;
+	bFlagJumpStartState = false;
 //	float speed = Lerp(0, 10, 2);
 	
 	//AnimationList에 애니메이션을 추가해준다.  enum순서대로 넣어줘야 한다ㄷ
@@ -43,7 +42,7 @@ Player::Player()
 
 	int screenSizeWidth = defines.screenSizeX;
 	//x = screenSizeWidth * 0.5f;
-	x = 3500;
+	x = 3200;
 	y = 450;
 
 	collider = new BoxCollider2D(x, y, width, height, false);
@@ -72,7 +71,6 @@ Player::~Player()
 
 void Player::Update(float Delta)
 {
-
 	//Component Update
 	//physics 업데이트
 	control.Update(*this);
@@ -88,7 +86,7 @@ void Player::Update(float Delta)
 	//현재 Animation의 image를 XML정보에 맞춰 저장해줌.
 	playerAnimationList[state]->Update(&atlasRect,Delta);
 
-	//printf("x = %d\n", x);
+	printf("Delta = %f\n", Delta);
 }
 
 void Player::Render(Gdiplus::Graphics* _MemG)
@@ -159,6 +157,10 @@ void Player::Jump(bool bFlagLeft,int terrainY,float Delta)
 		AddDelta += Delta;
 		float AddVal = (0.5f * GRAVITY * AddDelta * AddDelta);
 
+		if (AddDelta > 0.3f)
+		{
+			bFlagJumpStartState = false;
+		}
 		if (bFlagLeft && !bFlagLeftCol)
 		{
 			x -= velocity * Delta; 
@@ -166,6 +168,7 @@ void Player::Jump(bool bFlagLeft,int terrainY,float Delta)
 		else if(!bFlagLeft && !bFlagRightCol)
 		{
 			x += velocity * Delta;
+			//printf("vel = %f\n", velocity);
 		}
 
 		if (!bFlagBotmCol)
@@ -178,7 +181,7 @@ void Player::Jump(bool bFlagLeft,int terrainY,float Delta)
 			y = terrainY;
 			ChangeState(eState_Idle);
 			AddDelta = 0.0f;
-			velocity = 0;
+			InitVelocity();
 		}
 }
 
@@ -221,26 +224,33 @@ void Player::PhysicsUpdate(float Delta)
 		}
 		break;
 	case eState_Run:
+	{
 		if (!bFlagBotmCol)
 		{
 			y = y + GRAVITY * AddUpdateDelta + 10;
 		}
 		//y = y + GRAVITY * AddUpdateDelta;
-		velocity = ACCELERATION * AddUpdateDelta * 1.3f;
-		
+		velocity = ACCELERATION * AddUpdateDelta * 1.5f;
+		if (velocity > MAX_velocity)
+		{
+			velocity = MAX_velocity;
+		}
+		int velocity_Int = abs(velocity * Delta);
 		if (bFlagLeft && !bFlagLeftCol)
 		{
-			x -= velocity * Delta;
+			x -= velocity_Int;
 		}
-		else if(!bFlagLeft && !bFlagRightCol)
+		else if (!bFlagLeft && !bFlagRightCol)
 		{
-			x += velocity * Delta;
+			x += velocity_Int;
 		}
 
 		if (y >= terrainY)
 		{
 			y = terrainY;
 		}
+	}
+
 		break;
 	case eState_Jump:
 		Jump(bFlagLeft, terrainY, Delta);
@@ -296,25 +306,39 @@ void Player::Collision(Object* obj)
 			}
 
 			float dist = abs(pBottom - objTop);
-			if (pBottom > objTop && dist < 5)
+			if (pBottom > objTop && dist < 50)
 			{
 				//y = objTop - height * 0.5f;
 				bFlagBotmCol = true;
 			}
+			//if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
+			//{
+			//	if (GetAsyncKeyState(VK_UP) & 0x8000)
+			//	{
+			//		bFlagJumpStartState = true;
+			//	}
+			//}
 		}
 			break;
 		case eState_Idle:
 		{
 			float dist = abs(pBottom - objTop);
-			if (pBottom > objTop && dist < 5)
+			if (pBottom > objTop && dist < 50)
 			{
 				bFlagBotmCol = true;
 				ChangeState(eState_Idle);
+			}
+
+
+			if (GetAsyncKeyState(VK_UP) & 0x8001)
+			{
+				bFlagJumpStartState = true;
 			}
 		}
 			break;
 		case eState_Jump:
 		{
+
 			if (pLeft < objRight && abs(objRight - pLeft) < width)
 			{
 				bFlagLeftCol = true;
@@ -326,22 +350,20 @@ void Player::Collision(Object* obj)
 				break;
 			}
 
-			float dist = pBottom - objTop;
+			float dist = abs(pBottom - objTop);
 
-			if (pBottom > objTop && dist > 0)
+			if (pBottom > objTop && dist < 10)
 			{
-				if (dist > jumpdist)
+				if (!bFlagJumpStartState)
 				{
 					bFlagBotmCol = true;
+					AddDelta = 0.0f;
 					ChangeState(eState_Idle);
-					jumpdist = dist;
 				}
-				if (GetAsyncKeyState(VK_UP) & 0x8001)
+				else
 				{
-					y -= 10;
-					bFlagBotmCol = false;
+					int zzz = 0;
 				}
-				//printf("%f\n", dist);
 
 			}
 		}
@@ -371,12 +393,14 @@ void Player::SetLeftFlag(bool Flag)
 
 void Player::InitVelocity()
 {
-	velocity = 0;
+	velocity = 50;
 }
 
 void Player::PlayerDie()
 {
 	ChangeState(eState_Die);
+	SoundManager::GetInstance()->Play(ESound::sound2);
+
 }
 
 bool Player::GetbFlagInteraction()
@@ -460,5 +484,18 @@ void Player::SetNowColState(bool bFlagState)
 bool Player::GetNowColState()
 {
 	return bFlagNowCol;
+}
+
+void Player::InitColState()
+{
+		bFlagNowCol = false;
+		bFlagLeftCol = false;
+		bFlagRightCol = false;
+		bFlagBotmCol = false;
+}
+
+void Player::SetJumpStartState(bool bFlagstate)
+{
+	bFlagJumpStartState = bFlagstate;
 }
 

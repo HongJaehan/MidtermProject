@@ -8,8 +8,6 @@ Trap::Trap()
 
 Trap::Trap(ETag _tag, int _x, int _y, int _width, int _height)
 {
-
-	colImg = AssetManager().GetInstance()->GetImage(TEXT("collider.png")).lock().get();
 	tag = _tag;
 	x = _x;
 	y = _y;
@@ -21,7 +19,7 @@ Trap::Trap(ETag _tag, int _x, int _y, int _width, int _height)
 	InitPosY = y;
 	enable = false;
 
-	collider = new BoxCollider2D(_x, _y, _width - 50, _height, false);
+	collider = new BoxCollider2D(_x, _y, _width-50, _height, false);
 
 	EventManager::GetInstance()->AddEvent(std::bind(&Trap::Init, this), EEvent::eEvent_ResetGameScene);
 }
@@ -34,16 +32,11 @@ Trap::~Trap()
 void Trap::Update(float Delta)
 {
 	animation.Update(&atlasRect, Delta, action);
-	////printf("Top = %f\n", collider->GetY() - collider->GetHeight() * 0.5);
-	////printf("Left = %f\n", collider->GetX() - collider->GetWidth() * 0.5);
-	//
+
 	y = GameManager::GetInstance()->GetTerrainData(x)-height*0.5f;
 	collider->SetX(x);
-	collider->SetY(y-height*0.5f);
-	//collider->SetX(x);
-	//collider->SetY(y-height*0.5f);
-	////printf("Top = %f\n", collider->GetY() - collider->GetHeight() * 0.5);
-	////system("cls");
+	collider->SetY(y+height*0.3f);
+
 }
 
 void Trap::Render(Gdiplus::Graphics* MemG)
@@ -51,21 +44,17 @@ void Trap::Render(Gdiplus::Graphics* MemG)
 
 
 	int drawToScreenPosX = x - (width * 0.5f) - (GameManager::GetInstance()->GetPlayerPosX() - defines.screenSizeX * 0.5f);
-	////PlayerÀÇ Å©±â
-	//Gdiplus::Rect rect(0, 0, width, height);
+
 
 	Gdiplus::Bitmap bm(width, height, PixelFormat32bppARGB);
 	Gdiplus::Graphics temp(&bm);
-	
 	
 	Gdiplus::Rect r(0, 0, width, height);
 	temp.DrawImage(animation.GetAtlasImg().lock().get(), r,
 		atlasRect.X, atlasRect.Y, atlasRect.Width, atlasRect.Height, Gdiplus::Unit::UnitPixel, nullptr, 0, nullptr);
 	
-	Gdiplus::Rect rect2(drawToScreenPosX, y-height*0.5f + 10, width, height);
+	Gdiplus::Rect rect2(drawToScreenPosX, y-height*0.5f + 5, width, height);
 	MemG->DrawImage(&bm, rect2);
-	Gdiplus::Rect rect(drawToScreenPosX, y, width, height);
-	MemG->DrawImage(colImg, rect);
 	//int drawToScreenPosX = x - (GameManager::GetInstance()->GetPlayerPosX() - defines.screenSizeX * 0.5f);
 	//int drawToScreenPosY = y - height;
 
@@ -96,7 +85,7 @@ void Trap::Collision(Object* obj)
 	int objTop = collider->GetY() - collider->GetHeight() * 0.5f;
 	int objBottom = collider->GetY() + collider->GetHeight() * 0.5f;
 
-	if (playerBottom > objTop && (playerBottom - objTop) < 80)
+	if (playerBottom > objTop && abs(playerBottom - objTop)<10)
 	{
 		action = true;
 		EventManager::GetInstance()->OnEvent(eEvent_PlayerDie);

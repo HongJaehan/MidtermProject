@@ -15,7 +15,6 @@ public:
 	void Init();
 	bool HasInteraction();
 private:
-	Gdiplus::Image* colImg;
 	Gdiplus::Rect atlasRect;
 	Animation_Trap animation;
 	int screenPosX;

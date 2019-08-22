@@ -41,13 +41,8 @@ public:
 
 	void SetNowColState(bool bFlagState);
 	bool GetNowColState();
-	void InitColState()
-	{
-		bFlagNowCol = false;
-		bFlagLeftCol = false;
-		bFlagRightCol = false;
-		bFlagBotmCol = false;
-	}
+	void InitColState();
+	void SetJumpStartState(bool bFlagstate);
 private:
 	//Component
 	PlayerControlComponent control;
@@ -71,7 +66,6 @@ private:
 	bool bFlagLeftCol;
 	bool bFlagBotmCol;
 
-	int jumpCount;
-	float jumpdist;
+	bool bFlagJumpStartState;
 };
 

@@ -54,12 +54,12 @@ void GameScene::Init()
 	bFlagCollision = false;
 	
 	ColliderObject *cObject = new ColliderObject(ETag::eTag_Collider, 95, 206, 190, 412);
-	ColliderObject *cObject2 = new ColliderObject(ETag::eTag_Collider, 3800, 300, 200, 100);
+	ColliderObject *cObject2 = new ColliderObject(ETag::eTag_Collider, 3278, 410, 80, 50);
 	ColliderObject *cObject3 = new ColliderObject(ETag::eTag_Collider, 3890, 350, 60, 36);
 	ColliderObject *cObject4 = new ColliderObject(ETag::eTag_Collider, 9478, 360, 65, 40);
 	Niddle* cObject5 = new Niddle(ETag::eTag_Niddle, 1360, 480, 80, 72);
-	Trap* cObject6 = new Trap(ETag::eTag_Trap, 2890, 390, 120, 70);
-	Trap* cObject7 = new Trap(ETag::eTag_Trap, 3016,460, 120, 70);
+	Trap* cObject6 = new Trap(ETag::eTag_Trap, 2940, 390, 120, 70);
+	Trap* cObject7 = new Trap(ETag::eTag_Trap, 3066,460, 120, 70);
 	Spider* cObject8 = new Spider(ETag::eTag_Spider, 5566, -171, 438, 524);
 	RotateRock* cObject9 = new RotateRock(ETag::eTag_Rock, 9297, 233, 160, 160);
 	Corpse* cObject10 = new Corpse(ETag::eTag_Corpse, 6328, 485, 100, 50);
@@ -68,7 +68,9 @@ void GameScene::Init()
 	FelledTrap* cObject13 = new FelledTrap(ETag::eTag_FallenTrap, 10505, 145, 50, 74);
 	Niddle* cObject14 = new Niddle(ETag::eTag_Niddle, 10160, 450, 200, 90);
 	Niddle* cObject15 = new Niddle(ETag::eTag_Niddle, 11618, 603, 937, 100);
-	FallenRock* cObject16 = new FallenRock(ETag::eTag_FallenRock, 11364, 444, 188, 182, EObjectNum::eRock1);
+	FallenRock* cObject16 = new FallenRock(ETag::eTag_FallenRock, 11350, 470, 188, 182, EObjectNum::eRock1);
+	FallenRock* cObject17 = new FallenRock(ETag::eTag_FallenRock, 11600, 475, 146, 128, EObjectNum::eRock2);
+	FallenRock* cObject18 = new FallenRock(ETag::eTag_FallenRock, 11830, 450, 152, 100, EObjectNum::eRock1);
 
 
 	objectVec.emplace_back(cObject);
@@ -87,6 +89,10 @@ void GameScene::Init()
 	objectVec.emplace_back(cObject14);
 	objectVec.emplace_back(cObject15);
 	objectVec.emplace_back(cObject16);
+	objectVec.emplace_back(cObject17);
+	objectVec.emplace_back(cObject18);
+
+
 
 	//임시로
 	int mapCount = 10;
@@ -124,7 +130,7 @@ void GameScene::Update(float Delta)
 		{
 			it->SetEnable(true);
 			//충돌 체크
-			if (it->HasCollider() && CollisionCheck(player, it))
+			if (it->HasCollider() && CollisionCheck(player, it) && player->GetState() != EPlayerState::eState_Die)
 			{
 				it->Collision(player);
 				player->Collision(it);

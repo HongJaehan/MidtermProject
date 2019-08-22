@@ -87,6 +87,14 @@ enum EObjectNum
 	eFallTrap = 12
 };
 
+enum ESound
+{
+	sound1,
+	sound2,
+	sound3,
+	sound4
+};
+
 struct Defines
 {
 public:

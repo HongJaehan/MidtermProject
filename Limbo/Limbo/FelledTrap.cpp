@@ -34,7 +34,6 @@ FelledTrap::~FelledTrap()
 void FelledTrap::Update(float Delta)
 {
 	float dist = abs(x - GameManager::GetInstance()->GetPlayerPosX());
-	printf("%f\n", dist);
 	if (dist< 80)
 	{
 		active = true;

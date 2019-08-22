@@ -45,17 +45,17 @@ void IntroScene::Update(float delta)
 {
 	if (!sound)
 	{
-		sound = new MCISound();
-		hWnd = theApp.GetMainWnd()->GetSafeHwnd();
-		Sound1 = sound->LoadWAV(hWnd, L"Sound\\Imprison2_OST.wav");
+		//sound = new MCISound();
+		//hWnd = theApp.GetMainWnd()->GetSafeHwnd();
+		////Sound1 = sound->LoadWAV(hWnd, L"Sound\\Imprison2_OST.wav");
 		//Sound2 = sound->LoadWAV(hWnd, L"Sound\\walking-1.wav");
-		sound->PlayWAV(hWnd, Sound1); //play : MCI_NOTIFY , 반복 : MCI_DGV_PLAY_REPEAT
+		//sound->PlayWAV(hWnd, Sound2); //play : MCI_NOTIFY , 반복 : MCI_DGV_PLAY_REPEAT
 	}
 
 	if (GetAsyncKeyState(VK_SPACE) & 0x1001)
 	{
-		//Sound1 = mciSendCommandW(1, MCI_CLOSE, 0, (DWORD)(LPVOID)nullptr);
-		sound->StopWAV(hWnd, Sound1);
+		////Sound1 = mciSendCommandW(1, MCI_CLOSE, 0, (DWORD)(LPVOID)nullptr);
+		//sound->StopWAV(hWnd, Sound2);
 		SceneManager::GetInstance()->MoveNextScene();
 	}
 

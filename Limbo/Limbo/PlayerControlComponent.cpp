@@ -28,6 +28,8 @@ void PlayerControlComponent::Update(Player& player)
 			if (GetAsyncKeyState(VK_UP) & 0x1001)
 			{
 				player.ChangeState(eState_Jump);
+				player.SetJumpStartState(true);
+
 				break;
 			}
 			if (!player.GetLeftFlag()) { player.InitVelocity(); }//현재 왼쪽으로 달리고있는 중이었다면 speed를 0으로 초기화한다.
@@ -56,6 +58,7 @@ void PlayerControlComponent::Update(Player& player)
 			if (GetAsyncKeyState(VK_UP) & 0x1001)
 			{
 				player.ChangeState(eState_Jump);
+				player.SetJumpStartState(true);
 				break;
 			}
 			if (player.GetLeftFlag()) { player.InitVelocity(); }//현재 왼쪽으로 달리고있는 중이었다면 speed를 0으로 초기화한다.
@@ -83,6 +86,7 @@ void PlayerControlComponent::Update(Player& player)
 		{
 		case eState_Idle:
 			player.ChangeState(eState_Jump);
+			player.SetJumpStartState(true);
 			break;
 		}
 	}
