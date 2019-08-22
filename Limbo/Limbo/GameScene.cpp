@@ -2,10 +2,13 @@
 #include "GameScene.h"
 
 
+static float SoundDelta;
+
 GameScene::GameScene()
 {
 	Init();
 	tag = ESceneTag::eGameScene;
+	SoundDelta = 0.0f;
 }
 
 GameScene::~GameScene()
@@ -52,14 +55,12 @@ void GameScene::Init()
 	//	}
 	//}
 
-	sndPlaySound(L"Sound\\FrogForest.wav", SND_ASYNC | SND_LOOP);
-
 	bFlagCollision = false;
 	
 	ColliderObject *cObject = new ColliderObject(ETag::eTag_Collider, 95, 206, 190, 412);
 	ColliderObject *cObject2 = new ColliderObject(ETag::eTag_Collider, 3278, 410, 80, 50);
-	ColliderObject *cObject3 = new ColliderObject(ETag::eTag_Collider, 3890, 350, 60, 36);
-	ColliderObject *cObject4 = new ColliderObject(ETag::eTag_Collider, 9478, 360, 65, 40);
+	ColliderObject *cObject3 = new ColliderObject(ETag::eTag_Collider, 3890, 370, 60, 36);
+	ColliderObject *cObject4 = new ColliderObject(ETag::eTag_Collider, 9478, 360, 50, 40);
 	Niddle* cObject5 = new Niddle(ETag::eTag_Niddle, 1360, 480, 80, 72);
 	Trap* cObject6 = new Trap(ETag::eTag_Trap, 2940, 390, 120, 70);
 	Trap* cObject7 = new Trap(ETag::eTag_Trap, 3066,460, 120, 70);
@@ -118,6 +119,13 @@ void GameScene::Init()
 
 void GameScene::Update(float Delta)
 {
+	SoundDelta += Delta;
+	if (SoundDelta > 3.0f)
+	{
+		SoundManager::GetInstance()->Stop(ESound::sound_GameScene);
+		SoundManager::GetInstance()->Play(ESound::sound_GameScene);
+		SoundDelta = 0.0f;
+	}
 	//현재 스크린 좌표
 	int screenLeft = GameManager::GetInstance()->GetPlayerPosX() - defines.screenSizeX * 0.5f;
 	int screenRight = GameManager::GetInstance()->GetPlayerPosX() + defines.screenSizeX * 0.5f;

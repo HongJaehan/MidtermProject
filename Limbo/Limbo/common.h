@@ -89,10 +89,11 @@ enum EObjectNum
 
 enum ESound
 {
-	sound1,
-	sound2,
-	sound3,
-	sound4
+	sound_walk,
+	sound_Dead,
+	sound_GameScene,
+	sound_Cave,
+	sound_Rock
 };
 
 struct Defines

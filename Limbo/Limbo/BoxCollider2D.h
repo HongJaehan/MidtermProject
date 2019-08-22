@@ -13,7 +13,10 @@ public:
 	int GetHeight();
 	void SetX(int);
 	void SetY(int);
+	void SetWidth(int _width);
+	void SetHeight(int _height);
 	bool IsTrigger();
+
 private:
 	int x;
 	int y;

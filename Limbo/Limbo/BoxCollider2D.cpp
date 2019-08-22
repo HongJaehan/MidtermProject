@@ -49,6 +49,16 @@ void BoxCollider2D::SetY(int _y)
 	y = _y;
 }
 
+void BoxCollider2D::SetWidth(int _width)
+{
+	width = _width;
+}
+
+void BoxCollider2D::SetHeight(int _height)
+{
+	height = _height;
+}
+
 bool BoxCollider2D::IsTrigger()
 {
 	return trigger;

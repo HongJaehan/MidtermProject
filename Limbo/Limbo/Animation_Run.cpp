@@ -37,13 +37,14 @@ void Animation_Run::Update( Gdiplus::Rect* rect, float Delta)
 }
 void Animation_Run::Begin()
 {
-
+	SoundManager::GetInstance()->Play(ESound::sound_walk);
 }
 
 void Animation_Run::End()
 {
 	frame = 0;
 	addDelta = 0;
+	SoundManager::GetInstance()->Stop(ESound::sound_walk);
 }
 std::weak_ptr<Gdiplus::Image> Animation_Run::GetAtlasImg()
 {

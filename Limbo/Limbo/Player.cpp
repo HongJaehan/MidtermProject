@@ -4,7 +4,7 @@
 #include "PlayerControlComponent.h"
 #include <cmath>
 
-#define MAX_velocity 150
+#define MAX_velocity 200
 #define INIT_velocity 0.5f
 #define ACCELERATION 150
 #define PI (3.1415926535897932f)
@@ -42,7 +42,7 @@ Player::Player()
 
 	int screenSizeWidth = defines.screenSizeX;
 	//x = screenSizeWidth * 0.5f;
-	x = 3200;
+	x = 10000;
 	y = 450;
 
 	collider = new BoxCollider2D(x, y, width, height, false);
@@ -85,8 +85,6 @@ void Player::Update(float Delta)
 
 	//현재 Animation의 image를 XML정보에 맞춰 저장해줌.
 	playerAnimationList[state]->Update(&atlasRect,Delta);
-
-	printf("Delta = %f\n", Delta);
 }
 
 void Player::Render(Gdiplus::Graphics* _MemG)
@@ -198,10 +196,10 @@ void Player::ChangeState(EPlayerState _state)
 }
 
 static float AddUpdateDelta = 0;
+static float RunSoundDelta = 0;
 void Player::PhysicsUpdate(float Delta)
 {
 	AddUpdateDelta += Delta;
-
 	if (AddUpdateDelta > 1.0f)
 	{
 		AddUpdateDelta = 0.5f;
@@ -225,6 +223,13 @@ void Player::PhysicsUpdate(float Delta)
 		break;
 	case eState_Run:
 	{
+		RunSoundDelta += Delta;
+		if (RunSoundDelta > 8.0f)
+		{
+			SoundManager::GetInstance()->Stop(ESound::sound_walk);
+			SoundManager::GetInstance()->Play(ESound::sound_walk);
+			RunSoundDelta = 0.0f;
+		}
 		if (!bFlagBotmCol)
 		{
 			y = y + GRAVITY * AddUpdateDelta + 10;
@@ -360,10 +365,6 @@ void Player::Collision(Object* obj)
 					AddDelta = 0.0f;
 					ChangeState(eState_Idle);
 				}
-				else
-				{
-					int zzz = 0;
-				}
 
 			}
 		}
@@ -399,7 +400,7 @@ void Player::InitVelocity()
 void Player::PlayerDie()
 {
 	ChangeState(eState_Die);
-	SoundManager::GetInstance()->Play(ESound::sound2);
+	SoundManager::GetInstance()->Play(ESound::sound_Dead);
 
 }
 

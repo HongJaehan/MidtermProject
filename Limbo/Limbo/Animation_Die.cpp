@@ -60,7 +60,7 @@ void Animation_Die::CountSceneChange(float Delta)
 	if (countInt >= 15)
 	{
 		EventManager::GetInstance()->OnEvent(eEvent_ResetGameScene);
-		SoundManager::GetInstance()->Stop(ESound::sound2);
+		SoundManager::GetInstance()->Stop(ESound::sound_Dead);
 		countInt = 0;
 		frame = 0;
 		addDelta = 0;

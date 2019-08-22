@@ -52,6 +52,7 @@ void IntroScene::Update(float delta)
 		//sound->StopWAV(hWnd, Sound1);
 		sndPlaySound(NULL, SND_ASYNC);
 		SceneManager::GetInstance()->MoveNextScene();
+		SoundManager::GetInstance()->Play(ESound::sound_GameScene);
 	}
 
 	/////////////////////////////////////////////////

@@ -27,7 +27,6 @@ RotateRock::RotateRock(ETag _tag, int _x, int _y, int _width, int _height)
 	minX = 7810 + width * 0.5f;
 
 	collider = new BoxCollider2D(_x, _y, _width, _height, false);
-
 //	bm = new Gdiplus::Bitmap(width, height, PixelFormat32bppARGB);
 	EventManager::GetInstance()->AddEvent(std::bind(&RotateRock::Init, this), EEvent::eEvent_ResetGameScene);
 }
@@ -46,17 +45,22 @@ void RotateRock::Update(float Delta)
 		if ((x - width * 0.5f) - GameManager::GetInstance()->GetPlayerPosX() < 500)
 		{
 			state = eRotateRock_Move;
+			SoundManager::GetInstance()->Play(ESound::sound_Rock);
 		}
 		break;
 	case eRotateRock_Move:
 		if (x > minX)
 		{
-			x -= Delta * 190;
+			x -= Delta * 170;
 		}
 		else
 		{
 			state = eRotateRock_Stop;
 			tag = eTag_Collider;
+			SoundManager::GetInstance()->Stop(ESound::sound_Rock);
+			collider->SetWidth(width - 70);
+			collider->SetHeight(height - 70);
+
 		}
 		break;
 	}
@@ -110,6 +114,7 @@ void RotateRock::Collision(Object* obj)
 	if (obj->GetTag() == eTag_Player && tag != eTag_Collider)
 	{
 		EventManager::GetInstance()->OnEvent(eEvent_PlayerDie);
+		SoundManager::GetInstance()->Stop(ESound::sound_Rock);
 		return;
 	}
 }

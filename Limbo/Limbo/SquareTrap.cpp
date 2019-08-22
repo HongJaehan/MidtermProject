@@ -21,7 +21,7 @@ SquareTrap::SquareTrap(ETag _tag, int _x, int _y, int _width, int _height)
 	maxY = GameManager::GetInstance()->GetTerrainData(x);
 	enable = false;
 
-	collider = new BoxCollider2D(_x, _y, _width, _height, false);
+	collider = new BoxCollider2D(_x, _y, _width, _height-520, false);
 
 	EventManager::GetInstance()->AddEvent(std::bind(&SquareTrap::Init, this), EEvent::eEvent_ResetGameScene);
 	EventManager::GetInstance()->AddEvent(std::bind(&SquareTrap::OnTrap, this), EEvent::eEvent_CutRope);
@@ -38,7 +38,7 @@ void SquareTrap::Update(float Delta)
 	{
 		Down(Delta);
 	}
-	collider->SetY(y);
+	collider->SetY(y+257);
 }
 
 void SquareTrap::Render(Gdiplus::Graphics* MemG)
