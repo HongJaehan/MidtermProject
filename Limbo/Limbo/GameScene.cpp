@@ -51,6 +51,9 @@ void GameScene::Init()
 	//		break;
 	//	}
 	//}
+
+	sndPlaySound(L"Sound\\FrogForest.wav", SND_ASYNC | SND_LOOP);
+
 	bFlagCollision = false;
 	
 	ColliderObject *cObject = new ColliderObject(ETag::eTag_Collider, 95, 206, 190, 412);
@@ -255,4 +258,9 @@ void GameScene::SceneReset()
 	_player->ChangeState(eState_Idle);
 	_player->SetX(GameManager::GetInstance()->GetCheckPointPosX());
 	_player->SetY(player->GetPosX());
+}
+
+void GameScene::SoundEnd()
+{
+	sndPlaySound(NULL, SND_ASYNC);
 }

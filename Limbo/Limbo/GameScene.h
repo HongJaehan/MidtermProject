@@ -25,6 +25,7 @@ public:
 	void Render(Gdiplus::Graphics*);
 	bool CollisionCheck(Object*,Object*);
 	void SceneReset();
+	void SoundEnd();
 
 private:
 	Player* player;

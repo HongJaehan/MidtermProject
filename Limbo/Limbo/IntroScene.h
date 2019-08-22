@@ -25,8 +25,8 @@ private:
 	Animation* IntroAnimation;
 	Gdiplus::Rect atlasRect;
 
-	MCISound* sound;
+	/*MCISound* sound;
 	HWND hWnd;
-	DWORD Sound1, Sound2;
+	DWORD Sound1, Sound2;*/
 };
 

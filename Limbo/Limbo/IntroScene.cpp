@@ -15,24 +15,19 @@ IntroScene::IntroScene()
 	imgAttr = new Gdiplus::ImageAttributes();
 	IntroAnimation = new Animation_Logo();
 
-	/////////////////////////////////////Sound////////////////////////////////////////////////////
-
-
-	//////////////////////////////////////////////////////////////////////////////////////////////
+	sndPlaySound(L"Sound\\Imprison2_OST.wav", SND_ASYNC | SND_LOOP);
 }
 
 IntroScene::~IntroScene()
 {
 	delete bm2;
 	delete imgAttr;
-	delete sound;
+	//delete sound;
 
-	if (sound->wDeviceID > 0) 
+	/*if (sound->wDeviceID > 0)
 	{
 		sound->CloseWAV(hWnd, Sound1);
-		//mciSendCommand(1, MCI_CLOSE, 0, (DWORD)(LPVOID)nullptr);
-		//mciSendCommand(2, MCI_CLOSE, 0, (DWORD)(LPVOID)nullptr);
-	}
+	}*/
 }
 
 void IntroScene::Init()
@@ -43,19 +38,19 @@ void IntroScene::Init()
 
 void IntroScene::Update(float delta)
 {
-	if (!sound)
-	{
-		//sound = new MCISound();
-		//hWnd = theApp.GetMainWnd()->GetSafeHwnd();
-		////Sound1 = sound->LoadWAV(hWnd, L"Sound\\Imprison2_OST.wav");
-		//Sound2 = sound->LoadWAV(hWnd, L"Sound\\walking-1.wav");
-		//sound->PlayWAV(hWnd, Sound2); //play : MCI_NOTIFY , นÝบน : MCI_DGV_PLAY_REPEAT
-	}
+	//if (!sound)
+	//{
+	//	sound = new MCISound();
+	//	hWnd = theApp.GetMainWnd()->GetSafeHwnd();
+	//	//Sound1 = sound->LoadWAV(hWnd, L"Sound\\Imprison2_OST.wav");
+	//	Sound1 = sound->LoadWAV(hWnd, L"Sound\\walking-1.wav");
+	//	sound->PlayWAV_Repeat(hWnd, Sound1);
+	//}
 
 	if (GetAsyncKeyState(VK_SPACE) & 0x1001)
 	{
-		////Sound1 = mciSendCommandW(1, MCI_CLOSE, 0, (DWORD)(LPVOID)nullptr);
-		//sound->StopWAV(hWnd, Sound2);
+		//sound->StopWAV(hWnd, Sound1);
+		sndPlaySound(NULL, SND_ASYNC);
 		SceneManager::GetInstance()->MoveNextScene();
 	}
 
