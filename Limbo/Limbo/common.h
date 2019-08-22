@@ -93,7 +93,12 @@ enum ESound
 	sound_Dead,
 	sound_GameScene,
 	sound_Cave,
-	sound_Rock
+	sound_Rock,
+	sound_Rope,
+	sound_Slide,
+	sound_FallenRock,
+	sound_FelledTrap,
+	sound_Spider
 };
 
 struct Defines
