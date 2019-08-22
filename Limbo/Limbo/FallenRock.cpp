@@ -21,7 +21,7 @@ FallenRock::FallenRock(ETag _tag, int _x, int _y, int _width, int _height,EObjec
 	maxY = GameManager::GetInstance()->GetTerrainData(x);
 	enable = false;
 
-	collider = new BoxCollider2D(_x, _y, _width, _height, false);
+	collider = new BoxCollider2D(_x+width*0.5f, _y-height*0.5f, _width, _height, false);
 
 	EventManager::GetInstance()->AddEvent(std::bind(&FallenRock::Init, this), EEvent::eEvent_ResetGameScene);
 }
