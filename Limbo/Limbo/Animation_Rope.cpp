@@ -3,11 +3,11 @@
 
 Animation_Rope::Animation_Rope()
 {
-	//frame = 0;
-	//addDelta = 0.0f;
-	//std::wstring imgName(TEXT("Rope.png"));
-	//atlasImg = AssetManager::GetInstance()->GetImage(imgName);
-	//AssetManager::GetInstance()->SetXMLData(XMLRect, "XML\\Rope.xml");
+	frame = 0;
+	addDelta = 0.0f;
+	std::wstring imgName(TEXT("Rope.png"));
+	atlasImg = AssetManager::GetInstance()->GetImage(imgName);
+	AssetManager::GetInstance()->SetXMLData(XMLRect, "XML\\Rope.xml");
 }
 
 Animation_Rope::~Animation_Rope()
@@ -30,13 +30,12 @@ void Animation_Rope::Update(Gdiplus::Rect* rect, float Delta, bool action)
 		return;
 	}
 
-	//addDelta += Delta;
-
-	//if (addDelta > 0.01f)
-	//{
-	//	addDelta = 0;
-	//}
-	++frame;
+	addDelta += Delta;
+	if (addDelta > 0.05f)
+	{
+		frame++;
+		addDelta = 0;
+	}
 	if (frame > XMLRect.size() - 1)
 	{
 		frame = XMLRect.size() - 1;

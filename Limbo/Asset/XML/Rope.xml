@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker https://www.codeandweb.com/texturepacker -->
+<!-- $TexturePacker:SmartUpdate:b49388deba2144039e137e603757e01d:ffc575bc5c14fa0e34790fd4a1979fc9:7779956b8fbdea039a0f34f96c81496b$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+with polygon mode enabled:
+vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
+verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
+triangles  => sprite triangulation, 3 vertex indices per triangle
+-->
+<TextureAtlas imagePath="Rope.png" width="1024" height="512">
+    <sprite n="rope1 (1).png" x="0" y="0" w="370" h="90"/>
+    <sprite n="rope2 (1).png" x="370" y="0" w="370" h="90"/>
+    <sprite n="rope3 (1).png" x="0" y="90" w="370" h="90"/>
+    <sprite n="rope4 (1).png" x="370" y="90" w="370" h="90"/>
+    <sprite n="rope5 (1).png" x="0" y="180" w="370" h="90"/>
+    <sprite n="rope6 (1).png" x="370" y="180" w="370" h="90"/>
+</TextureAtlas>

@@ -21,7 +21,6 @@ public:
 
 	void Update(float);
 	void Render(Gdiplus::Graphics*);
-	//std::weak_ptr<Gdiplus::Image> GetImage();
 	void Jump(bool bFlagLeft,int terrainY,float Delta);
 	void AddAnimation(Animation*);
 	void ChangeState(EPlayerState);
@@ -30,7 +29,6 @@ public:
 	void SetLeftFlag(bool Flag);
 	void InitVelocity();
 	void PhysicsUpdate(float Delta);
-	//void CheckCollision(Object &objVec);
 	void Collision(Object*);
 	void PlayerDie();
 
@@ -40,12 +38,20 @@ public:
 	void SetVelocity(float _velocity);
 	bool HasInteraction();
 	void InInteractionDistance(Object* obj);
+
+	void SetNowColState(bool bFlagState);
+	bool GetNowColState();
+	void InitColState()
+	{
+		bFlagNowCol = false;
+		bFlagLeftCol = false;
+		bFlagRightCol = false;
+		bFlagBotmCol = false;
+	}
 private:
 	//Component
 	PlayerControlComponent control;
 	bool bFlagInteraction;
-	//BoxCollider2D collider;
-	//Component* collider;
 
 	EPlayerState state;
 	int playerScreenPosX;
@@ -59,5 +65,13 @@ private:
 	//std::vector<Gdiplus::PointF> ptList;
 	std::vector<Animation*> playerAnimationList;
 	Gdiplus::Rect atlasRect;
+
+	bool bFlagNowCol;
+	bool bFlagRightCol;
+	bool bFlagLeftCol;
+	bool bFlagBotmCol;
+
+	int jumpCount;
+	float jumpdist;
 };
 

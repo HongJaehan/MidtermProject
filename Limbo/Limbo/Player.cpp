@@ -26,6 +26,11 @@ Player::Player()
 	width = defines.playerWidth;
 	height = defines.playerHeight;
 	enable = true;
+	bFlagNowCol = false;
+	bFlagRightCol = false;
+	bFlagLeftCol = false;
+	jumpCount = 0;
+	jumpdist = 0.0f;
 //	float speed = Lerp(0, 10, 2);
 	
 	//AnimationList에 애니메이션을 추가해준다.  enum순서대로 넣어줘야 한다ㄷ
@@ -38,7 +43,7 @@ Player::Player()
 
 	int screenSizeWidth = defines.screenSizeX;
 	//x = screenSizeWidth * 0.5f;
-	x = 10800;
+	x = 3500;
 	y = 450;
 
 	collider = new BoxCollider2D(x, y, width, height, false);
@@ -69,8 +74,9 @@ void Player::Update(float Delta)
 {
 
 	//Component Update
-	control.Update(*this);
 	//physics 업데이트
+	control.Update(*this);
+
 	PhysicsUpdate(Delta);
 	//printf("bottom = %f", collider->GetY()+collider->GetHeight() * 0.5f);
 	//printf("right = %f\n", collider->GetX() + collider->GetWidth() * 0.5f);
@@ -153,16 +159,19 @@ void Player::Jump(bool bFlagLeft,int terrainY,float Delta)
 		AddDelta += Delta;
 		float AddVal = (0.5f * GRAVITY * AddDelta * AddDelta);
 
-		if (bFlagLeft)
+		if (bFlagLeft && !bFlagLeftCol)
 		{
 			x -= velocity * Delta; 
 		}
-		else
+		else if(!bFlagLeft && !bFlagRightCol)
 		{
 			x += velocity * Delta;
 		}
 
-		y = y + (-150 * Delta) + AddVal;
+		if (!bFlagBotmCol)
+		{
+			y = y + (-150 * Delta) + AddVal;
+		}
 
 		if (y > terrainY)
 		{
@@ -199,7 +208,10 @@ void Player::PhysicsUpdate(float Delta)
 	switch (state)
 	{
 	case eState_Idle:
-		y = y + GRAVITY * AddUpdateDelta + 1;
+		if (!bFlagBotmCol)
+		{
+			y = y + GRAVITY * AddUpdateDelta + 10;
+		}
 		velocity = INIT_velocity; //속도 초기화
 		AddUpdateDelta = 0.0f;
 		//현재 Player의 Y좌표가 Terrain보다 크다면
@@ -209,16 +221,22 @@ void Player::PhysicsUpdate(float Delta)
 		}
 		break;
 	case eState_Run:
-		y = y + GRAVITY * AddUpdateDelta;
+		if (!bFlagBotmCol)
+		{
+			y = y + GRAVITY * AddUpdateDelta + 10;
+		}
+		//y = y + GRAVITY * AddUpdateDelta;
 		velocity = ACCELERATION * AddUpdateDelta * 1.3f;
-		if (bFlagLeft)
+		
+		if (bFlagLeft && !bFlagLeftCol)
 		{
 			x -= velocity * Delta;
 		}
-		else
+		else if(!bFlagLeft && !bFlagRightCol)
 		{
 			x += velocity * Delta;
 		}
+
 		if (y >= terrainY)
 		{
 			y = terrainY;
@@ -262,7 +280,6 @@ void Player::Collision(Object* obj)
 		int pTop = GetCollider()->GetY() - GetCollider()->GetHeight() * 0.5f;
 		int pBottom = GetCollider()->GetY() + GetCollider()->GetHeight() * 0.5f;
 
-
 		switch(state)
 		{
 		case eState_Die:
@@ -271,37 +288,62 @@ void Player::Collision(Object* obj)
 		{
 			if (pLeft < objRight && abs(objRight - pLeft) < width)
 			{
-				if (y > objTop)
-				{
-					x = objRight + width * 0.5f;
-				}
+				bFlagLeftCol = true; 
 			}
 			else if (pRight > objLeft && abs(pRight - objLeft) < width)
 			{
-				if (y > objTop)
-				{
-					x = objLeft - width * 0.5f;
-				}
+				bFlagRightCol = true;
+			}
+
+			float dist = abs(pBottom - objTop);
+			if (pBottom > objTop && dist < 5)
+			{
+				//y = objTop - height * 0.5f;
+				bFlagBotmCol = true;
 			}
 		}
 			break;
 		case eState_Idle:
 		{
 			float dist = abs(pBottom - objTop);
-			if (pBottom > objTop && dist < height)
+			if (pBottom > objTop && dist < 5)
 			{
-				y = objTop - height * 0.5f;
+				bFlagBotmCol = true;
+				ChangeState(eState_Idle);
 			}
 		}
 			break;
 		case eState_Jump:
 		{
-			float dist = abs(pBottom - objTop);
-			if (pBottom >= objTop && dist < height)
+			if (pLeft < objRight && abs(objRight - pLeft) < width)
 			{
-				y = objTop - height * 0.5f;
+				bFlagLeftCol = true;
+				break;
 			}
-			ChangeState(eState_Idle);
+			else if (pRight > objLeft && abs(pRight - objLeft) < width)
+			{
+				bFlagRightCol = true;
+				break;
+			}
+
+			float dist = pBottom - objTop;
+
+			if (pBottom > objTop && dist > 0)
+			{
+				if (dist > jumpdist)
+				{
+					bFlagBotmCol = true;
+					ChangeState(eState_Idle);
+					jumpdist = dist;
+				}
+				if (GetAsyncKeyState(VK_UP) & 0x8001)
+				{
+					y -= 10;
+					bFlagBotmCol = false;
+				}
+				//printf("%f\n", dist);
+
+			}
 		}
 			break;
 		case eState_Interaction:
@@ -409,3 +451,14 @@ void Player::InInteractionDistance(Object* obj)
 		break;
 	}
 }
+
+void Player::SetNowColState(bool bFlagState)
+{
+	bFlagNowCol = bFlagState;
+}
+
+bool Player::GetNowColState()
+{
+	return bFlagNowCol;
+}
+
