@@ -40,6 +40,9 @@
     <Filter Include="소스 파일\Background">
       <UniqueIdentifier>{d68712d6-e9c2-449a-ab59-5fbbab785e96}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Sound">
+      <UniqueIdentifier>{86585472-ca46-4c66-befd-ed3f5edb5a46}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="object.h">
@@ -199,7 +202,10 @@
       <Filter>소스 파일\Object</Filter>
     </ClInclude>
     <ClInclude Include="Animation_End.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>소스 파일\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="MCISound.h">
+      <Filter>소스 파일\Sound</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -345,7 +351,10 @@
       <Filter>소스 파일\Object</Filter>
     </ClCompile>
     <ClCompile Include="Animation_End.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="MCISound.cpp">
+      <Filter>소스 파일\Sound</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -229,6 +229,7 @@
     <ClInclude Include="IntroScene.h" />
     <ClInclude Include="Limbo.h" />
     <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="MCISound.h" />
     <ClInclude Include="Niddle.h" />
     <ClInclude Include="object.h" />
     <ClInclude Include="pch.h" />
@@ -282,6 +283,7 @@
     <ClCompile Include="IntroScene.cpp" />
     <ClCompile Include="Limbo.cpp" />
     <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="MCISound.cpp" />
     <ClCompile Include="Niddle.cpp" />
     <ClCompile Include="object.cpp" />
     <ClCompile Include="pch.cpp">
