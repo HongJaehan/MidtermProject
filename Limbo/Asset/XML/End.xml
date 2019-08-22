@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ROOT>
+    <sprite n="THANK1.png" x="0" y="0" w="833" h="562"/>
+	<sprite n="THANK2.png" x="832" y="0" w="833" h="562"/>
+</ROOT>

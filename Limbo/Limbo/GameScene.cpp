@@ -5,6 +5,7 @@
 GameScene::GameScene()
 {
 	Init();
+	tag = ESceneTag::eGameScene;
 }
 
 GameScene::~GameScene()

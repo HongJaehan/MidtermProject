@@ -63,6 +63,13 @@ public:
 	std::string Player = "Player.png";
 };
 
+enum ESceneTag
+{
+	eIntroScene,
+	eGameScene,
+	eEndScene
+};
+
 enum EObjectNum
 {
 	eCorpse = 0,

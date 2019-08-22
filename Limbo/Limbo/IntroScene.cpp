@@ -3,6 +3,8 @@
 
 IntroScene::IntroScene()
 {
+	tag = ESceneTag::eIntroScene;
+
 	backgroundImg = AssetManager::GetInstance()->GetImage(TEXT("Background.png"));
 	fadeOutImg = AssetManager::GetInstance()->GetImage(TEXT("black.png"));
 
