@@ -97,3 +97,21 @@ void AssetManager::SetXMLData(std::unordered_map<int, Gdiplus::Rect>& dic, char*
 		dic.insert(std::make_pair(key,rect));
 	}
 }
+
+void AssetManager::SetObjectXMLData(std::vector<ObjectXMLData> objXMLDataVec, char* fileName)
+{
+	doc->LoadFile(fileName);
+
+	if (doc == nullptr) return;
+
+	tinyxml2::XMLElement* Root = doc->RootElement();
+	tinyxml2::XMLElement* atlasInfo = Root->FirstChildElement("object");
+
+	for (tinyxml2::XMLElement* element = atlasInfo; element != nullptr; element = element->NextSiblingElement())
+	{
+		//ObjectXMLData *oData = new ObjectXMLData();
+		ObjectXMLData* oData = new ObjectXMLData(element->IntAttribute("num"), element->IntAttribute("x"), element->IntAttribute("y"), element->IntAttribute("w"), element->IntAttribute("h"));
+
+		objXMLDataVec.emplace_back(oData);
+	}
+}

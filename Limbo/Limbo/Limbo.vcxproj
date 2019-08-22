@@ -232,6 +232,7 @@
     <ClInclude Include="MCISound.h" />
     <ClInclude Include="Niddle.h" />
     <ClInclude Include="object.h" />
+    <ClInclude Include="ObjectXMLData.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="PhysicsComponent.h" />
     <ClInclude Include="Player.h" />
@@ -287,6 +288,7 @@
     <ClCompile Include="MCISound.cpp" />
     <ClCompile Include="Niddle.cpp" />
     <ClCompile Include="object.cpp" />
+    <ClCompile Include="ObjectXMLData.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

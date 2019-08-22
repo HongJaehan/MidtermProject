@@ -14,6 +14,8 @@
 #include "Rope.h"
 #include "FelledTrap.h"
 #include "FallenRock.h"
+#include "ObjectXMLData.h"
+
 class GameScene :	public Scene
 {
 public:
@@ -34,5 +36,7 @@ private:
 	std::vector<Object*> objectVec;
 	ECheckPoint checkPoint;
 	bool bFlagCollision;
+
+	std::vector<ObjectXMLData> objXmlVec;
 };
 

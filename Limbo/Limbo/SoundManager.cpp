@@ -38,6 +38,7 @@ SoundManager::~SoundManager()
 
 void SoundManager::Play(ESound eSound)
 {
+
 	soundM->PlayWAV(hWnd, soundList[eSound]);
 	//soundM->PlayWAV(hWnd,Sound2);
 }

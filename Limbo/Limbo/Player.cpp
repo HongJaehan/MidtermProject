@@ -30,9 +30,9 @@ Player::Player()
 	bFlagRightCol = false;
 	bFlagLeftCol = false;
 	bFlagJumpStartState = false;
-//	float speed = Lerp(0, 10, 2);
-	
-	//AnimationList에 애니메이션을 추가해준다.  enum순서대로 넣어줘야 한다ㄷ
+	//	float speed = Lerp(0, 10, 2);
+
+		//AnimationList에 애니메이션을 추가해준다.  enum순서대로 넣어줘야 한다ㄷ
 	AddAnimation(new Animation_Idle());
 	AddAnimation(new Animation_Run());
 	AddAnimation(new Animation_Jump());
@@ -42,7 +42,7 @@ Player::Player()
 
 	int screenSizeWidth = defines.screenSizeX;
 	//x = screenSizeWidth * 0.5f;
-	x = 10300;
+	x = 10000;
 	y = 450;
 
 	collider = new BoxCollider2D(x, y, width, height, false);
@@ -50,8 +50,7 @@ Player::Player()
 	playerScreenPosX = x - width * 0.5;
 	playerScreenPosY = y - height * 0.5;
 
-
- 	EventManager::GetInstance()->AddEvent(std::bind(&Player::PlayerDie, this),EEvent::eEvent_PlayerDie);
+	EventManager::GetInstance()->AddEvent(std::bind(&Player::PlayerDie, this), EEvent::eEvent_PlayerDie);
 	EventManager::GetInstance()->AddEvent(std::bind(&Player::MoveReady, this), EEvent::eEvent_MoveReady);
 
 	//사용할 생각
@@ -84,18 +83,18 @@ void Player::Update(float Delta)
 	collider->SetY(y);
 
 	//현재 Animation의 image를 XML정보에 맞춰 저장해줌.
-	playerAnimationList[state]->Update(&atlasRect,Delta);
+	playerAnimationList[state]->Update(&atlasRect, Delta);
 }
 
 void Player::Render(Gdiplus::Graphics* _MemG)
 {
 	//Player의 크기
-	Gdiplus::Rect rect(0,0,width,height);
+	Gdiplus::Rect rect(0, 0, width, height);
 
 	Gdiplus::Bitmap bm(width, height, PixelFormat32bppARGB);
 	Gdiplus::Graphics temp(&bm);
-	temp.DrawImage(playerAnimationList[state]->GetAtlasImg().lock().get(),rect,
-		atlasRect.X , atlasRect.Y, atlasRect.Width, atlasRect.Height, Gdiplus::Unit::UnitPixel, nullptr, 0, nullptr);
+	temp.DrawImage(playerAnimationList[state]->GetAtlasImg().lock().get(), rect,
+		atlasRect.X, atlasRect.Y, atlasRect.Width, atlasRect.Height, Gdiplus::Unit::UnitPixel, nullptr, 0, nullptr);
 
 	int playerScreenWidth;
 	int playerScreenHeight;
@@ -121,7 +120,7 @@ void Player::Render(Gdiplus::Graphics* _MemG)
 	}
 
 	Gdiplus::Rect screenPosRect((defines.screenSizeX / 2) - (width * 0.5f), screenPosY, playerScreenWidth, playerScreenHeight);
-	
+
 
 
 	//만약 좌측방향이라면 bit를 좌우 반전시켜준다.
@@ -133,7 +132,7 @@ void Player::Render(Gdiplus::Graphics* _MemG)
 	_MemG->DrawImage(&bm, screenPosRect);
 
 #if defined VEL_DEBUG
-	if(ptList.size() < 2) return;
+	if (ptList.size() < 2) return;
 	for (auto it = ptList.begin(); it != ptList.end() - 1; ++it)
 	{
 		Gdiplus::Pen pen(Gdiplus::Color(255, 0, 0, 0), 1);
@@ -150,37 +149,37 @@ void Player::Render(Gdiplus::Graphics* _MemG)
 }
 
 static float AddDelta = 0;
-void Player::Jump(bool bFlagLeft,int terrainY,float Delta)
+void Player::Jump(bool bFlagLeft, int terrainY, float Delta)
 {
-		AddDelta += Delta;
-		float AddVal = (0.5f * GRAVITY * AddDelta * AddDelta);
+	AddDelta += Delta;
+	float AddVal = (0.5f * GRAVITY * AddDelta * AddDelta);
 
-		if (AddDelta > 0.3f)
-		{
-			bFlagJumpStartState = false;
-		}
-		if (bFlagLeft && !bFlagLeftCol)
-		{
-			x -= velocity * Delta; 
-		}
-		else if(!bFlagLeft && !bFlagRightCol)
-		{
-			x += velocity * Delta;
-			//printf("vel = %f\n", velocity);
-		}
+	if (AddDelta > 0.3f)
+	{
+		bFlagJumpStartState = false;
+	}
+	if (bFlagLeft && !bFlagLeftCol)
+	{
+		x -= velocity * Delta;
+	}
+	else if (!bFlagLeft && !bFlagRightCol)
+	{
+		x += velocity * Delta;
+		//printf("vel = %f\n", velocity);
+	}
 
-		if (!bFlagBotmCol)
-		{
-			y = y + (-150 * Delta) + AddVal;
-		}
+	if (!bFlagBotmCol)
+	{
+		y = y + (-150 * Delta) + AddVal;
+	}
 
-		if (y > terrainY)
-		{
-			y = terrainY;
-			ChangeState(eState_Idle);
-			AddDelta = 0.0f;
-			InitVelocity();
-		}
+	if (y > terrainY)
+	{
+		y = terrainY;
+		ChangeState(eState_Idle);
+		AddDelta = 0.0f;
+		InitVelocity();
+	}
 }
 
 void Player::AddAnimation(Animation* ani)
@@ -256,7 +255,7 @@ void Player::PhysicsUpdate(float Delta)
 		}
 	}
 
-		break;
+	break;
 	case eState_Jump:
 		Jump(bFlagLeft, terrainY, Delta);
 		break;
@@ -295,7 +294,7 @@ void Player::Collision(Object* obj)
 		int pTop = GetCollider()->GetY() - GetCollider()->GetHeight() * 0.5f;
 		int pBottom = GetCollider()->GetY() + GetCollider()->GetHeight() * 0.5f;
 
-		switch(state)
+		switch (state)
 		{
 		case eState_Die:
 			break;
@@ -303,7 +302,7 @@ void Player::Collision(Object* obj)
 		{
 			if (pLeft < objRight && abs(objRight - pLeft) < width)
 			{
-				bFlagLeftCol = true; 
+				bFlagLeftCol = true;
 			}
 			else if (pRight > objLeft && abs(pRight - objLeft) < width)
 			{
@@ -324,7 +323,7 @@ void Player::Collision(Object* obj)
 			//	}
 			//}
 		}
-			break;
+		break;
 		case eState_Idle:
 		{
 			float dist = abs(pBottom - objTop);
@@ -340,7 +339,7 @@ void Player::Collision(Object* obj)
 				bFlagJumpStartState = true;
 			}
 		}
-			break;
+		break;
 		case eState_Jump:
 		{
 
@@ -368,7 +367,7 @@ void Player::Collision(Object* obj)
 
 			}
 		}
-			break;
+		break;
 		case eState_Interaction:
 			break;
 		case eState_InteractionMove:
@@ -401,7 +400,6 @@ void Player::PlayerDie()
 {
 	ChangeState(eState_Die);
 	SoundManager::GetInstance()->Play(ESound::sound_Dead);
-
 }
 
 bool Player::GetbFlagInteraction()
@@ -438,10 +436,10 @@ void Player::InInteractionDistance(Object* obj)
 	case eState_Run:
 		break;
 	case eState_Idle:
-			if (GetAsyncKeyState(VK_CONTROL) & 0x8001) //상호작용
-			{
-				ChangeState(eState_Interaction);
-			}
+		if (GetAsyncKeyState(VK_CONTROL) & 0x8001) //상호작용
+		{
+			ChangeState(eState_Interaction);
+		}
 		break;
 	case eState_Interaction:
 		if (GetAsyncKeyState(VK_CONTROL) & 0x8001)
@@ -489,10 +487,10 @@ bool Player::GetNowColState()
 
 void Player::InitColState()
 {
-		bFlagNowCol = false;
-		bFlagLeftCol = false;
-		bFlagRightCol = false;
-		bFlagBotmCol = false;
+	bFlagNowCol = false;
+	bFlagLeftCol = false;
+	bFlagRightCol = false;
+	bFlagBotmCol = false;
 }
 
 void Player::SetJumpStartState(bool bFlagstate)

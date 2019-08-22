@@ -26,18 +26,22 @@ GameScene::~GameScene()
 		delete it2;
 	}
 	backgroundVec.clear();
-}
 
-//void GameScene::Func(int x)
-//{
-//	int k = x;
-//}
+	for (auto& it : objXmlVec)
+	{
+		delete &it;
+	}
+	objXmlVec.clear();
+}
 
 void GameScene::Init()
 {
+	AssetManager::GetInstance()->SetObjectXMLData(objXmlVec,"XML\\ObjectCreateData.xml");
+	//AssetManager::GetInstance()->SetObjectXMLData(objXmlVec, "XML\\ObjectCreateData.xml");
 	//EventManager::GetInstance()->AddEvent(std::bind(&GameScene::Func, this, std::placeholders::_1), eEvent_PlayerDie);
 	//EventManager::GetInstance()->OnEvent(eEvent_PlayerDie);
 	player = new Player();
+
 	//objectVec.emplace_back(player);
 	//terrain = new Terrain();
 	//objectVec.emplace_back(terrain);
@@ -56,6 +60,7 @@ void GameScene::Init()
 	//}
 
 	bFlagCollision = false;
+	
 	
 	ColliderObject *cObject = new ColliderObject(ETag::eTag_Collider, 95, 206, 190, 412);
 	ColliderObject *cObject2 = new ColliderObject(ETag::eTag_Collider, 3278, 410, 80, 50);
@@ -263,9 +268,12 @@ bool GameScene::CollisionCheck(Object* obj1, Object* obj2)
 void GameScene::SceneReset()
 {
 	Player* _player = dynamic_cast<Player*>(player);
-	_player->ChangeState(eState_Idle);
 	_player->SetX(GameManager::GetInstance()->GetCheckPointPosX());
 	_player->SetY(player->GetPosX());
+	_player->GetCollider()->SetX(_player->GetPosX());
+	_player->GetCollider()->SetY(_player->GetPosY());
+
+	_player->ChangeState(eState_Idle);
 }
 
 void GameScene::SoundEnd()

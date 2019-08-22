@@ -37,7 +37,7 @@ void Niddle::Render(Gdiplus::Graphics* MemG)
 	MemG->DrawImage(img, rect);
 }
 
-void Niddle::Collision(Object*)
+void Niddle::Collision(Object* obj)
 {
 	EventManager::GetInstance()->OnEvent(eEvent_PlayerDie); 
 }
