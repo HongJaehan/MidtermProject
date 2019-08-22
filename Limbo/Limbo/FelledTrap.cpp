@@ -64,6 +64,7 @@ void FelledTrap::Collision(Object* obj)
 {
 	if (tag != eTag_Collider)
 	{
+		SoundManager::GetInstance()->Play(ESound::sound_FelledTrap);
 		EventManager::GetInstance()->OnEvent(eEvent_PlayerDie);
 	}
 }
@@ -91,6 +92,8 @@ void FelledTrap::Init()
 	y = initPosY;
 	active = false;
 	tag = eTag_FallenTrap;
+	SoundManager::GetInstance()->Stop(ESound::sound_FelledTrap);
+
 }
 
 bool FelledTrap::HasInteraction()

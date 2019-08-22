@@ -38,7 +38,8 @@ void Animation_Jump::Update( Gdiplus::Rect* rect, float Delta)
 }
 void Animation_Jump::Begin()
 {
-
+	frame = 0;
+	addDelta = 0;
 }
 
 void Animation_Jump::End()

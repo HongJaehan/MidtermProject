@@ -23,7 +23,9 @@ enum ETag
 	eTag_Corpse,
 	eTag_SquareRock,
 	eTag_FallenTrap,
-	eTag_FallenRock
+	eTag_FallenRock,
+	eTag_Rope,
+	eTag_Trap_Black
 };
 
 static enum EPlayerState 

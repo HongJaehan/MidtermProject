@@ -207,6 +207,7 @@
     <ClInclude Include="Animation_Run.h" />
     <ClInclude Include="Animation_Spider.h" />
     <ClInclude Include="Animation_Trap.h" />
+    <ClInclude Include="Animation_Trap_Black.h" />
     <ClInclude Include="AssetManager.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="BoxCollider2D.h" />
@@ -250,6 +251,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="Trap.h" />
+    <ClInclude Include="Trap_Black.h" />
     <ClInclude Include="XMLPaser.h" />
   </ItemGroup>
   <ItemGroup>
@@ -265,6 +267,7 @@
     <ClCompile Include="Animation_Run.cpp" />
     <ClCompile Include="Animation_Spider.cpp" />
     <ClCompile Include="Animation_Trap.cpp" />
+    <ClCompile Include="Animation_Trap_Black.cpp" />
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="BoxCollider2D.cpp" />
@@ -308,6 +311,7 @@
     <ClCompile Include="SquareTrap.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Trap.cpp" />
+    <ClCompile Include="Trap_Black.cpp" />
     <ClCompile Include="XMLPaser.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -37,7 +37,9 @@ void Spider::Update(float Delta)
 	if ((x - width * 0.5f) - GameManager::GetInstance()->GetPlayerPosX() < 100
 		&& state == eSpiderState_Idle)
 	{
+		SoundManager::GetInstance()->Play(ESound::sound_Spider);
 		state = eSpiderState_Down;
+
 	}
 
 	animation.Update(&atlasRect, Delta, state);
@@ -82,6 +84,7 @@ void Spider::Collision(Object* obj)
 
 void Spider::Up(float Delta)
 {
+	SoundManager::GetInstance()->Stop(ESound::sound_Spider);
 	if (state != eSpiderState_Idle)
 	{
 		if (y > initPosY)
@@ -116,6 +119,8 @@ void Spider::Init()
 	state = eSpiderState_Idle;
 	x = initPosX;
 	y = initPosY;
+	SoundManager::GetInstance()->Stop(ESound::sound_Spider);
+
 }
 
 bool Spider::HasInteraction()

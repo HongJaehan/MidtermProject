@@ -51,11 +51,14 @@ void IntroScene::Update(float delta)
 	{
 		//sound->StopWAV(hWnd, Sound1);
 		sndPlaySound(NULL, SND_ASYNC);
+		sndPlaySound(L"Sound\\FrogForest.wav", SND_ASYNC | SND_LOOP);
 		SceneManager::GetInstance()->MoveNextScene();
 		SoundManager::GetInstance()->Play(ESound::sound_GameScene);
+		return;
 	}
 
 	/////////////////////////////////////////////////
+
 	////투명도 조절 4행 4열
 	Gdiplus::ColorMatrix clrMatrix = {
 		1.0f, 0.0f, 0.0f, 0.0f, 0.0f,

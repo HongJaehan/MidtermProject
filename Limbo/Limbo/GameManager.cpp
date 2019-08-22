@@ -23,11 +23,9 @@ GameManager::GameManager()
 		x += defines.screenSizeX * 2;
 	}
 
-	//임시
-	checkPointVec.emplace_back(500);
-	checkPointVec.emplace_back(2375);
-	checkPointVec.emplace_back(4291);
-	checkPointVec.emplace_back(7993);
+
+	//CheckPoint 데이타 가져오기
+	AssetManager::GetInstance()->SetCheckPointData(checkPointVec, "XML\\CheckPoint.xml");
 
 	//Object들의 XML데이터를 objectXMLDic에 저장
 	AssetManager::GetInstance()->SetXMLData(objectXMLDic, "XML\\Object.xml");
@@ -53,6 +51,12 @@ void GameManager::ConfirmCheckPoint(int _playerPosX)
 			if (nowCheckPoint < i)
 			{
 				nowCheckPoint = i;
+			}
+			//마지막 CheckPoint 도달 시 
+			if (i == checkPointVec.size() - 1)
+			{
+				sndPlaySound(NULL, SND_ASYNC); //배경음 종료
+				SceneManager::GetInstance()->MoveNextScene(); //씬 전환
 			}
 		}
 		

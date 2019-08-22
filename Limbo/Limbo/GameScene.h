@@ -14,6 +14,7 @@
 #include "Rope.h"
 #include "FelledTrap.h"
 #include "FallenRock.h"
+#include "Trap_Black.h"
 #include "ObjectXMLData.h"
 
 class GameScene :	public Scene

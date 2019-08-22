@@ -57,6 +57,7 @@ void FallenRock::Render(Gdiplus::Graphics* MemG)
 
 void FallenRock::Collision(Object* obj)
 {
+	SoundManager::GetInstance()->Play(ESound::sound_FallenRock);
 	active = true;
 }
 
@@ -66,10 +67,15 @@ void FallenRock::Down(float Delta)
 	{
 		y += Delta * 70;
 	}
+	else
+	{
+		SoundManager::GetInstance()->Stop(ESound::sound_FallenRock);
+	}
 }
 
 void FallenRock::Init()
 {
+	SoundManager::GetInstance()->Stop(ESound::sound_FallenRock);
 	active = false;
 	x = initPosX;
 	y = initPosY;

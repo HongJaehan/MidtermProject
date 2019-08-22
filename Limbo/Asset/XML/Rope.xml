@@ -20,10 +20,10 @@ verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
 triangles  => sprite triangulation, 3 vertex indices per triangle
 -->
 <TextureAtlas imagePath="Rope.png" width="1024" height="512">
-    <sprite n="rope1 (1).png" x="0" y="0" w="370" h="90"/>
-    <sprite n="rope2 (1).png" x="370" y="0" w="370" h="90"/>
-    <sprite n="rope3 (1).png" x="0" y="90" w="370" h="90"/>
-    <sprite n="rope4 (1).png" x="370" y="90" w="370" h="90"/>
-    <sprite n="rope5 (1).png" x="0" y="180" w="370" h="90"/>
-    <sprite n="rope6 (1).png" x="370" y="180" w="370" h="90"/>
+    <sprite num="rope1 (1).png" x="0" y="0" w="370" h="90"/>
+    <sprite num="rope2 (1).png" x="370" y="0" w="370" h="90"/>
+    <sprite num="rope3 (1).png" x="0" y="90" w="370" h="90"/>
+    <sprite num="rope4 (1).png" x="370" y="90" w="370" h="90"/>
+    <sprite num="rope5 (1).png" x="0" y="180" w="370" h="90"/>
+    <sprite num="rope6 (1).png" x="370" y="180" w="370" h="90"/>
 </TextureAtlas>

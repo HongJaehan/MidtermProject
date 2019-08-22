@@ -19,7 +19,7 @@ Trap::Trap(ETag _tag, int _x, int _y, int _width, int _height)
 	InitPosY = y;
 	enable = false;
 
-	collider = new BoxCollider2D(_x, _y, _width-50, _height, false);
+	collider = new BoxCollider2D(_x, _y, _width-50, _height-20, false);
 
 	EventManager::GetInstance()->AddEvent(std::bind(&Trap::Init, this), EEvent::eEvent_ResetGameScene);
 }

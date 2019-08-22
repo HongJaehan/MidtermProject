@@ -53,13 +53,18 @@ void Rope::Render(Gdiplus::Graphics* MemG)
 
 void Rope::Collision(Object* obj)
 {
+	//Rope가 끊어지는 소리 재생
+	SoundManager::GetInstance()->Play(ESound::sound_Rope);
+	//EventManager을 통해 Rope가 끊어지는 Event발생
 	EventManager::GetInstance()->OnEvent(EEvent::eEvent_CutRope);
+	
 	active = true;
 }
 
 void Rope::Init()
 {
 	active = false;
+	SoundManager::GetInstance()->Stop(ESound::sound_Rope);
 }
 
 void Rope::StartAnimation()

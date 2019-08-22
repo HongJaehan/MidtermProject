@@ -10,8 +10,6 @@ RotateRock::RotateRock(ETag _tag, int _x, int _y, int _width, int _height)
 	//img = AssetManager().GetInstance()->GetImage(TEXT("Object.png")).lock().get();
  	img = AssetManager().GetInstance()->GetImage(TEXT("Rock.png")).lock().get();
 
-	//xmlRect = new Gdiplus::Rect(GameManager::GetInstance()->GetObjectRect(EObjectNum::eRotateRock));
-	
 	tag = _tag;
 	x = _x;
 	y = _y;
@@ -51,7 +49,7 @@ void RotateRock::Update(float Delta)
 	case eRotateRock_Move:
 		if (x > minX)
 		{
-			x -= Delta * 170;
+			x -= Delta * 200;
 		}
 		else
 		{
@@ -69,15 +67,16 @@ void RotateRock::Update(float Delta)
 	collider->SetY(y);
 
 	
+
+}
+
+void RotateRock::Render(Gdiplus::Graphics* MemG)
+{
 	rotateNum++;
 	if (rotateNum > 2)
 	{
 		rotateNum = 0;
 	}
-}
-
-void RotateRock::Render(Gdiplus::Graphics* MemG)
-{
 
 	Gdiplus::Rect rect(0, 0, width, height);
 	Gdiplus::Bitmap bm(width, height, PixelFormat32bppARGB);

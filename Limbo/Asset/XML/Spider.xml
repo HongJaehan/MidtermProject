@@ -20,14 +20,14 @@ verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
 triangles  => sprite triangulation, 3 vertex indices per triangle
 -->
 <ROOT>
-    <sprite n="Spider1.png" x="0" y="0" w="177" h="211"/>
-    <sprite n="Spider2.png" x="188" y="0" w="178" h="211"/>
-    <sprite n="Spider3.png" x="376" y="0" w="178" h="211"/>
-    <sprite n="Spider4.png" x="564" y="0" w="177" h="212"/>
-    <sprite n="Spider5.png" x="752" y="0" w="178" h="212"/>
-    <sprite n="Spider6.png" x="0" y="212" w="156" h="212"/>
-    <sprite n="Spider7.png" x="188" y="212" w="156" h="212"/>
-    <sprite n="Spider8.png" x="376" y="212" w="188" h="212"/>
-    <sprite n="Spider9.png" x="564" y="212" w="185" h="212"/>
-    <sprite n="Spider10.png" x="752" y="212" w="177" h="212"/>
+    <sprite num="Spider1.png" x="0" y="0" w="177" h="211"/>
+    <sprite num="Spider2.png" x="188" y="0" w="178" h="211"/>
+    <sprite num="Spider3.png" x="376" y="0" w="178" h="211"/>
+    <sprite num="Spider4.png" x="564" y="0" w="177" h="212"/>
+    <sprite num="Spider5.png" x="752" y="0" w="178" h="212"/>
+    <sprite num="Spider6.png" x="0" y="212" w="156" h="212"/>
+    <sprite num="Spider7.png" x="188" y="212" w="156" h="212"/>
+    <sprite num="Spider8.png" x="376" y="212" w="188" h="212"/>
+    <sprite num="Spider9.png" x="564" y="212" w="185" h="212"/>
+    <sprite num="Spider10.png" x="752" y="212" w="177" h="212"/>
 </ROOT>

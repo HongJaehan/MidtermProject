@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <ROOT>
-    <sprite n="Frame0.png" x="0" y="0" w="125" h="163"/>
-    <sprite n="Frame1.png" x="125" y="0" w="125" h="163"/>
-    <sprite n="Frame2.png" x="250" y="0" w="125" h="163"/>
-    <sprite n="Frame3.png" x="375" y="0" w="125" h="163"/>
-    <sprite n="Frame4.png" x="0" y="163" w="125" h="163"/>
-    <sprite n="Frame5.png" x="125" y="163" w="125" h="163"/>
-    <sprite n="Frame6.png" x="250" y="163" w="125" h="163"/>
-    <sprite n="Frame7.png" x="375" y="163" w="125" h="163"/>
-    <sprite n="Frame8.png" x="0" y="326" w="125" h="163"/>
-    <sprite n="Frame9.png" x="125" y="326" w="125" h="163"/>
+    <sprite num="Frame0.png" x="0" y="0" w="125" h="163"/>
+    <sprite num="Frame1.png" x="125" y="0" w="125" h="163"/>
+    <sprite num="Frame2.png" x="250" y="0" w="125" h="163"/>
+    <sprite num="Frame3.png" x="375" y="0" w="125" h="163"/>
+    <sprite num="Frame4.png" x="0" y="163" w="125" h="163"/>
+    <sprite num="Frame5.png" x="125" y="163" w="125" h="163"/>
+    <sprite num="Frame6.png" x="250" y="163" w="125" h="163"/>
+    <sprite num="Frame7.png" x="375" y="163" w="125" h="163"/>
+    <sprite num="Frame8.png" x="0" y="326" w="125" h="163"/>
+    <sprite num="Frame9.png" x="125" y="326" w="125" h="163"/>
 </ROOT>

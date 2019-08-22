@@ -62,6 +62,7 @@ std::weak_ptr<Gdiplus::Image> AssetManager::MyLoadImage(std::wstring fileName)
 
 void AssetManager::SetXMLData(std::vector<Gdiplus::Rect> &Rects, char* fileName)
 {
+
 	doc->LoadFile(fileName);
 	
 	if (doc == nullptr) return;
@@ -98,7 +99,7 @@ void AssetManager::SetXMLData(std::unordered_map<int, Gdiplus::Rect>& dic, char*
 	}
 }
 
-void AssetManager::SetObjectXMLData(std::vector<ObjectXMLData> objXMLDataVec, char* fileName)
+void AssetManager::SetObjectXMLData(std::vector<ObjectXMLData>& objXMLDataVec, char* fileName)
 {
 	doc->LoadFile(fileName);
 
@@ -109,9 +110,22 @@ void AssetManager::SetObjectXMLData(std::vector<ObjectXMLData> objXMLDataVec, ch
 
 	for (tinyxml2::XMLElement* element = atlasInfo; element != nullptr; element = element->NextSiblingElement())
 	{
-		//ObjectXMLData *oData = new ObjectXMLData();
-		ObjectXMLData* oData = new ObjectXMLData(element->IntAttribute("num"), element->IntAttribute("x"), element->IntAttribute("y"), element->IntAttribute("w"), element->IntAttribute("h"));
-
+		ObjectXMLData oData(element->IntAttribute("num"), element->IntAttribute("x"), element->IntAttribute("y"), element->IntAttribute("w"), element->IntAttribute("h"));
 		objXMLDataVec.emplace_back(oData);
+	}
+}
+
+void AssetManager::SetCheckPointData(std::vector<int>& vec, char* fileName)
+{
+	doc->LoadFile(fileName);
+
+	if (doc == nullptr) return;
+
+	tinyxml2::XMLElement* Root = doc->RootElement();
+	tinyxml2::XMLElement* atlasInfo = Root->FirstChildElement("point");
+
+	for (tinyxml2::XMLElement* element = atlasInfo; element != nullptr; element = element->NextSiblingElement())
+	{
+		vec.emplace_back(element->IntAttribute("pos"));
 	}
 }

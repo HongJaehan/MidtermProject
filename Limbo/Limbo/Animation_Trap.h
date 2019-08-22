@@ -1,5 +1,6 @@
 #pragma once
 #include "Animation.h"
+
 class Animation_Trap :
 	public Animation
 {

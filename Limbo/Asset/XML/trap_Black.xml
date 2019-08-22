@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ROOT>
+    <sprite num="1.png" x="0" y="0" w="665" h="334"/>
+    <sprite num="2.png" x="665" y="0" w="665" h="334"/>
+    <sprite num="3.png" x="1330" y="0" w="665" h="334"/>
+    <sprite num="4.png" x="0" y="334" w="665" h="334"/>
+    <sprite num="5.png" x="665" y="334" w="665" h="334"/>
+    <sprite num="6.png" x="1330" y="334" w="665" h="334"/>
+    <sprite num="7.png" x="0" y="668" w="665" h="334"/>
+    <sprite num="8.png" x="665" y="668" w="665" h="334"/>
+    <sprite num="9.png" x="1330" y="668" w="665" h="334"/>
+    <sprite num="10.png" x="0" y="1002" w="665" h="334"/>
+    <sprite num="11.png" x="665" y="1002" w="665" h="334"/>
+    <sprite num="12.png" x="1330" y="1002" w="665" h="334"/>
+    <sprite num="13.png" x="0" y="1336" w="665" h="334"/>
+    <sprite num="14.png" x="665" y="1336" w="665" h="334"/>
+</ROOT>

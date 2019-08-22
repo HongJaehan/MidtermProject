@@ -24,6 +24,8 @@ SquareTrap::SquareTrap(ETag _tag, int _x, int _y, int _width, int _height)
 	collider = new BoxCollider2D(_x, _y, _width, _height-520, false);
 
 	EventManager::GetInstance()->AddEvent(std::bind(&SquareTrap::Init, this), EEvent::eEvent_ResetGameScene);
+
+	//Rope가 끊어지는 Event에 Trap을 발동시키는 함수 등록
 	EventManager::GetInstance()->AddEvent(std::bind(&SquareTrap::OnTrap, this), EEvent::eEvent_CutRope);
 
 }

@@ -4,11 +4,11 @@
 #include "PlayerControlComponent.h"
 #include <cmath>
 
-#define MAX_velocity 200
+#define MAX_velocity 300
 #define INIT_velocity 0.5f
 #define ACCELERATION 150
 #define PI (3.1415926535897932f)
-#define GRAVITY 7
+#define GRAVITY 10
 #define JUMPFORCE 350
 #define DEGTORAD(X) (X * (PI / 180))
 
@@ -42,7 +42,7 @@ Player::Player()
 
 	int screenSizeWidth = defines.screenSizeX;
 	//x = screenSizeWidth * 0.5f;
-	x = 10000;
+	x = 13800;
 	y = 450;
 
 	collider = new BoxCollider2D(x, y, width, height, false);
@@ -52,10 +52,6 @@ Player::Player()
 
 	EventManager::GetInstance()->AddEvent(std::bind(&Player::PlayerDie, this), EEvent::eEvent_PlayerDie);
 	EventManager::GetInstance()->AddEvent(std::bind(&Player::MoveReady, this), EEvent::eEvent_MoveReady);
-
-	//사용할 생각
-	//pos.SetX(GameManager::GetInstance()->GetCheckPoint().first + width * 0.5);
-	//pos.SetY(GameManager::GetInstance()->GetCheckPoint().first - height);
 
 }
 
@@ -70,14 +66,13 @@ Player::~Player()
 
 void Player::Update(float Delta)
 {
+	//printf("Delta : %f\n", Delta);
 	//Component Update
 	//physics 업데이트
 	control.Update(*this);
 
 	PhysicsUpdate(Delta);
-	//printf("bottom = %f", collider->GetY()+collider->GetHeight() * 0.5f);
-	//printf("right = %f\n", collider->GetX() + collider->GetWidth() * 0.5f);
-
+	printf("X = %d\n", x);
 	GameManager::GetInstance()->SetPlayerPosX(x);
 	collider->SetX(x);
 	collider->SetY(y);
@@ -158,19 +153,21 @@ void Player::Jump(bool bFlagLeft, int terrainY, float Delta)
 	{
 		bFlagJumpStartState = false;
 	}
+	int velocity_Int = abs(velocity * Delta)+1;
+	//printf("velocity : %d\n", velocity_Int);
 	if (bFlagLeft && !bFlagLeftCol)
 	{
-		x -= velocity * Delta;
+		x -= velocity_Int;
 	}
 	else if (!bFlagLeft && !bFlagRightCol)
 	{
-		x += velocity * Delta;
+		x += velocity_Int;
 		//printf("vel = %f\n", velocity);
 	}
 
 	if (!bFlagBotmCol)
 	{
-		y = y + (-150 * Delta) + AddVal;
+		y = y + (-140 * Delta) + AddVal;
 	}
 
 	if (y > terrainY)
@@ -242,11 +239,11 @@ void Player::PhysicsUpdate(float Delta)
 		int velocity_Int = abs(velocity * Delta);
 		if (bFlagLeft && !bFlagLeftCol)
 		{
-			x -= velocity_Int;
+			x -= velocity_Int + 1;
 		}
 		else if (!bFlagLeft && !bFlagRightCol)
 		{
-			x += velocity_Int;
+			x += velocity_Int + 1;
 		}
 
 		if (y >= terrainY)
@@ -315,13 +312,6 @@ void Player::Collision(Object* obj)
 				//y = objTop - height * 0.5f;
 				bFlagBotmCol = true;
 			}
-			//if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
-			//{
-			//	if (GetAsyncKeyState(VK_UP) & 0x8000)
-			//	{
-			//		bFlagJumpStartState = true;
-			//	}
-			//}
 		}
 		break;
 		case eState_Idle:
