@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "Trap_Black.h"
-
+#define ADDHEIGHT 20
 Trap_Black::Trap_Black()
 {
 
@@ -18,20 +18,21 @@ Trap_Black::Trap_Black(ETag _tag, int _x, int _y, int _width, int _height)
 	InitPosX = x;
 	InitPosY = y;
 	enable = false;
+	animState.Init();
 
 	collider = new BoxCollider2D(_x, _y, _width - 50, _height - 20, false);
 
-	EventManager::GetInstance()->AddEvent(std::bind(&Trap_Black::Init, this), EEvent::eEvent_ResetGameScene);
+	EventManager::GetInstance()->AddEvent(std::bind(&Trap_Black::Awake, this), EEvent::eEvent_ResetGameScene);
 }
 
 Trap_Black::~Trap_Black()
 {
-
+	delete collider;
 }
 
 void Trap_Black::Update(float Delta)
 {
-	animation.Update(&atlasRect, Delta, action);
+	animState.Update(&atlasRect, Delta, action);
 
 	y = GameManager::GetInstance()->GetTerrainData(x) - height * 0.5f;
 	collider->SetX(x);
@@ -50,10 +51,15 @@ void Trap_Black::Render(Gdiplus::Graphics* MemG)
 	Gdiplus::Graphics temp(&bm);
 
 	Gdiplus::Rect r(0, 0, width, height);
-	temp.DrawImage(animation.GetAtlasImg().lock().get(), r,
+	
+	if(animState.GetAtlasImg().expired())
+	{
+		return;
+	}
+	temp.DrawImage(animState.GetAtlasImg().lock().get(), r,
 		atlasRect.X, atlasRect.Y, atlasRect.Width, atlasRect.Height, Gdiplus::Unit::UnitPixel, nullptr, 0, nullptr);
 
-	Gdiplus::Rect rect2(drawToScreenPosX, y - height * 0.5f + 20, width, height);
+	Gdiplus::Rect rect2(drawToScreenPosX, y - height * 0.5f + ADDHEIGHT, width, height);
 	MemG->DrawImage(&bm, rect2);
 	//int drawToScreenPosX = x - (GameManager::GetInstance()->GetPlayerPosX() - defines.screenSizeX * 0.5f);
 	//int drawToScreenPosY = y - height;
@@ -93,7 +99,7 @@ void Trap_Black::Collision(Object* obj)
 	}
 }
 
-void Trap_Black::Init()
+void Trap_Black::Awake()
 {
 	x = InitPosX;
 	y = InitPosY;

@@ -7,8 +7,10 @@ RotateRock::RotateRock()
 
 RotateRock::RotateRock(ETag _tag, int _x, int _y, int _width, int _height)
 {
-	//img = AssetManager().GetInstance()->GetImage(TEXT("Object.png")).lock().get();
- 	img = AssetManager().GetInstance()->GetImage(TEXT("Rock.png")).lock().get();
+	if (!AssetManager().GetInstance()->GetImage(TEXT("collider.png")).expired())
+	{
+		img = AssetManager().GetInstance()->GetImage(TEXT("collider.png")).lock().get();
+	}
 
 	tag = _tag;
 	x = _x;
@@ -26,7 +28,7 @@ RotateRock::RotateRock(ETag _tag, int _x, int _y, int _width, int _height)
 
 	collider = new BoxCollider2D(_x, _y, _width, _height, false);
 //	bm = new Gdiplus::Bitmap(width, height, PixelFormat32bppARGB);
-	EventManager::GetInstance()->AddEvent(std::bind(&RotateRock::Init, this), EEvent::eEvent_ResetGameScene);
+	EventManager::GetInstance()->AddEvent(std::bind(&RotateRock::Awake, this), EEvent::eEvent_ResetGameScene);
 }
 
 RotateRock::~RotateRock()
@@ -118,7 +120,7 @@ void RotateRock::Collision(Object* obj)
 	}
 }
 
-void RotateRock::Init()
+void RotateRock::Awake()
 {
 	x = initPosX;
 	y = initPosY;

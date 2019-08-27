@@ -1,6 +1,6 @@
 #pragma once
 #include "object.h"
-#include "Animation_Rope.h"
+#include "AnimState_Rope.h"
 
 class Rope :
 	public Object
@@ -12,13 +12,13 @@ public:
 	void Update(float Delta);
 	void Render(Gdiplus::Graphics* MemG);
 	void Collision(Object* obj);
-	void Init();
-	void StartAnimation();
+	void Awake();
+	void StartAnimState();
 	bool HasInteraction();
 private:
 	Gdiplus::Image* img;
 	Gdiplus::Rect atlasRect;
-	Animation_Rope animation;
+	AnimState_Rope animState;
 	int screenPosX;
 	int screenPosY;
 	int InitPosX;

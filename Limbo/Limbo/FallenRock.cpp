@@ -7,7 +7,11 @@ FallenRock::FallenRock()
 
 FallenRock::FallenRock(ETag _tag, int _x, int _y, int _width, int _height,EObjectNum objNum)
 {
-	img = AssetManager().GetInstance()->GetImage(TEXT("Object.png")).lock().get();
+	
+	if (!AssetManager().GetInstance()->GetImage(TEXT("collider.png")).expired())
+	{
+		img = AssetManager().GetInstance()->GetImage(TEXT("collider.png")).lock().get();
+	}
 	xmlRect = new Gdiplus::Rect(GameManager::GetInstance()->GetObjectRect(objNum));
 	tag = _tag;
 	x = _x;
@@ -23,7 +27,7 @@ FallenRock::FallenRock(ETag _tag, int _x, int _y, int _width, int _height,EObjec
 
 	collider = new BoxCollider2D(_x, _y, _width, _height, false);
 
-	EventManager::GetInstance()->AddEvent(std::bind(&FallenRock::Init, this), EEvent::eEvent_ResetGameScene);
+	EventManager::GetInstance()->AddEvent(std::bind(&FallenRock::Awake, this), EEvent::eEvent_ResetGameScene);
 }
 
 FallenRock::~FallenRock()
@@ -73,7 +77,7 @@ void FallenRock::Down(float Delta)
 	}
 }
 
-void FallenRock::Init()
+void FallenRock::Awake()
 {
 	SoundManager::GetInstance()->Stop(ESound::sound_FallenRock);
 	active = false;

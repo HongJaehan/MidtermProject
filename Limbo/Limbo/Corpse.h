@@ -10,7 +10,7 @@ public:
 	void Update(float Delta);
 	void Render(Gdiplus::Graphics* MemG);
 	void Collision(Object* obj);
-	void Init();
+	void AWake();
 	bool HasInteraction();
 	void CutRope();
 private:

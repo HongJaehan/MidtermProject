@@ -9,7 +9,6 @@ Rope::Rope()
 
 Rope::Rope(ETag _tag, int _x, int _y, int _width, int _height)
 {
-	//img = AssetManager().GetInstance()->GetImage(TEXT("Rope.png")).lock().get();
 	tag = _tag;
 	x = _x;
 	y = _y;
@@ -20,19 +19,21 @@ Rope::Rope(ETag _tag, int _x, int _y, int _width, int _height)
 	InitPosX = x;
 	InitPosY = y;
 	enable = false;
+	animState.Init();
 
 	collider = new BoxCollider2D(_x, _y, _width, _height, true);
-	EventManager::GetInstance()->AddEvent(std::bind(&Rope::Init, this), EEvent::eEvent_ResetGameScene);
-	EventManager::GetInstance()->AddEvent(std::bind(&Rope::StartAnimation, this), EEvent::eEvent_CutRope);
+	EventManager::GetInstance()->AddEvent(std::bind(&Rope::Awake, this), EEvent::eEvent_ResetGameScene);
+	EventManager::GetInstance()->AddEvent(std::bind(&Rope::StartAnimState, this), EEvent::eEvent_CutRope);
 
 }
 Rope::~Rope()
 {
+	delete collider;
 }
 
 void Rope::Update(float Delta)
 {
-	animation.Update(&atlasRect, Delta, active);
+	animState.Update(&atlasRect, Delta, active);
 }
 
 void Rope::Render(Gdiplus::Graphics* MemG)
@@ -44,7 +45,11 @@ void Rope::Render(Gdiplus::Graphics* MemG)
 	Gdiplus::Graphics temp(&bm);
 
 	Gdiplus::Rect r(0, 0, width, height);
-	temp.DrawImage(animation.GetAtlasImg().lock().get(), r,
+	if (animState.GetAtlasImg().expired())
+	{
+		return;
+	}
+	temp.DrawImage(animState.GetAtlasImg().lock().get(), r,
 		atlasRect.X, atlasRect.Y, atlasRect.Width, atlasRect.Height, Gdiplus::Unit::UnitPixel, nullptr, 0, nullptr);
 
 	Gdiplus::Rect rect2(drawToScreenPosX, y , width, height);
@@ -61,13 +66,13 @@ void Rope::Collision(Object* obj)
 	active = true;
 }
 
-void Rope::Init()
+void Rope::Awake()
 {
 	SoundManager::GetInstance()->Stop(ESound::sound_Rope);
 	active = false;
 }
 
-void Rope::StartAnimation()
+void Rope::StartAnimState()
 {
 	active = true;
 }

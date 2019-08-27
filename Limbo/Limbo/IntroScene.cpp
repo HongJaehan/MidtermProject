@@ -4,18 +4,7 @@
 
 IntroScene::IntroScene()
 {
-	tag = ESceneTag::eIntroScene;
 
-	backgroundImg = AssetManager::GetInstance()->GetImage(TEXT("Background.png"));
-	fadeOutImg = AssetManager::GetInstance()->GetImage(TEXT("black.png"));
-
-	AddDelta = 0.0f;
-	rTransparency = 0.4f;
-	bm2 = new Gdiplus::Bitmap(GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), PixelFormat32bppARGB);
-	imgAttr = new Gdiplus::ImageAttributes();
-	IntroAnimation = new Animation_Logo();
-
-	sndPlaySound(L"Sound\\Imprison2_OST.wav", SND_ASYNC | SND_LOOP);
 }
 
 IntroScene::~IntroScene()
@@ -32,21 +21,23 @@ IntroScene::~IntroScene()
 
 void IntroScene::Init()
 {
+	tag = ESceneTag::eIntroScene;
 
+	backgroundImg = AssetManager::GetInstance()->GetImage(TEXT("Background.png"));
+	fadeOutImg = AssetManager::GetInstance()->GetImage(TEXT("black.png"));
+
+	AddDelta = 0.0f;
+	rTransparency = 0.4f;
+	bm2 = new Gdiplus::Bitmap(GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), PixelFormat32bppARGB);
+	imgAttr = new Gdiplus::ImageAttributes();
+	IntroAnimState = new AnimState_Logo();
+
+	sndPlaySound(L"Sound\\Imprison2_OST.wav", SND_ASYNC | SND_LOOP);
 }
 
 
 void IntroScene::Update(float delta)
 {
-	//if (!sound)
-	//{
-	//	sound = new MCISound();
-	//	hWnd = theApp.GetMainWnd()->GetSafeHwnd();
-	//	//Sound1 = sound->LoadWAV(hWnd, L"Sound\\Imprison2_OST.wav");
-	//	Sound1 = sound->LoadWAV(hWnd, L"Sound\\walking-1.wav");
-	//	sound->PlayWAV_Repeat(hWnd, Sound1);
-	//}
-
 	if (GetAsyncKeyState(VK_SPACE) & 0x1001)
 	{
 		//sound->StopWAV(hWnd, Sound1);
@@ -74,7 +65,7 @@ void IntroScene::Update(float delta)
 	}
 
 	////////////////////////////////////////////////
-	IntroAnimation->Update(&atlasRect, delta);
+	IntroAnimState->Update(&atlasRect, delta);
 }
 
 void IntroScene::Render(Gdiplus::Graphics* MemG)
@@ -106,7 +97,7 @@ void IntroScene::Render(Gdiplus::Graphics* MemG)
 	Gdiplus::Bitmap bm3(GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), PixelFormat32bppARGB);
 	Gdiplus::Graphics temp3(&bm3);
 
-	temp3.DrawImage(IntroAnimation->GetAtlasImg().lock().get(), rect3, atlasRect.X, atlasRect.Y, atlasRect.Width, atlasRect.Height, Gdiplus::Unit::UnitPixel, nullptr, 0, nullptr);
+	temp3.DrawImage(IntroAnimState->GetAtlasImg().lock().get(), rect3, atlasRect.X, atlasRect.Y, atlasRect.Width, atlasRect.Height, Gdiplus::Unit::UnitPixel, nullptr, 0, nullptr);
 
 	////그려줄 screen좌표의 rect
 	Gdiplus::Rect screenPosRect3(100, 50, defines.screenSizeX - 200, defines.screenSizeY - 150);

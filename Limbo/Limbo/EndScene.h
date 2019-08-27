@@ -1,6 +1,6 @@
 #pragma once
 #include "Scene.h"
-#include "Animation_End.h"
+#include "AnimState_End.h"
 
 class EndScene : public Scene
 {
@@ -24,6 +24,6 @@ private:
 	float AddDelta;
 	float rTransparency;
 
-	Animation* IntroAnimation;
+	AnimState* IntroAnimState;
 	Gdiplus::Rect atlasRect;
 };

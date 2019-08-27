@@ -1,6 +1,6 @@
 #pragma once
 #include "Scene.h"
-#include "Animation_Logo.h"
+#include "AnimState_Logo.h"
 #include "MCISound.h"
 
 class IntroScene :public Scene
@@ -22,7 +22,7 @@ private:
 	float AddDelta;
 	float rTransparency;
 
-	Animation* IntroAnimation;
+	AnimState* IntroAnimState;
 	Gdiplus::Rect atlasRect;
 
 	/*MCISound* sound;

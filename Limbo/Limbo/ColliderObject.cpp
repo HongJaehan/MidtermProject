@@ -9,7 +9,11 @@ ColliderObject::ColliderObject()
 
 ColliderObject::ColliderObject(ETag _tag, int _x, int _y, int _width, int _height)
 {
-	img = AssetManager().GetInstance()->GetImage(TEXT("collider.png")).lock().get();
+	if (!AssetManager().GetInstance()->GetImage(TEXT("collider.png")).expired())
+	{
+		img = AssetManager().GetInstance()->GetImage(TEXT("collider.png")).lock().get();
+	}
+
 	tag = _tag;
 	x = _x;
 	y = _y;

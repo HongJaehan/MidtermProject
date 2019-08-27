@@ -11,7 +11,7 @@ public:
 	void Update(float Delta);
 	void Render(Gdiplus::Graphics* MemG);
 	void Collision(Object*);
-	void Init();
+	void Awake();
 	bool HasInteraction();
 private:
 	int screenPosX;

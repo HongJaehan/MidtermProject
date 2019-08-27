@@ -14,7 +14,8 @@ public:
 
 private:
 	//이벤트(Key)에 따라 실행할 함수를 저장할 Map 
-	std::unordered_map<EEvent,std::vector<std::function<void()>>> dicEvent;
+	typedef std::unordered_map<EEvent, std::vector<std::function<void()>>> EventHandler;
+	EventHandler dicEvent;
 };
 
 EventManager* EventManager::instance = nullptr;

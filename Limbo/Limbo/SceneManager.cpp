@@ -26,9 +26,14 @@ Scene* SceneManager::GetCurScene()
 
 void SceneManager::Init()
 {
+
 	introScene = new IntroScene();
+	introScene->Init();
 	gameScene = new GameScene();
+	gameScene->Init();
 	endScene = new EndScene();
+	endScene->Init();
+
 	curScene = introScene;
 	
 
@@ -54,14 +59,4 @@ void SceneManager::MoveNextScene()
 
 void SceneManager::Render(CRect rc)
 {
-	//Gdiplus::Rect rc2(rc.left, rc.top, rc.Width(), rc.Height());
-
-	//Gdiplus::Bitmap BackBuffer(rc.Width(), rc.Height(), PixelFormat32bppARGB);
-	//Gdiplus::Graphics MemG(&BackBuffer);
-
-	//Gdiplus::SolidBrush WhiteBrush(Gdiplus::Color(255, 202, 202, 202));
-	//MemG.FillRectangle(&WhiteBrush, rc2);
-
-	//GetCurScene()->Render(&MemG);
-	//MainG->DrawImage(&BackBuffer, 0, 0, rc.Width(), rc.Height());
 }

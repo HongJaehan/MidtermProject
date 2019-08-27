@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "SquareTrap.h"
+#define DOWNFORCE 400
 
 SquareTrap::SquareTrap()
 {
@@ -7,7 +8,10 @@ SquareTrap::SquareTrap()
 
 SquareTrap::SquareTrap(ETag _tag, int _x, int _y, int _width, int _height)
 {
-	img = AssetManager().GetInstance()->GetImage(TEXT("Object.png")).lock().get();
+	if (!AssetManager().GetInstance()->GetImage(TEXT("collider.png")).expired())
+	{
+		img = AssetManager().GetInstance()->GetImage(TEXT("collider.png")).lock().get();
+	}
 	xmlRect = new Gdiplus::Rect(GameManager::GetInstance()->GetObjectRect(EObjectNum::eSquareTrap));
 	tag = _tag;
 	x = _x;
@@ -23,7 +27,7 @@ SquareTrap::SquareTrap(ETag _tag, int _x, int _y, int _width, int _height)
 
 	collider = new BoxCollider2D(_x, _y, _width, _height-520, false);
 
-	EventManager::GetInstance()->AddEvent(std::bind(&SquareTrap::Init, this), EEvent::eEvent_ResetGameScene);
+	EventManager::GetInstance()->AddEvent(std::bind(&SquareTrap::Awake, this), EEvent::eEvent_ResetGameScene);
 
 	//Rope가 끊어지는 Event에 Trap을 발동시키는 함수 등록
 	EventManager::GetInstance()->AddEvent(std::bind(&SquareTrap::OnTrap, this), EEvent::eEvent_CutRope);
@@ -70,7 +74,7 @@ void SquareTrap::Down(float Delta)
 {
 	if (y + (height * 0.5f) < maxY)
 	{
-		y += Delta * 400;
+		y += Delta * DOWNFORCE;
 	}
 	else
 	{
@@ -82,7 +86,7 @@ void SquareTrap::OnTrap()
 {
 	active = true;
 }
-void SquareTrap::Init()
+void SquareTrap::Awake()
 {
 	x = initPosX;
 	y = initPosY;

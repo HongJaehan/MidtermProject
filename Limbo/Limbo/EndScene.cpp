@@ -3,6 +3,10 @@
 
 EndScene::EndScene()
 {
+}
+
+void EndScene::Init()
+{
 	tag = ESceneTag::eEndScene;
 
 	backgroundImg = AssetManager::GetInstance()->GetImage(TEXT("ENDBackground.png"));
@@ -12,7 +16,7 @@ EndScene::EndScene()
 	rTransparency = 0.4f;
 	bm2 = new Gdiplus::Bitmap(GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), PixelFormat32bppARGB);
 	imgAttr = new Gdiplus::ImageAttributes();
-	IntroAnimation = new Animation_End();
+	IntroAnimState = new AnimState_End();
 }
 
 EndScene::~EndScene()
@@ -21,10 +25,7 @@ EndScene::~EndScene()
 	delete imgAttr;
 }
 
-void EndScene::Init()
-{
 
-}
 
 
 void EndScene::Update(float delta)
@@ -48,7 +49,7 @@ void EndScene::Update(float delta)
 		imgAttr->SetColorMatrix(&clrMatrix);
 	}
 	/////////////////////////////////////////////
-	IntroAnimation->Update(&atlasRect, delta);
+	IntroAnimState->Update(&atlasRect, delta);
 }
 
 void EndScene::Render(Gdiplus::Graphics* MemG)
@@ -80,7 +81,7 @@ void EndScene::Render(Gdiplus::Graphics* MemG)
 	Gdiplus::Bitmap bm3(GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), PixelFormat32bppARGB);
 	Gdiplus::Graphics temp3(&bm3);
 
-	temp3.DrawImage(IntroAnimation->GetAtlasImg().lock().get(), rect3, atlasRect.X, atlasRect.Y, atlasRect.Width, atlasRect.Height, Gdiplus::Unit::UnitPixel, nullptr, 0, nullptr);
+	temp3.DrawImage(IntroAnimState->GetAtlasImg().lock().get(), rect3, atlasRect.X, atlasRect.Y, atlasRect.Width, atlasRect.Height, Gdiplus::Unit::UnitPixel, nullptr, 0, nullptr);
 
 	////그려줄 screen좌표의 rect
 	Gdiplus::Rect screenPosRect3(100, 50, defines.screenSizeX - 200, defines.screenSizeY - 150);

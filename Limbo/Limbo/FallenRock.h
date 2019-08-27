@@ -10,7 +10,7 @@ public:
 	void Render(Gdiplus::Graphics* MemG);
 	void Collision(Object* obj);
 	void Down(float Delta);
-	void Init();
+	void Awake();
 	bool HasInteraction();
 
 private:

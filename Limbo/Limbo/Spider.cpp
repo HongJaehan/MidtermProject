@@ -20,10 +20,11 @@ Spider::Spider(ETag _tag, int _x, int _y, int _width, int _height)
 	state = eSpiderState_Idle;
 	initPosY = y;
 	initPosX = x;
+	animState.Init();
 	maxY = GameManager::GetInstance()->GetTerrainData(x) - height*0.5f;
 	collider = new BoxCollider2D(_x, _y, _width-50, _height, false);
 
-	EventManager::GetInstance()->AddEvent(std::bind(&Spider::Init, this), EEvent::eEvent_ResetGameScene);
+	EventManager::GetInstance()->AddEvent(std::bind(&Spider::Awake, this), EEvent::eEvent_ResetGameScene);
 }
 
 Spider::~Spider()
@@ -33,14 +34,14 @@ Spider::~Spider()
 
 void Spider::Update(float Delta)
 {
-	//animation.Update(&atlasRect, Delta, action);
+	//AnimState.Update(&atlasRect, Delta, action);
 	if ((x - width * 0.5f) - GameManager::GetInstance()->GetPlayerPosX() < 100
 		&& state == eSpiderState_Idle)
 	{
 		state = eSpiderState_Down;
 	}
 
-	animation.Update(&atlasRect, Delta, state);
+	animState.Update(&atlasRect, Delta, state);
 	switch (state)
 	{
 	case eSpiderState_Idle:
@@ -67,7 +68,11 @@ void Spider::Render(Gdiplus::Graphics* MemG)
 	Gdiplus::Graphics temp(&bm);
 
 	Gdiplus::Rect r(0, 0, width, height);
-	temp.DrawImage(animation.GetAtlasImg().lock().get(), r,
+	if (animState.GetAtlasImg().expired())
+	{
+		return;
+	}
+	temp.DrawImage(animState.GetAtlasImg().lock().get(), r,
 		atlasRect.X, atlasRect.Y, atlasRect.Width, atlasRect.Height, Gdiplus::Unit::UnitPixel, nullptr, 0, nullptr);
 
 	Gdiplus::Rect rect2(drawToScreenPosX, y - height * 0.5f + 10, width, height);
@@ -121,7 +126,7 @@ void Spider::Down(float Delta)
 	}
 }
 
-void Spider::Init()
+void Spider::Awake()
 {
 	state = eSpiderState_Idle;
 	x = initPosX;

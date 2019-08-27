@@ -32,13 +32,27 @@ Player::Player()
 	bFlagJumpStartState = false;
 	//	float speed = Lerp(0, 10, 2);
 
-		//AnimationList에 애니메이션을 추가해준다.  enum순서대로 넣어줘야 한다ㄷ
-	AddAnimation(new Animation_Idle());
-	AddAnimation(new Animation_Run());
-	AddAnimation(new Animation_Jump());
-	AddAnimation(new Animation_Die());
-	AddAnimation(new Animation_Interaction());
-	AddAnimation(new Animation_InteractionMove());
+		//AnimStateList에 애니메이션을 추가해준다.  enum순서대로 넣어줘야 한다ㄷ
+	AnimState_Idle *animState_Idle = new AnimState_Idle();
+	animState_Idle->Init();
+	AnimState_Run *animState_Run = new AnimState_Run();
+	animState_Run->Init();
+	AnimState_Jump* animState_Jump = new AnimState_Jump();
+	animState_Jump->Init();
+	AnimState_Die* animState_Die = new AnimState_Die();
+	animState_Die->Init();
+	AnimState_Interaction* animState_Interaction = new AnimState_Interaction();
+	animState_Interaction->Init();
+	AnimState_InteractionMove* animState_InteractionMove = new AnimState_InteractionMove();
+	animState_InteractionMove->Init();
+
+	AddAnimState(animState_Idle);
+	AddAnimState(animState_Run);
+	AddAnimState(animState_Jump);
+	AddAnimState(animState_Die);
+	AddAnimState(animState_Interaction);
+	AddAnimState(animState_InteractionMove);
+
 
 	int screenSizeWidth = defines.screenSizeX;
 	//x = screenSizeWidth * 0.5f;
@@ -57,7 +71,7 @@ Player::Player()
 
 Player::~Player()
 {
-	for (auto& it : playerAnimationList)
+	for (auto& it : playerAnimStateList)
 	{
 		delete it;
 	}
@@ -76,8 +90,8 @@ void Player::Update(float Delta)
 	collider->SetX(x);
 	collider->SetY(y);
 
-	//현재 Animation의 image를 XML정보에 맞춰 저장해줌.
-	playerAnimationList[state]->Update(&atlasRect, Delta);
+	//현재 AnimState의 image를 XML정보에 맞춰 저장해줌.
+	playerAnimStateList[state]->Update(&atlasRect, Delta);
 }
 
 void Player::Render(Gdiplus::Graphics* _MemG)
@@ -87,7 +101,13 @@ void Player::Render(Gdiplus::Graphics* _MemG)
 
 	Gdiplus::Bitmap bm(width, height, PixelFormat32bppARGB);
 	Gdiplus::Graphics temp(&bm);
-	temp.DrawImage(playerAnimationList[state]->GetAtlasImg().lock().get(), rect,
+
+	if (playerAnimStateList[state]->GetAtlasImg().expired())
+	{
+		return;
+	}
+
+	temp.DrawImage(playerAnimStateList[state]->GetAtlasImg().lock().get(), rect,
 		atlasRect.X, atlasRect.Y, atlasRect.Width, atlasRect.Height, Gdiplus::Unit::UnitPixel, nullptr, 0, nullptr);
 
 	int playerScreenWidth;
@@ -178,16 +198,16 @@ void Player::Jump(bool bFlagLeft, int terrainY, float Delta)
 	}
 }
 
-void Player::AddAnimation(Animation* ani)
+void Player::AddAnimState(AnimState* ani)
 {
-	playerAnimationList.emplace_back(ani);
+	playerAnimStateList.emplace_back(ani);
 }
 
 void Player::ChangeState(EPlayerState _state)
 {
-	playerAnimationList[state]->End();
+	playerAnimStateList[state]->End();
 	state = _state;
-	playerAnimationList[state]->Begin();
+	playerAnimStateList[state]->Begin();
 }
 
 static float AddUpdateDelta = 0;

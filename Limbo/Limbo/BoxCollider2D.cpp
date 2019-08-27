@@ -7,12 +7,12 @@ BoxCollider2D::BoxCollider2D()
 }
 
 BoxCollider2D::BoxCollider2D(int _x, int _y, int _width, int _height, bool _trigger)
+	:x(_x),
+	y(_y),
+	width(_width),
+	height(_height),
+	trigger(_trigger)
 {
-	x = _x;
-	y = _y;
-	width = _width;
-	height = _height;
-	trigger = _trigger;
 }
 
 BoxCollider2D::~BoxCollider2D()

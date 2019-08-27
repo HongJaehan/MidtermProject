@@ -3,8 +3,6 @@
 
 GameScene::GameScene()
 {
-	Init();
-	tag = ESceneTag::eGameScene;
 }
 
 GameScene::~GameScene()
@@ -32,6 +30,8 @@ GameScene::~GameScene()
 
 void GameScene::Init()
 {
+	tag = ESceneTag::eGameScene;
+
 	player = new Player();
 	AssetManager::GetInstance()->SetObjectXMLData(objXmlVec,"XML\\ObjectCreateData.xml");
 	bFlagCollision = false;

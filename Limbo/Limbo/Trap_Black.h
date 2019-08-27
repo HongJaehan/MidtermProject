@@ -1,6 +1,6 @@
 #pragma once
 #include "object.h"
-#include "Animation_Trap_Black.h"
+#include "AnimState_Trap_Black.h"
 
 
 class Trap_Black :
@@ -13,11 +13,11 @@ public:
 	void Update(float Delta);
 	void Render(Gdiplus::Graphics* MemG);
 	void Collision(Object* obj);
-	void Init();
+	void Awake();
 	bool HasInteraction();
 private:
 	Gdiplus::Rect atlasRect;
-	Animation_Trap_Black animation;
+	AnimState_Trap_Black animState;
 	int screenPosX;
 	int screenPosY;
 	int InitPosX;

@@ -18,20 +18,21 @@ Trap::Trap(ETag _tag, int _x, int _y, int _width, int _height)
 	InitPosX = x;
 	InitPosY = y;
 	enable = false;
+	animState.Init();
 
 	collider = new BoxCollider2D(_x, _y, _width-50, _height-20, false);
 
-	EventManager::GetInstance()->AddEvent(std::bind(&Trap::Init, this), EEvent::eEvent_ResetGameScene);
+	EventManager::GetInstance()->AddEvent(std::bind(&Trap::Awake, this), EEvent::eEvent_ResetGameScene);
 }
 
 Trap::~Trap()
 {
-
+	delete collider;
 }
 
 void Trap::Update(float Delta)
 {
-	animation.Update(&atlasRect, Delta, action);
+	animState.Update(&atlasRect, Delta, action);
 
 	y = GameManager::GetInstance()->GetTerrainData(x)-height*0.5f;
 	collider->SetX(x);
@@ -48,18 +49,19 @@ void Trap::Render(Gdiplus::Graphics* MemG)
 
 	Gdiplus::Bitmap bm(width, height, PixelFormat32bppARGB);
 	Gdiplus::Graphics temp(&bm);
-	
+
+
 	Gdiplus::Rect r(0, 0, width, height);
-	temp.DrawImage(animation.GetAtlasImg().lock().get(), r,
+
+	if (animState.GetAtlasImg().expired())
+	{
+		return;
+	}
+	temp.DrawImage(animState.GetAtlasImg().lock().get(), r,
 		atlasRect.X, atlasRect.Y, atlasRect.Width, atlasRect.Height, Gdiplus::Unit::UnitPixel, nullptr, 0, nullptr);
 	
 	Gdiplus::Rect rect2(drawToScreenPosX, y-height*0.5f + 5, width, height);
 	MemG->DrawImage(&bm, rect2);
-	//int drawToScreenPosX = x - (GameManager::GetInstance()->GetPlayerPosX() - defines.screenSizeX * 0.5f);
-	//int drawToScreenPosY = y - height;
-
-	////Trap은 전체사이즈가 안맞기 때문에 
-	//Gdiplus::Rect rect2(drawToScreenPosX, drawToScreenPosY, width, height);
 }
 
 void Trap::Collision(Object* obj)
@@ -85,36 +87,15 @@ void Trap::Collision(Object* obj)
 	int objTop = collider->GetY() - collider->GetHeight() * 0.5f;
 	int objBottom = collider->GetY() + collider->GetHeight() * 0.5f;
 
-	if (playerBottom > objTop && abs(playerBottom - objTop)<10)
+	if (playerBottom > objTop && abs(playerBottom - objTop) < 10)
 	{
 		action = true;
 		EventManager::GetInstance()->OnEvent(eEvent_PlayerDie);
 		return;
 	}
-	//if (_obj->GetState() == eState_InteractionMove)
-	//{
-	//	if (playerRight > objLeft && playerLeft < objLeft)
-	//	{
-	//		x = playerLeft + 1;
-	//	}
-	//	else if(playerLeft < objRight && playerRight > objRight)
-	//	{
-	//		x = playerRight - 1;
-	//	}
-	//}
-
-	//if (playerBottom < objTop && playerRight > objLeft && abs(playerRight - objLeft) < obj->GetWidth())
-	//{
-	//
-	//}
-	//else if (playerBottom < objTop && playerLeft < objRight && (objRight - playerLeft) < obj->GetWidth())
-	//{
-	//	action = true;
-	//	EventManager::GetInstance()->OnEvent(eEvent_PlayerDie);
-	//}
 }
 
-void Trap::Init()
+void Trap::Awake()
 {
 	x = InitPosX;
 	y = InitPosY;

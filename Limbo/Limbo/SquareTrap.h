@@ -12,7 +12,7 @@ public:
 	void Collision(Object* obj);
 	void Down(float Delta);
 	void OnTrap();
-	void Init();
+	void Awake();
 	bool HasInteraction();
 private:
 	Gdiplus::Image* img;

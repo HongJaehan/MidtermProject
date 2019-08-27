@@ -7,7 +7,10 @@ FelledTrap::FelledTrap()
 
 FelledTrap::FelledTrap(ETag _tag, int _x, int _y, int _width, int _height)
 {
-	img = AssetManager().GetInstance()->GetImage(TEXT("Object.png")).lock().get();
+	if (!AssetManager().GetInstance()->GetImage(TEXT("collider.png")).expired())
+	{
+		img = AssetManager().GetInstance()->GetImage(TEXT("collider.png")).lock().get();
+	}
 	xmlRect = new Gdiplus::Rect(GameManager::GetInstance()->GetObjectRect(EObjectNum::eFallTrap));
 	tag = _tag;
 	x = _x;
@@ -23,7 +26,7 @@ FelledTrap::FelledTrap(ETag _tag, int _x, int _y, int _width, int _height)
 
 	collider = new BoxCollider2D(_x, _y, _width, _height-60, false);
 
-	EventManager::GetInstance()->AddEvent(std::bind(&FelledTrap::Init, this), EEvent::eEvent_ResetGameScene);
+	EventManager::GetInstance()->AddEvent(std::bind(&FelledTrap::Awake, this), EEvent::eEvent_ResetGameScene);
 }
 
 FelledTrap::~FelledTrap()
@@ -88,7 +91,7 @@ void FelledTrap::OnTrap()
 	active = true;
 }
 
-void FelledTrap::Init()
+void FelledTrap::Awake()
 {
 	x = initPosX;
 	y = initPosY;

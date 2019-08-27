@@ -2,7 +2,6 @@
 #include "Scene.h"
 #include "Player.h"
 #include "object.h"
-#include "Terrain.h"
 #include "Background.h"
 #include "ColliderObject.h"
 #include "Niddle.h"
@@ -32,7 +31,6 @@ public:
 
 private:
 	Player* player;
-	Object* terrain;
 	std::vector<Background*> backgroundVec;
 	std::vector<Object*> objectVec;
 	ECheckPoint checkPoint;
