@@ -120,9 +120,6 @@
     <ClInclude Include="XMLPaser.h">
       <Filter>소스 파일\MXL</Filter>
     </ClInclude>
-    <ClInclude Include="Terrain.h">
-      <Filter>소스 파일\Object</Filter>
-    </ClInclude>
     <ClInclude Include="Background.h">
       <Filter>소스 파일\Background</Filter>
     </ClInclude>
@@ -280,9 +277,6 @@
     </ClCompile>
     <ClCompile Include="XMLPaser.cpp">
       <Filter>소스 파일\MXL</Filter>
-    </ClCompile>
-    <ClCompile Include="Terrain.cpp">
-      <Filter>소스 파일\Object</Filter>
     </ClCompile>
     <ClCompile Include="Background.cpp">
       <Filter>소스 파일\Background</Filter>

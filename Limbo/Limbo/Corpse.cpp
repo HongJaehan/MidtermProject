@@ -21,7 +21,7 @@ Corpse::Corpse(ETag _tag, int _x, int _y, int _width, int _height)
 	InitPosY = y;
 	enable = false;
 	bFlagOnEvent = false;
-	cutRopeEventPos = 6747;
+	cutRopeEventPos = 500;
 	collider = new BoxCollider2D(_x, _y, _width-50, _height-10, false);
 
 	EventManager::GetInstance()->AddEvent(std::bind(&Corpse::Init, this), EEvent::eEvent_ResetGameScene);
@@ -39,7 +39,7 @@ void Corpse::Update(float Delta)
 
 	if (bFlagOnEvent == false)
 	{
-		if (x > cutRopeEventPos)
+		if (y > cutRopeEventPos)
 		{
 			bFlagOnEvent = true;
 			CutRope();

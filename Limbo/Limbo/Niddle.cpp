@@ -32,9 +32,9 @@ void Niddle::Update(float Delta)
 
 void Niddle::Render(Gdiplus::Graphics* MemG)
 {
-	int drawToScreenPosX = screenPosX - (GameManager::GetInstance()->GetPlayerPosX() - defines.screenSizeX * 0.5f);
-	Gdiplus::Rect rect(drawToScreenPosX, y, width, height);
-	MemG->DrawImage(img, rect);
+	//int drawToScreenPosX = screenPosX - (GameManager::GetInstance()->GetPlayerPosX() - defines.screenSizeX * 0.5f);
+	//Gdiplus::Rect rect(drawToScreenPosX, y, width, height);
+	//MemG->DrawImage(img, rect);
 }
 
 void Niddle::Collision(Object* obj)

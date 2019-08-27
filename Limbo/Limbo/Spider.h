@@ -26,5 +26,6 @@ private:
 	int initPosX;
 	int initPosY;
 	int maxY;
+	bool bFlagSoundOn;
 };
 

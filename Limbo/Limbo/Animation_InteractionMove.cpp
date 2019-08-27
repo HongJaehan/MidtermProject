@@ -16,9 +16,19 @@ Animation_InteractionMove::~Animation_InteractionMove()
 	atlasImg.reset();
 }
 
+static float soundDelta =0.0f;
 void Animation_InteractionMove::Update(Gdiplus::Rect* rect, float Delta)
 {
 	addDelta += Delta;
+	soundDelta += Delta;
+
+	if (soundDelta > 2.0)
+	{
+		soundDelta = 0;
+		SoundManager::GetInstance()->Stop(ESound::sound_Slide);
+		SoundManager::GetInstance()->Play(ESound::sound_Slide);
+
+	}
 
 	if (addDelta > 0.08f)
 	{
@@ -39,10 +49,12 @@ void Animation_InteractionMove::Update(Gdiplus::Rect* rect, float Delta)
 
 void Animation_InteractionMove::Begin()
 {
+	SoundManager::GetInstance()->Play(ESound::sound_Slide);
 }
 
 void Animation_InteractionMove::End()
 {
+	SoundManager::GetInstance()->Stop(ESound::sound_Slide);
 	frame = 0;
 	addDelta = 0;
 }

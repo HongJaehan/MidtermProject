@@ -249,7 +249,6 @@
     <ClInclude Include="Spider.h" />
     <ClInclude Include="SquareTrap.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="Terrain.h" />
     <ClInclude Include="Trap.h" />
     <ClInclude Include="Trap_Black.h" />
     <ClInclude Include="XMLPaser.h" />
@@ -309,7 +308,6 @@
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Spider.cpp" />
     <ClCompile Include="SquareTrap.cpp" />
-    <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Trap.cpp" />
     <ClCompile Include="Trap_Black.cpp" />
     <ClCompile Include="XMLPaser.cpp" />

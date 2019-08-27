@@ -42,6 +42,8 @@ void FelledTrap::Update(float Delta)
 	if (active)
 	{
 		Down(Delta);
+
+		SoundManager::GetInstance()->Play(ESound::sound_FelledTrap);
 	}
 	collider->SetY(y);
 }
@@ -64,7 +66,6 @@ void FelledTrap::Collision(Object* obj)
 {
 	if (tag != eTag_Collider)
 	{
-		SoundManager::GetInstance()->Play(ESound::sound_FelledTrap);
 		EventManager::GetInstance()->OnEvent(eEvent_PlayerDie);
 	}
 }
@@ -83,6 +84,7 @@ void FelledTrap::Down(float Delta)
 
 void FelledTrap::OnTrap()
 {
+	SoundManager::GetInstance()->Play(ESound::sound_FelledTrap);
 	active = true;
 }
 

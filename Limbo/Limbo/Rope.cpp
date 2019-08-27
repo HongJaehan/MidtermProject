@@ -63,8 +63,8 @@ void Rope::Collision(Object* obj)
 
 void Rope::Init()
 {
-	active = false;
 	SoundManager::GetInstance()->Stop(ESound::sound_Rope);
+	active = false;
 }
 
 void Rope::StartAnimation()

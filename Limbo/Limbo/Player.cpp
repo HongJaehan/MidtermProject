@@ -42,7 +42,7 @@ Player::Player()
 
 	int screenSizeWidth = defines.screenSizeX;
 	//x = screenSizeWidth * 0.5f;
-	x = 13800;
+	x = 850;
 	y = 450;
 
 	collider = new BoxCollider2D(x, y, width, height, false);
@@ -72,7 +72,6 @@ void Player::Update(float Delta)
 	control.Update(*this);
 
 	PhysicsUpdate(Delta);
-	printf("X = %d\n", x);
 	GameManager::GetInstance()->SetPlayerPosX(x);
 	collider->SetX(x);
 	collider->SetY(y);

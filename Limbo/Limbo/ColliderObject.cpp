@@ -34,9 +34,9 @@ void ColliderObject::Update(float Delta)
 
 void ColliderObject::Render(Gdiplus::Graphics* MemG)
 {
-	int drawToScreenPosX = screenPosX - (GameManager::GetInstance()->GetPlayerPosX() - defines.screenSizeX * 0.5f);
-	Gdiplus::Rect rect(drawToScreenPosX,y-height*0.5f, width, height);
-	MemG->DrawImage(img, rect);
+	//int drawToScreenPosX = screenPosX - (GameManager::GetInstance()->GetPlayerPosX() - defines.screenSizeX * 0.5f);
+	//Gdiplus::Rect rect(drawToScreenPosX,y-height*0.5f, width, height);
+	//MemG->DrawImage(img, rect);
 }
 
 void ColliderObject::Collision(Object* obj)

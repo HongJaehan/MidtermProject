@@ -26,10 +26,12 @@ void Animation_Idle::Update(Gdiplus::Rect* rect, float Delta)
 		++frame;
 	}
 
+
 	if (frame > XMLRect.size() - 1)
 	{
 		frame = 0;
 	}
+
 	rect->X = XMLRect[frame].X;
 	rect->Y = XMLRect[frame].Y;
 	rect->Width = XMLRect[frame].Width;
@@ -43,8 +45,7 @@ void Animation_Idle::Begin()
 
 void Animation_Idle::End()
 {
-	//frame = 0;
-	//addDelta = 0;
+
 }
 
 std::weak_ptr<Gdiplus::Image> Animation_Idle::GetAtlasImg()

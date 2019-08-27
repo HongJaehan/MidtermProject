@@ -16,7 +16,7 @@ Spider::Spider(ETag _tag, int _x, int _y, int _width, int _height)
 	screenPosY = y - height * 0.5;
 	enable = false;
 	action = false;
-
+	bFlagSoundOn = false;
 	state = eSpiderState_Idle;
 	initPosY = y;
 	initPosX = x;
@@ -37,9 +37,7 @@ void Spider::Update(float Delta)
 	if ((x - width * 0.5f) - GameManager::GetInstance()->GetPlayerPosX() < 100
 		&& state == eSpiderState_Idle)
 	{
-		SoundManager::GetInstance()->Play(ESound::sound_Spider);
 		state = eSpiderState_Down;
-
 	}
 
 	animation.Update(&atlasRect, Delta, state);
@@ -84,7 +82,11 @@ void Spider::Collision(Object* obj)
 
 void Spider::Up(float Delta)
 {
-	SoundManager::GetInstance()->Stop(ESound::sound_Spider);
+	if (bFlagSoundOn)
+	{
+		SoundManager::GetInstance()->Stop(ESound::sound_Spider);
+		bFlagSoundOn = false;
+	}
 	if (state != eSpiderState_Idle)
 	{
 		if (y > initPosY)
@@ -101,6 +103,11 @@ void Spider::Up(float Delta)
 
 void Spider::Down(float Delta)
 {
+	if (!bFlagSoundOn)
+	{
+		SoundManager::GetInstance()->Play(ESound::sound_Spider);
+	}
+
 	if (state != eSpiderState_Idle)
 	{
 		if (y < maxY)

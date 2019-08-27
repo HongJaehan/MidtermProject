@@ -43,6 +43,8 @@ void Animation_Run::Begin()
 void Animation_Run::End()
 {
 	SoundManager::GetInstance()->Stop(ESound::sound_walk);
+	frame = 0;
+	addDelta = 0;
 }
 std::weak_ptr<Gdiplus::Image> Animation_Run::GetAtlasImg()
 {

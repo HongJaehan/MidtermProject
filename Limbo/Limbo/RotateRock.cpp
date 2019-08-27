@@ -123,6 +123,10 @@ void RotateRock::Init()
 	x = initPosX;
 	y = initPosY;
 	state = eRotateRock_Idle;
+	collider->SetWidth(width + 70);
+	collider->SetHeight(height + 70);
+	SoundManager::GetInstance()->Stop(ESound::sound_Rock);
+
 }
 
 bool RotateRock::HasInteraction()
