@@ -9,30 +9,12 @@ GameScene::GameScene()
 
 GameScene::~GameScene()
 {
-	delete player;
-
-	for (auto& it : objectVec)
-	{
-		delete it;
-	}
-	objectVec.clear();
-
-	for (auto& it2 : backgroundVec)
-	{
-		delete it2;
-	}
-	backgroundVec.clear();
-
-	for (auto& it : objXmlVec)
-	{
-		delete &it;
-	}
-	objXmlVec.clear();
 }
 
 void GameScene::Init()
 {
 	player = new Player();
+	player->Init();
 	AssetManager::GetInstance()->SetObjectXMLData(objXmlVec,"XML\\ObjectCreateData.xml");
 	bFlagCollision = false;
 
@@ -138,6 +120,29 @@ void GameScene::Init()
 
 	//Eventµî·Ï
 	EventManager::GetInstance()->AddEvent(std::bind(&GameScene::SceneReset, this), EEvent::eEvent_ResetGameScene);
+}
+
+void GameScene::Realease()
+{
+	player->Release();
+
+	for (auto& it : objectVec)
+	{
+		delete it;
+	}
+	objectVec.clear();
+
+	for (auto& it2 : backgroundVec)
+	{
+		delete it2;
+	}
+	backgroundVec.clear();
+
+	for (auto& it : objXmlVec)
+	{
+		delete& it;
+	}
+	objXmlVec.clear();
 }
 
 void GameScene::Update(float Delta)

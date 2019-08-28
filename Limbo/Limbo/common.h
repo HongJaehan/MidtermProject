@@ -1,6 +1,11 @@
 #pragma once
 #include <string>
 
+#define CORPSE_EVENT_POS 470
+#define PLAYER_INIT_POS_X 850
+#define PLAYER_INIT_POS_Y 450
+
+
 enum ECheckPoint
 {
 	eCheckPoint1,

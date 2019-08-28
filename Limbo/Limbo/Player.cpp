@@ -19,6 +19,14 @@ float Lerp(float value1, float value2, float amount)
 
 Player::Player()
 {
+}
+
+Player::~Player()
+{
+}
+
+void Player::Init()
+{
 	tag = eTag_Player;
 	state = eState_Idle;
 	bFlagLeft = false;
@@ -32,18 +40,31 @@ Player::Player()
 	bFlagJumpStartState = false;
 	//	float speed = Lerp(0, 10, 2);
 
-		//AnimationList에 애니메이션을 추가해준다.  enum순서대로 넣어줘야 한다ㄷ
-	AddAnimation(new Animation_Idle());
-	AddAnimation(new Animation_Run());
-	AddAnimation(new Animation_Jump());
-	AddAnimation(new Animation_Die());
-	AddAnimation(new Animation_Interaction());
-	AddAnimation(new Animation_InteractionMove());
+		//AnimationList에 애니메이션을 추가해준다.  enum순서대로 넣어줘야 한다
+	AnimState_Idle* animState_Idle = new AnimState_Idle();
+	animState_Idle->Init();
+	AnimState_Die* animState_Die = new AnimState_Die();
+	animState_Die->Init();
+	AnimState_Run* animState_Run = new AnimState_Run();
+	animState_Run->Init();
+	AnimState_Jump* animState_Jump = new AnimState_Jump();
+	animState_Jump->Init();
+	AnimState_Interaction* animState_Interaction = new AnimState_Interaction();
+	animState_Interaction->Init();
+	AnimState_InteractionMove* animState_InteractionMove = new AnimState_InteractionMove();
+	animState_InteractionMove->Init();
+
+	AddAnimation(animState_Idle);
+	AddAnimation(animState_Run);
+	AddAnimation(animState_Jump);
+	AddAnimation(animState_Die);
+	AddAnimation(animState_Interaction);
+	AddAnimation(animState_InteractionMove);
 
 	int screenSizeWidth = defines.screenSizeX;
 	//x = screenSizeWidth * 0.5f;
-	x = 850;
-	y = 450;
+	x = PLAYER_INIT_POS_X;
+	y = PLAYER_INIT_POS_Y;
 
 	collider = new BoxCollider2D(x, y, width, height, false);
 
@@ -55,13 +76,17 @@ Player::Player()
 
 }
 
-Player::~Player()
+void Player::Release()
 {
 	for (auto& it : playerAnimationList)
 	{
 		delete it;
 	}
+	playerAnimationList.clear();
+
 	delete collider;
+
+	delete this;
 }
 
 void Player::Update(float Delta)

@@ -108,15 +108,6 @@
     <ClInclude Include="Animation.h">
       <Filter>소스 파일\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="Animation_Idle.h">
-      <Filter>소스 파일\Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="Animation_Jump.h">
-      <Filter>소스 파일\Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="Animation_Run.h">
-      <Filter>소스 파일\Animation</Filter>
-    </ClInclude>
     <ClInclude Include="XMLPaser.h">
       <Filter>소스 파일\MXL</Filter>
     </ClInclude>
@@ -156,15 +147,6 @@
     <ClInclude Include="Animation_Trap.h">
       <Filter>소스 파일\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="Animation_Die.h">
-      <Filter>소스 파일\Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="Animation_Interaction.h">
-      <Filter>소스 파일\Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="Animation_InteractionMove.h">
-      <Filter>소스 파일\Animation</Filter>
-    </ClInclude>
     <ClInclude Include="Animation_Logo.h">
       <Filter>소스 파일\Animation</Filter>
     </ClInclude>
@@ -179,9 +161,6 @@
     </ClInclude>
     <ClInclude Include="Corpse.h">
       <Filter>소스 파일\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="InteractionComponent.h">
-      <Filter>소스 파일\Component</Filter>
     </ClInclude>
     <ClInclude Include="SquareTrap.h">
       <Filter>소스 파일\Object</Filter>
@@ -198,9 +177,6 @@
     <ClInclude Include="FallenRock.h">
       <Filter>소스 파일\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Animation_End.h">
-      <Filter>소스 파일\Animation</Filter>
-    </ClInclude>
     <ClInclude Include="MCISound.h">
       <Filter>소스 파일\Sound</Filter>
     </ClInclude>
@@ -214,6 +190,27 @@
       <Filter>소스 파일\Object</Filter>
     </ClInclude>
     <ClInclude Include="Animation_Trap_Black.h">
+      <Filter>소스 파일\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimState_Die.h">
+      <Filter>소스 파일\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimState_Idle.h">
+      <Filter>소스 파일\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimState_Interaction.h">
+      <Filter>소스 파일\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimState_InteractionMove.h">
+      <Filter>소스 파일\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation_End.h">
+      <Filter>소스 파일\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimState_Run.h">
+      <Filter>소스 파일\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimState_Jump.h">
       <Filter>소스 파일\Animation</Filter>
     </ClInclude>
   </ItemGroup>
@@ -266,15 +263,6 @@
     <ClCompile Include="Animation.cpp">
       <Filter>소스 파일\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="Animation_Idle.cpp">
-      <Filter>소스 파일\Animation</Filter>
-    </ClCompile>
-    <ClCompile Include="Animation_Jump.cpp">
-      <Filter>소스 파일\Animation</Filter>
-    </ClCompile>
-    <ClCompile Include="Animation_Run.cpp">
-      <Filter>소스 파일\Animation</Filter>
-    </ClCompile>
     <ClCompile Include="XMLPaser.cpp">
       <Filter>소스 파일\MXL</Filter>
     </ClCompile>
@@ -314,15 +302,6 @@
     <ClCompile Include="Animation_Trap.cpp">
       <Filter>소스 파일\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="Animation_Die.cpp">
-      <Filter>소스 파일\Animation</Filter>
-    </ClCompile>
-    <ClCompile Include="Animation_Interaction.cpp">
-      <Filter>소스 파일\Animation</Filter>
-    </ClCompile>
-    <ClCompile Include="Animation_InteractionMove.cpp">
-      <Filter>소스 파일\Animation</Filter>
-    </ClCompile>
     <ClCompile Include="Animation_Logo.cpp">
       <Filter>소스 파일\Animation</Filter>
     </ClCompile>
@@ -337,9 +316,6 @@
     </ClCompile>
     <ClCompile Include="Corpse.cpp">
       <Filter>소스 파일\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="InteractionComponent.cpp">
-      <Filter>소스 파일\Component</Filter>
     </ClCompile>
     <ClCompile Include="SquareTrap.cpp">
       <Filter>소스 파일\Object</Filter>
@@ -356,9 +332,6 @@
     <ClCompile Include="FallenRock.cpp">
       <Filter>소스 파일\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Animation_End.cpp">
-      <Filter>소스 파일\Animation</Filter>
-    </ClCompile>
     <ClCompile Include="MCISound.cpp">
       <Filter>소스 파일\Sound</Filter>
     </ClCompile>
@@ -372,6 +345,27 @@
       <Filter>소스 파일\Object</Filter>
     </ClCompile>
     <ClCompile Include="Animation_Trap_Black.cpp">
+      <Filter>소스 파일\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimState_Die.cpp">
+      <Filter>소스 파일\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimState_Idle.cpp">
+      <Filter>소스 파일\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimState_Interaction.cpp">
+      <Filter>소스 파일\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimState_InteractionMove.cpp">
+      <Filter>소스 파일\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation_End.cpp">
+      <Filter>소스 파일\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimState_Run.cpp">
+      <Filter>소스 파일\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimState_Jump.cpp">
       <Filter>소스 파일\Animation</Filter>
     </ClCompile>
   </ItemGroup>

@@ -4,12 +4,12 @@
 #include "Position.h"
 #include "common.h"
 #include "Animation.h"
-#include "Animation_Idle.h"
-#include "Animation_Run.h"
-#include "Animation_Jump.h"
-#include "Animation_Die.h"
-#include "Animation_InteractionMove.h"
-#include "Animation_Interaction.h"
+#include "AnimState_Idle.h"
+#include "AnimState_Run.h"
+#include "AnimState_Jump.h"
+#include "AnimState_Die.h"
+#include "AnimState_InteractionMove.h"
+#include "AnimState_Interaction.h"
 #include "PlayerControlComponent.h"
 #include "BoxCollider2D.h"
 
@@ -19,6 +19,8 @@ public:
 	Player();
 	~Player();
 
+	void Init();
+	void Release();
 	void Update(float);
 	void Render(Gdiplus::Graphics*);
 	void Jump(bool bFlagLeft,int terrainY,float Delta);

@@ -2,7 +2,6 @@
 #include "Scene.h"
 #include "Player.h"
 #include "object.h"
-#include "Terrain.h"
 #include "Background.h"
 #include "ColliderObject.h"
 #include "Niddle.h"
@@ -24,6 +23,7 @@ public:
 	~GameScene();
 	
 	void Init();
+	void Realease();
 	void Update(float);
 	void Render(Gdiplus::Graphics*);
 	bool CollisionCheck(Object*,Object*);

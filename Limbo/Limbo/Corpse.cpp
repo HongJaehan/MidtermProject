@@ -7,7 +7,6 @@ Corpse::Corpse()
 
 Corpse::Corpse(ETag _tag, int _x, int _y, int _width, int _height)
 {
-
 	img = AssetManager().GetInstance()->GetImage(TEXT("Object.png")).lock().get();
 	xmlRect = new Gdiplus::Rect(GameManager::GetInstance()->GetObjectRect(EObjectNum::eCorpse));
 	tag = _tag;
@@ -21,7 +20,7 @@ Corpse::Corpse(ETag _tag, int _x, int _y, int _width, int _height)
 	InitPosY = y;
 	enable = false;
 	bFlagOnEvent = false;
-	cutRopeEventPos = 500;
+	cutRopeEventPos = CORPSE_EVENT_POS;
 	collider = new BoxCollider2D(_x, _y, _width-50, _height-10, false);
 
 	EventManager::GetInstance()->AddEvent(std::bind(&Corpse::Init, this), EEvent::eEvent_ResetGameScene);
