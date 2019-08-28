@@ -77,16 +77,16 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\Asset</OutDir>
-    <IncludePath>D:\MidTermProject\MidtermProject\Limbo\Limbo\include;C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\include;E:\MidTermProject\Limbo\Limbo\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\MidTermProject\MidtermProject\Limbo\Limbo\Lib;C:\Users\Inha\Documents\GitHub\MidtermProject\MidtermProject\Limbo\Limbo\Lib;E:\MidTermProject\Limbo\Limbo\Lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\Limbo\include;$(IncludePath)</IncludePath>
+    <LibraryPath>..\Limbo\Lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>D:\MidTermProject\MidtermProject\Limbo\Limbo\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\MidTermProject\MidtermProject\Limbo\Limbo\Lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\Limbo\include;$(IncludePath)</IncludePath>
+    <LibraryPath>..\Limbo\Lib;$(LibraryPath)</LibraryPath>
     <OutDir>..\Asset</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
