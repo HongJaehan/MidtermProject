@@ -1,0 +1,182 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(438,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+  pch.cpp
+D:\MidTermProject\MidtermProject\Limbo\Limbo\common.h(39,2): warning C4091:  'static ': 변수를 선언하지 않으면 'EPlayerState' 왼쪽은 무시됩니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\common.h(66,2): warning C4091:  'static ': 변수를 선언하지 않으면 'SFileImgName' 왼쪽은 무시됩니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\AssetManager.h(30,38): warning C4356:  'Singleton<AssetManager>::instance': 정적 데이터 멤버는 파생 클래스를 통해 초기화할 수 없습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\SceneManager.h(29,38): warning C4356:  'Singleton<SceneManager>::instance': 정적 데이터 멤버는 파생 클래스를 통해 초기화할 수 없습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\GameManager.h(31,36): warning C4356:  'Singleton<GameManager>::instance': 정적 데이터 멤버는 파생 클래스를 통해 초기화할 수 없습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\EventManager.h(20,38): warning C4356:  'Singleton<EventManager>::instance': 정적 데이터 멤버는 파생 클래스를 통해 초기화할 수 없습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\SoundManager.h(21,38): warning C4356:  'Singleton<SoundManager>::instance': 정적 데이터 멤버는 파생 클래스를 통해 초기화할 수 없습니다.
+  Animation.cpp
+  Animation_End.cpp
+  Animation_Rope.cpp
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Animation_End.cpp(28,12): warning C4018:  '>': signed 또는 unsigned가 일치하지 않습니다.
+  Animation_Die.cpp
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Animation_Rope.cpp(39,12): warning C4018:  '>': signed 또는 unsigned가 일치하지 않습니다.
+  Animation_Idle.cpp
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Animation_Die.cpp(32,12): warning C4018:  '>': signed 또는 unsigned가 일치하지 않습니다.
+  Animation_Interaction.cpp
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Animation_Idle.cpp(30,12): warning C4018:  '>': signed 또는 unsigned가 일치하지 않습니다.
+  Animation_InteractionMove.cpp
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Animation_Interaction.cpp(29,12): warning C4018:  '>': signed 또는 unsigned가 일치하지 않습니다.
+  Animation_Jump.cpp
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Animation_InteractionMove.cpp(39,12): warning C4018:  '>': signed 또는 unsigned가 일치하지 않습니다.
+  Animation_Logo.cpp
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Animation_Jump.cpp(29,12): warning C4018:  '>': signed 또는 unsigned가 일치하지 않습니다.
+  Animation_Run.cpp
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Animation_Logo.cpp(28,12): warning C4018:  '>': signed 또는 unsigned가 일치하지 않습니다.
+  Animation_Spider.cpp
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Animation_Run.cpp(28,12): warning C4018:  '>': signed 또는 unsigned가 일치하지 않습니다.
+  Animation_Trap.cpp
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Animation_Spider.cpp(41,13): warning C4018:  '>=': signed 또는 unsigned가 일치하지 않습니다.
+  Animation_Trap_Black.cpp
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Animation_Trap.cpp(41,12): warning C4018:  '>': signed 또는 unsigned가 일치하지 않습니다.
+  AssetManager.cpp
+  Background.cpp
+  BoxCollider2D.cpp
+  ChildView.cpp
+  ColliderComponent.cpp
+  ColliderObject.cpp
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Animation_Trap_Black.cpp(41,12): warning C4018:  '>': signed 또는 unsigned가 일치하지 않습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\ColliderObject.cpp(18,18): warning C4244:  '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Component.cpp
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  ControlComponent.cpp
+  Corpse.cpp
+D:\MidTermProject\MidtermProject\Limbo\Limbo\ColliderObject.cpp(19,17): warning C4244:  '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Corpse.cpp(18,17): warning C4244:  '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Corpse.cpp(19,17): warning C4244:  '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Corpse.cpp(36,52): warning C4244:  '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CVector.cpp
+  EndScene.cpp
+  EventManager.cpp
+  FallenRock.cpp
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Corpse.cpp(59,23): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\FallenRock.cpp(17,17): warning C4244:  '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\FallenRock.cpp(18,17): warning C4244:  '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\FallenRock.cpp(51,24): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\FallenRock.cpp(53,43): warning C4244:  '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  FelledTrap.cpp
+D:\MidTermProject\MidtermProject\Limbo\Limbo\FallenRock.cpp(68,18): warning C4244:  '+=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\FelledTrap.cpp(17,17): warning C4244:  '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\FelledTrap.cpp(18,17): warning C4244:  '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\FelledTrap.cpp(36,13): warning C4244:  '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\FelledTrap.cpp(59,23): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\FelledTrap.cpp(61,42): warning C4244:  '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  GameManager.cpp
+D:\MidTermProject\MidtermProject\Limbo\Limbo\FelledTrap.cpp(77,19): warning C4244:  '+=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  GameScene.cpp
+D:\MidTermProject\MidtermProject\Limbo\Limbo\GameManager.cpp(47,20): warning C4018:  '<': signed 또는 unsigned가 일치하지 않습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\GameScene.cpp(146,17): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\GameScene.cpp(147,18): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\GameScene.cpp(152,16): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\GameScene.cpp(153,15): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\GameScene.cpp(250,15): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\GameScene.cpp(251,18): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\GameScene.cpp(252,16): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\GameScene.cpp(253,17): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\GameScene.cpp(255,15): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\GameScene.cpp(256,18): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\GameScene.cpp(257,16): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  InteractionComponent.cpp
+  IntroScene.cpp
+  Limbo.cpp
+  MainFrm.cpp
+  MCISound.cpp
+  Niddle.cpp
+D:\MidTermProject\MidtermProject\Limbo\Limbo\GameScene.cpp(258,17): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Niddle.cpp(18,17): warning C4244:  '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  object.cpp
+  ObjectXMLData.cpp
+  PhysicsComponent.cpp
+  Player.cpp
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Niddle.cpp(19,17): warning C4244:  '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Player.cpp(50,23): warning C4244:  '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Player.cpp(51,23): warning C4244:  '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Player.cpp(96,17): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Player.cpp(116,56): warning C4244:  '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Player.cpp(155,19): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Player.cpp(169,26): warning C4244:  '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Player.cpp(203,15): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Player.cpp(209,37): warning C4244:  '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Player.cpp(230,37): warning C4244:  '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Player.cpp(238,20): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Player.cpp(263,9): warning C4244:  '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Player.cpp(283,15): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Player.cpp(284,16): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Player.cpp(285,14): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Player.cpp(286,17): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Player.cpp(288,13): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Player.cpp(289,14): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Player.cpp(290,12): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Player.cpp(291,15): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Player.cpp(308,15): warning C4244:  '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Player.cpp(318,15): warning C4244:  '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  PlayerControlComponent.cpp
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  Position.cpp
+  Rope.cpp
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Player.cpp(346,15): warning C4244:  '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Rope.cpp(18,17): warning C4244:  '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Rope.cpp(19,17): warning C4244:  '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  RotateRock.cpp
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Rope.cpp(40,23): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\RotateRock.cpp(19,17): warning C4244:  '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\RotateRock.cpp(20,17): warning C4244:  '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\RotateRock.cpp(25,14): warning C4244:  '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\RotateRock.cpp(52,20): warning C4244:  '-=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\RotateRock.cpp(65,52): warning C4244:  '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\RotateRock.cpp(105,23): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Scene.cpp
+  SceneManager.cpp
+  SoundManager.cpp
+  Spider.cpp
+D:\MidTermProject\MidtermProject\Limbo\Limbo\RotateRock.cpp(107,59): warning C4244:  '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Spider.cpp(15,17): warning C4244:  '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Spider.cpp(16,17): warning C4244:  '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Spider.cpp(23,55): warning C4244:  '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Spider.cpp(62,23): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Spider.cpp(73,58): warning C4244:  '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Spider.cpp(94,19): warning C4244:  '-=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  SquareTrap.cpp
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Spider.cpp(115,20): warning C4244:  '+=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\SquareTrap.cpp(17,17): warning C4244:  '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\SquareTrap.cpp(18,17): warning C4244:  '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\SquareTrap.cpp(54,23): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\SquareTrap.cpp(56,42): warning C4244:  '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Trap.cpp
+D:\MidTermProject\MidtermProject\Limbo\Limbo\SquareTrap.cpp(73,19): warning C4244:  '+=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Trap.cpp(16,17): warning C4244:  '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Trap.cpp(17,17): warning C4244:  '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Trap.cpp(36,51): warning C4244:  '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Trap.cpp(38,18): warning C4244:  '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Trap.cpp(46,23): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Trap.cpp(56,54): warning C4244:  '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Trap.cpp(78,17): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Trap.cpp(79,18): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Trap.cpp(80,16): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Trap.cpp(81,19): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Trap.cpp(83,14): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Trap.cpp(84,15): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Trap.cpp(85,13): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Trap_Black.cpp
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Trap.cpp(86,16): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Trap_Black.cpp(16,17): warning C4244:  '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Trap_Black.cpp(17,17): warning C4244:  '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Trap_Black.cpp(36,52): warning C4244:  '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Trap_Black.cpp(38,19): warning C4244:  '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Trap_Black.cpp(46,23): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Trap_Black.cpp(56,58): warning C4244:  '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Trap_Black.cpp(78,17): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Trap_Black.cpp(79,18): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Trap_Black.cpp(80,16): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Trap_Black.cpp(81,19): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Trap_Black.cpp(83,14): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Trap_Black.cpp(84,15): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Trap_Black.cpp(85,13): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  XMLPaser.cpp
+  코드를 생성하고 있습니다...
+D:\MidTermProject\MidtermProject\Limbo\Limbo\Trap_Black.cpp(86,16): warning C4244:  '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Limbo.vcxproj -> D:\MidTermProject\MidtermProject\Limbo\Limbo\..\Asset\Limbo.exe

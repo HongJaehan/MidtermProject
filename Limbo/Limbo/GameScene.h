@@ -2,7 +2,6 @@
 #include "Scene.h"
 #include "Player.h"
 #include "object.h"
-#include "Terrain.h"
 #include "Background.h"
 #include "ColliderObject.h"
 #include "Niddle.h"
