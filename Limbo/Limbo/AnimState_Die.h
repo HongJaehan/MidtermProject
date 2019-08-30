@@ -6,7 +6,8 @@ class AnimState_Die :
 public:
 	AnimState_Die();
 	~AnimState_Die();
-	void Init();
+	virtual void Init()override;
+	virtual void Release()override;
 	void Update(Gdiplus::Rect* rect, float Delta);
 	void Begin();
 	void End();

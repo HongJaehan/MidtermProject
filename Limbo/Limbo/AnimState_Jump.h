@@ -6,7 +6,8 @@ class AnimState_Jump :
 public:
 	AnimState_Jump();
 	~AnimState_Jump();
-	void Init();
+	virtual void Init()override;
+	virtual void Release()override;
 	void Update(Gdiplus::Rect* rect, float Delta);
 	void Begin();
 	void End();

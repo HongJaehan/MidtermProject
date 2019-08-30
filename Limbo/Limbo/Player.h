@@ -19,8 +19,8 @@ public:
 	Player();
 	~Player();
 
-	void Init();
-	void Release();
+	virtual void Init()override;
+	virtual void Release()override;
 	void Update(float);
 	void Render(Gdiplus::Graphics*);
 	void Jump(bool bFlagLeft,int terrainY,float Delta);

@@ -2,37 +2,59 @@
 #include "Corpse.h"
 
 Corpse::Corpse()
+	:initPosX(0),
+	initPosY(0),
+	bFlagOnEvent(false),
+	cutRopeEventPos(0),
+	img(nullptr),
+	screenPosX(0),
+	screenPosY(0),
+	xmlRect(nullptr)
 {
+
 }
 
 Corpse::Corpse(ETag _tag, int _x, int _y, int _width, int _height)
 {
-	img = AssetManager().GetInstance()->GetImage(TEXT("Object.png")).lock().get();
-	xmlRect = new Gdiplus::Rect(GameManager::GetInstance()->GetObjectRect(EObjectNum::eCorpse));
 	tag = _tag;
 	x = _x;
 	y = _y;
 	width = _width;
 	height = _height;
-	screenPosX = x - width * 0.5;
-	screenPosY = y - height * 0.5;
-	InitPosX = x;
-	InitPosY = y;
-	enable = false;
-	bFlagOnEvent = false;
-	cutRopeEventPos = CORPSE_EVENT_POS;
-	collider = new BoxCollider2D(_x, _y, _width-50, _height-10, false);
-
-	EventManager::GetInstance()->AddEvent(std::bind(&Corpse::Init, this), EEvent::eEvent_ResetGameScene);
+	collider = new BoxCollider2D(_x, _y, _width - 50, _height - 10, false);
 }
 
 Corpse::~Corpse()
 {
 }
 
+void Corpse::Init()
+{
+	if (!AssetManager().GetInstance()->GetImage(TEXT("Object.png")).expired())
+	{
+		img = AssetManager().GetInstance()->GetImage(TEXT("Object.png")).lock().get();
+	}
+	xmlRect = new Gdiplus::Rect(GameManager::GetInstance()->GetObjectRect(EObjectNum::eCorpse));
+	screenPosX = x - int(width * 0.5f);
+	screenPosY = y - int(height * 0.5f);
+	initPosX = x;
+	initPosY = y;
+	enable = false;
+	bFlagOnEvent = false;
+	cutRopeEventPos = CORPSE_EVENT_POS;
+
+	EventManager::GetInstance()->AddEvent(std::bind(&Corpse::Awake, this), EEvent::eEvent_ResetGameScene);
+
+}
+
+void Corpse::Release()
+{
+	delete collider;
+}
+
 void Corpse::Update(float Delta)
 {
-	y = GameManager::GetInstance()->GetTerrainData(x) - (height * 0.5f);
+	y = GameManager::GetInstance()->GetTerrainData(x) - int(height * 0.5f);
 	collider->SetX(x);
 	collider->SetY(y);
 
@@ -55,7 +77,7 @@ void Corpse::Render(Gdiplus::Graphics* MemG)
 	temp.DrawImage(img, rect,
 		xmlRect->X, xmlRect->Y, xmlRect->Width, xmlRect->Height, Gdiplus::Unit::UnitPixel, nullptr, 0, nullptr);
 
-	int drawToScreenPosX = (x - width * 0.5f) - (GameManager::GetInstance()->GetPlayerPosX() - defines.screenSizeX * 0.5f);
+	int drawToScreenPosX = (x - int(width * 0.5f)) - (GameManager::GetInstance()->GetPlayerPosX() - int(defines.screenSizeX * 0.5f));
 
 	//Gdiplus::Rect rect2(drawToScreenPosX, y - (height * 0.5f), width, height);
 	Gdiplus::Rect rect2(drawToScreenPosX, y, width, height);
@@ -68,10 +90,10 @@ void Corpse::Collision(Object* obj)
 
 }
 
-void Corpse::Init()
+void Corpse::Awake()
 {
-	x = InitPosX;
-	y = InitPosY;
+	x = initPosX;
+	y = initPosY;
 }
 
 bool Corpse::HasInteraction()

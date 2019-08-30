@@ -7,7 +7,8 @@ class AnimState_Idle :
 public:
 	AnimState_Idle();
 	~AnimState_Idle();
-	void Init();
+	virtual void Init()override;
+	virtual void Release()override;
 	void Update(Gdiplus::Rect* rect, float Delta);
 	void Begin();
 	void End();

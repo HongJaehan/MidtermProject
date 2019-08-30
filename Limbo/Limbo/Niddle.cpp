@@ -8,20 +8,31 @@ Niddle::Niddle()
 
 Niddle::Niddle(ETag _tag, int _x, int _y, int _width, int _height)
 {
-	img = AssetManager().GetInstance()->GetImage(TEXT("collider.png")).lock().get();
 	tag = _tag;
 	x = _x;
 	y = _y;
 	width = _width;
 	height = _height;
-	enable = false;
-	screenPosX = x - width * 0.5;
-	screenPosY = y - height * 0.5;
-
 	collider = new BoxCollider2D(_x, _y, _width, _height, false);
 }
 
 Niddle::~Niddle()
+{
+
+}
+
+void Niddle::Init()
+{
+	if (!AssetManager().GetInstance()->GetImage(TEXT("collider.png")).expired())
+	{
+		img = AssetManager().GetInstance()->GetImage(TEXT("collider.png")).lock().get();
+	}
+	enable = false;
+	screenPosX = x - int(width * 0.5f);
+	screenPosY = y - int(height * 0.5f);
+}
+
+void Niddle::Release()
 {
 	delete collider;
 }

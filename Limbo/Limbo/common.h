@@ -4,7 +4,19 @@
 #define CORPSE_EVENT_POS 470
 #define PLAYER_INIT_POS_X 850
 #define PLAYER_INIT_POS_Y 450
+#define ROCK_MIX_X 7810
+#define ROCK_EVENT_DIST 500
 
+
+template <class T> void SafeRelease(T** ppT)
+{
+	if (*ppT)
+	{
+		(*ppT)->Release();
+		delete* ppT;
+		*ppT = nullptr;
+	}
+}
 
 enum ECheckPoint
 {
@@ -33,7 +45,7 @@ enum ETag
 	eTag_Trap_Black
 };
 
-static enum EPlayerState 
+enum EPlayerState 
 {
 	eState_Idle = 0,
 	eState_Run = 1,
@@ -61,10 +73,11 @@ enum EEvent
 	eEvent_PlayerDie,
 	eEvent_ResetGameScene,
 	eEvent_MoveReady,
-	eEvent_CutRope
+	eEvent_CutRope,
+	eEvent_ExitGame
 };
 
-static struct SFileImgName
+struct SFileImgName
 {
 public:
 	std::string Player = "Player.png";

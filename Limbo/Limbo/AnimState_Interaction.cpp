@@ -8,7 +8,6 @@ AnimState_Interaction::AnimState_Interaction()
 
 AnimState_Interaction::~AnimState_Interaction()
 {
-	atlasImg.reset();
 }
 
 void AnimState_Interaction::Init()
@@ -19,6 +18,14 @@ void AnimState_Interaction::Init()
 	std::wstring imgName(TEXT("Interaction.png"));
 	atlasImg = AssetManager::GetInstance()->GetImage(imgName);
 	AssetManager::GetInstance()->SetXMLData(XMLRect, "XML\\Interaction.xml");
+}
+
+void AnimState_Interaction::Release()
+{
+	if (!atlasImg.expired())
+	{
+		atlasImg.reset();
+	}
 }
 
 void AnimState_Interaction::Update(Gdiplus::Rect* rect, float Delta)

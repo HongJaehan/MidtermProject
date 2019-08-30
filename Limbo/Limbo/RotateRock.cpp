@@ -7,29 +7,37 @@ RotateRock::RotateRock()
 
 RotateRock::RotateRock(ETag _tag, int _x, int _y, int _width, int _height)
 {
-	//img = AssetManager().GetInstance()->GetImage(TEXT("Object.png")).lock().get();
- 	img = AssetManager().GetInstance()->GetImage(TEXT("Rock.png")).lock().get();
 
 	tag = _tag;
 	x = _x;
 	y = _y;
 	width = _width;
 	height = _height;
+	collider = new BoxCollider2D(_x, _y, _width, _height, false);
+}
+
+RotateRock::~RotateRock()
+{
+}
+
+void RotateRock::Init()
+{
+	if (!AssetManager().GetInstance()->GetImage(TEXT("Rock.png")).expired())
+	{
+		img = AssetManager().GetInstance()->GetImage(TEXT("Rock.png")).lock().get();
+	}
 	enable = false;
-	screenPosX = x - width * 0.5;
-	screenPosY = y - height * 0.5;
+	screenPosX = x - int(width * 0.5f);
+	screenPosY = y - int(height * 0.5f);
 	state = eRotateRock_Idle;
 	initPosX = x;
 	initPosY = y;
 	rotateNum = 0;
-	minX = 7810 + width * 0.5f;
-
-	collider = new BoxCollider2D(_x, _y, _width, _height, false);
-//	bm = new Gdiplus::Bitmap(width, height, PixelFormat32bppARGB);
-	EventManager::GetInstance()->AddEvent(std::bind(&RotateRock::Init, this), EEvent::eEvent_ResetGameScene);
+	minX = ROCK_MIX_X + int(width * 0.5f);
+	EventManager::GetInstance()->AddEvent(std::bind(&RotateRock::Awake, this), EEvent::eEvent_ResetGameScene);
 }
 
-RotateRock::~RotateRock()
+void RotateRock::Release()
 {
 	delete collider;
 	delete xmlRect;
@@ -40,7 +48,7 @@ void RotateRock::Update(float Delta)
 	switch (state)
 	{
 	case eRotateRock_Idle:
-		if ((x - width * 0.5f) - GameManager::GetInstance()->GetPlayerPosX() < 500)
+		if ((x - width * 0.5f) - GameManager::GetInstance()->GetPlayerPosX() < ROCK_EVENT_DIST)
 		{
 			state = eRotateRock_Move;
 			SoundManager::GetInstance()->Play(ESound::sound_Rock);
@@ -49,7 +57,7 @@ void RotateRock::Update(float Delta)
 	case eRotateRock_Move:
 		if (x > minX)
 		{
-			x -= Delta * 200;
+			x -= int(Delta * 200);
 		}
 		else
 		{
@@ -62,7 +70,7 @@ void RotateRock::Update(float Delta)
 		}
 		break;
 	}
-	y = GameManager::GetInstance()->GetTerrainData(x) - height * 0.5f;
+	y = GameManager::GetInstance()->GetTerrainData(x) - int(height * 0.5f);
 	collider->SetX(x);
 	collider->SetY(y);
 
@@ -102,9 +110,9 @@ void RotateRock::Render(Gdiplus::Graphics* MemG)
 		
 	}
 	//bm.RotateFlip(Gdiplus::Rotate90FlipX);
-	int drawToScreenPosX = (x - width * 0.5f) - (GameManager::GetInstance()->GetPlayerPosX() - defines.screenSizeX * 0.5f);
+	int drawToScreenPosX = (x - int(width * 0.5f)) - (GameManager::GetInstance()->GetPlayerPosX() - int(defines.screenSizeX * 0.5f));
 
-	Gdiplus::Rect rect2(drawToScreenPosX, y - (height * 0.5f)+10, width, height);
+	Gdiplus::Rect rect2(drawToScreenPosX, y - int(height * 0.5f) + 10, width, height);
 	MemG->DrawImage(&bm, rect2);
 }
 
@@ -118,7 +126,7 @@ void RotateRock::Collision(Object* obj)
 	}
 }
 
-void RotateRock::Init()
+void RotateRock::Awake()
 {
 	x = initPosX;
 	y = initPosY;

@@ -7,7 +7,6 @@ AnimState_Idle::AnimState_Idle()
 
 AnimState_Idle::~AnimState_Idle()
 {
-	atlasImg.reset();
 }
 
 void AnimState_Idle::Init()
@@ -18,6 +17,14 @@ void AnimState_Idle::Init()
 	std::wstring imgName(TEXT("Idle.png"));
 	atlasImg = AssetManager::GetInstance()->GetImage(imgName);
 	AssetManager::GetInstance()->SetXMLData(XMLRect, "XML\\Idle.xml");
+}
+
+void AnimState_Idle::Release()
+{
+	if (!atlasImg.expired())
+	{
+		atlasImg.reset();
+	}
 }
 
 void AnimState_Idle::Update(Gdiplus::Rect* rect, float Delta)

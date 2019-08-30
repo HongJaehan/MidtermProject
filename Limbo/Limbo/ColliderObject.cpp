@@ -3,26 +3,43 @@
 
 
 ColliderObject::ColliderObject()
+	:img(nullptr),
+	screenPosX(0),
+	screenPosY(0)
 {
 
 }
 
 ColliderObject::ColliderObject(ETag _tag, int _x, int _y, int _width, int _height)
+	:img(nullptr),
+	screenPosX(0),
+	screenPosY(0)
 {
-	img = AssetManager().GetInstance()->GetImage(TEXT("collider.png")).lock().get();
 	tag = _tag;
 	x = _x;
 	y = _y;
 	width = _width;
 	height = _height;
- 	screenPosX = x - width * 0.5;
-	screenPosY = y - height * 0.5;
-	enable = false;
-
-	collider = new BoxCollider2D(_x, _y, _width,_height, false);
+	collider = new BoxCollider2D(_x, _y, _width, _height, false);
 }
 
 ColliderObject::~ColliderObject()
+{
+
+}
+
+void ColliderObject::Init()
+{
+	if (!AssetManager().GetInstance()->GetImage(TEXT("collider.png")).expired())
+	{
+		img = AssetManager().GetInstance()->GetImage(TEXT("collider.png")).lock().get();
+	}
+	screenPosX = x - int(width * 0.5f);
+	screenPosY = y - int(height * 0.5f);
+	enable = false;
+}
+
+void ColliderObject::Release()
 {
 	delete collider;
 }

@@ -7,7 +7,7 @@ AnimState_InteractionMove::AnimState_InteractionMove()
 
 AnimState_InteractionMove::~AnimState_InteractionMove()
 {
-	atlasImg.reset();
+
 }
 
 void AnimState_InteractionMove::Init()
@@ -18,6 +18,14 @@ void AnimState_InteractionMove::Init()
 	std::wstring imgName(TEXT("Interaction_Move.png"));
 	atlasImg = AssetManager::GetInstance()->GetImage(imgName);
 	AssetManager::GetInstance()->SetXMLData(XMLRect, "XML\\Interaction_Move.xml");
+}
+
+void AnimState_InteractionMove::Release()
+{
+	if (!atlasImg.expired())
+	{
+		atlasImg.reset();
+	}
 }
 
 static float soundDelta =0.0f;

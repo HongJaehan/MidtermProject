@@ -4,6 +4,15 @@
 #define MAX_DOWN_FRAME 
 Animation_Spider::Animation_Spider()
 {
+}
+
+Animation_Spider::~Animation_Spider()
+{
+
+}
+
+void Animation_Spider::Init()
+{
 	frame = 0;
 	addDelta = 0.0f;
 	std::wstring imgName(TEXT("Spider.png"));
@@ -11,7 +20,7 @@ Animation_Spider::Animation_Spider()
 	AssetManager::GetInstance()->SetXMLData(XMLRect, "XML\\Spider.xml");
 }
 
-Animation_Spider::~Animation_Spider()
+void Animation_Spider::Release()
 {
 	atlasImg.lock().reset();
 }
@@ -48,11 +57,11 @@ void Animation_Spider::Update(Gdiplus::Rect* rect, float Delta, ESpiderState sta
 		if (addDelta > 0.1f)
 		{
 			--frame;
+			if (frame <= 0)
+			{
+				frame = 0;
+			}
 			addDelta = 0.0f;
-		}
-		if (frame <= 0)
-		{
-			frame = 0;
 		}
 		break;
 	}

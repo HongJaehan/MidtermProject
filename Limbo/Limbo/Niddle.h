@@ -7,7 +7,8 @@ public:
 	Niddle();
 	Niddle(ETag _tag, int _x, int _y, int _width, int _height);
 	~Niddle();
-
+	virtual void Init()override;
+	virtual void Release()override;
 	void Update(float Delta);
 	void Render(Gdiplus::Graphics* MemG);
 	void Collision(Object*);

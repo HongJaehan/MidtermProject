@@ -13,6 +13,7 @@ public:
 	void SetCurScene(Scene*);
 	Scene* GetCurScene();
 	void Init();
+	void Release();
 	void MoveNextScene();
 	void Render(CRect rc);
 	Gdiplus::Graphics* MainG;

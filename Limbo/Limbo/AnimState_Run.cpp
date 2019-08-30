@@ -8,7 +8,7 @@ AnimState_Run::AnimState_Run()
 
 AnimState_Run::~AnimState_Run()
 {
-	atlasImg.reset();
+
 }
 void AnimState_Run::Init()
 {
@@ -18,6 +18,13 @@ void AnimState_Run::Init()
 	std::wstring imgName(TEXT("Run.png"));
 	atlasImg = AssetManager::GetInstance()->GetImage(imgName);
 	AssetManager::GetInstance()->SetXMLData(XMLRect, "XML\\Run.xml");
+}
+void AnimState_Run::Release()
+{
+	if (!atlasImg.expired())
+	{
+		atlasImg.reset();
+	}
 }
 void AnimState_Run::Update( Gdiplus::Rect* rect, float Delta)
 {

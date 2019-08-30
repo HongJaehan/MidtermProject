@@ -12,21 +12,32 @@ Spider::Spider(ETag _tag, int _x, int _y, int _width, int _height)
 	y = _y;
 	width = _width;
 	height = _height;
-	screenPosX = x - width * 0.5;
-	screenPosY = y - height * 0.5;
+	collider = new BoxCollider2D(_x, _y, _width-50, _height, false);
+
+}
+
+Spider::~Spider()
+{
+
+}
+
+void Spider::Init()
+{
+	screenPosX = x - int(width * 0.5f);
+	screenPosY = y - int(height * 0.5f);
 	enable = false;
 	action = false;
 	bFlagSoundOn = false;
 	state = eSpiderState_Idle;
 	initPosY = y;
 	initPosX = x;
-	maxY = GameManager::GetInstance()->GetTerrainData(x) - height*0.5f;
-	collider = new BoxCollider2D(_x, _y, _width-50, _height, false);
+	animation.Init();
+	maxY = GameManager::GetInstance()->GetTerrainData(x) - int(height * 0.5f);
+	EventManager::GetInstance()->AddEvent(std::bind(&Spider::Awake, this), EEvent::eEvent_ResetGameScene);
 
-	EventManager::GetInstance()->AddEvent(std::bind(&Spider::Init, this), EEvent::eEvent_ResetGameScene);
 }
 
-Spider::~Spider()
+void Spider::Release()
 {
 	delete collider;
 }
@@ -59,7 +70,7 @@ void Spider::Update(float Delta)
 
 void Spider::Render(Gdiplus::Graphics* MemG)
 {
-	int drawToScreenPosX = screenPosX - (GameManager::GetInstance()->GetPlayerPosX() - defines.screenSizeX * 0.5f);
+	int drawToScreenPosX = screenPosX - (GameManager::GetInstance()->GetPlayerPosX() - int(defines.screenSizeX * 0.5f));
 	////PlayerÀÇ Å©±â
 	//Gdiplus::Rect rect(0, 0, width, height);
 
@@ -67,10 +78,11 @@ void Spider::Render(Gdiplus::Graphics* MemG)
 	Gdiplus::Graphics temp(&bm);
 
 	Gdiplus::Rect r(0, 0, width, height);
-	temp.DrawImage(animation.GetAtlasImg().lock().get(), r,
-		atlasRect.X, atlasRect.Y, atlasRect.Width, atlasRect.Height, Gdiplus::Unit::UnitPixel, nullptr, 0, nullptr);
 
-	Gdiplus::Rect rect2(drawToScreenPosX, y - height * 0.5f + 10, width, height);
+		temp.DrawImage(animation.GetAtlasImg().lock().get(), r,
+			atlasRect.X, atlasRect.Y, atlasRect.Width, atlasRect.Height, Gdiplus::Unit::UnitPixel, nullptr, 0, nullptr);
+
+	Gdiplus::Rect rect2(drawToScreenPosX, y - int(height * 0.5f) + 10, width, height);
 	MemG->DrawImage(&bm, rect2);
 }
 
@@ -91,7 +103,7 @@ void Spider::Up(float Delta)
 	{
 		if (y > initPosY)
 		{
-			y -= Delta * 70;
+			y -= int(Delta * 70);
 		}
 		else
 		{
@@ -112,7 +124,7 @@ void Spider::Down(float Delta)
 	{
 		if (y < maxY)
 		{
-			y += Delta * 400;
+			y += (Delta * 400);
 		}
 		else
 		{
@@ -121,7 +133,7 @@ void Spider::Down(float Delta)
 	}
 }
 
-void Spider::Init()
+void Spider::Awake()
 {
 	state = eSpiderState_Idle;
 	x = initPosX;

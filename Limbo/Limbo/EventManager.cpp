@@ -12,6 +12,11 @@ EventManager::~EventManager()
 
 }
 
+void EventManager::Release()
+{
+	
+}
+
 void EventManager::AddEvent(std::function<void(void)> func,EEvent _event)
 {
 	dicEvent[_event].emplace_back(func);

@@ -8,9 +8,10 @@ public:
 	EndScene();
 	~EndScene();
 
-	void Init();
-	void Update(float);
-	void Render(Gdiplus::Graphics*);
+	virtual void Init()override;
+	virtual void Release()override;
+	virtual void Update(float)override;
+	virtual void Render(Gdiplus::Graphics*)override;
 
 	void SendKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
 

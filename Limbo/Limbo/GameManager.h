@@ -12,12 +12,14 @@ public:
 	void Init();
 	void SetPlayerPosX(int _playerPosX);
 	void ConfirmCheckPoint(int _playerPosX);
+	void ExitGame();
 	Gdiplus::Rect GetObjectRect(EObjectNum);
+
 private:
 	//key : 체크 포인트 number    value: 체크포인트의 x, y 값
 	std::vector<int> checkPointVec;
 	std::unordered_map<int,Gdiplus::Rect> objectXMLDic;
-	int nowCheckPoint;
+	size_t nowCheckPoint;
 
 	//지형정보
 	int mapCount;

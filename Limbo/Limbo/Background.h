@@ -7,6 +7,8 @@ public:
 	Background();
 	Background(int startPosX, std::wstring);
 	~Background();
+	void Init();
+	void Release();
 	void Render(Gdiplus::Graphics*,int interval);
 	void RenderLeft(Gdiplus::Graphics*, int sizeToDraw);
 	void RenderRight(Gdiplus::Graphics*, int sizeToDraw);

@@ -3,6 +3,16 @@
 
 Animation_Rope::Animation_Rope()
 {
+
+}
+
+Animation_Rope::~Animation_Rope()
+{
+	atlasImg.reset();
+}
+
+void Animation_Rope::Init()
+{
 	frame = 0;
 	addDelta = 0.0f;
 	std::wstring imgName(TEXT("Rope.png"));
@@ -10,9 +20,8 @@ Animation_Rope::Animation_Rope()
 	AssetManager::GetInstance()->SetXMLData(XMLRect, "XML\\Rope.xml");
 }
 
-Animation_Rope::~Animation_Rope()
+void Animation_Rope::Release()
 {
-	atlasImg.reset();
 }
 
 void Animation_Rope::Update(Gdiplus::Rect* rect, float Delta)

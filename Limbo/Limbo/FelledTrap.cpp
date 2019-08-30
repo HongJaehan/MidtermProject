@@ -1,39 +1,51 @@
 #include "pch.h"
 #include "FelledTrap.h"
 
+#define DOWN_FORCE 400
 FelledTrap::FelledTrap()
 {
 }
 
 FelledTrap::FelledTrap(ETag _tag, int _x, int _y, int _width, int _height)
 {
-	img = AssetManager().GetInstance()->GetImage(TEXT("Object.png")).lock().get();
-	xmlRect = new Gdiplus::Rect(GameManager::GetInstance()->GetObjectRect(EObjectNum::eFallTrap));
 	tag = _tag;
 	x = _x;
 	y = _y;
 	width = _width;
 	height = _height;
-	screenPosX = x - width * 0.5;
-	screenPosY = y - height * 0.5;
+	collider = new BoxCollider2D(_x, _y, _width, _height - 60, false);
+}
+
+FelledTrap::~FelledTrap()
+{
+
+}
+
+void FelledTrap::Init()
+{
+	if (!AssetManager().GetInstance()->GetImage(TEXT("Object.png")).expired())
+	{
+		img = AssetManager().GetInstance()->GetImage(TEXT("Object.png")).lock().get();
+	}
+	xmlRect = new Gdiplus::Rect(GameManager::GetInstance()->GetObjectRect(EObjectNum::eFallTrap));
+	screenPosX = x - int(width * 0.5f);
+	screenPosY = y - int(height * 0.5f);
 	initPosX = x;
 	initPosY = y;
 	maxY = GameManager::GetInstance()->GetTerrainData(x) + 20;
 	enable = false;
 
-	collider = new BoxCollider2D(_x, _y, _width, _height-60, false);
-
-	EventManager::GetInstance()->AddEvent(std::bind(&FelledTrap::Init, this), EEvent::eEvent_ResetGameScene);
+	EventManager::GetInstance()->AddEvent(std::bind(&FelledTrap::Awake, this), EEvent::eEvent_ResetGameScene);
 }
 
-FelledTrap::~FelledTrap()
+void FelledTrap::Release()
 {
 	delete xmlRect;
 }
 
 void FelledTrap::Update(float Delta)
 {
-	float dist = abs(x - GameManager::GetInstance()->GetPlayerPosX());
+	int dist = abs(x - GameManager::GetInstance()->GetPlayerPosX());
 	if (dist< 80)
 	{
 		active = true;
@@ -56,9 +68,9 @@ void FelledTrap::Render(Gdiplus::Graphics* MemG)
 	temp.DrawImage(img, rect,
 		xmlRect->X, xmlRect->Y, xmlRect->Width, xmlRect->Height, Gdiplus::Unit::UnitPixel, nullptr, 0, nullptr);
 
-	int drawToScreenPosX = (x - width * 0.5f) - (GameManager::GetInstance()->GetPlayerPosX() - defines.screenSizeX * 0.5f);
+	int drawToScreenPosX = (x - int(width * 0.5f)) - (GameManager::GetInstance()->GetPlayerPosX() - int(defines.screenSizeX * 0.5f));
 
-	Gdiplus::Rect rect2(drawToScreenPosX, y - (height * 0.5f), width, height);
+	Gdiplus::Rect rect2(drawToScreenPosX, y - int(height * 0.5f), width, height);
 	MemG->DrawImage(&bm, rect2);
 }
 
@@ -74,7 +86,7 @@ void FelledTrap::Down(float Delta)
 {
 	if (y + (height * 0.5f) < maxY)
 	{
-		y += Delta * 400;
+		y += int(Delta * DOWN_FORCE);
 	}
 	else
 	{
@@ -88,7 +100,7 @@ void FelledTrap::OnTrap()
 	active = true;
 }
 
-void FelledTrap::Init()
+void FelledTrap::Awake()
 {
 	x = initPosX;
 	y = initPosY;

@@ -3,6 +3,15 @@
 
 Animation_Trap::Animation_Trap()
 {
+}
+
+Animation_Trap::~Animation_Trap()
+{
+	atlasImg.reset();
+}
+
+void Animation_Trap::Init()
+{
 	frame = 0;
 	addDelta = 0.0f;
 	std::wstring imgName(TEXT("trapEx.png"));
@@ -10,7 +19,7 @@ Animation_Trap::Animation_Trap()
 	AssetManager::GetInstance()->SetXMLData(XMLRect, "XML\\trap.xml");
 }
 
-Animation_Trap::~Animation_Trap()
+void Animation_Trap::Release()
 {
 	atlasImg.reset();
 }

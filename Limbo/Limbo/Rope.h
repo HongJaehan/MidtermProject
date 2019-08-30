@@ -9,14 +9,15 @@ public:
 	Rope();
 	Rope(ETag _tag, int _x, int _y, int _width, int _height);
 	~Rope();
+	virtual void Init()override;
+	virtual void Release()override;
 	void Update(float Delta);
 	void Render(Gdiplus::Graphics* MemG);
 	void Collision(Object* obj);
-	void Init();
+	void Awake();
 	void StartAnimation();
 	bool HasInteraction();
 private:
-	Gdiplus::Image* img;
 	Gdiplus::Rect atlasRect;
 	Animation_Rope animation;
 	int screenPosX;

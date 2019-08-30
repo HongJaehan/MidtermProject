@@ -8,6 +8,8 @@ class Object
 public:
 	Object();
 	virtual ~Object();
+	virtual void Init() = 0;
+	virtual void Release() = 0;
 	virtual void Update(float) = 0;
 	virtual void Render(Gdiplus::Graphics*) = 0;
 	virtual void Collision(Object*) = 0;

@@ -5,13 +5,14 @@
 //오브젝트들은 이미지의 하드 포인터를 들고있으면 안되기 때문에 Weak_ptr을 사용해줘야한다.
 AssetManager::AssetManager()
 {
-	doc = new tinyxml2::XMLDocument();
+	if (doc == nullptr)
+	{
+		doc = new tinyxml2::XMLDocument();
+	}
 }
 
 AssetManager::~AssetManager()
 {
-	delete doc;
-	//imgDic.clear();
 }
 
 std::weak_ptr<Gdiplus::Image> AssetManager::GetImage(std::wstring str)
@@ -56,7 +57,7 @@ std::weak_ptr<Gdiplus::Image> AssetManager::MyLoadImage(std::wstring fileName)
 
 	std::hash<std::wstring> makeHash;
 	imgDic.insert(std::make_pair(makeHash(fileName), Img));
-	
+	//printf("[%s]의 count 수 [%f]\n", fileName, Img.use_count());
 	 return Img;
 }
 
@@ -127,5 +128,15 @@ void AssetManager::SetCheckPointData(std::vector<int>& vec, char* fileName)
 	for (tinyxml2::XMLElement* element = atlasInfo; element != nullptr; element = element->NextSiblingElement())
 	{
 		vec.emplace_back(element->IntAttribute("pos"));
+	}
+}
+
+void AssetManager::Release()
+{
+	delete doc;
+
+	for (auto& it : imgDic)
+	{
+		it.second.reset();
 	}
 }

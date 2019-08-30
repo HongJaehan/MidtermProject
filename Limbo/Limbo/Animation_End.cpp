@@ -12,6 +12,15 @@ Animation_End::Animation_End()
 
 Animation_End::~Animation_End()
 {
+	
+}
+
+void Animation_End::Init()
+{
+}
+
+void Animation_End::Release()
+{
 	atlasImg.reset();
 }
 

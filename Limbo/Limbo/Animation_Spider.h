@@ -6,6 +6,8 @@ class Animation_Spider :
 public:
 	Animation_Spider();
 	~Animation_Spider();
+	virtual void Init()override;
+	virtual void Release()override;
 	void Update(Gdiplus::Rect* rect, float Delta);
 	void Update(Gdiplus::Rect* rect, float Delta, ESpiderState);
 	void Begin();

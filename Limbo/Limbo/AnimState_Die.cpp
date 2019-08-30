@@ -1,9 +1,6 @@
 #include "pch.h"
 #include "AnimState_Die.h"
 
-
-static int countInt = 0;
-
 AnimState_Die::AnimState_Die()
 {
 
@@ -11,7 +8,6 @@ AnimState_Die::AnimState_Die()
 
 AnimState_Die::~AnimState_Die()
 {
-	atlasImg.reset();
 }
 
 void AnimState_Die::Init()
@@ -22,6 +18,15 @@ void AnimState_Die::Init()
 	std::wstring imgName(TEXT("Die.png"));
 	atlasImg = AssetManager::GetInstance()->GetImage(imgName);
 	AssetManager::GetInstance()->SetXMLData(XMLRect, "XML\\Die.xml");
+}
+
+void AnimState_Die::Release()
+{
+	if (!atlasImg.expired())
+	{
+		atlasImg.reset();
+
+	}
 }
 
 
@@ -60,14 +65,15 @@ std::weak_ptr<Gdiplus::Image> AnimState_Die::GetAtlasImg()
 	return atlasImg;
 }
 
+static float countDelta = 0.0f;
 void AnimState_Die::CountSceneChange(float Delta)
 {
-	countInt++;
-	if (countInt >= 15)
+	countDelta += Delta;
+	if (countDelta >= 0.3f)
 	{
 		EventManager::GetInstance()->OnEvent(eEvent_ResetGameScene);
 		SoundManager::GetInstance()->Stop(ESound::sound_Dead);
-		countInt = 0;
+		countDelta = 0.0f;
 		frame = 0;
 		addDelta = 0;
 	}

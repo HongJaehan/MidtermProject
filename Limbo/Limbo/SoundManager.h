@@ -8,6 +8,7 @@ class SoundManager :
 public:
 	SoundManager();
 	~SoundManager();
+	void Release();
 	void Play(ESound);
 	void Stop(ESound);
 	void AllStop();

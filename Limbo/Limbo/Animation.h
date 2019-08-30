@@ -6,6 +6,8 @@ class Animation
 public:
 	Animation();
 	~Animation();
+	virtual void Init() = 0;
+	virtual void Release() = 0;
 	virtual void Update(Gdiplus::Rect *rect,float Delta) = 0;
 	virtual void Begin() = 0;
 	virtual void End() = 0;

@@ -9,9 +9,10 @@ public:
 	IntroScene();
 	~IntroScene();
 
-	void Init();
-	void Update(float);
-	void Render(Gdiplus::Graphics*);
+	virtual void Init()override;
+	virtual void Release()override;
+	virtual void Update(float)override;
+	virtual void Render(Gdiplus::Graphics*)override;
 private:
 	std::weak_ptr<Gdiplus::Image> backgroundImg;
 	std::weak_ptr<Gdiplus::Image> fadeOutImg;

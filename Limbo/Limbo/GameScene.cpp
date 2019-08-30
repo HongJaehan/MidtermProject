@@ -3,8 +3,7 @@
 
 GameScene::GameScene()
 {
-	Init();
-	tag = ESceneTag::eGameScene;
+	
 }
 
 GameScene::~GameScene()
@@ -17,6 +16,7 @@ void GameScene::Init()
 	player->Init();
 	AssetManager::GetInstance()->SetObjectXMLData(objXmlVec,"XML\\ObjectCreateData.xml");
 	bFlagCollision = false;
+	tag = ESceneTag::eGameScene;
 
 	//Object 생성
 	int i = 0;
@@ -28,54 +28,63 @@ void GameScene::Init()
 		case eTag_Collider:
 		{
 			ColliderObject* cObject = new ColliderObject(ETag::eTag_Collider, it.GetX(), it.GetY(), it.GetW(), it.GetH());
+			cObject->Init();
 			objectVec.emplace_back(cObject);
 			break;
 		}
 		case eTag_Niddle:
 		{
 			Niddle* cObject = new Niddle(ETag::eTag_Niddle, it.GetX(), it.GetY(), it.GetW(), it.GetH());
+			cObject->Init();
 			objectVec.emplace_back(cObject);
 			break;
 		}
 		case eTag_Trap:
 		{
 			Trap* cObject = new Trap(ETag::eTag_Trap, it.GetX(), it.GetY(), it.GetW(), it.GetH());
+			cObject->Init();
 			objectVec.emplace_back(cObject);
 			break;
 		}
 		case eTag_Spider:
 		{
 			Spider* cObject= new Spider(ETag::eTag_Spider, it.GetX(), it.GetY(), it.GetW(), it.GetH());
+			cObject->Init();
 			objectVec.emplace_back(cObject);
 			break;
 		}
 		case eTag_Rock:
 		{
 			RotateRock* cObject = new RotateRock(ETag::eTag_Rock, it.GetX(), it.GetY(), it.GetW(), it.GetH());
+			cObject->Init();
 			objectVec.emplace_back(cObject);
 			break;
 		}
 		case eTag_Corpse:
 		{
 			Corpse* cObject = new Corpse(ETag::eTag_Corpse, it.GetX(), it.GetY(), it.GetW(), it.GetH());
+			cObject->Init();
 			objectVec.emplace_back(cObject);
 			break;
 		}
 		case eTag_SquareRock:
 		{
 			SquareTrap* cObject = new SquareTrap(ETag::eTag_SquareRock, it.GetX(), it.GetY(), it.GetW(), it.GetH());
+			cObject->Init();
 			objectVec.emplace_back(cObject);
 			break;
 		}
 		case eTag_Rope:
 		{
 			Rope* cObject= new Rope(ETag::eTag_Rope, it.GetX(), it.GetY(), it.GetW(), it.GetH());
+			cObject->Init();
 			objectVec.emplace_back(cObject);
 			break;
 		}
 		case eTag_FallenTrap:
 		{
 			FelledTrap* cObject = new FelledTrap(ETag::eTag_FallenTrap, it.GetX(), it.GetY(), it.GetW(), it.GetH());
+			cObject->Init();
 			objectVec.emplace_back(cObject);
 			break;
 		}
@@ -84,11 +93,13 @@ void GameScene::Init()
 			if (i % 2 == 0)
 			{
 				FallenRock* cObject = new FallenRock(ETag::eTag_FallenRock, it.GetX(), it.GetY(), it.GetW(), it.GetH(), EObjectNum::eRock1);
+				cObject->Init();
 				objectVec.emplace_back(cObject);
 			}
 			else
 			{
 				FallenRock* cObject = new FallenRock(ETag::eTag_FallenRock, it.GetX(), it.GetY(), it.GetW(), it.GetH(), EObjectNum::eRock2);
+				cObject->Init();
 				objectVec.emplace_back(cObject);
 			}
 			break;
@@ -96,6 +107,7 @@ void GameScene::Init()
 		case eTag_Trap_Black:
 		{
 			Trap_Black* cObject = new Trap_Black(ETag::eTag_Trap_Black, it.GetX(), it.GetY(), it.GetW(), it.GetH());
+			cObject->Init();
 			objectVec.emplace_back(cObject);
 			break;
 		}
@@ -113,8 +125,8 @@ void GameScene::Init()
 		s.append(std::to_wstring(i));
 		s.append(TEXT(".png"));
 
-		auto b = new Background(startPosX, s);
-		backgroundVec.emplace_back(b);
+		auto bg = new Background(startPosX, s);
+		backgroundVec.emplace_back(bg);
 		startPosX += defines.screenSizeX * 2;
 	}
 
@@ -122,40 +134,41 @@ void GameScene::Init()
 	EventManager::GetInstance()->AddEvent(std::bind(&GameScene::SceneReset, this), EEvent::eEvent_ResetGameScene);
 }
 
-void GameScene::Realease()
+void GameScene::Release()
 {
-	player->Release();
+	//바로 Delete를 해주는 것이 아닌 SafeRelease를 통해 Release 후 delete
+	SafeRelease(&player);
 
 	for (auto& it : objectVec)
 	{
-		delete it;
+		SafeRelease(&it);
 	}
+
 	objectVec.clear();
 
 	for (auto& it2 : backgroundVec)
 	{
-		delete it2;
+		SafeRelease(&it2);
 	}
-	backgroundVec.clear();
 
-	for (auto& it : objXmlVec)
-	{
-		delete& it;
-	}
-	objXmlVec.clear();
+	//for (auto& it : objXmlVec)
+	//{
+	//	delete &it;
+	//}
+	backgroundVec.clear();
 }
 
 void GameScene::Update(float Delta)
 {
 	//현재 스크린 좌표
-	int screenLeft = GameManager::GetInstance()->GetPlayerPosX() - defines.screenSizeX * 0.5f;
-	int screenRight = GameManager::GetInstance()->GetPlayerPosX() + defines.screenSizeX * 0.5f;
+	int screenLeft = GameManager::GetInstance()->GetPlayerPosX() - int(defines.screenSizeX * 0.5f);
+	int screenRight = GameManager::GetInstance()->GetPlayerPosX() + int(defines.screenSizeX * 0.5f);
 
 	for (auto& it : objectVec)
 	{
 		//오브젝트의 좌표
-		int objRight = it->GetPosX() + it->GetWidth() * 0.5f;
-		int objLeft = it->GetPosX() - it->GetWidth() * 0.5f;
+		int objRight = it->GetPosX() + int(it->GetWidth() * 0.5f);
+		int objLeft = it->GetPosX() - int(it->GetWidth() * 0.5f);
 		//스크린 좌표 안에 오브젝트가 존재하면 enable -> true 로 변경, Update실행
 		if (objRight >= screenLeft && (abs(objRight-screenLeft) < defines.screenSizeX) 
 			|| objLeft <= screenRight && (abs(screenRight - objLeft) < defines.screenSizeX))
@@ -252,15 +265,15 @@ void GameScene::Render(Gdiplus::Graphics* MemG)
 bool GameScene::CollisionCheck(Object* obj1, Object* obj2)
 {
 	//각 충돌체크할 오브젝트들의 Left, Right, Top, Bottom 계산
-	int obj1_Top = obj1->GetCollider()->GetY() - obj1->GetCollider()->GetHeight() * 0.5f;
-	int obj1_Bottom = obj1->GetCollider()->GetY() + obj1->GetCollider()->GetHeight() * 0.5f;
-	int obj1_Left = obj1->GetCollider()->GetX() - obj1->GetCollider()->GetWidth() * 0.5f;
-	int obj1_Right = obj1->GetCollider()->GetX() + obj1->GetCollider()->GetWidth() * 0.5f;
+	int obj1_Top = obj1->GetCollider()->GetY() - int(obj1->GetCollider()->GetHeight() * 0.5f);
+	int obj1_Bottom = obj1->GetCollider()->GetY() + int(obj1->GetCollider()->GetHeight() * 0.5f);
+	int obj1_Left = obj1->GetCollider()->GetX() - int(obj1->GetCollider()->GetWidth() * 0.5f);
+	int obj1_Right = obj1->GetCollider()->GetX() + int(obj1->GetCollider()->GetWidth() * 0.5f);
 
-	int obj2_Top = obj2->GetCollider()->GetY() - obj2->GetCollider()->GetHeight() * 0.5f;
-	int obj2_Bottom = obj2->GetCollider()->GetY() + obj2->GetCollider()->GetHeight()*0.5f;
-	int obj2_Left = obj2->GetCollider()->GetX() - obj2->GetCollider()->GetWidth() * 0.5f;
-	int obj2_Right = obj2->GetCollider()->GetX() + obj2->GetCollider()->GetWidth() * 0.5f;
+	int obj2_Top = obj2->GetCollider()->GetY() - int(obj2->GetCollider()->GetHeight() * 0.5f);
+	int obj2_Bottom = obj2->GetCollider()->GetY() + int(obj2->GetCollider()->GetHeight()*0.5f);
+	int obj2_Left = obj2->GetCollider()->GetX() - int(obj2->GetCollider()->GetWidth() * 0.5f);
+	int obj2_Right = obj2->GetCollider()->GetX() + int(obj2->GetCollider()->GetWidth() * 0.5f);
 
 	//AABB
 	//충돌하지 않을 경우부터 계산

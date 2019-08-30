@@ -6,6 +6,8 @@ class Animation_Rope :
 public:
 	Animation_Rope();
 	~Animation_Rope();
+	virtual void Init()override;
+	virtual void Release()override;
 	void Update(Gdiplus::Rect* rect, float Delta);
 	void Update(Gdiplus::Rect* rect, float Delta, bool action);
 	void Begin();

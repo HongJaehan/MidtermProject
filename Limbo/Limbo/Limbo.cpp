@@ -41,13 +41,20 @@ DWORD CLimboApp::PrevTick = 0;
 bool CLimboApp::bRender = false;
 int CLimboApp::CallCount = 0;
 DWORD CLimboApp::StaticTick = 0;
+bool CLimboApp::bGameProcess = true;
 
+void CLimboApp::EndGameProcess()
+{
+	bGameProcess = false;
+}
 
 // CLimboApp 초기화
 ULONG_PTR gpToken;
 BOOL CLimboApp::InitInstance()
 {
 	CWinApp::InitInstance();
+	//초기화에 Event등록
+	EventManager::GetInstance()->AddEvent(std::bind(&CLimboApp::EndGameProcess, this), eEvent_ExitGame);
 
 	Gdiplus::GdiplusStartupInput start;
 	Gdiplus::GdiplusStartup(&gpToken, &start, nullptr);
@@ -143,6 +150,8 @@ void CLimboApp::OnAppAbout()
 	aboutDlg.DoModal();
 }
 
+//Thread 예시 코드 입니다.
+#pragma region MyRegion 
 //UINT CLimboApp::FuncThread(LPVOID pParam)
 //{
 //	while (1)
@@ -258,11 +267,13 @@ void CLimboApp::OnAppAbout()
 //	}
 //	return  -1;
 //}
+#pragma endregion
+
 
 
 UINT CLimboApp::FuncThread(LPVOID pParam)
 {
-	while (1)
+	while (bGameProcess)
 	{
 		DWORD tick = GetTickCount();
 		DWORD Delta = tick - PrevTick;

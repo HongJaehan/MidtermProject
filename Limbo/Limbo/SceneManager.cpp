@@ -4,15 +4,10 @@
 
 SceneManager::SceneManager()
 {
-
 }
 
 SceneManager::~SceneManager()
 {
-	for (auto& it : sceneVec)
-	{
-		delete it;
-	}
 }
 void SceneManager::SetCurScene(Scene* scene)
 {
@@ -26,20 +21,35 @@ Scene* SceneManager::GetCurScene()
 
 void SceneManager::Init()
 {
+	//_crtBreakAlloc = 497;
+	//1283 1266 1250 1233 1216 1199
 	introScene = new IntroScene();
+	introScene->Init();
 	gameScene = new GameScene();
+	gameScene->Init();
 	endScene = new EndScene();
-	curScene = introScene;
+	endScene->Init();
+
+ 	curScene = introScene;
 	
 
 	sceneVec.emplace_back(introScene);
 	sceneVec.emplace_back(gameScene);
 	sceneVec.emplace_back(endScene);
 
+
 	//SceneLevel 0부터 시작
 	sceneLevel = 0;
 	//Scene의 Level 최고값 현재 씬은 3개
  	maxSceneLevel = 2;
+}
+
+void SceneManager::Release()
+{
+	for (auto& it : sceneVec)
+	{
+		SafeRelease(&it);
+	}
 }
 
 void SceneManager::MoveNextScene()
@@ -54,14 +64,5 @@ void SceneManager::MoveNextScene()
 
 void SceneManager::Render(CRect rc)
 {
-	//Gdiplus::Rect rc2(rc.left, rc.top, rc.Width(), rc.Height());
 
-	//Gdiplus::Bitmap BackBuffer(rc.Width(), rc.Height(), PixelFormat32bppARGB);
-	//Gdiplus::Graphics MemG(&BackBuffer);
-
-	//Gdiplus::SolidBrush WhiteBrush(Gdiplus::Color(255, 202, 202, 202));
-	//MemG.FillRectangle(&WhiteBrush, rc2);
-
-	//GetCurScene()->Render(&MemG);
-	//MainG->DrawImage(&BackBuffer, 0, 0, rc.Width(), rc.Height());
 }

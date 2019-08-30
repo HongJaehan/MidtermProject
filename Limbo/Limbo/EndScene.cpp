@@ -3,6 +3,15 @@
 
 EndScene::EndScene()
 {
+}
+
+EndScene::~EndScene()
+{
+
+}
+
+void EndScene::Init()
+{
 	tag = ESceneTag::eEndScene;
 
 	backgroundImg = AssetManager::GetInstance()->GetImage(TEXT("ENDBackground.png"));
@@ -13,17 +22,15 @@ EndScene::EndScene()
 	bm2 = new Gdiplus::Bitmap(GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), PixelFormat32bppARGB);
 	imgAttr = new Gdiplus::ImageAttributes();
 	IntroAnimation = new Animation_End();
+	IntroAnimation->Init();
 }
 
-EndScene::~EndScene()
+void EndScene::Release()
 {
 	delete bm2;
 	delete imgAttr;
-}
-
-void EndScene::Init()
-{
-
+	fadeOutImg.reset();
+	SafeRelease(&IntroAnimation);
 }
 
 
@@ -59,7 +66,10 @@ void EndScene::Render(Gdiplus::Graphics* MemG)
 	Gdiplus::Bitmap bm(GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), PixelFormat32bppARGB);
 	Gdiplus::Graphics temp(&bm);
 
-	temp.DrawImage(fadeOutImg.lock().get(), rect);
+	if (!fadeOutImg.expired())
+	{
+		temp.DrawImage(fadeOutImg.lock().get(), rect);
+	}
 
 	////그려줄 screen좌표의 rect
 	Gdiplus::Rect screenPosRect(0, 0, defines.screenSizeX, defines.screenSizeY);
@@ -69,7 +79,10 @@ void EndScene::Render(Gdiplus::Graphics* MemG)
 	Gdiplus::Rect rect2(0, 0, GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN));
 	Gdiplus::Graphics temp2(bm2);
 
-	temp2.DrawImage(backgroundImg.lock().get(), rect2, 0, 0, 1666, 1321, Gdiplus::UnitPixel, imgAttr);
+	if (!backgroundImg.expired())
+	{
+		temp2.DrawImage(backgroundImg.lock().get(), rect2, 0, 0, 1666, 1321, Gdiplus::UnitPixel, imgAttr);
+	}
 
 	////그려줄 screen좌표의 rect
 	Gdiplus::Rect screenPosRect2(0, 0, defines.screenSizeX, defines.screenSizeY);
@@ -80,7 +93,10 @@ void EndScene::Render(Gdiplus::Graphics* MemG)
 	Gdiplus::Bitmap bm3(GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), PixelFormat32bppARGB);
 	Gdiplus::Graphics temp3(&bm3);
 
+	if (!IntroAnimation->GetAtlasImg().expired())
+	{
 	temp3.DrawImage(IntroAnimation->GetAtlasImg().lock().get(), rect3, atlasRect.X, atlasRect.Y, atlasRect.Width, atlasRect.Height, Gdiplus::Unit::UnitPixel, nullptr, 0, nullptr);
+	}
 
 	////그려줄 screen좌표의 rect
 	Gdiplus::Rect screenPosRect3(100, 50, defines.screenSizeX - 200, defines.screenSizeY - 150);
@@ -93,5 +109,5 @@ void EndScene::Render(Gdiplus::Graphics* MemG)
 
 void EndScene::SendKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
-	ExitProcess(0);
+	EventManager::GetInstance()->OnEvent(EEvent::eEvent_ExitGame);
 }

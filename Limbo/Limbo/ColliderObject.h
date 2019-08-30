@@ -8,6 +8,8 @@ public:
 	ColliderObject();
 	ColliderObject(ETag _tag, int _x, int _y, int _width, int _height);
 	~ColliderObject();
+	virtual void Init()override;
+	virtual void Release()override;
 	void Update(float Delta);
 	void Render(Gdiplus::Graphics*);
 	void Collision(Object*);

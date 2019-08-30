@@ -32,8 +32,12 @@ SoundManager::SoundManager()
 
 SoundManager::~SoundManager()
 {
+}
+
+void SoundManager::Release()
+{
 	delete soundM;
-	soundList.clear();
+	soundM = nullptr;
 }
 
 void SoundManager::Play(ESound eSound)

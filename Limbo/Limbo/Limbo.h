@@ -24,13 +24,15 @@ public:
 public:
 	virtual BOOL InitInstance();
 	virtual int ExitInstance();
-
+	virtual void EndGameProcess();
 // 구현입니다.
 	static DWORD PrevTick;
 	static bool bRender;
 
 	static DWORD StaticTick;
 	static int CallCount;
+
+	static bool bGameProcess;
 public:
 	afx_msg void OnAppAbout();
 	static UINT FuncThread(LPVOID pParam);

@@ -22,10 +22,10 @@ public:
 	GameScene();
 	~GameScene();
 	
-	void Init();
-	void Realease();
-	void Update(float);
-	void Render(Gdiplus::Graphics*);
+	virtual void Init()override;
+	virtual void Release()override;
+	virtual void Update(float)override;
+	virtual void Render(Gdiplus::Graphics*)override;
 	bool CollisionCheck(Object*,Object*);
 	void SceneReset();
 	void SoundEnd();

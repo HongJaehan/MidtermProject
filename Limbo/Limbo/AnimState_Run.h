@@ -6,7 +6,8 @@ class AnimState_Run :
 public:
 	AnimState_Run();
 	~AnimState_Run();
-	void Init();
+	virtual void Init()override;
+	virtual void Release()override;
 	void Update( Gdiplus::Rect* rect, float Delta);
 	void Begin();
 	void End();

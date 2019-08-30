@@ -6,7 +6,8 @@ class AnimState_Interaction :
 public:
 	AnimState_Interaction();
 	~AnimState_Interaction();
-	void Init();
+	virtual void Init()override;
+	virtual void Release()override;
 	void Update(Gdiplus::Rect* rect, float Delta);
 	void Begin();
 	void End();

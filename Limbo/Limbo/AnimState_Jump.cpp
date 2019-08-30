@@ -7,7 +7,7 @@ AnimState_Jump::AnimState_Jump()
 
 AnimState_Jump::~AnimState_Jump()
 {
-	atlasImg.reset();
+	
 }
 
 void AnimState_Jump::Init()
@@ -18,6 +18,14 @@ void AnimState_Jump::Init()
 	std::wstring imgName(TEXT("Jump.png"));
 	atlasImg = AssetManager::GetInstance()->GetImage(imgName);
 	AssetManager::GetInstance()->SetXMLData(XMLRect, "XML\\Jump.xml");
+}
+
+void AnimState_Jump::Release()
+{
+	if (!atlasImg.expired())
+	{
+		atlasImg.reset();
+	}
 }
 
 void AnimState_Jump::Update( Gdiplus::Rect* rect, float Delta)

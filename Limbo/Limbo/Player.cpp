@@ -18,6 +18,19 @@ float Lerp(float value1, float value2, float amount)
 }
 
 Player::Player()
+	:bFlagBotmCol(false),
+	bFlagInteraction(false),
+	bFlagJumpStartState(false),
+	bFlagLeft(false),
+	bFlagLeftCol(false),
+	bFlagRightCol(false),
+	bFlagNowCol(false),
+	jumpInitPosX(0),
+	jumpInitPosY(0),
+	playerScreenPosX(0),
+	playerScreenPosY(0),
+	state(EPlayerState::eState_Idle),
+	velocity(0)
 {
 }
 
@@ -29,15 +42,10 @@ void Player::Init()
 {
 	tag = eTag_Player;
 	state = eState_Idle;
-	bFlagLeft = false;
 	velocity = 0.1f;
 	width = defines.playerWidth;
 	height = defines.playerHeight;
 	enable = true;
-	bFlagNowCol = false;
-	bFlagRightCol = false;
-	bFlagLeftCol = false;
-	bFlagJumpStartState = false;
 	//	float speed = Lerp(0, 10, 2);
 
 		//AnimationList에 애니메이션을 추가해준다.  enum순서대로 넣어줘야 한다
@@ -68,8 +76,8 @@ void Player::Init()
 
 	collider = new BoxCollider2D(x, y, width, height, false);
 
-	playerScreenPosX = x - width * 0.5;
-	playerScreenPosY = y - height * 0.5;
+	playerScreenPosX = x - int(width * 0.5f);
+	playerScreenPosY = y - int(height * 0.5f);
 
 	EventManager::GetInstance()->AddEvent(std::bind(&Player::PlayerDie, this), EEvent::eEvent_PlayerDie);
 	EventManager::GetInstance()->AddEvent(std::bind(&Player::MoveReady, this), EEvent::eEvent_MoveReady);
@@ -80,13 +88,11 @@ void Player::Release()
 {
 	for (auto& it : playerAnimationList)
 	{
-		delete it;
+		SafeRelease(&it);
 	}
 	playerAnimationList.clear();
 
 	delete collider;
-
-	delete this;
 }
 
 void Player::Update(float Delta)
@@ -112,13 +118,17 @@ void Player::Render(Gdiplus::Graphics* _MemG)
 
 	Gdiplus::Bitmap bm(width, height, PixelFormat32bppARGB);
 	Gdiplus::Graphics temp(&bm);
-	temp.DrawImage(playerAnimationList[state]->GetAtlasImg().lock().get(), rect,
-		atlasRect.X, atlasRect.Y, atlasRect.Width, atlasRect.Height, Gdiplus::Unit::UnitPixel, nullptr, 0, nullptr);
+
+	if (!playerAnimationList[state]->GetAtlasImg().expired())
+	{
+		temp.DrawImage(playerAnimationList[state]->GetAtlasImg().lock().get(), rect,
+			atlasRect.X, atlasRect.Y, atlasRect.Width, atlasRect.Height, Gdiplus::Unit::UnitPixel, nullptr, 0, nullptr);
+	}
 
 	int playerScreenWidth;
 	int playerScreenHeight;
 
-	int screenPosY = y - (height * 0.5f) + 10;
+	int screenPosY = y - int(height * 0.5f) + 10;
 
 	switch (state)
 	{
@@ -138,7 +148,7 @@ void Player::Render(Gdiplus::Graphics* _MemG)
 		break;
 	}
 
-	Gdiplus::Rect screenPosRect((defines.screenSizeX / 2) - (width * 0.5f), screenPosY, playerScreenWidth, playerScreenHeight);
+	Gdiplus::Rect screenPosRect((defines.screenSizeX / 2) - int(width * 0.5f), screenPosY, playerScreenWidth, playerScreenHeight);
 
 
 
@@ -177,7 +187,7 @@ void Player::Jump(bool bFlagLeft, int terrainY, float Delta)
 	{
 		bFlagJumpStartState = false;
 	}
-	int velocity_Int = abs(velocity * Delta)+1;
+	int velocity_Int = (abs(velocity * Delta))+1;
 	//printf("velocity : %d\n", velocity_Int);
 	if (bFlagLeft && !bFlagLeftCol)
 	{
@@ -191,7 +201,7 @@ void Player::Jump(bool bFlagLeft, int terrainY, float Delta)
 
 	if (!bFlagBotmCol)
 	{
-		y = y + (-140 * Delta) + AddVal;
+		y = y + (-140 * Delta) + (AddVal);
 	}
 
 	if (y > terrainY)
@@ -225,13 +235,13 @@ void Player::PhysicsUpdate(float Delta)
 		AddUpdateDelta = 0.5f;
 	}
 	//GameManager에 현재 Player의 X좌표를 보내 Terrain의 Y 정보를 받아온다.
-	int terrainY = GameManager::GetInstance()->GetTerrainData(x) - height * 0.5f;
+	int terrainY = GameManager::GetInstance()->GetTerrainData(x) - int(height * 0.5f);
 	switch (state)
 	{
 	case eState_Idle:
 		if (!bFlagBotmCol)
 		{
-			y = y + GRAVITY * AddUpdateDelta + 10;
+			y = y + int(GRAVITY * AddUpdateDelta) + 10;
 		}
 		velocity = INIT_velocity; //속도 초기화
 		AddUpdateDelta = 0.0f;
@@ -252,7 +262,7 @@ void Player::PhysicsUpdate(float Delta)
 		}
 		if (!bFlagBotmCol)
 		{
-			y = y + GRAVITY * AddUpdateDelta + 10;
+			y = y + GRAVITY * int(AddUpdateDelta + 10);
 		}
 		//y = y + GRAVITY * AddUpdateDelta;
 		velocity = ACCELERATION * AddUpdateDelta * 1.5f;
@@ -260,7 +270,7 @@ void Player::PhysicsUpdate(float Delta)
 		{
 			velocity = MAX_velocity;
 		}
-		int velocity_Int = abs(velocity * Delta);
+		int velocity_Int = int(abs(velocity * Delta));
 		if (bFlagLeft && !bFlagLeftCol)
 		{
 			x -= velocity_Int + 1;
@@ -285,7 +295,7 @@ void Player::PhysicsUpdate(float Delta)
 		//y = y + GRAVITY * AddUpdateDelta;
 		//현재 Player의 Y좌표가 Terrain보다 크다면
 	case eState_Die:
-		y = y + GRAVITY * AddUpdateDelta;
+		y = y + int(GRAVITY * AddUpdateDelta);
 		if (y >= terrainY)
 		{
 			y = terrainY;
@@ -305,15 +315,15 @@ void Player::Collision(Object* obj)
 	//Trigger가 아닐경우 수행
 	if (!obj->GetCollider()->IsTrigger())
 	{
-		int objLeft = obj->GetCollider()->GetX() - obj->GetCollider()->GetWidth() * 0.5f;
-		int objRight = obj->GetCollider()->GetX() + obj->GetCollider()->GetWidth() * 0.5f;
-		int objTop = obj->GetCollider()->GetY() - obj->GetCollider()->GetHeight() * 0.5f;
-		int objBottom = obj->GetCollider()->GetY() + obj->GetCollider()->GetHeight() * 0.5f;
+		int objLeft = obj->GetCollider()->GetX() - int(obj->GetCollider()->GetWidth() * 0.5f);
+		int objRight = obj->GetCollider()->GetX() + int(obj->GetCollider()->GetWidth() * 0.5f);
+		int objTop = obj->GetCollider()->GetY() - int(obj->GetCollider()->GetHeight() * 0.5f);
+		int objBottom = obj->GetCollider()->GetY() + int(obj->GetCollider()->GetHeight() * 0.5f);
 
-		int pLeft = GetCollider()->GetX() - GetCollider()->GetWidth() * 0.5f;
-		int pRight = GetCollider()->GetX() + GetCollider()->GetWidth() * 0.5f;
-		int pTop = GetCollider()->GetY() - GetCollider()->GetHeight() * 0.5f;
-		int pBottom = GetCollider()->GetY() + GetCollider()->GetHeight() * 0.5f;
+		int pLeft = GetCollider()->GetX() - int(GetCollider()->GetWidth() * 0.5f);
+		int pRight = GetCollider()->GetX() + int(GetCollider()->GetWidth() * 0.5f);
+		int pTop = GetCollider()->GetY() - int(GetCollider()->GetHeight() * 0.5f);
+		int pBottom = GetCollider()->GetY() + int(GetCollider()->GetHeight() * 0.5f);
 
 		switch (state)
 		{
@@ -330,7 +340,7 @@ void Player::Collision(Object* obj)
 				bFlagRightCol = true;
 			}
 
-			float dist = abs(pBottom - objTop);
+			int dist = abs(pBottom - objTop);
 			if (pBottom > objTop && dist < 50)
 			{
 				//y = objTop - height * 0.5f;
@@ -340,7 +350,7 @@ void Player::Collision(Object* obj)
 		break;
 		case eState_Idle:
 		{
-			float dist = abs(pBottom - objTop);
+			int dist = abs(pBottom - objTop);
 			if (pBottom > objTop && dist < 50)
 			{
 				bFlagBotmCol = true;
@@ -368,7 +378,7 @@ void Player::Collision(Object* obj)
 				break;
 			}
 
-			float dist = abs(pBottom - objTop);
+			int dist = abs(pBottom - objTop);
 
 			if (pBottom > objTop && dist < 10)
 			{

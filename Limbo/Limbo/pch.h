@@ -27,5 +27,16 @@
 #include "SoundManager.h"
 #include <MMSystem.h>
 
+//console창
+#ifdef _DEBUG
+#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
+#endif
+
+//Memory Leak 검출
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+
+
 #pragma comment(lib, "winmm.lib")
 #endif //PCH_H

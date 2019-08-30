@@ -3,6 +3,15 @@
 
 Animation_Logo::Animation_Logo()
 {
+}
+
+Animation_Logo::~Animation_Logo()
+{
+	atlasImg.reset();
+}
+
+void Animation_Logo::Init()
+{
 	frame = 0;
 	addDelta = 0.0f;
 	std::wstring imgName(TEXT("PRESS.png"));
@@ -10,9 +19,8 @@ Animation_Logo::Animation_Logo()
 	AssetManager::GetInstance()->SetXMLData(XMLRect, "XML\\Intro.xml");
 }
 
-Animation_Logo::~Animation_Logo()
+void Animation_Logo::Release()
 {
-	atlasImg.reset();
 }
 
 void Animation_Logo::Update(Gdiplus::Rect* rect, float Delta)

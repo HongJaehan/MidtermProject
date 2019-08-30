@@ -3,6 +3,15 @@
 
 Animation_Trap_Black::Animation_Trap_Black()
 {
+}
+
+Animation_Trap_Black::~Animation_Trap_Black()
+{
+
+}
+
+void Animation_Trap_Black::Init()
+{
 	frame = 0;
 	addDelta = 0.0f;
 	std::wstring imgName(TEXT("trap.png"));
@@ -10,7 +19,7 @@ Animation_Trap_Black::Animation_Trap_Black()
 	AssetManager::GetInstance()->SetXMLData(XMLRect, "XML\\trap_Black.xml");
 }
 
-Animation_Trap_Black::~Animation_Trap_Black()
+void Animation_Trap_Black::Release()
 {
 	atlasImg.reset();
 }
